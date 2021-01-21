@@ -11,6 +11,6 @@
 ## Nom du bateau : *Horror Jackson*
 
 ## Drapeau : 
-![alt text](https://github.com/pns-si3-qgl/pns-si3-qgl-2021-queleglitch/flag.png?raw=true)
+![alt text](https://github.com/pns-si3-qgl/pns-si3-qgl-2021-queleglitch/blob/master/flag.png?raw=true)
 
 
