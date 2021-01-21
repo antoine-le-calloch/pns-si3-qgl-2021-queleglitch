@@ -1,17 +1,15 @@
 # Projet SI3-QGL Polytech Nice Sophia
 
-## Nom d'équipe : QueLeGlitch
-
-Membre : 
+## Membre : 
 * Le Calloch Antoine
 * Huot-Marchand Antoine
 * Madern Loic
 * Naud Eric
 
-Nom d'équipe :
+## Nom d'équipe : *QueLeGlitch*
 
-Nom du bateau :
+## Nom du bateau : *horor jackson*
 
-Drapeau : 
+## Drapeau : 
 
 
