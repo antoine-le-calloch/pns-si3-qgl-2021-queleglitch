@@ -8,8 +8,9 @@
 
 ## Nom d'équipe : *QueLeGlitch*
 
-## Nom du bateau : *Horor Jackson*
+## Nom du bateau : *Horror Jackson*
 
 ## Drapeau : 
+![alt text](https://github.com/pns-si3-qgl/pns-si3-qgl-2021-queleglitch/flag.png?raw=true)
 
 
