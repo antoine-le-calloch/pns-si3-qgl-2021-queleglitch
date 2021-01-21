@@ -8,7 +8,7 @@
 
 ## Nom d'équipe : *QueLeGlitch*
 
-## Nom du bateau : *horor jackson*
+## Nom du bateau : *Horor Jackson*
 
 ## Drapeau : 
 
