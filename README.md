@@ -1,4 +1,16 @@
-# pns-si3-qgl-2021-queleglitch
-pns-si3-qgl-2021-queleglitch created by GitHub Classroom
+# Projet SI3-QGL Polytech Nice Sophia
 
-test
+## Nom d'équipe : QueLeGlitch
+
+Membre : 
+* Le Calloch Antoine
+* Huot-Marchand Antoine
+* Madern Loic
+* Naud Eric
+
+Nom d'équipe :
+
+Nom du bateau :
+
+Drapeau : 
+
