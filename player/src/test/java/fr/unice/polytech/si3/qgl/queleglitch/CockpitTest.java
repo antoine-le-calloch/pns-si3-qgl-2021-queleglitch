@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.teamid;
+package fr.unice.polytech.si3.qgl.queleglitch;
 
 import fr.unice.polytech.si3.qgl.queleglitch.Cockpit;
 import org.junit.jupiter.api.BeforeEach;

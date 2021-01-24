@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.teamid.tooling;
+package fr.unice.polytech.si3.qgl.queleglitch.tooling;
 
 import fr.unice.polytech.si3.qgl.queleglitch.Cockpit;
 
