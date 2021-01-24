@@ -12,8 +12,6 @@ class CockpitTest {
 
     Cockpit cockpit;
     ObjectMapper objectMapper;
-    ActionToProcess oar1;
-    ActionToProcess oar2;
 
     @BeforeEach
     void setUp() {
