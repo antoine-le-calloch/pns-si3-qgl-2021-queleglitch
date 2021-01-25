@@ -7,7 +7,8 @@ public class Ship {
         return position;
     }
 
-    public String getStringPosition(){
+    @Override
+    public String toString(){
         return "Bateau | orientation : " + position.orientation +
                 " | x : " + position.x + " | y : " + position.y;
     }

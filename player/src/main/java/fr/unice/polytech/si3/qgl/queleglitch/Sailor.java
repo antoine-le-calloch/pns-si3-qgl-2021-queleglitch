@@ -9,7 +9,8 @@ class Sailor {
         return id;
     }
 
-    public String getInformations(){
+    @Override
+    public String toString(){
         return "Marin " + id + " | position x : " + x + " | position y : " + y;
     }
 }

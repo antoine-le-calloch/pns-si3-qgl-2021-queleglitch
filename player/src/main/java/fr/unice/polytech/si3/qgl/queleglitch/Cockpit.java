@@ -42,11 +42,11 @@ public class Cockpit implements ICockpit {
 	public List<String> getLogs() {
 		ArrayList<String> logs = new ArrayList<>();
 		logs.add("NEW TURN");
-		logs.add(gameData.getShip().getStringPosition());
+		logs.add(gameData.getShip().toString());
 		logs.add(" ---- ");
-		logs.add(gameData.getSailor(0).getInformations());
+		logs.add(gameData.getSailor(0).toString());
 		logs.add(" ---- ");
-		logs.add(gameData.getSailor(1).getInformations());
+		logs.add(gameData.getSailor(1).toString());
 		return logs;
 	}
 }
