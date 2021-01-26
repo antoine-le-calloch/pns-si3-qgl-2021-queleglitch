@@ -19,7 +19,7 @@ import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
 public class Cockpit implements ICockpit {
 
-	GameData gameData;
+	InitGame initGame;
 	ObjectMapper objectMapper = new ObjectMapper();
 
 	/**
@@ -31,7 +31,7 @@ public class Cockpit implements ICockpit {
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		System.out.println("Init game input: " + game);
 		try {
-			gameData = objectMapper.readValue(game, GameData.class);
+			initGame = objectMapper.readValue(game, InitGame.class);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
@@ -45,8 +45,8 @@ public class Cockpit implements ICockpit {
 	 */
 	public String nextRound(String round) {
 		System.out.println("Next round input: " + round);
-		ActionToProcess actionSailor1 = new ActionToProcess(gameData.getSailor(0), "OAR");
-		ActionToProcess actionSailor2 = new ActionToProcess(gameData.getSailor(1), "OAR");
+		ActionToProcess actionSailor1 = new ActionToProcess(initGame.getSailor(0), "OAR");
+		ActionToProcess actionSailor2 = new ActionToProcess(initGame.getSailor(1), "OAR");
 
 		try {
 			return "[" + objectMapper.writeValueAsString(actionSailor1) + "," + objectMapper.writeValueAsString(actionSailor2) + "]";
@@ -65,11 +65,16 @@ public class Cockpit implements ICockpit {
 	public List<String> getLogs() {
 		ArrayList<String> logs = new ArrayList<>();
 		logs.add("NEW TURN");
-		logs.add(gameData.getShip().toString());
+		logs.add("Ship coordinates: ");
+		logs.add(initGame.getShip().toString());
 		logs.add(" ---- ");
-		logs.add(gameData.getSailor(0).toString());
+		logs.add("Checkpoint coordinates: ");
+		RegattaGoal regattaGoal = (RegattaGoal) initGame.getGoal();
+		logs.add(regattaGoal.toString());
 		logs.add(" ---- ");
-		logs.add(gameData.getSailor(1).toString());
+		logs.add(initGame.getSailor(0).toString());
+		logs.add(" ---- ");
+		logs.add(initGame.getSailor(1).toString());
 		return logs;
 	}
 }

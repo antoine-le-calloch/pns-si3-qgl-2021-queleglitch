@@ -9,9 +9,10 @@ package fr.unice.polytech.si3.qgl.queleglitch;
  * @version 2021.01.26
  */
 
-class GameData {
+class InitGame {
     public Sailor[] sailors;
     public Ship ship;
+    public Goal goal;
 
     /**
      * @return <b>The list of sailors.</b>
@@ -24,4 +25,11 @@ class GameData {
      * @return <b>The ship.</b>
      */
     Ship getShip() {return ship;}
+
+    /**
+     * @return <b>The Goal.</b>
+     */
+    public Goal getGoal() {
+        return goal;
+    }
 }
