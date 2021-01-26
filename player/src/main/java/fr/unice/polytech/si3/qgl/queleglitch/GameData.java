@@ -1,12 +1,27 @@
 package fr.unice.polytech.si3.qgl.queleglitch;
 
+/**
+ * Classe permettant de gerer les éléments principaux du jeux : {@link Ship}, {@link Sailor}
+ * @author Huot-Marchand Antoine
+ * @author Naud Eric
+ * @author Madern Loic
+ * @author Le Calloch Antoine
+ * @version 2021.01.26
+ */
+
 class GameData {
     public Sailor[] sailors;
     public Ship ship;
 
+    /**
+     * @return <b>The list of sailors.</b>
+     */
     Sailor getSailor(int numSailor){
         return sailors[numSailor];
     }
 
+    /**
+     * @return <b>The ship.</b>
+     */
     Ship getShip() {return ship;}
 }
