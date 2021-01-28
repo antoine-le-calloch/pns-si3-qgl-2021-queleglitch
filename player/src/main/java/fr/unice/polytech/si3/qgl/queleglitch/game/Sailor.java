@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch;
+package fr.unice.polytech.si3.qgl.queleglitch.game;
 
 /**
  * Classe representant les marins
@@ -9,7 +9,7 @@ package fr.unice.polytech.si3.qgl.queleglitch;
  * @version 2021.01.26
  */
 
-class Sailor {
+public class Sailor {
     public int id;
     public int x;
     public int y;
@@ -17,7 +17,7 @@ class Sailor {
     /**
      * @return <b>The id of the sailor</b>
      */
-    int getId(){
+    public int getId(){
         return id;
     }
 

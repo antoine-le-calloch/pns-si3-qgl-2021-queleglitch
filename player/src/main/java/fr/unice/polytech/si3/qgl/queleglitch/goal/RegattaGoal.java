@@ -1,4 +1,7 @@
-package fr.unice.polytech.si3.qgl.queleglitch;
+package fr.unice.polytech.si3.qgl.queleglitch.goal;
+
+import fr.unice.polytech.si3.qgl.queleglitch.Checkpoint;
+import fr.unice.polytech.si3.qgl.queleglitch.goal.Goal;
 
 /**
  * Classe permettant de définir le mode Regatta

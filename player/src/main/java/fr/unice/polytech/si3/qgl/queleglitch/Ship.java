@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch;
 
+import fr.unice.polytech.si3.qgl.queleglitch.entitie.Entities;
+
 /**
  * Classe representant les bâteaux
  * @author Huot-Marchand Antoine
@@ -11,6 +13,8 @@ package fr.unice.polytech.si3.qgl.queleglitch;
 
 public class Ship {
     public Position position;
+    public Deck deck;
+    public Entities[] entities;
 
     /**
      * @return <b>The position of the ship.</b>
