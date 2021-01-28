@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.goal.Goal;
 
 /**

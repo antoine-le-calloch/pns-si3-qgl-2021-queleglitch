@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.Sailor;
+import fr.unice.polytech.si3.qgl.queleglitch.Sailor;
+import fr.unice.polytech.si3.qgl.queleglitch.action.Actions;
+import fr.unice.polytech.si3.qgl.queleglitch.action.Oar;
 
 /**
  * Classe permettant de définir l'action à faire à chaque tour
@@ -13,10 +15,10 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.Sailor;
 
 public class ActionToProcess {
     public int sailorId;
-    public String type;
+    public Actions action;
 
-    public ActionToProcess(Sailor sailor, String action){
+    public ActionToProcess(Sailor sailor){
         sailorId = sailor.getId();
-        type = action;
+        action = new Oar();
     }
 }

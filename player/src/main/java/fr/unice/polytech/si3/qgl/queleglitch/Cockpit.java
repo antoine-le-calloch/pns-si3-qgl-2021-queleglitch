@@ -47,8 +47,8 @@ public class Cockpit implements ICockpit {
 	 */
 	public String nextRound(String round) {
 		System.out.println("Next round input: " + round);
-		ActionToProcess actionSailor1 = new ActionToProcess(initGame.getSailor(0), "OAR");
-		ActionToProcess actionSailor2 = new ActionToProcess(initGame.getSailor(1), "OAR");
+		ActionToProcess actionSailor1 = new ActionToProcess(initGame.getSailor(0));
+		ActionToProcess actionSailor2 = new ActionToProcess(initGame.getSailor(1));
 
 		try {
 			return "[" + objectMapper.writeValueAsString(actionSailor1) + "," + objectMapper.writeValueAsString(actionSailor2) + "]";
