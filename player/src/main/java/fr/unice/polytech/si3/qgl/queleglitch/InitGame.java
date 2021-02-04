@@ -11,7 +11,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.goal.Goal;
  * @version 2021.01.26
  */
 
-class InitGame {
+public class InitGame {
     public Sailor[] sailors;
     public Ship ship;
     public Goal goal;
@@ -19,8 +19,8 @@ class InitGame {
     /**
      * @return <b>The list of sailors.</b>
      */
-    Sailor getSailor(int numSailor){
-        return sailors[numSailor];
+    Sailor[] getSailors(){
+        return sailors;
     }
 
     /**

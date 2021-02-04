@@ -22,6 +22,8 @@ import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 public class Cockpit implements ICockpit {
 
 	InitGame initGame;
+	NextRound nextRound;
+	ActionToProcess actionToProcess;
 	ObjectMapper objectMapper = new ObjectMapper();
 
 	/**
@@ -34,6 +36,7 @@ public class Cockpit implements ICockpit {
 		System.out.println("Init game input: " + game);
 		try {
 			initGame = objectMapper.readValue(game, InitGame.class);
+			actionToProcess = new ActionToProcess(initGame);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
@@ -47,11 +50,16 @@ public class Cockpit implements ICockpit {
 	 */
 	public String nextRound(String round) {
 		System.out.println("Next round input: " + round);
-		ActionToProcess actionSailor1 = new ActionToProcess(initGame.getSailor(0));
-		ActionToProcess actionSailor2 = new ActionToProcess(initGame.getSailor(1));
+		try {
+			nextRound = objectMapper.readValue(round, NextRound.class);
+			actionToProcess.setNewRound(nextRound);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
 
 		try {
-			return "[" + objectMapper.writeValueAsString(actionSailor1.getAction()) + "," + objectMapper.writeValueAsString(actionSailor2.getAction()) + "]";
+			return "[" + objectMapper.writeValueAsString(actionToProcess.getAction(0)) + "," + objectMapper.writeValueAsString(actionToProcess.getAction(1)) + "]";
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			return null;
@@ -74,9 +82,9 @@ public class Cockpit implements ICockpit {
 		RegattaGoal regattaGoal = (RegattaGoal) initGame.getGoal();
 		logs.add(regattaGoal.toString());
 		logs.add(" ---- ");
-		logs.add(initGame.getSailor(0).toString());
+		logs.add(initGame.getSailors()[0].toString());
 		logs.add(" ---- ");
-		logs.add(initGame.getSailor(1).toString());
+		logs.add(initGame.getSailors()[1].toString());
 		return logs;
 	}
 }

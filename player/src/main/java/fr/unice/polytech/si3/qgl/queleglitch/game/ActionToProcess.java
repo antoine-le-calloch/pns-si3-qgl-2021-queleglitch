@@ -1,5 +1,8 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
+import fr.unice.polytech.si3.qgl.queleglitch.InitGame;
+import fr.unice.polytech.si3.qgl.queleglitch.NextRound;
+import fr.unice.polytech.si3.qgl.queleglitch.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.action.Actions;
 import fr.unice.polytech.si3.qgl.queleglitch.action.Oar;
@@ -14,15 +17,20 @@ import fr.unice.polytech.si3.qgl.queleglitch.action.Oar;
  */
 
 public class ActionToProcess {
-    public int sailorId;
     public Actions action;
+    public Sailor[] sailors;
+    public Position position;
 
-    public ActionToProcess(Sailor sailor){
-        sailorId = sailor.getId();
-        action = new Oar(sailorId);
+    public ActionToProcess(InitGame initGame){
+        sailors = initGame.sailors;
+
     }
 
-    public Actions getAction() {
-        return action;
+    public void setNewRound(NextRound nextRound){
+        position = nextRound.getShip().getPosition();
+    }
+
+    public Actions getAction(int num_sailor) {
+        return action = new Oar(sailors[num_sailor].id);
     }
 }
