@@ -19,6 +19,10 @@ public class ActionToProcess {
 
     public ActionToProcess(Sailor sailor){
         sailorId = sailor.getId();
-        action = new Oar();
+        action = new Oar(sailorId);
+    }
+
+    public Actions getAction() {
+        return action;
     }
 }

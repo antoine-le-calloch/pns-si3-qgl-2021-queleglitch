@@ -12,5 +12,9 @@ import fr.unice.polytech.si3.qgl.queleglitch.entitie.*;
 })
 
 public abstract class Actions {
-    public int sailorld;
+    public int sailorId;
+
+    Actions(int sailorId){
+        this.sailorId = sailorId;
+    }
 }

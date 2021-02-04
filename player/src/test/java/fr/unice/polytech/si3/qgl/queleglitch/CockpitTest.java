@@ -28,7 +28,7 @@ class CockpitTest {
 
     @Test
     void nextRoundTest(){
-        assertEquals("[{\"sailorId\":2,\"type\":\"OAR\"},{\"sailorId\":3,\"type\":\"OAR\"}]",cockpit.nextRound(""));
+        assertEquals("[{\"type\":\"OAR\",\"sailorId\":2},{\"type\":\"OAR\",\"sailorId\":3}]",cockpit.nextRound(""));
     }
 
     @Test

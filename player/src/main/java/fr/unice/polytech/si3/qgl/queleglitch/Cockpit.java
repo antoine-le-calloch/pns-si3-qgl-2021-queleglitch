@@ -51,7 +51,7 @@ public class Cockpit implements ICockpit {
 		ActionToProcess actionSailor2 = new ActionToProcess(initGame.getSailor(1));
 
 		try {
-			return "[" + objectMapper.writeValueAsString(actionSailor1) + "," + objectMapper.writeValueAsString(actionSailor2) + "]";
+			return "[" + objectMapper.writeValueAsString(actionSailor1.getAction()) + "," + objectMapper.writeValueAsString(actionSailor2.getAction()) + "]";
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			return null;
