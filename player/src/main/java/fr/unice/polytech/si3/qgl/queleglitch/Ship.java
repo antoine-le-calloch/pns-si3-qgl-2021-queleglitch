@@ -31,4 +31,8 @@ public class Ship {
         return "Bateau | orientation : " + position.orientation +
                 " | x : " + position.x + " | y : " + position.y;
     }
+
+    public Entities[] getEntities() {
+        return entities;
+    }
 }
