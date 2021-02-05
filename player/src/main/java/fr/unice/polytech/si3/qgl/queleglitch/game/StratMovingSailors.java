@@ -23,6 +23,8 @@ public class StratMovingSailors {
     }
 
 
+
+
     public String balancedTheSailorsOnTheRames(){
         StringBuilder string= new StringBuilder();
         int i=0;
@@ -32,8 +34,8 @@ public class StratMovingSailors {
 
         for(; sailors.length / 2 > i; i++){
             int id=sailors[i].id;
-            int xdiff=(ramesAtRight.get(i).x-sailors[i].x>0 ?  ramesAtRight.get(i).x-sailors[i].x:  -(sailors[i].x-ramesAtRight.get(i).x));
-            int ydiff=(ramesAtRight.get(i).y-sailors[i].y>0 ?  ramesAtRight.get(i).y-sailors[i].y:  -(sailors[i].y-ramesAtRight.get(i).y));
+            int xdiff= ramesAtRight.get(i).x-sailors[i].x;
+            int ydiff=ramesAtRight.get(i).y-sailors[i].y;
 
             Actions action=new Moving(id,xdiff,ydiff);
 
@@ -47,8 +49,8 @@ public class StratMovingSailors {
         }
         for(; sailors.length  > i; i++){
             int id=sailors[i].id;
-            int xdiff=(ramesAtLeft.get(i).x-sailors[i].x>0 ?  ramesAtLeft.get(i).x-sailors[i].x:  -(sailors[i].x-ramesAtLeft.get(i).x));
-            int ydiff=(ramesAtLeft.get(i).y-sailors[i].y>0 ?  ramesAtLeft.get(i).y-sailors[i].y:  -(sailors[i].y-ramesAtLeft.get(i).y));
+            int xdiff=ramesAtLeft.get(i).x-sailors[i].x;
+            int ydiff=ramesAtLeft.get(i).y-sailors[i].y;
 
             Actions action=new Moving(id,xdiff,ydiff);
 
