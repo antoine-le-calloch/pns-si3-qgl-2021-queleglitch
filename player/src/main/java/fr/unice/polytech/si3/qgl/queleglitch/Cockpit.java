@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.unice.polytech.si3.qgl.queleglitch.game.ActionToProcess;
+import fr.unice.polytech.si3.qgl.queleglitch.game.ActionsToProcess;
 import fr.unice.polytech.si3.qgl.queleglitch.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
@@ -23,7 +23,7 @@ public class Cockpit implements ICockpit {
 
 	InitGame initGame;
 	NextRound nextRound;
-	ActionToProcess actionToProcess;
+	ActionsToProcess actionsToProcess;
 	ObjectMapper objectMapper = new ObjectMapper();
 
 	/**
@@ -36,7 +36,7 @@ public class Cockpit implements ICockpit {
 		System.out.println("Init game input: " + game);
 		try {
 			initGame = objectMapper.readValue(game, InitGame.class);
-			actionToProcess = new ActionToProcess(initGame);
+			actionsToProcess = new ActionsToProcess(initGame);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
@@ -52,19 +52,10 @@ public class Cockpit implements ICockpit {
 		System.out.println("Next round input: " + round);
 		try {
 			nextRound = objectMapper.readValue(round, NextRound.class);
-			actionToProcess.setNewRound(nextRound);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-
-
-		try {
-			return "[" + objectMapper.writeValueAsString(actionToProcess.getAction(0)) + "," + objectMapper.writeValueAsString(actionToProcess.getAction(1)) + "]";
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			return null;
-		}
-
+		return "[" + actionsToProcess.actionForTheRound() + "]";
 	}
 
 	/**

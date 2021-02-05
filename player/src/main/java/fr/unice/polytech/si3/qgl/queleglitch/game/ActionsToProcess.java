@@ -16,21 +16,16 @@ import fr.unice.polytech.si3.qgl.queleglitch.action.Oar;
  * @version 2021.01.26
  */
 
-public class ActionToProcess {
-    public Actions action;
-    public Sailor[] sailors;
-    public Position position;
+public class ActionsToProcess {
 
-    public ActionToProcess(InitGame initGame){
-        sailors = initGame.sailors;
+    StratMovingSailors stratMovingSailors;
 
+    public ActionsToProcess(InitGame initGame) {
+        this.stratMovingSailors = new StratMovingSailors(initGame);
     }
 
-    public void setNewRound(NextRound nextRound){
-        position = nextRound.getShip().getPosition();
+    public String actionForTheRound(){
+        return stratMovingSailors.balancedTheSailorsOnTheRames();
     }
 
-    public Actions getAction(int num_sailor) {
-        return action = new Oar(sailors[num_sailor].id);
-    }
 }

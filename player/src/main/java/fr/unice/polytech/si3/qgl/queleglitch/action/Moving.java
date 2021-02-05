@@ -4,7 +4,10 @@ public class Moving extends Actions{
     public int xdistance;
     public int ydistance;
 
-    Moving(int sailorId) {
+    public Moving(int sailorId,int xdistance,int ydistance) {
+
         super(sailorId);
+        this.xdistance=xdistance;
+        this.ydistance=ydistance;
     }
 }

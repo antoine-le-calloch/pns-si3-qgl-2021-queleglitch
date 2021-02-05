@@ -1,6 +1,11 @@
 package fr.unice.polytech.si3.qgl.queleglitch;
 
 import fr.unice.polytech.si3.qgl.queleglitch.entitie.Entities;
+import fr.unice.polytech.si3.qgl.queleglitch.entitie.Rame;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Classe representant les bâteaux
@@ -13,8 +18,8 @@ import fr.unice.polytech.si3.qgl.queleglitch.entitie.Entities;
 
 public class Ship {
     public Position position;
-    public Deck deck;
     public Entities[] entities;
+    public Deck deck;
 
     /**
      * @return <b>The position of the ship.</b>
@@ -34,5 +39,22 @@ public class Ship {
 
     public Entities[] getEntities() {
         return entities;
+    }
+
+    public List<Rame> getRames(){
+        List<Rame> rames=new ArrayList<>();
+        for (Entities entitie:entities){
+            if(entitie instanceof Rame) {
+                rames.add((Rame) entitie);
+            }
+        }
+        return new ArrayList<>(rames);
+    }
+
+    public List<Rame> getRamesAtRight(){
+        return getRames().stream().filter(rame -> rame.getY()!=0).collect(Collectors.toList());
+    }
+    public List<Rame> getRamesAtLeft(){
+        return getRames().stream().filter(rame -> rame.getY()==0).collect(Collectors.toList());
     }
 }

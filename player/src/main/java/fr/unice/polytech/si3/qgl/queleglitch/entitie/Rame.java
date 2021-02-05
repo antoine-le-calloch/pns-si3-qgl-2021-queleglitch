@@ -1,6 +1,11 @@
 package fr.unice.polytech.si3.qgl.queleglitch.entitie;
 
+import java.util.Objects;
+
 public class Rame extends Entities{
+
+    public int x;
+    public int y;
 
 
     public int getX() {
@@ -17,6 +22,26 @@ public class Rame extends Entities{
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Rame)) {
+            return false;
+        }
+        Rame r = (Rame) o;
+        return Double.compare(x, r.x) == 0
+                && Double.compare(y, r.y) == 0;
     }
 
 }

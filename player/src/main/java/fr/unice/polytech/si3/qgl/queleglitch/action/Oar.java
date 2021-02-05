@@ -4,4 +4,6 @@ public class Oar extends Actions{
     public Oar(int sailorId) {
         super(sailorId);
     }
+
+
 }
