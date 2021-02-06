@@ -2,7 +2,6 @@ package fr.unice.polytech.si3.qgl.queleglitch;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.queleglitch.entitie.Rame;
-import fr.unice.polytech.si3.qgl.queleglitch.game.StratMovingSailors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

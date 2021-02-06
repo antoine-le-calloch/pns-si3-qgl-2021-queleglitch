@@ -17,6 +17,9 @@ public class RegattaGoal extends Goal {
     public Checkpoint[] checkpoints;
 
 
+    public Checkpoint[] getCheckpoints(){
+        return checkpoints;
+    }
     /**
      * <p>Override of toString method, allow to print a different string to give the Checkpoints' informations</p>
      */

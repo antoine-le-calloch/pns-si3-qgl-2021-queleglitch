@@ -2,10 +2,6 @@ package fr.unice.polytech.si3.qgl.queleglitch.game;
 
 import fr.unice.polytech.si3.qgl.queleglitch.InitGame;
 import fr.unice.polytech.si3.qgl.queleglitch.NextRound;
-import fr.unice.polytech.si3.qgl.queleglitch.Position;
-import fr.unice.polytech.si3.qgl.queleglitch.Sailor;
-import fr.unice.polytech.si3.qgl.queleglitch.action.Actions;
-import fr.unice.polytech.si3.qgl.queleglitch.action.Oar;
 
 /**
  * Classe permettant de définir l'action à faire à chaque tour
@@ -18,14 +14,20 @@ import fr.unice.polytech.si3.qgl.queleglitch.action.Oar;
 
 public class ActionsToProcess {
 
-    StratMovingSailors stratMovingSailors;
+    InitGame initGame;
+    NextRound nextRound;
 
     public ActionsToProcess(InitGame initGame) {
-        this.stratMovingSailors = new StratMovingSailors(initGame);
+        this.initGame = initGame;
+    }
+
+    public void setDataNewRound(NextRound nextRound){
+        this.nextRound = nextRound;
     }
 
     public String actionForTheRound(){
-        return stratMovingSailors.balancedTheSailorsOnTheRames();
+        Strat strat = new Strat(initGame,nextRound);
+        return strat.balancedTheSailorsOnTheRames();
     }
 
 }

@@ -1,36 +1,36 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.unice.polytech.si3.qgl.queleglitch.InitGame;
-import fr.unice.polytech.si3.qgl.queleglitch.Sailor;
-import fr.unice.polytech.si3.qgl.queleglitch.Ship;
+import fr.unice.polytech.si3.qgl.queleglitch.*;
 import fr.unice.polytech.si3.qgl.queleglitch.action.Actions;
 import fr.unice.polytech.si3.qgl.queleglitch.action.Moving;
 import fr.unice.polytech.si3.qgl.queleglitch.entitie.Rame;
+import fr.unice.polytech.si3.qgl.queleglitch.goal.RegattaGoal;
 
 import java.util.List;
 
-public class StratMovingSailors {
+public class Strat {
 
 
     ObjectMapper objectMapper = new ObjectMapper();
     Ship ship;
     Sailor[] sailors;
+    Position shipPosition;
+    Position checkPointPosition;
 
-    public StratMovingSailors(InitGame initGame) {
+    public Strat(InitGame initGame, NextRound nextRound) {
+        checkPointPosition = ((RegattaGoal) initGame.getGoal()).getCheckpoints()[0].getPosition();
+        shipPosition = nextRound.getShip().getPosition();
         this.ship = initGame.ship;
-        this.sailors=initGame.sailors;
+        this.sailors = initGame.sailors;
     }
-
-
-
 
     public String balancedTheSailorsOnTheRames(){
         StringBuilder string= new StringBuilder();
         int i=0;
 
-        List<Rame> ramesAtRight=ship.getRamesAtRight();
-        List<Rame> ramesAtLeft=ship.getRamesAtLeft();
+        List<Rame> ramesAtRight = ship.getRamesAtRight();
+        List<Rame> ramesAtLeft = ship.getRamesAtLeft();
 
         for(; sailors.length / 2 > i; i++){
             int id=sailors[i].id;

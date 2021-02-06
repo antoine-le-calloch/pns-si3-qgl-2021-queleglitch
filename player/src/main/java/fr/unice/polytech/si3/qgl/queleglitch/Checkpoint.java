@@ -13,6 +13,10 @@ public class Checkpoint {
 
     public Position position;
 
+    public Position getPosition(){
+        return position;
+    }
+
     /**
      * <p>Override of toString method, allow to print a different string to give the Checkpoint's informations</p>
      */
