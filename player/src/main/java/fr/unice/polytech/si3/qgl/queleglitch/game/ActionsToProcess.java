@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
+import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.MoveSailorsStrat;
+import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.TurnStrat;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
 
 /**
@@ -12,22 +14,33 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
  */
 
 public class ActionsToProcess {
-
     InitGame initGame;
     NextRound nextRound;
+    int nbRound;
+    StringBuilder action;
 
     public ActionsToProcess(InitGame initGame) {
         this.initGame = initGame;
+        nbRound = 0;
+        action = new StringBuilder();
     }
 
     public void setDataNewRound(NextRound nextRound){
+        nbRound++;
         this.nextRound = nextRound;
         initGame.setShip(nextRound.getShip());
     }
 
     public String actionForTheRound(){
-        Strat strat = new Strat(initGame);
-        return strat.balancedTheSailorsOnTheRames();
+        MoveSailorsStrat moveSailorsStrat = new MoveSailorsStrat(initGame);
+        TurnStrat turnStrat = new TurnStrat(initGame);
+
+        if (nbRound == 1)
+            action.append(moveSailorsStrat.balancedTheSailorsOnTheRames());
+
+        action.append(turnStrat.useOar());
+
+        return action.toString();
     }
 
 }

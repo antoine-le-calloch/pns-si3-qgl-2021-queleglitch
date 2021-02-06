@@ -1,25 +1,18 @@
-package fr.unice.polytech.si3.qgl.queleglitch.game;
+package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.*;
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.*;
 
 import java.util.List;
 
-public class Strat {
-
-    ObjectMapper objectMapper = new ObjectMapper();
+public class MoveSailorsStrat extends Strategie {
     Ship ship;
     Sailor[] sailors;
-    Position shipPosition;
-    Position checkPointPosition;
 
-    public Strat(InitGame initGame) {
-        checkPointPosition = ((RegattaGoal) initGame.getGoal()).getCheckpoints()[0].getPosition();
-        shipPosition = initGame.getShip().getPosition();
+    public MoveSailorsStrat(InitGame initGame) {
+        super(initGame);
         ship = initGame.getShip();
         sailors = initGame.getSailors();
     }
