@@ -1,8 +1,7 @@
-package fr.unice.polytech.si3.qgl.queleglitch.entitie;
+package fr.unice.polytech.si3.qgl.queleglitch.json.entitie;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import fr.unice.polytech.si3.qgl.queleglitch.entitie.Rame;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property =  "type", defaultImpl = Void.class)
 @JsonSubTypes({

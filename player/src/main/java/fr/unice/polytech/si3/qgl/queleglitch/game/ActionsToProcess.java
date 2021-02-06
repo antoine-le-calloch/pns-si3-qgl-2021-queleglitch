@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
-import fr.unice.polytech.si3.qgl.queleglitch.InitGame;
-import fr.unice.polytech.si3.qgl.queleglitch.NextRound;
+import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
 
 /**
  * Classe permettant de définir l'action à faire à chaque tour
@@ -23,10 +22,11 @@ public class ActionsToProcess {
 
     public void setDataNewRound(NextRound nextRound){
         this.nextRound = nextRound;
+        initGame.setShip(nextRound.getShip());
     }
 
     public String actionForTheRound(){
-        Strat strat = new Strat(initGame,nextRound);
+        Strat strat = new Strat(initGame);
         return strat.balancedTheSailorsOnTheRames();
     }
 

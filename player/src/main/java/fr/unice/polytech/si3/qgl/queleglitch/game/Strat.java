@@ -1,16 +1,15 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.unice.polytech.si3.qgl.queleglitch.*;
-import fr.unice.polytech.si3.qgl.queleglitch.action.Actions;
-import fr.unice.polytech.si3.qgl.queleglitch.action.Moving;
-import fr.unice.polytech.si3.qgl.queleglitch.entitie.Rame;
-import fr.unice.polytech.si3.qgl.queleglitch.goal.RegattaGoal;
+import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
+import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.*;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.*;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.*;
 
 import java.util.List;
 
 public class Strat {
-
 
     ObjectMapper objectMapper = new ObjectMapper();
     Ship ship;
@@ -18,11 +17,11 @@ public class Strat {
     Position shipPosition;
     Position checkPointPosition;
 
-    public Strat(InitGame initGame, NextRound nextRound) {
+    public Strat(InitGame initGame) {
         checkPointPosition = ((RegattaGoal) initGame.getGoal()).getCheckpoints()[0].getPosition();
-        shipPosition = nextRound.getShip().getPosition();
-        this.ship = initGame.ship;
-        this.sailors = initGame.sailors;
+        shipPosition = initGame.getShip().getPosition();
+        ship = initGame.getShip();
+        sailors = initGame.getSailors();
     }
 
     public String balancedTheSailorsOnTheRames(){

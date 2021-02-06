@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch.entitie;
+package fr.unice.polytech.si3.qgl.queleglitch.json.entitie;
 
 import java.util.Objects;
 

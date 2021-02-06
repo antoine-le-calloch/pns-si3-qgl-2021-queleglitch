@@ -1,6 +1,8 @@
-package fr.unice.polytech.si3.qgl.queleglitch;
+package fr.unice.polytech.si3.qgl.queleglitch.json;
 
-import fr.unice.polytech.si3.qgl.queleglitch.goal.Goal;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 
 /**
  * Classe permettant de gerer les éléments principaux du jeux : {@link Ship}, {@link Sailor}
@@ -19,19 +21,23 @@ public class InitGame {
     /**
      * @return <b>The list of sailors.</b>
      */
-    Sailor[] getSailors(){
+    public Sailor[] getSailors(){
         return sailors;
     }
 
     /**
      * @return <b>The ship.</b>
      */
-    Ship getShip() {return ship;}
+    public Ship getShip() {return ship;}
 
     /**
      * @return <b>The Goal.</b>
      */
     public Goal getGoal() {
         return goal;
+    }
+
+    public void setShip(Ship ship){
+        this.ship = ship;
     }
 }

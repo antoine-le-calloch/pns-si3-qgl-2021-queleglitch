@@ -7,7 +7,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.queleglitch.game.ActionsToProcess;
-import fr.unice.polytech.si3.qgl.queleglitch.goal.RegattaGoal;
+import fr.unice.polytech.si3.qgl.queleglitch.game.NextRound;
+import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
 /**
@@ -73,10 +75,14 @@ public class Cockpit implements ICockpit {
 		logs.add("Checkpoint coordinates: ");
 		RegattaGoal regattaGoal = (RegattaGoal) initGame.getGoal();
 		logs.add(regattaGoal.toString());
-		logs.add(" ---- ");
-		logs.add(initGame.getSailors()[0].toString());
-		logs.add(" ---- ");
-		logs.add(initGame.getSailors()[1].toString());
+		for (int i = 0; i < initGame.getSailors().length; i++) {
+			logs.add(" ---- ");
+			logs.add(initGame.getSailors()[i].toString());
+		}
 		return logs;
+	}
+
+	public InitGame getInitGame() {
+		return initGame;
 	}
 }

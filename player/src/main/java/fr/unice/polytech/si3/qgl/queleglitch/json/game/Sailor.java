@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch;
+package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
 /**
  * Classe representant les marins

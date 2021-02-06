@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch.goal;
+package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

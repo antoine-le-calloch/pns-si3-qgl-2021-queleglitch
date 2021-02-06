@@ -1,7 +1,7 @@
-package fr.unice.polytech.si3.qgl.queleglitch;
+package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
-import fr.unice.polytech.si3.qgl.queleglitch.entitie.Entities;
-import fr.unice.polytech.si3.qgl.queleglitch.entitie.Rame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Entities;
+import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
 
 import java.util.ArrayList;
 import java.util.List;
