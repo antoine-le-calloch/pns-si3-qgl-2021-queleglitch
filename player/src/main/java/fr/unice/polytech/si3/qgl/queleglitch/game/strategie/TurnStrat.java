@@ -14,8 +14,11 @@ public class TurnStrat extends Strategie {
         shipPosition = initGame.getShip().getPosition();
     }
 
-    public void calculateAngle(){
+    public double calculateAngle(){
         //calculer angle bateay / checkpoint
+        double shipAngle =Math.atan2(shipPosition.y, shipPosition.x);
+        double checkpointAngle=Math.atan2(checkPointPosition.y, checkPointPosition.x);
+        return checkpointAngle-shipAngle;
     }
 
     public String useOar(){
