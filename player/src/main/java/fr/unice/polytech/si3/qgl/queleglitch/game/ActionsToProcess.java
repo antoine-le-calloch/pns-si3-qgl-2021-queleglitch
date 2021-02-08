@@ -36,7 +36,7 @@ public class ActionsToProcess {
         TurnStrat turnStrat = new TurnStrat(initGame);
 
         if (nbRound == 1)
-            action.append(moveSailorsStrat.balancedTheSailorsOnTheRames());
+            //action.append(moveSailorsStrat.balancedTheSailorsOnTheRames());
 
         action.append(turnStrat.useOar());
 

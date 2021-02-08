@@ -17,14 +17,15 @@ public class MoveSailorsStrat extends Strategie {
         sailors = initGame.getSailors();
     }
 
-    public String balancedTheSailorsOnTheRames(){
+    // il faudra vérifier que deux marins n'utilisent pas la même rame...
+    public String balancedTheSailorsOnTheRames(int sailorsAtLeft,int sailorsAtRight){
         StringBuilder string= new StringBuilder();
         int i=0;
 
         List<Rame> ramesAtRight = ship.getRamesAtRight();
         List<Rame> ramesAtLeft = ship.getRamesAtLeft();
 
-        for(; sailors.length / 2 > i; i++){
+        for(; sailorsAtRight > i; i++){
             int id=sailors[i].id;
             int xdiff= ramesAtRight.get(i).x-sailors[i].x;
             int ydiff=ramesAtRight.get(i).y-sailors[i].y;
@@ -32,6 +33,7 @@ public class MoveSailorsStrat extends Strategie {
             Actions action=new Moving(id,xdiff,ydiff);
 
             try{
+                // attention problème virgule dans le cas ou on en place plus de 1 à droite
                 string.append(objectMapper.writeValueAsString(action));
             }
             catch (Exception e){
@@ -39,7 +41,7 @@ public class MoveSailorsStrat extends Strategie {
             }
 
         }
-        for(; sailors.length  > i; i++){
+        for(; sailorsAtLeft+sailorsAtRight  > i; i++){
             int id=sailors[i].id;
             int xdiff=ramesAtLeft.get(i).x-sailors[i].x;
             int ydiff=ramesAtLeft.get(i).y-sailors[i].y;
