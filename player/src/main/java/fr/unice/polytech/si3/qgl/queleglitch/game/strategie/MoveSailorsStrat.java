@@ -21,7 +21,6 @@ public class MoveSailorsStrat extends Strategie {
     public String moveSailorsOnTheRames(int sailorsAtLeft, int sailorsAtRight){
         StringBuilder string= new StringBuilder();
         int i=0;
-
         List<Rame> ramesAtRight = ship.getRamesAtRight();
         List<Rame> ramesAtLeft = ship.getRamesAtLeft();
 

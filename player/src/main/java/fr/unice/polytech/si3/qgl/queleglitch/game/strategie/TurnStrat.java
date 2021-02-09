@@ -1,7 +1,9 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
+import fr.unice.polytech.si3.qgl.queleglitch.game.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Checkpoint;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
@@ -10,10 +12,11 @@ public class TurnStrat extends Strategie {
     Position checkPointPosition;
     MoveSailorsStrat moveSailorsStrat;
 
-    public TurnStrat(InitGame initGame) {
+
+    public TurnStrat(InitGame initGame,NextRound nextRound) {
         super(initGame);
         checkPointPosition = ((RegattaGoal) initGame.getGoal()).getCheckpoints()[0].getPosition();
-        shipPosition = initGame.getShip().getPosition();
+        shipPosition = nextRound.ship.position;
     }
 
     public double calculateAngle(){
@@ -101,8 +104,4 @@ public class TurnStrat extends Strategie {
 
 
         // problème avec le début de la boucle for pour ne pas faire ramer un marin inutilement
-
-
-
-
 }
