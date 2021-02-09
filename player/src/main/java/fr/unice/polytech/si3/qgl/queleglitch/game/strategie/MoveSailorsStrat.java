@@ -17,8 +17,8 @@ public class MoveSailorsStrat extends Strategie {
         sailors = initGame.getSailors();
     }
 
-    // il faudra vérifier que deux marins n'utilisent pas la même rame...
-    public String balancedTheSailorsOnTheRames(int sailorsAtLeft,int sailorsAtRight){
+
+    public String moveSailorsOnTheRames(int sailorsAtLeft, int sailorsAtRight){
         StringBuilder string= new StringBuilder();
         int i=0;
 
@@ -28,13 +28,14 @@ public class MoveSailorsStrat extends Strategie {
         for(; sailorsAtRight > i; i++){
             int id=sailors[i].id;
             int xdiff= ramesAtRight.get(i).x-sailors[i].x;
-            int ydiff=ramesAtRight.get(i).y-sailors[i].y;
+            int ydiff= ramesAtRight.get(i).y-sailors[i].y;
 
             Actions action=new Moving(id,xdiff,ydiff);
 
             try{
-                // attention problème virgule dans le cas ou on en place plus de 1 à droite
                 string.append(objectMapper.writeValueAsString(action));
+                if(sailorsAtLeft!=0)
+                    string.append(",");
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -43,13 +44,15 @@ public class MoveSailorsStrat extends Strategie {
         }
         for(; sailorsAtLeft+sailorsAtRight  > i; i++){
             int id=sailors[i].id;
-            int xdiff=ramesAtLeft.get(i).x-sailors[i].x;
-            int ydiff=ramesAtLeft.get(i).y-sailors[i].y;
+            int xdiff=ramesAtLeft.get(i-sailorsAtRight).x-sailors[i].x;
+            int ydiff=ramesAtLeft.get(i-sailorsAtRight).y-sailors[i].y;
 
             Actions action=new Moving(id,xdiff,ydiff);
 
             try{
-                string.append(",");
+                if(i!=0 && i!=sailorsAtRight) {
+                    string.append(",");
+                }
                 string.append(objectMapper.writeValueAsString(action));
             }
             catch (Exception e){
