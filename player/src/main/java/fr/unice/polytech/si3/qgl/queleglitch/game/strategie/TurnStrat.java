@@ -33,22 +33,18 @@ public class TurnStrat extends Strategie {
         double angleCalculated = calculateAngle();
 
         if (angleCalculated <= Math.PI / 12 && angleCalculated >= -Math.PI / 12) {
-            moveSailorsStrat.moveSailorsOnTheRames(2, 2);
-            return useNRames(string,0);
+            return moveSailorsStrat.moveSailorsOnTheRames(2, 2)+","+useNRames(string,0);
         }
 
         // cas négatifs
         else if (angleCalculated < 0) {
 
             if (angleCalculated >= -Math.PI/4 && angleCalculated < -Math.PI/12) {
-                moveSailorsStrat.moveSailorsOnTheRames(2, 1);
-                return useNRames(string,1);
+                return moveSailorsStrat.moveSailorsOnTheRames(2, 1)+","+useNRames(string,1);
             } else if (angleCalculated >= -Math.PI*5/12 && angleCalculated < -Math.PI/4) {
-                moveSailorsStrat.moveSailorsOnTheRames(3, 1);
-                return useNRames(string,0);
+                return moveSailorsStrat.moveSailorsOnTheRames(3, 1)+","+useNRames(string,0);
             } else if (angleCalculated >= -Math.PI*2 && angleCalculated < -Math.PI*5/12) {
-                moveSailorsStrat.moveSailorsOnTheRames(3, 0);
-                return useNRames(string,1);
+                return moveSailorsStrat.moveSailorsOnTheRames(3, 0)+","+useNRames(string,1);
             }
         }
 
@@ -56,14 +52,11 @@ public class TurnStrat extends Strategie {
         else if (angleCalculated > 0) {
 
             if (angleCalculated > Math.PI/12 && angleCalculated <= Math.PI/4) {
-                moveSailorsStrat.moveSailorsOnTheRames(1, 2);
-                return useNRames(string,1);
+                return moveSailorsStrat.moveSailorsOnTheRames(1, 2)+","+useNRames(string,1);
             } else if (angleCalculated > Math.PI/4 && angleCalculated <= Math.PI*5/12) {
-                moveSailorsStrat.moveSailorsOnTheRames(1, 3);
-                return useNRames(string,0);
+                return moveSailorsStrat.moveSailorsOnTheRames(1, 3)+","+useNRames(string,0);
             } else if (angleCalculated > Math.PI*5/12 && angleCalculated < Math.PI * 2) {
-                moveSailorsStrat.moveSailorsOnTheRames(0, 3);
-                return useNRames(string,1);
+                return moveSailorsStrat.moveSailorsOnTheRames(0, 3)+","+useNRames(string,1);
             }
         }
         return string.toString();
