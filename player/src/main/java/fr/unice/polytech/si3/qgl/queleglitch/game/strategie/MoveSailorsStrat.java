@@ -24,7 +24,7 @@ public class MoveSailorsStrat extends Strategie {
         List<Rame> ramesAtRight = ship.getRamesAtRight();
         List<Rame> ramesAtLeft = ship.getRamesAtLeft();
 
-        for(; sailorsAtRight > i; i++){
+        for(; i < sailorsAtRight; i++){
             int id=sailors[i].id;
             int xdiff= ramesAtRight.get(i).x-sailors[i].x;
             int ydiff= ramesAtRight.get(i).y-sailors[i].y;
@@ -43,7 +43,7 @@ public class MoveSailorsStrat extends Strategie {
             }
 
         }
-        for(; sailorsAtLeft+sailorsAtRight  > i; i++){
+        for(; i < sailorsAtLeft+sailorsAtRight; i++){
             int id=sailors[i].id;
             int xdiff=ramesAtLeft.get(i-sailorsAtRight).x-sailors[i].x;
             int ydiff=ramesAtLeft.get(i-sailorsAtRight).y-sailors[i].y;
@@ -63,7 +63,6 @@ public class MoveSailorsStrat extends Strategie {
             }
         }
         return string.toString();
-
     }
 
 
