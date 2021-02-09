@@ -12,7 +12,8 @@ class CockpitTest {
 
     Cockpit cockpit;
     ObjectMapper objectMapper;
-    String enter;
+    String init;
+    String nextRound;
     int FIRST_OAR;
 
     @BeforeEach
@@ -20,24 +21,26 @@ class CockpitTest {
         final int FIRST_OAR=0;
         this.cockpit = new Cockpit();
         objectMapper = new ObjectMapper();
-        enter="{\"goal\":{\"mode\":\"REGATTA\",\"checkpoints\":[{\"position\":{\"x\":1000,\"y\":0,\"orientation\":0},\"shape\":{\"type\":\"circle\",\"radius\":50}},{\"position\":{\"x\":0,\"y\":0,\"orientation\":0},\"shape\":{\"type\":\"circle\",\"radius\":50}}]},\"ship\":{\"type\":\"ship\",\"life\":100,\"position\":{\"x\":0,\"y\":0,\"orientation\":0},\"name\":\"Lescopaingsd'abord!\",\"deck\":{\"width\":3,\"length\":6},\"entities\":[{\"x\":1,\"y\":0,\"type\":\"oar\"},{\"x\":1,\"y\":2,\"type\":\"oar\"},{\"x\":0,\"y\":1,\"type\":\"oar\"},{\"x\":3,\"y\":2,\"type\":\"oar\"},{\"x\":4,\"y\":0,\"type\":\"oar\"},{\"x\":4,\"y\":2,\"type\":\"oar\"},{\"x\":2,\"y\":1,\"type\":\"sail\",\"openned\":false},{\"x\":5,\"y\":0,\"type\":\"rudder\"}],\"shape\":{\"type\":\"rectangle\",\"width\":3,\"height\":6,\"orientation\":0}},\"sailors\":[{\"x\":0,\"y\":1,\"id\":2,\"name\":\"EdwardPouce\"},{\"x\":0,\"y\":2,\"id\":3,\"name\":\"TomPouce\"}]}";
-        cockpit.initGame(enter);
+        init = "{\"goal\":{\"mode\":\"REGATTA\",\"checkpoints\":[{\"position\":{\"x\":1000,\"y\":0,\"orientation\":0},\"shape\":{\"type\":\"circle\",\"radius\":50}},{\"position\":{\"x\":0,\"y\":0,\"orientation\":0},\"shape\":{\"type\":\"circle\",\"radius\":50}}]},\"ship\":{\"type\":\"ship\",\"life\":100,\"position\":{\"x\":0,\"y\":0,\"orientation\":0},\"name\":\"Lescopaingsd'abord!\",\"deck\":{\"width\":2,\"length\":4},\"entities\":[{\"x\":1,\"y\":0,\"type\":\"oar\"},{\"x\":1,\"y\":2,\"type\":\"oar\"},{\"x\":0,\"y\":1,\"type\":\"oar\"},{\"x\":3,\"y\":2,\"type\":\"oar\"},{\"x\":4,\"y\":0,\"type\":\"oar\"},{\"x\":4,\"y\":2,\"type\":\"oar\"}],\"shape\":{\"type\":\"rectangle\",\"width\":2,\"height\":4,\"orientation\":0}},\"sailors\":[{\"x\":0,\"y\":1,\"id\":2,\"name\":\"EdwardPouce\"},{\"x\":0,\"y\":1,\"id\":3,\"name\":\"TomPouce\"},{\"x\":1,\"y\":0,\"id\":4,\"name\":\"JackPouce\"},{\"x\":1,\"y\":0,\"id\":5,\"name\":\"FredPouce\"}]}";cockpit.initGame(init);
     }
 
     @Test
     void nextRoundTest(){
-        //assertEquals("[{\"type\":\"OAR\",\"sailorId\":2},{\"type\":\"OAR\",\"sailorId\":3}]",cockpit.nextRound(""));
-        //System.out.println(cockpit.nextRound(enter));
+        nextRound = "{\"ship\":{\"type\":\"ship\",\"life\":100,\"position\":{\"x\":0,\"y\":0,\"orientation\":0},\"name\":\"Lescopaingsd'abord!\",\"deck\":{\"width\":2,\"length\":4},\"entities\":[{\"x\":1,\"y\":0,\"type\":\"oar\"},{\"x\":1,\"y\":2,\"type\":\"oar\"},{\"x\":0,\"y\":1,\"type\":\"oar\"},{\"x\":3,\"y\":2,\"type\":\"oar\"},{\"x\":4,\"y\":0,\"type\":\"oar\"},{\"x\":4,\"y\":2,\"type\":\"oar\"}],\"shape\":{\"type\":\"rectangle\",\"width\":2,\"height\":4,\"orientation\":0}}}";
+        String nextRoundOut;
+        nextRoundOut = cockpit.nextRound(nextRound);
+        assertEquals("[{\"type\":\"OAR\",\"sailorId\":2},{\"type\":\"OAR\",\"sailorId\":3},{\"type\":\"OAR\",\"sailorId\":4},{\"type\":\"OAR\",\"sailorId\":5}]",nextRoundOut);
+
     }
 
     @Test
     void LogTest() {
-        assertEquals("[NEW TURN, Ship coordinates: , Bateau | orientation : 0.0 | x : 0.0 | y : 0.0,  ---- , Checkpoint coordinates: ,  | Checkpoint | x : 1000.0 | y : 0.0 | Checkpoint | x : 0.0 | y : 0.0,  ---- , Marin 2 | position x : 0 | position y : 1,  ---- , Marin 3 | position x : 0 | position y : 2]",cockpit.getLogs().toString());
+        assertEquals("[NEW TURN, Ship coordinates: , Bateau | orientation : 0.0 | x : 0.0 | y : 0.0,  ---- , Checkpoint coordinates: ,  | Checkpoint | x : 1000.0 | y : 0.0 | Checkpoint | x : 0.0 | y : 0.0,  ---- , Marin 2 | position x : 0 | position y : 1,  ---- , Marin 3 | position x : 0 | position y : 1,  ---- , Marin 4 | position x : 1 | position y : 0,  ---- , Marin 5 | position x : 1 | position y : 0]",cockpit.getLogs().toString());
     }
 
     @Test
     void entitieInexistant(){
-        final int OUT_OF_BOUND=6;
+        final int OUT_OF_BOUND=7;
         assertNull(cockpit.initGame.getShip().getEntities()[OUT_OF_BOUND]);
     }
 

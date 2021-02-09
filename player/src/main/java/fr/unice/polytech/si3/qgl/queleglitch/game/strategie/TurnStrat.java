@@ -17,6 +17,7 @@ public class TurnStrat extends Strategie {
         super(initGame);
         checkPointPosition = ((RegattaGoal) initGame.getGoal()).getCheckpoints()[0].getPosition();
         shipPosition = nextRound.ship.position;
+        moveSailorsStrat = new MoveSailorsStrat(initGame);
     }
 
     public double calculateAngle(){
@@ -66,12 +67,7 @@ public class TurnStrat extends Strategie {
                 return use3Rames(string);
             }
         }
-
-
-
-
         return string.toString();
-
     }
 
     private String use3Rames(StringBuilder string) {
