@@ -53,6 +53,4 @@ class CockpitTest {
         assertEquals(rame.getX(),xExpectedOfTheFirstOar);
         assertEquals(rame.getY(),yExpectedOfTheFirstOar);
     }
-
-
 }
