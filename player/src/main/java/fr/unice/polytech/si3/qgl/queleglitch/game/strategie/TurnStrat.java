@@ -35,7 +35,7 @@ public class TurnStrat extends Strategie {
 
         if (angleCalculated <= Math.PI / 12 && angleCalculated >= -Math.PI / 12) {
             moveSailorsStrat.moveSailorsOnTheRames(2, 2);
-            return use4Rames(string);
+            return useNRames(string,0);
         }
 
         // cas négatifs
@@ -43,13 +43,13 @@ public class TurnStrat extends Strategie {
 
             if (angleCalculated >= -Math.PI/4 && angleCalculated < -Math.PI/12) {
                 moveSailorsStrat.moveSailorsOnTheRames(2, 1);
-                return use3Rames(string);
+                return useNRames(string,1);
             } else if (angleCalculated >= -Math.PI*5/12 && angleCalculated < -Math.PI/4) {
                 moveSailorsStrat.moveSailorsOnTheRames(3, 1);
-                return use4Rames(string);
+                return useNRames(string,0);
             } else if (angleCalculated >= -Math.PI*2 && angleCalculated < -Math.PI*5/12) {
                 moveSailorsStrat.moveSailorsOnTheRames(3, 0);
-                return use3Rames(string);
+                return useNRames(string,1);
             }
         }
 
@@ -58,23 +58,23 @@ public class TurnStrat extends Strategie {
 
             if (angleCalculated > Math.PI/12 && angleCalculated <= Math.PI/4) {
                 moveSailorsStrat.moveSailorsOnTheRames(1, 2);
-                return use3Rames(string);
+                return useNRames(string,1);
             } else if (angleCalculated > Math.PI/4 && angleCalculated <= Math.PI*5/12) {
                 moveSailorsStrat.moveSailorsOnTheRames(1, 3);
-                return use4Rames(string);
+                return useNRames(string,0);
             } else if (angleCalculated > Math.PI*5/12 && angleCalculated < Math.PI * 2) {
                 moveSailorsStrat.moveSailorsOnTheRames(0, 3);
-                return use3Rames(string);
+                return useNRames(string,1);
             }
         }
         return string.toString();
     }
 
-    private String use3Rames(StringBuilder string) {
-        for (int i = 0; i < moveSailorsStrat.sailors.length - 1; i++) {
+    private String useNRames(StringBuilder string, int nb) {
+        for (int i = 0; i < moveSailorsStrat.sailors.length - nb; i++) {
             try {
                 string.append(objectMapper.writeValueAsString(new Oar(moveSailorsStrat.sailors[i].id)));
-                if (i != moveSailorsStrat.sailors.length - 2) {
+                if (i != moveSailorsStrat.sailors.length - (nb+1)) {
                     string.append(",");
                 }
             } catch (Exception e) {
@@ -84,19 +84,6 @@ public class TurnStrat extends Strategie {
         return string.toString();
     }
 
-    private String use4Rames(StringBuilder string) {
-        for (int i = 0; i < moveSailorsStrat.sailors.length; i++) {
-            try {
-                string.append(objectMapper.writeValueAsString(new Oar(moveSailorsStrat.sailors[i].id)));
-                if (i != moveSailorsStrat.sailors.length - 1) {
-                    string.append(",");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return string.toString();
-    }
 
 
         // problème avec le début de la boucle for pour ne pas faire ramer un marin inutilement

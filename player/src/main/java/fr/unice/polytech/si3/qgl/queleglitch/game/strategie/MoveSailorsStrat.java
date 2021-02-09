@@ -30,6 +30,8 @@ public class MoveSailorsStrat extends Strategie {
             int ydiff= ramesAtRight.get(i).y-sailors[i].y;
 
             Actions action=new Moving(id,xdiff,ydiff);
+            sailors[i].x=ramesAtRight.get(i).x;
+            sailors[i].y=ramesAtRight.get(i).y;
 
             try{
                 string.append(objectMapper.writeValueAsString(action));
@@ -47,6 +49,8 @@ public class MoveSailorsStrat extends Strategie {
             int ydiff=ramesAtLeft.get(i-sailorsAtRight).y-sailors[i].y;
 
             Actions action=new Moving(id,xdiff,ydiff);
+            sailors[i].x=ramesAtLeft.get(i-sailorsAtRight).x;
+            sailors[i].y=ramesAtLeft.get(i-sailorsAtRight).y;
 
             try{
                 if(i!=0 && i!=sailorsAtRight) {

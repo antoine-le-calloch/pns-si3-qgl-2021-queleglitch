@@ -21,6 +21,14 @@ public class Sailor {
         return id;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     /**
      * <p>Override of toString method, allow to print a different string to give the Sailor's informations</p>
      */
