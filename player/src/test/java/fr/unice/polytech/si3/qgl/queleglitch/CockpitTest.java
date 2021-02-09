@@ -37,12 +37,7 @@ class CockpitTest {
     void LogTest() {
         assertEquals("[NEW TURN, Ship coordinates: , Bateau | orientation : 0.0 | x : 0.0 | y : 0.0,  ---- , Checkpoint coordinates: ,  | Checkpoint | x : 1000.0 | y : 0.0 | Checkpoint | x : 0.0 | y : 0.0,  ---- , Marin 2 | position x : 0 | position y : 1,  ---- , Marin 3 | position x : 0 | position y : 1,  ---- , Marin 4 | position x : 1 | position y : 0,  ---- , Marin 5 | position x : 1 | position y : 0]",cockpit.getLogs().toString());
     }
-
-    @Test
-    void entitieInexistant(){
-        final int OUT_OF_BOUND=6;
-        assertNull(cockpit.initGame.getShip().getEntities()[OUT_OF_BOUND]);
-    }
+    
 
     @Test
     void wrongOarSelected(){
