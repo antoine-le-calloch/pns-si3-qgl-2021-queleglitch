@@ -15,7 +15,6 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
 
 public class ActionsToProcess {
     InitGame initGame;
-    NextRound nextRound;
     StringBuilder action;
 
     public ActionsToProcess(InitGame initGame) {
@@ -23,13 +22,13 @@ public class ActionsToProcess {
         action = new StringBuilder();
     }
 
-    public void setDataNewRound(NextRound nextRound){
-        this.nextRound = nextRound;
-        initGame.setShip(nextRound.getShip());
+    public void setDataNewRound(InitGame initGame){
+        this.initGame = initGame;
+        initGame.setShip(initGame.getShip());
     }
 
     public String actionForTheRound(){
-        TurnStrat turnStrat = new TurnStrat(initGame,nextRound);
+        TurnStrat turnStrat = new TurnStrat(initGame);
         action.append(turnStrat.useOar());
         return action.toString();
     }

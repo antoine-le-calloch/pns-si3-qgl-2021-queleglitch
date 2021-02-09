@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 import fr.unice.polytech.si3.qgl.queleglitch.game.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar;
+import fr.unice.polytech.si3.qgl.queleglitch.json.action.Turn;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Checkpoint;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
@@ -12,16 +13,15 @@ public class TurnStrat extends Strategie {
     Position checkPointPosition;
     MoveSailorsStrat moveSailorsStrat;
 
-
-    public TurnStrat(InitGame initGame,NextRound nextRound) {
+    public TurnStrat(InitGame initGame) {
         super(initGame);
         checkPointPosition = ((RegattaGoal) initGame.getGoal()).getCheckpoints()[0].getPosition();
-        shipPosition = nextRound.ship.position;
+        shipPosition = initGame.getShip().getPosition();
         moveSailorsStrat = new MoveSailorsStrat(initGame);
     }
 
     public double calculateAngle(){
-        //calculer angle bateay / checkpoint
+        //calculer angle bateau / checkpoint
         double shipAngle =Math.atan2(shipPosition.y, shipPosition.x);
         double checkpointAngle=Math.atan2(checkPointPosition.y, checkPointPosition.x);
         return checkpointAngle-shipAngle;
@@ -83,8 +83,5 @@ public class TurnStrat extends Strategie {
         }
         return string.toString();
     }
-
-
-
         // problème avec le début de la boucle for pour ne pas faire ramer un marin inutilement
 }

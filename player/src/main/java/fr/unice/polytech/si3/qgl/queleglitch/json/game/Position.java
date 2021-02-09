@@ -14,6 +14,16 @@ public class Position {
     public double y;
     public double orientation;
 
+    public Position(double x, double y, double orientation){
+        this.x = x;
+        this.y = y;
+        this.orientation = orientation;
+    }
+
+    public Position(){
+
+    }
+
     /**
      * @return <b>The orientation.</b>
      */

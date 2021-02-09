@@ -24,7 +24,6 @@ import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 public class Cockpit implements ICockpit {
 
 	InitGame initGame;
-	NextRound nextRound;
 	ActionsToProcess actionsToProcess;
 	ObjectMapper objectMapper = new ObjectMapper();
 
@@ -53,8 +52,8 @@ public class Cockpit implements ICockpit {
 	public String nextRound(String round) {
 		System.out.println("Next round input: " + round);
 		try {
-			nextRound = objectMapper.readValue(round, NextRound.class);
-			actionsToProcess.setDataNewRound(nextRound);
+			initGame = objectMapper.readValue(round, InitGame.class);
+			actionsToProcess.setDataNewRound(initGame);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
