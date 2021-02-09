@@ -21,6 +21,13 @@ public class Ship {
     public Entities[] entities;
     public Deck deck;
 
+    public Ship(){}
+
+    public Ship(Position position, Entities[] entities, Deck deck){
+        this.position = position;
+        this.entities = entities;
+        this.deck = deck;
+    }
     /**
      * @return <b>The position of the ship.</b>
      */
