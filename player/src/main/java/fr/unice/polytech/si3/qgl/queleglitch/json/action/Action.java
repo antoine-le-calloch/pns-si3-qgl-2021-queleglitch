@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Oar.class, name = "OAR"),
         @JsonSubTypes.Type(value = Moving.class, name = "MOVING"),
-        /*@JsonSubTypes.Type(value = Turn.class, name = "TURN")*/
+        @JsonSubTypes.Type(value = Turn.class, name = "TURN")
 })
 
-public abstract class Actions {
+public abstract class Action {
     public int sailorId;
 
-    Actions(int sailorId){
+    Action(int sailorId){
         this.sailorId = sailorId;
     }
 }

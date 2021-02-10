@@ -1,8 +1,11 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.MoveSailorsStrat;
+import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.createActions;
 import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.TurnStrat;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
+
+import java.util.List;
 
 /**
  * Classe permettant de définir l'action à faire à chaque tour
@@ -13,12 +16,12 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
  * @version 2021.01.26
  */
 
-public class ActionsToProcess {
+public class processing {
     InitGame initGame;
     NextRound nextRound;
     StringBuilder action;
 
-    public ActionsToProcess(InitGame initGame) {
+    public processing(InitGame initGame) {
         this.initGame = initGame;
         action = new StringBuilder();
     }
@@ -28,10 +31,10 @@ public class ActionsToProcess {
         initGame.setShip(nextRound.getShip());
     }
 
-    public String actionForTheRound(){
+    public List<Action> actionForTheRound(){
         TurnStrat turnStrat = new TurnStrat(initGame,nextRound);
-        action.append(turnStrat.useOar());
-        return action.toString();
+        createActions createActions = new createActions(initGame, turnStrat.getToolsToUse());
+        return createActions.getActions();
     }
 
 }

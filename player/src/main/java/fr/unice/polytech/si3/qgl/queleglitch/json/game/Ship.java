@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Entities;
+import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Gouvernail;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
 
 import java.util.ArrayList;
@@ -56,6 +57,15 @@ public class Ship {
             }
         }
         return new ArrayList<>(rames);
+    }
+
+    public Gouvernail getGouvernail(){
+        for (Entities entitie:entities){
+            if(entitie instanceof Gouvernail) {
+                return (Gouvernail) entitie;
+            }
+        }
+        return null;
     }
 
     public List<Rame> getRamesAtRight(){

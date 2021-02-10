@@ -2,21 +2,16 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.Checkpoint;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
-public class TurnStrat extends Strategie {
+public class TurnStrat {
     Position shipPosition;
     Position checkPointPosition;
-    MoveSailorsStrat moveSailorsStrat;
 
     public TurnStrat(InitGame initGame,NextRound nextRound) {
-        super(initGame);
         checkPointPosition = ((RegattaGoal) initGame.getGoal()).getCheckpoints()[0].getPosition();
         shipPosition = nextRound.ship.position;
-        moveSailorsStrat = new MoveSailorsStrat(initGame);
     }
 
     public double calculateAngle(){
@@ -26,54 +21,45 @@ public class TurnStrat extends Strategie {
         return checkpointAngle-shipAngle;
     }
 
-    // en fonction de l'angle, ajouter certain marins qui rament
-    public String useOar() {
-        StringBuilder string = new StringBuilder();
+    ToolsToUse angleSmallerThan90(double angle, int signe){
+        if(angle >= Math.PI / 24)
+            return new ToolsToUse(signe*angle,1,1);
 
+        return new ToolsToUse(0,2,2);
+    }
+
+    ToolsToUse angleGreaterThan90(double angle, int signe){
+        if(signe > 0) {
+            if (angle >= Math.PI / 24)
+                return new ToolsToUse(signe * angle, 0, 3);
+
+            return new ToolsToUse(0, 0, 3);
+        }
+        else{
+            if (angle >= Math.PI / 24)
+                return new ToolsToUse(signe * angle, 3, 0);
+
+            return new ToolsToUse(0, 3, 0);
+        }
+    }
+
+    ToolsToUse findToolsToUse(){
+        int signe = 1;
         double angleCalculated = calculateAngle();
 
-        if (angleCalculated <= Math.PI / 12 && angleCalculated >= -Math.PI / 12) {
-            return moveSailorsStrat.moveSailorsOnTheRames(2, 2)+","+useNRames(string,0);
+        if(angleCalculated < 0){
+            signe = -1;
+            angleCalculated *= signe;
         }
 
-        // cas négatifs
-        else if (angleCalculated < 0) {
-
-            if (angleCalculated >= -Math.PI/4 && angleCalculated < -Math.PI/12) {
-                return moveSailorsStrat.moveSailorsOnTheRames(2, 1)+","+useNRames(string,1);
-            } else if (angleCalculated >= -Math.PI*5/12 && angleCalculated < -Math.PI/4) {
-                return moveSailorsStrat.moveSailorsOnTheRames(3, 1)+","+useNRames(string,0);
-            } else if (angleCalculated >= -Math.PI*2 && angleCalculated < -Math.PI*5/12) {
-                return moveSailorsStrat.moveSailorsOnTheRames(3, 0)+","+useNRames(string,1);
-            }
-        }
-
-        // cas positifs
-        else if (angleCalculated > 0) {
-
-            if (angleCalculated > Math.PI/12 && angleCalculated <= Math.PI/4) {
-                return moveSailorsStrat.moveSailorsOnTheRames(1, 2)+","+useNRames(string,1);
-            } else if (angleCalculated > Math.PI/4 && angleCalculated <= Math.PI*5/12) {
-                return moveSailorsStrat.moveSailorsOnTheRames(1, 3)+","+useNRames(string,0);
-            } else if (angleCalculated > Math.PI*5/12 && angleCalculated < Math.PI * 2) {
-                return moveSailorsStrat.moveSailorsOnTheRames(0, 3)+","+useNRames(string,1);
-            }
-        }
-        return string.toString();
+        if(angleCalculated > Math.PI / 2)
+            return angleGreaterThan90(angleCalculated - Math.PI / 2,signe);
+        else
+            return angleSmallerThan90(angleCalculated,signe);
     }
 
-    private String useNRames(StringBuilder string, int nb) {
-        for (int i = 0; i < moveSailorsStrat.sailors.length - nb; i++) {
-            try {
-                string.append(objectMapper.writeValueAsString(new Oar(moveSailorsStrat.sailors[i].id)));
-                if (i != moveSailorsStrat.sailors.length - (nb+1)) {
-                    string.append(",");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return string.toString();
+    // retourne les éléments à utliser et la facon de les utiliser (rames, gouvernail...)
+    public ToolsToUse getToolsToUse() {
+        return findToolsToUse();
     }
-        // problème avec le début de la boucle for pour ne pas faire ramer un marin inutilement
 }

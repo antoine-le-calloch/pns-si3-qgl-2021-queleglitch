@@ -1,6 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.action;
 
-public class Moving extends Actions{
+public class Moving extends Action {
     public int xdistance;
     public int ydistance;
 
