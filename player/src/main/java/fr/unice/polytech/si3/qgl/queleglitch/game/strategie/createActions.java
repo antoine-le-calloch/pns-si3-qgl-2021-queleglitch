@@ -24,7 +24,7 @@ public class createActions {
         int y;
         int i = 0;
         double angle;
-        List<Action> actionsMoving = new ArrayList<>();
+        List<Action> actions = new ArrayList<>();
         List<Action> actionsOar = new ArrayList<>();
         List<Action> actionsTurn = new ArrayList<>();
 
@@ -39,16 +39,18 @@ public class createActions {
                 y = ship.getRamesAtRight().get(0).y - sailors[i].y;
                 ship.getRamesAtRight().remove(0);
             }
-            actionsMoving.add(new Moving(sailors[i].getId(),x,y));
+            actions.add(new Moving(sailors[i].getId(),x,y));
             actionsOar.add(new Oar(sailors[i].getId()));
         }
         if(i<NB_SAILOR && (angle = toolsToUse.getRudderAngle()) != 0){
             x = ship.getGouvernail().getX() - sailors[i].x;
             y = ship.getGouvernail().getY() - sailors[i].y;
-            actionsMoving.add(new Moving(sailors[i].getId(),x,y));
+            actions.add(new Moving(sailors[i].getId(),x,y));
             actionsTurn.add(new Turn(sailors[i].getId(),angle));
         }
-        return actionsMoving;
+        actions.addAll(actionsOar);
+        actions.addAll(actionsTurn);
+        return actions;
     }
 
     public List<Action> getActions(){

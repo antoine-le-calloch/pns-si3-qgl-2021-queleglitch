@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.queleglitch.game.processing;
 import fr.unice.polytech.si3.qgl.queleglitch.game.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
@@ -51,11 +52,15 @@ public class Cockpit implements ICockpit {
 	 * @return <b>A Json string which contains the actions of all the sailors in a round.</b>
 	 */
 	public String nextRound(String round) {
+		StringBuilder stringActionForTheRound = new StringBuilder();
 		System.out.println("Next round input: " + round);
 		try {
 			nextRound = objectMapper.readValue(round, NextRound.class);
 			processing.setDataNewRound(nextRound);
-			return "[" + objectMapper.writeValueAsString(processing.actionForTheRound()) + "]";
+			for (Action action:processing.actionForTheRound()) {
+				stringActionForTheRound.append(objectMapper.writeValueAsString(action));
+			}
+			return "[" + stringActionForTheRound + "]";
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}

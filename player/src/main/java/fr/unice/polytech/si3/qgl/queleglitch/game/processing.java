@@ -54,5 +54,4 @@ public class processing {
         createActions createActions = new createActions(initGame, turnStrat.getToolsToUse());
         return createActions.getActions();
     }
-
 }
