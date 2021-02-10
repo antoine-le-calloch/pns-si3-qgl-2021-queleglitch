@@ -14,11 +14,16 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Checkpoint;
 public class RegattaGoal extends Goal {
 
     public Checkpoint[] checkpoints;
+    public int numActualCheckpoint = 0;
 
-
-    public Checkpoint[] getCheckpoints(){
-        return checkpoints;
+    public Checkpoint getActualCheckpoint(){
+        return checkpoints[numActualCheckpoint];
     }
+
+    public void checkpointReached(){
+        numActualCheckpoint++;
+    }
+
     /**
      * <p>Override of toString method, allow to print a different string to give the Checkpoints' informations</p>
      */

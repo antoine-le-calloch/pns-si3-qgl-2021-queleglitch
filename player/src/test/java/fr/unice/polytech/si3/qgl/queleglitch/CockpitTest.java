@@ -30,7 +30,6 @@ class CockpitTest {
         String nextRoundOut;
         nextRoundOut = cockpit.nextRound(nextRound);
         assertEquals("[{\"type\":\"MOVING\",\"sailorId\":2,\"xdistance\":1,\"ydistance\":1},{\"type\":\"MOVING\",\"sailorId\":3,\"xdistance\":0,\"ydistance\":0},{\"type\":\"MOVING\",\"sailorId\":4,\"xdistance\":0,\"ydistance\":0},{\"type\":\"MOVING\",\"sailorId\":5,\"xdistance\":3,\"ydistance\":0},{\"type\":\"OAR\",\"sailorId\":2},{\"type\":\"OAR\",\"sailorId\":3},{\"type\":\"OAR\",\"sailorId\":4},{\"type\":\"OAR\",\"sailorId\":5}]",nextRoundOut);
-
     }
 
     @Test

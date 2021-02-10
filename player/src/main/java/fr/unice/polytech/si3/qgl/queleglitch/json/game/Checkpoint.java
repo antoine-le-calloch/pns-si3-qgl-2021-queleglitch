@@ -14,9 +14,14 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 public class Checkpoint {
 
     public Position position;
+    public Shape shape;
 
     public Position getPosition(){
         return position;
+    }
+
+    public Shape getShape(){
+        return shape;
     }
 
     /**

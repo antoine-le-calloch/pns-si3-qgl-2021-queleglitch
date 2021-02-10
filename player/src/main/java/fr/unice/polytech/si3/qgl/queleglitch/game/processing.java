@@ -4,6 +4,9 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.createActions;
 import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.TurnStrat;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Circle;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
 import java.util.List;
 
@@ -29,6 +32,21 @@ public class processing {
     public void setDataNewRound(NextRound nextRound){
         this.nextRound = nextRound;
         initGame.setShip(nextRound.getShip());
+
+        if(distanceFromCheckpoint() < ((Circle) ((RegattaGoal) initGame.getGoal()).getActualCheckpoint().getShape()).getRadius()){
+            ((RegattaGoal) initGame.getGoal()).checkpointReached();
+        }
+    }
+
+    double distanceFromCheckpoint(){
+        double distance;
+        Position shipPosition = nextRound.ship.position;
+        Position checkpointPosition = ((RegattaGoal) initGame.getGoal()).getActualCheckpoint().getPosition();
+
+        distance = Math.pow(checkpointPosition.getX()-shipPosition.getX(),2);
+        distance += Math.pow(checkpointPosition.getY()-shipPosition.getY(),2);
+        distance = Math.sqrt(distance);
+        return distance;
     }
 
     public List<Action> actionForTheRound(){

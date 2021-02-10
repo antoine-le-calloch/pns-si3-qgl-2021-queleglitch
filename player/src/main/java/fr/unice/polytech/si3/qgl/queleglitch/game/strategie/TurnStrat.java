@@ -10,12 +10,12 @@ public class TurnStrat {
     Position checkPointPosition;
 
     public TurnStrat(InitGame initGame,NextRound nextRound) {
-        checkPointPosition = ((RegattaGoal) initGame.getGoal()).getCheckpoints()[0].getPosition();
+        checkPointPosition = ((RegattaGoal) initGame.getGoal()).getActualCheckpoint().getPosition();
         shipPosition = nextRound.ship.position;
     }
 
+    //calculer angle bateau / checkpoint
     public double calculateAngle(){
-        //calculer angle bateau / checkpoint
         double shipAngle =Math.atan2(shipPosition.y, shipPosition.x);
         double checkpointAngle=Math.atan2(checkPointPosition.y, checkPointPosition.x);
         return checkpointAngle-shipAngle;
