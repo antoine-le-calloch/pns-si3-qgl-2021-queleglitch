@@ -74,6 +74,7 @@ public class Ship {
     public List<Rame> getRamesAtRight(){
         return getRames().stream().filter(rame -> rame.getY()!=0).collect(Collectors.toList());
     }
+
     public List<Rame> getRamesAtLeft(){
         return getRames().stream().filter(rame -> rame.getY()==0).collect(Collectors.toList());
     }

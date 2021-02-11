@@ -23,11 +23,9 @@ import java.util.List;
 public class processing {
     InformationGame informationGame;
     NextRound nextRound;
-    StringBuilder action;
 
     public processing(InformationGame informationGame) {
         this.informationGame = informationGame;
-        action = new StringBuilder();
     }
 
     public void setDataNewRound(NextRound nextRound){

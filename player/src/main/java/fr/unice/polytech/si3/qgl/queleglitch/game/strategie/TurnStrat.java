@@ -16,9 +16,37 @@ public class TurnStrat {
 
     //calculer angle bateau / checkpoint
     public double calculateAngle(){
-        double shipAngle =Math.atan2(shipPosition.y, shipPosition.x);
-        double checkpointAngle=Math.atan2(checkPointPosition.y, checkPointPosition.x);
-        return checkpointAngle-shipAngle;
+        double shipX = shipPosition.getX();
+        double shipY = shipPosition.getY();
+        double shipAngle = shipPosition.getOrientation();
+        double checkPointX = checkPointPosition.getX();
+        double checkPointY = checkPointPosition.getY();
+
+        double angle = 0;
+        if(checkPointX-shipX > 0 && checkPointY-shipY >= 0){
+            angle = Math.atan((checkPointY-shipY)/(checkPointX-shipX));
+        }
+        else if(checkPointX-shipX <= 0 && checkPointY-shipY > 0){
+            angle = Math.atan((checkPointX-shipX)/(checkPointY-shipY));
+            angle += Math.PI/2;
+        }
+        else if(checkPointX-shipX > 0 && checkPointY-shipY <= 0){
+            angle = Math.atan((shipY-checkPointY)/(checkPointX-shipX));
+        }
+        else if(checkPointX-shipX <= 0 && checkPointY-shipY < 0){
+            angle = Math.atan((shipX-checkPointX)/(checkPointY-shipY));
+            angle -= Math.PI/2;
+        }
+        angle -= shipAngle;
+        if(angle > Math.PI) {
+            angle -= Math.PI;
+            angle *= -1;
+        }
+        if(angle < -Math.PI) {
+            angle += Math.PI;
+            angle *= -1;
+        }
+        return angle;
     }
 
     ToolsToUse angleSmallerThan90(double angle, int signe){
