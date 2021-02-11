@@ -8,6 +8,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 public class TurnStrat {
     Position shipPosition;
     Position checkPointPosition;
+    
 
     public TurnStrat(InformationGame informationGame, NextRound nextRound) {
         checkPointPosition = ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition();
