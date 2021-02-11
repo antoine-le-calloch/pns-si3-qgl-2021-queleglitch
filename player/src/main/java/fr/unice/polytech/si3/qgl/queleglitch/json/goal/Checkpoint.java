@@ -1,6 +1,7 @@
-package fr.unice.polytech.si3.qgl.queleglitch.json.game;
+package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 /**
  * Classe representant les Checkpoints

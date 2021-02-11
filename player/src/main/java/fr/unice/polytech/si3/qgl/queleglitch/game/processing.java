@@ -2,9 +2,10 @@ package fr.unice.polytech.si3.qgl.queleglitch.game;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.createActions;
 import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.TurnStrat;
-import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.Circle;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
@@ -20,28 +21,28 @@ import java.util.List;
  */
 
 public class processing {
-    InitGame initGame;
+    InformationGame informationGame;
     NextRound nextRound;
     StringBuilder action;
 
-    public processing(InitGame initGame) {
-        this.initGame = initGame;
+    public processing(InformationGame informationGame) {
+        this.informationGame = informationGame;
         action = new StringBuilder();
     }
 
     public void setDataNewRound(NextRound nextRound){
         this.nextRound = nextRound;
-        initGame.setShip(nextRound.getShip());
+        informationGame.setShip(nextRound.getShip());
 
-        if(distanceFromCheckpoint() < ((Circle) ((RegattaGoal) initGame.getGoal()).getActualCheckpoint().getShape()).getRadius()){
-            ((RegattaGoal) initGame.getGoal()).checkpointReached();
+        if(distanceFromCheckpoint() < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius()){
+            ((RegattaGoal) informationGame.getGoal()).checkpointReached();
         }
     }
 
     double distanceFromCheckpoint(){
         double distance;
         Position shipPosition = nextRound.ship.position;
-        Position checkpointPosition = ((RegattaGoal) initGame.getGoal()).getActualCheckpoint().getPosition();
+        Position checkpointPosition = ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition();
 
         distance = Math.pow(checkpointPosition.getX()-shipPosition.getX(),2);
         distance += Math.pow(checkpointPosition.getY()-shipPosition.getY(),2);
@@ -50,8 +51,8 @@ public class processing {
     }
 
     public List<Action> actionForTheRound(){
-        TurnStrat turnStrat = new TurnStrat(initGame,nextRound);
-        createActions createActions = new createActions(initGame, turnStrat.getToolsToUse());
+        TurnStrat turnStrat = new TurnStrat(informationGame,nextRound);
+        createActions createActions = new createActions(informationGame, turnStrat.getToolsToUse());
         return createActions.getActions();
     }
 }

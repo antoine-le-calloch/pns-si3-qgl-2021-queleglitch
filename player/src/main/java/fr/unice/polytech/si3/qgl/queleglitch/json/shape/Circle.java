@@ -1,4 +1,6 @@
-package fr.unice.polytech.si3.qgl.queleglitch.json.game;
+package fr.unice.polytech.si3.qgl.queleglitch.json.shape;
+
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 /**
  * Classe permettant de définir la forme cercledu checkpoint
@@ -9,7 +11,8 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
  * @version 2021.01.26
  */
 
-public class Circle extends Shape{
+public class Circle extends Shape {
+
     public double radius;
 
     public double getRadius(){

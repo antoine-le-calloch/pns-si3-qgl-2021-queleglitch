@@ -41,14 +41,14 @@ class CockpitTest {
     @Test
     void wrongOarSelected(){
         final int SECOND_OAR=1;
-        assertNotEquals(cockpit.initGame.getShip().getEntities()[SECOND_OAR],cockpit.initGame.getShip().getEntities()[FIRST_OAR]);
+        assertNotEquals(cockpit.informationGame.getShip().getEntities()[SECOND_OAR],cockpit.informationGame.getShip().getEntities()[FIRST_OAR]);
     }
 
     @Test
     void goodOarSelected(){
         int xExpectedOfTheFirstOar=1;
         int yExpectedOfTheFirstOar=0;
-        Rame rame=(Rame)cockpit.initGame.getShip().getEntities()[FIRST_OAR];
+        Rame rame=(Rame)cockpit.informationGame.getShip().getEntities()[FIRST_OAR];
         assertEquals(rame.getX(),xExpectedOfTheFirstOar);
         assertEquals(rame.getY(),yExpectedOfTheFirstOar);
     }

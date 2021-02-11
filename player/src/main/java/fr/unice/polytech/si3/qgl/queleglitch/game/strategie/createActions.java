@@ -1,6 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.*;
 
@@ -13,9 +13,9 @@ public class createActions {
     ToolsToUse toolsToUse;
     final int NB_SAILOR = 4;
 
-    public createActions(InitGame initGame, ToolsToUse toolsToUse) {
-        ship = initGame.getShip();
-        sailors = initGame.getSailors();
+    public createActions(InformationGame informationGame, ToolsToUse toolsToUse) {
+        ship = informationGame.getShip();
+        sailors = informationGame.getSailors();
         this.toolsToUse = toolsToUse;
     }
 

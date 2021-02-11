@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.NextRound;
-import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
+import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
@@ -9,8 +9,8 @@ public class TurnStrat {
     Position shipPosition;
     Position checkPointPosition;
 
-    public TurnStrat(InitGame initGame,NextRound nextRound) {
-        checkPointPosition = ((RegattaGoal) initGame.getGoal()).getActualCheckpoint().getPosition();
+    public TurnStrat(InformationGame informationGame, NextRound nextRound) {
+        checkPointPosition = ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition();
         shipPosition = nextRound.ship.position;
     }
 

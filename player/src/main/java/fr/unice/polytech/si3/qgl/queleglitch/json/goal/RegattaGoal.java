@@ -1,7 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.Checkpoint;
-
 /**
  * Classe permettant de définir le mode Regatta
  * @author Huot-Marchand Antoine

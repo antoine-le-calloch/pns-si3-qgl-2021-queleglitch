@@ -7,8 +7,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.queleglitch.game.processing;
-import fr.unice.polytech.si3.qgl.queleglitch.game.NextRound;
-import fr.unice.polytech.si3.qgl.queleglitch.json.InitGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
+import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
@@ -24,7 +24,7 @@ import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
 public class Cockpit implements ICockpit {
 
-	InitGame initGame;
+	InformationGame informationGame;
 	NextRound nextRound;
 	processing processing;
 	ObjectMapper objectMapper = new ObjectMapper();
@@ -38,8 +38,8 @@ public class Cockpit implements ICockpit {
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		System.out.println("Init game input: " + game);
 		try {
-			initGame = objectMapper.readValue(game, InitGame.class);
-			processing = new processing(initGame);
+			informationGame = objectMapper.readValue(game, InformationGame.class);
+			processing = new processing(informationGame);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
@@ -76,19 +76,19 @@ public class Cockpit implements ICockpit {
 		ArrayList<String> logs = new ArrayList<>();
 		logs.add("NEW TURN");
 		logs.add("Ship coordinates: ");
-		logs.add(initGame.getShip().toString());
+		logs.add(informationGame.getShip().toString());
 		logs.add(" ---- ");
 		logs.add("Checkpoint coordinates: ");
-		RegattaGoal regattaGoal = (RegattaGoal) initGame.getGoal();
+		RegattaGoal regattaGoal = (RegattaGoal) informationGame.getGoal();
 		logs.add(regattaGoal.toString());
-		for (int i = 0; i < initGame.getSailors().length; i++) {
+		for (int i = 0; i < informationGame.getSailors().length; i++) {
 			logs.add(" ---- ");
-			logs.add(initGame.getSailors()[i].toString());
+			logs.add(informationGame.getSailors()[i].toString());
 		}
 		return logs;
 	}
 
-	public InitGame getInitGame() {
-		return initGame;
+	public InformationGame getInitGame() {
+		return informationGame;
 	}
 }

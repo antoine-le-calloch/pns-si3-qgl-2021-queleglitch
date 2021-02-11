@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Entities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Gouvernail;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,9 @@ import java.util.stream.Collectors;
 public class Ship {
     public Position position;
     public Entities[] entities;
+    public String name;
     public Deck deck;
+    public Shape shape;
 
     public Ship(){}
 
