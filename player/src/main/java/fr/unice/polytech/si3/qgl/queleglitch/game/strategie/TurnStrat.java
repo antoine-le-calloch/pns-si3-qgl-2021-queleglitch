@@ -9,9 +9,9 @@ public class TurnStrat {
     Position shipPosition;
     Position checkPointPosition;
 
-    public TurnStrat(InformationGame informationGame, NextRound nextRound) {
-        checkPointPosition = ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition();
-        shipPosition = nextRound.ship.position;
+    public TurnStrat(Position checkPointPosition, Position shipPosition) {
+        this.checkPointPosition = checkPointPosition;
+        this.shipPosition = shipPosition;
     }
 
     //calculer angle bateau / checkpoint
@@ -23,15 +23,19 @@ public class TurnStrat {
         double checkPointY = checkPointPosition.getY();
 
         double angle = 0;
-        if(checkPointX-shipX > 0 && checkPointY-shipY >= 0){
+
+        if(checkPointY-shipY==0 && checkPointX-shipX < 0){
+            angle = Math.PI;
+        }
+        else if(checkPointX-shipX > 0 && checkPointY-shipY > 0){
             angle = Math.atan((checkPointY-shipY)/(checkPointX-shipX));
         }
         else if(checkPointX-shipX <= 0 && checkPointY-shipY > 0){
-            angle = Math.atan((checkPointX-shipX)/(checkPointY-shipY));
-            angle += Math.PI/2;
+            angle = -Math.atan((checkPointX - shipX) / (checkPointY - shipY));
+            angle += Math.PI / 2;
         }
-        else if(checkPointX-shipX > 0 && checkPointY-shipY <= 0){
-            angle = Math.atan((shipY-checkPointY)/(checkPointX-shipX));
+        else if(checkPointX-shipX > 0 && checkPointY-shipY < 0){
+            angle = -Math.atan((shipY-checkPointY)/(checkPointX-shipX));
         }
         else if(checkPointX-shipX <= 0 && checkPointY-shipY < 0){
             angle = Math.atan((shipX-checkPointX)/(checkPointY-shipY));
@@ -39,12 +43,10 @@ public class TurnStrat {
         }
         angle -= shipAngle;
         if(angle > Math.PI) {
-            angle -= Math.PI;
-            angle *= -1;
+            angle = (-2*Math.PI)+angle;
         }
-        if(angle < -Math.PI) {
-            angle += Math.PI;
-            angle *= -1;
+        else if(angle < -Math.PI) {
+            angle = (2*Math.PI)+angle;
         }
         return angle;
     }

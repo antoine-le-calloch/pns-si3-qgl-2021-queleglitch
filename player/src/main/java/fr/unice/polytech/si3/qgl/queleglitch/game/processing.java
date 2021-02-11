@@ -49,7 +49,7 @@ public class processing {
     }
 
     public List<Action> actionForTheRound(){
-        TurnStrat turnStrat = new TurnStrat(informationGame,nextRound);
+        TurnStrat turnStrat = new TurnStrat(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition(),nextRound.getShip().getPosition());
         createActions createActions = new createActions(informationGame, turnStrat.getToolsToUse());
         return createActions.getActions();
     }
