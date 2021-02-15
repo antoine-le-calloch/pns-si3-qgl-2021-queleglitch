@@ -192,7 +192,7 @@ class TurnStratTest {
     }
 
 
-    /////////////////////////////Calcul des éléments du bateau en (0 : 0)
+    /////////////////////////////bateau en (-1 : -1) rotate 0°
 
     @Test
     void shipMinus1_Minus1CheckPoint_1000_0(){
@@ -276,5 +276,91 @@ class TurnStratTest {
         checkPointPosition = new Position(600,-500,0);
         turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
         assertEquals(-Math.atan(499.0/601.0),turnStrat.calculateAngle());
+    }
+
+    ////////////////////test tool to use
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_1000_0(){
+        checkPointPosition = new Position(1000,0,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(2,2),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_600_500(){
+        checkPointPosition = new Position(600,500,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(1,2),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_1000_1000(){
+        checkPointPosition = new Position(1000,1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(1,3),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_0_1000(){
+        checkPointPosition = new Position(0,1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(0,3),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_Minus1000_1000(){
+        checkPointPosition = new Position(-1000,1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(0,3),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_Minus600_500(){
+        checkPointPosition = new Position(-600,500,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(0,3),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_Minus1000_0(){
+        checkPointPosition = new Position(-1000,0,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(0,3),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_Minus600_Minus500(){
+        checkPointPosition = new Position(-600,-500,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(3,0),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_Minus1000_Minus1000(){
+        checkPointPosition = new Position(-1000,-1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(3,0),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_0_Minus1000(){
+        checkPointPosition = new Position(0,-1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(3,0),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_1000_Minus1000(){
+        checkPointPosition = new Position(1000,-1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(3,1),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseShip0_0CheckPoint_600_Minus500(){
+        checkPointPosition = new Position(600,-500,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0);
+        assertEquals(new ToolsToUse(2,1),turnStrat.getToolsToUse());
     }
 }
