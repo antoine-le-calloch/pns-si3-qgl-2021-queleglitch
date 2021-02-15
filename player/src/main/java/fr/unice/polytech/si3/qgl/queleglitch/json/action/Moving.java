@@ -12,4 +12,18 @@ public class Moving extends Action {
         this.xdistance=xdistance;
         this.ydistance=ydistance;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Moving)) {
+            return false;
+        }
+        Moving m = (Moving) o;
+        return xdistance == m.xdistance && ydistance == m.ydistance
+                && sailorId== m.sailorId;
+    }
 }

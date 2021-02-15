@@ -1,22 +1,19 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
+import fr.unice.polytech.si3.qgl.queleglitch.json.action.Moving;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
@@ -42,11 +39,134 @@ class createActionsTest {
     }
 
     @Test
-    void creationActionTurnToLeftAt90(){
+    void TurnToLeftAt90(){
         createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,3));
-
-        assertTrue(createActions.getActions().contains(new Oar(0)));
-        assertTrue(createActions.getActions().contains(new Oar(1)));
-        assertTrue(createActions.getActions().contains(new Oar(2)));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertTrue(actions.contains(new Oar(1)));
+        assertTrue(actions.contains(new Oar(2)));
+        assertFalse(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,1)));
+        assertTrue(actions.contains(new Moving(1,1,1)));
+        assertTrue(actions.contains(new Moving(2,2,1)));
     }
+    @Test
+    void TurnToRightAt90(){
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(3,0));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertTrue(actions.contains(new Oar(1)));
+        assertTrue(actions.contains(new Oar(2)));
+        assertFalse(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,0)));
+        assertTrue(actions.contains(new Moving(1,1,0)));
+        assertTrue(actions.contains(new Moving(2,2,0)));
+    }
+
+  @Test
+    void TurnToRightAtRight60WithMaxSpeed(){
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(3,1));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertTrue(actions.contains(new Oar(1)));
+        assertTrue(actions.contains(new Oar(2)));
+        assertTrue(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,1)));
+        assertTrue(actions.contains(new Moving(1,0,0)));
+        assertTrue(actions.contains(new Moving(2,1,0)));
+        assertTrue(actions.contains(new Moving(3,2,0)));
+    }
+
+  @Test
+    void TurnToRightAtLeft60WithMaxSpeed(){
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(1,3));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertTrue(actions.contains(new Oar(1)));
+        assertTrue(actions.contains(new Oar(2)));
+        assertTrue(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,1)));
+        assertTrue(actions.contains(new Moving(1,1,1)));
+        assertTrue(actions.contains(new Moving(2,2,1)));
+        assertTrue(actions.contains(new Moving(3,0,0)));
+    }
+
+    @Test
+    void TurnToRightAtLeft30WithMaxSpeed(){
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(1,2));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertTrue(actions.contains(new Oar(1)));
+        assertTrue(actions.contains(new Oar(2)));
+        assertFalse(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,1)));
+        assertTrue(actions.contains(new Moving(1,1,1)));
+        assertTrue(actions.contains(new Moving(2,0,0)));
+    }
+
+    @Test
+    void TurnToRightAtRight30WithMaxSpeed(){
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(2,1));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertTrue(actions.contains(new Oar(1)));
+        assertTrue(actions.contains(new Oar(2)));
+        assertFalse(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,1)));
+        assertTrue(actions.contains(new Moving(1,0,0)));
+        assertTrue(actions.contains(new Moving(2,1,0)));
+    }
+
+
+  @Test
+    void TurnToRightAtRight60WithLowSpeed(){
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(2,0));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertTrue(actions.contains(new Oar(1)));
+        assertFalse(actions.contains(new Oar(2)));
+        assertFalse(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,0)));
+        assertTrue(actions.contains(new Moving(1,1,0)));
+    }
+
+  @Test
+    void TurnToRightAtLeft60WithLowSpeed(){
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,2));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertTrue(actions.contains(new Oar(1)));
+        assertFalse(actions.contains(new Oar(2)));
+        assertFalse(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,1)));
+        assertTrue(actions.contains(new Moving(1,1,1)));
+    }
+
+    @Test
+    void TurnToRightAtLeft30WithLowSpeed(){
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,1));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertFalse(actions.contains(new Oar(1)));
+        assertFalse(actions.contains(new Oar(2)));
+        assertFalse(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,1)));
+    }
+
+    @Test
+    void TurnToRightAtRight30WithLowSpeed(){
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(1,0));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertFalse(actions.contains(new Oar(1)));
+        assertFalse(actions.contains(new Oar(2)));
+        assertFalse(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,0)));
+    }
+
+
+
+
+
+
 }
