@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public abstract class Action {
     public int sailorId;
 
+    public String type;
+
     Action(int sailorId){
         this.sailorId = sailorId;
     }
