@@ -51,41 +51,24 @@ public class TurnStrat {
         return angle;
     }
 
-    ToolsToUse angleSmallerThan90(double angle, int signe){
-        if(angle >= Math.PI / 24)
-            return new ToolsToUse(signe*angle,1,1);
-
-        return new ToolsToUse(0,2,2);
-    }
-
-    ToolsToUse angleGreaterThan90(double angle, int signe){
-        if(signe > 0) {
-            if (angle >= Math.PI / 24)
-                return new ToolsToUse(signe * angle, 0, 3);
-
-            return new ToolsToUse(0, 0, 3);
-        }
-        else{
-            if (angle >= Math.PI / 24)
-                return new ToolsToUse(signe * angle, 3, 0);
-
-            return new ToolsToUse(0, 3, 0);
-        }
-    }
-
     ToolsToUse findToolsToUse(){
-        int signe = 1;
-        double angleCalculated = calculateAngle();
+        double angle = calculateAngle();
 
-        if(angleCalculated < 0){
-            signe = -1;
-            angleCalculated *= signe;
-        }
+        if (angle >= 5*Math.PI / 12)
+            return new ToolsToUse(0, 3);
+        if (angle >= 3*Math.PI / 12)
+            return new ToolsToUse(1, 3);
+        if (angle >= Math.PI / 12)
+            return new ToolsToUse(1, 2);
 
-        if(angleCalculated > Math.PI / 2)
-            return angleGreaterThan90(angleCalculated - Math.PI / 2,signe);
-        else
-            return angleSmallerThan90(angleCalculated,signe);
+        if (angle <= -5*Math.PI / 12)
+            return new ToolsToUse(3, 0);
+        if (angle <= -3*Math.PI / 12)
+            return new ToolsToUse(3, 1);
+        if (angle <= -1*Math.PI / 12)
+            return new ToolsToUse(2, 1);
+
+        return new ToolsToUse(2,2);
     }
 
     // retourne les éléments à utliser et la facon de les utiliser (rames, gouvernail...)
