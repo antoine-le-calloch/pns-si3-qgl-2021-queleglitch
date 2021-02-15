@@ -190,4 +190,91 @@ class TurnStratTest {
         turnStrat = new TurnStrat(checkPointPosition,shipIn0_0Rotate45);
         assertEquals(-Math.PI/4,turnStrat.calculateAngle());
     }
+
+
+    /////////////////////////////Calcul des éléments du bateau en (0 : 0)
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_1000_0(){
+        checkPointPosition = new Position(1000,0,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(Math.atan(1.0/1001.0),turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_600_500(){
+        checkPointPosition = new Position(600,500,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(Math.atan(501.0/601.0),turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_1000_1000(){
+        checkPointPosition = new Position(1000,1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(Math.PI/4,turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_0_1000(){
+        checkPointPosition = new Position(0,1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(Math.atan(1001.0/1.0),turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_Minus1000_1000(){
+        checkPointPosition = new Position(-1000,1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(Math.atan(999.0/1001.0)+Math.PI/2,turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_Minus600_500(){
+        checkPointPosition = new Position(-600,500,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(Math.atan(599.0/501.0)+Math.PI/2,turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_Minus1000_0(){
+        checkPointPosition = new Position(-1000,0,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(Math.atan(999.0/1.0)+Math.PI/2,turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_Minus600_Minus500(){
+        checkPointPosition = new Position(-600,-500,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(-Math.atan(599.0/499.0)-Math.PI/2,turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_Minus1000_Minus1000(){
+        checkPointPosition = new Position(-1000,-1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(-(3*Math.PI)/4,turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_0_Minus1000(){
+        checkPointPosition = new Position(0,-1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(-Math.atan(999.0/1.0),turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_1000_Minus1000(){
+        checkPointPosition = new Position(1000,-1000,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(-Math.atan(999.0/1001.0),turnStrat.calculateAngle());
+    }
+
+    @Test
+    void shipMinus1_Minus1CheckPoint_600_Minus500(){
+        checkPointPosition = new Position(600,-500,0);
+        turnStrat = new TurnStrat(checkPointPosition,shipInMinus1_Minus1);
+        assertEquals(-Math.atan(499.0/601.0),turnStrat.calculateAngle());
+    }
 }
