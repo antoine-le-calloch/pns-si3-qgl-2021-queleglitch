@@ -38,6 +38,20 @@ class createActionsTest {
         Mockito.when(mockShip.getRamesAtRight()).thenReturn(rameAtRight);//donne le nombre de rame à gauche
     }
 
+
+    @Test
+    void StraightOn(){
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,3));
+        List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Oar(0)));
+        assertTrue(actions.contains(new Oar(1)));
+        assertTrue(actions.contains(new Oar(2)));
+        assertTrue(actions.contains(new Oar(3)));
+        assertTrue(actions.contains(new Moving(0,0,1)));
+        assertTrue(actions.contains(new Moving(1,1,1)));
+        assertTrue(actions.contains(new Moving(2,0,0)));
+        assertTrue(actions.contains(new Moving(3,1,0)));
+    }
     @Test
     void TurnToLeftAt90(){
         createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,3));
