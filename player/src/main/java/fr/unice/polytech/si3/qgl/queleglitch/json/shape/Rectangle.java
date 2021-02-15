@@ -6,4 +6,8 @@ public class Rectangle extends Shape {
     public double height;
     public double orientation;
 
+    public double getRadius(){
+        return 0;
+    }
+
 }

@@ -32,24 +32,13 @@ public class processing {
         this.nextRound = nextRound;
         informationGame.setShip(nextRound.getShip());
 
-        if(distanceFromCheckpoint() < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius()){
+        if(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition().getNorme(nextRound.getShip().getPosition()) < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius()){
             ((RegattaGoal) informationGame.getGoal()).checkpointReached();
         }
     }
 
-    double distanceFromCheckpoint(){
-        double distance;
-        Position shipPosition = nextRound.ship.position;
-        Position checkpointPosition = ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition();
-
-        distance = Math.pow(checkpointPosition.getX()-shipPosition.getX(),2);
-        distance += Math.pow(checkpointPosition.getY()-shipPosition.getY(),2);
-        distance = Math.sqrt(distance);
-        return distance;
-    }
-
     public List<Action> actionForTheRound(){
-        TurnStrat turnStrat = new TurnStrat(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition(),nextRound.getShip().getPosition());
+        TurnStrat turnStrat = new TurnStrat(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition(),nextRound.getShip().getPosition(),((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius()*2);
         createActions createActions = new createActions(informationGame, turnStrat.getToolsToUse());
         return createActions.getActions();
     }

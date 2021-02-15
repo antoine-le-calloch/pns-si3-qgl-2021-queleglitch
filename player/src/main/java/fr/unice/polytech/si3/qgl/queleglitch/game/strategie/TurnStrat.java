@@ -8,10 +8,12 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 public class TurnStrat {
     Position shipPosition;
     Position checkPointPosition;
+    double checkPointLength;
 
-    public TurnStrat(Position checkPointPosition, Position shipPosition) {
+    public TurnStrat(Position checkPointPosition, Position shipPosition, double checkPointLength) {
         this.checkPointPosition = checkPointPosition;
         this.shipPosition = shipPosition;
+        this.checkPointLength = checkPointLength;
     }
 
     //calculer angle bateau / checkpoint
@@ -53,22 +55,37 @@ public class TurnStrat {
 
     ToolsToUse findToolsToUse(){
         double angle = calculateAngle();
+        boolean positiveAngle = true;
+        int nbLeftOar = 2;
+        int nbRightOar = 2;
 
-        if (angle >= 5*Math.PI / 12)
-            return new ToolsToUse(0, 3);
-        if (angle >= 3*Math.PI / 12)
-            return new ToolsToUse(1, 3);
-        if (angle >= Math.PI / 12)
-            return new ToolsToUse(1, 2);
+        if(angle < 0){
+            positiveAngle = false;
+            angle *= -1;
+        }
 
-        if (angle <= -5*Math.PI / 12)
-            return new ToolsToUse(3, 0);
-        if (angle <= -3*Math.PI / 12)
-            return new ToolsToUse(3, 1);
-        if (angle <= -1*Math.PI / 12)
-            return new ToolsToUse(2, 1);
+        if (angle >= 5 * Math.PI / 12){
+            nbLeftOar = 0;
+            nbRightOar = 3;
+        }
+        else if (angle >= 3 * Math.PI / 12){
+            nbLeftOar = 1;
+            nbRightOar = 3;
+        }
+        else if (angle >= Math.PI / 12){
+            nbLeftOar = 1;
+            nbRightOar = 2;
+        }
 
-        return new ToolsToUse(2,2);
+        if(checkPointPosition.getNorme(shipPosition) < 110 - checkPointLength) {
+            nbLeftOar--;
+            nbRightOar--;
+        }
+
+        if(positiveAngle)
+            return new ToolsToUse(nbLeftOar, nbRightOar);
+        else
+            return new ToolsToUse(nbRightOar, nbLeftOar);
     }
 
     // retourne les éléments à utliser et la facon de les utiliser (rames, gouvernail...)

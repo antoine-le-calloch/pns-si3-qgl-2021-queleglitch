@@ -24,6 +24,15 @@ public class Position {
 
     }
 
+    public double getNorme(Position position){
+        double distance;
+
+        distance = Math.pow(x-position.getX(),2);
+        distance += Math.pow(y-position.getY(),2);
+        distance = Math.sqrt(distance);
+        return distance;
+    }
+
     /**
      * @return <b>The orientation.</b>
      */
