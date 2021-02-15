@@ -6,5 +6,4 @@ public class Oar extends Action {
     public Oar(int sailorId) {
         super(sailorId);
     }
-
 }

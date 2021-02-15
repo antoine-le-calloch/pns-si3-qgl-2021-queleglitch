@@ -23,6 +23,12 @@ public class InformationGame {
     public Ship ship;
     public Goal goal;
 
+    public InformationGame(Sailor[] sailors, Ship ship, Goal goal){
+        this.sailors = sailors;
+        this.ship = ship;
+        this.goal = goal;
+    }
+
     /**
      * @return <b>The list of sailors.</b>
      */

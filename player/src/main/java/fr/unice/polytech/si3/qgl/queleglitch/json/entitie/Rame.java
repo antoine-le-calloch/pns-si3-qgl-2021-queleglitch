@@ -7,6 +7,10 @@ public class Rame extends Entities{
     public int x;
     public int y;
 
+    public Rame(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
 
     public int getX() {
         return x;

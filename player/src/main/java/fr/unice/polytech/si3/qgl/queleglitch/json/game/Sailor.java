@@ -10,9 +10,15 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
  */
 
 public class Sailor {
-    public int id;
     public int x;
     public int y;
+    public int id;
+
+    public Sailor(int x, int y, int id){
+        this.id = id;
+        this.x = x;
+        this.y = y;
+    }
 
     /**
      * @return <b>The id of the sailor</b>

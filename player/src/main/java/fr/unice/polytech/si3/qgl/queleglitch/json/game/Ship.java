@@ -25,12 +25,15 @@ public class Ship {
     public Deck deck;
     public Shape shape;
 
-    public Ship(){}
+    public Ship(){
+    }
 
-    public Ship(Position position, Entities[] entities, Deck deck){
+    public Ship(Position position, Entities[] entities, String name, Deck deck, Shape shape){
         this.position = position;
         this.entities = entities;
+        this.name = name;
         this.deck = deck;
+        this.shape = shape;
     }
     /**
      * @return <b>The position of the ship.</b>
