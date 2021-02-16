@@ -19,4 +19,9 @@ public class Circle extends Shape {
         return radius;
     }
 
+    public Circle(){}
+
+    public Circle(double radius){
+        this.radius = radius;
+    }
 }

@@ -28,6 +28,10 @@ public class Ship {
     public Ship(){
     }
 
+    public Ship(Position position){
+        this.position = position;
+    }
+
     public Ship(Position position, Entities[] entities, String name, Deck deck, Shape shape){
         this.position = position;
         this.entities = entities;
@@ -42,6 +46,9 @@ public class Ship {
         return position;
     }
 
+    public void setPosition(Position position) {
+        this.position = position;
+    }
     /**
      * <p>Override of toString method, allow to print a different string to give the Ship's informations</p>
      */

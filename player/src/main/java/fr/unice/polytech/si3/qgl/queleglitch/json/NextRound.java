@@ -10,4 +10,10 @@ public class NextRound {
     public Ship getShip(){
         return ship;
     }
+
+    public  NextRound(){}
+
+    public  NextRound(Ship ship){
+        this.ship = ship;
+    }
 }

@@ -15,7 +15,6 @@ class TurnStratTest {
     Position shipIn0_0Rotate45;
     Position shipInMinus1_Minus1;
     Position checkPointPosition;
-    Shape checkPointShape;
 
     @BeforeEach
     void setUp() {
@@ -108,7 +107,9 @@ class TurnStratTest {
         assertEquals(-Math.atan(500.0/600.0),turnStrat.calculateAngle());
     }
 
-    /////////////////////////////bateau à 45°
+    /**
+     * <h1><u>Angle : bateau en (-1 : -1) rotate 45°</u></h1>
+     */
 
     @Test
     void ship0_0Rotat45CheckPoint_600_500(){
@@ -194,8 +195,9 @@ class TurnStratTest {
         assertEquals(-Math.PI/4,turnStrat.calculateAngle());
     }
 
-
-    /////////////////////////////bateau en (-1 : -1) rotate 0°
+    /**
+     * <h1><u>Angle : bateau en (-1 : -1) rotate 0°</u></h1>
+     */
 
     @Test
     void shipMinus1_Minus1CheckPoint_1000_0(){
@@ -281,7 +283,9 @@ class TurnStratTest {
         assertEquals(-Math.atan(499.0/601.0),turnStrat.calculateAngle());
     }
 
-    ////////////////////test tool to use
+    /**
+     * <h1><u>ToolToUse test angle</u></h1>
+     */
 
     @Test
     void toolsToUseShip0_0CheckPoint_1000_0(){

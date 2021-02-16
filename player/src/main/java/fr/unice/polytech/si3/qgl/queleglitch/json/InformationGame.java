@@ -29,6 +29,11 @@ public class InformationGame {
         this.goal = goal;
     }
 
+    public InformationGame(Goal goal, Ship ship){
+        this.goal = goal;
+        this.ship = ship;
+    }
+
     public InformationGame(){}
 
     /**

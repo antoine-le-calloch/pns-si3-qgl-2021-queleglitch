@@ -19,20 +19,25 @@ import java.util.List;
  * @version 2021.01.26
  */
 
-public class processing {
+public class Processing {
     InformationGame informationGame;
 
-    public processing(InformationGame informationGame) {
+    public Processing(InformationGame informationGame) {
         this.informationGame = informationGame;
     }
 
     public void setDataNewRound(NextRound nextRound){
         informationGame.setShip(nextRound.getShip());
 
-        if(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition().getNorme(nextRound.getShip().getPosition()) < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius()){
+        if(isCheckpointReached()){
             ((RegattaGoal) informationGame.getGoal()).checkpointReached();
         }
     }
+
+    public boolean isCheckpointReached(){
+        return ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition().getNorme(informationGame.getShip().getPosition()) < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
+    }
+
 
     public List<Action> actionForTheRound(){
         TurnStrat turnStrat = new TurnStrat(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition(),informationGame.getShip().getPosition(),((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius());
