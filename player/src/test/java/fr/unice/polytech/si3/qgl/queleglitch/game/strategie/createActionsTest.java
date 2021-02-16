@@ -41,7 +41,7 @@ class createActionsTest {
 
     @Test
     void StraightOn(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,3));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(2,2));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
@@ -177,10 +177,4 @@ class createActionsTest {
         assertFalse(actions.contains(new Oar(3)));
         assertTrue(actions.contains(new Moving(0,0,0)));
     }
-
-
-
-
-
-
 }

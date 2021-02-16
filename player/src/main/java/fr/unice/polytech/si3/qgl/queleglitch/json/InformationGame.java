@@ -29,6 +29,8 @@ public class InformationGame {
         this.goal = goal;
     }
 
+    public InformationGame(){}
+
     /**
      * @return <b>The list of sailors.</b>
      */

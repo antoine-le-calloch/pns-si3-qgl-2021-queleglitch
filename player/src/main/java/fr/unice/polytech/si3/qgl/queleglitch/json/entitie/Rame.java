@@ -12,6 +12,8 @@ public class Rame extends Entities{
         this.y = y;
     }
 
+    public Rame(){}
+
     public int getX() {
         return x;
     }

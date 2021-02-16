@@ -2,13 +2,15 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
 public class ToolsToUse {
     public double rudderAngle;
-    public int nbLeftOar;
-    public int nbRightOar;
+    public int nbLeftOar = 0;
+    public int nbRightOar = 0;
 
     public ToolsToUse(int nbLeftOar, int nbRightOar){
-        this.rudderAngle = rudderAngle;
-        this.nbLeftOar = nbLeftOar;
-        this.nbRightOar = nbRightOar;
+        if(nbLeftOar > 0)
+            this.nbLeftOar = nbLeftOar;
+
+        if(nbRightOar > 0)
+            this.nbRightOar = nbRightOar;
     }
 
     public double getRudderAngle(){

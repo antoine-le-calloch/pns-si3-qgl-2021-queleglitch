@@ -20,6 +20,8 @@ public class Sailor {
         this.y = y;
     }
 
+    public Sailor(){}
+
     /**
      * @return <b>The id of the sailor</b>
      */
