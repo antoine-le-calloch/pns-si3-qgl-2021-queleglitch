@@ -6,10 +6,9 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.unice.polytech.si3.qgl.queleglitch.game.processing;
+import fr.unice.polytech.si3.qgl.queleglitch.game.Processing;
 import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
@@ -26,7 +25,7 @@ public class Cockpit implements ICockpit {
 
 	InformationGame informationGame;
 	NextRound nextRound;
-	processing processing;
+	Processing processing;
 	ObjectMapper objectMapper = new ObjectMapper();
 
 	/**
@@ -39,7 +38,7 @@ public class Cockpit implements ICockpit {
 		System.out.println("Init game input: " + game);
 		try {
 			informationGame = objectMapper.readValue(game, InformationGame.class);
-			processing = new processing(informationGame);
+			processing = new Processing(informationGame);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}

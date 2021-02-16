@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Polygone;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 /**
@@ -17,12 +18,28 @@ public class Checkpoint {
     public Position position;
     public Shape shape;
 
+    public Checkpoint(){}
+
+    public Checkpoint(Position position, Shape shape){
+        this.position = position;
+        this.shape = shape;
+    }
+
+
     public Position getPosition(){
         return position;
     }
 
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     public Shape getShape(){
         return shape;
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
     }
 
     /**
