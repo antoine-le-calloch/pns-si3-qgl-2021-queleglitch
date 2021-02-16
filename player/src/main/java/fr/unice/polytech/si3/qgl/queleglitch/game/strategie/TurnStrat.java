@@ -1,19 +1,16 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
-import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
 public class TurnStrat {
     Position shipPosition;
     Position checkPointPosition;
-    double checkPointLength;
+    double checkPointRadius;
 
-    public TurnStrat(Position checkPointPosition, Position shipPosition, double checkPointLength) {
+    public TurnStrat(Position checkPointPosition, Position shipPosition, double checkPointRadius) {
         this.checkPointPosition = checkPointPosition;
         this.shipPosition = shipPosition;
-        this.checkPointLength = checkPointLength;
+        this.checkPointRadius = checkPointRadius;
     }
 
     //calculer angle bateau / checkpoint
@@ -52,12 +49,12 @@ public class TurnStrat {
         return angle;
     }
 
-    boolean slowDownForFutureCheckpoint(int nbLeftOar, int nbRightOar){
-        Position nextPostion;
-        for(int i = 0; i<100; i++){
+    /*boolean slowDownForFutureCheckpoint(int nbLeftOar, int nbRightOar){
+        if(nbLeftOar != nbRightOar)
+            return false;
 
-        }
-    }
+        if(calculateAngle())
+    }*/
 
     ToolsToUse findToolsToUse(){
         double angle = calculateAngle();
@@ -83,7 +80,7 @@ public class TurnStrat {
             nbRightOar = 2;
         }
 
-        if(checkPointPosition.getNorme(shipPosition) < 110 - checkPointLength/2 || slowDownForFutureCheckpoint(nbLeftOar,nbRightOar)) {
+        if(checkPointPosition.getNorme(shipPosition) < 110 - checkPointRadius){// || slowDownForFutureCheckpoint(nbLeftOar,nbRightOar)) {
             nbLeftOar--;
             nbRightOar--;
         }

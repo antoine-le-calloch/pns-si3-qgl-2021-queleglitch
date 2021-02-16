@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +15,7 @@ class TurnStratTest {
     Position shipIn0_0Rotate45;
     Position shipInMinus1_Minus1;
     Position checkPointPosition;
+    Shape checkPointShape;
 
     @BeforeEach
     void setUp() {
@@ -362,5 +365,51 @@ class TurnStratTest {
         checkPointPosition = new Position(600,-500,0);
         turnStrat = new TurnStrat(checkPointPosition,shipIn0_0,100);
         assertEquals(new ToolsToUse(2,1),turnStrat.getToolsToUse());
+    }
+
+    /**
+     * <h1><u>ToolToUse distance ship-checkpoint</u></h1>
+     */
+
+    @Test
+    void toolsToUseCheckpoint110Meters() {
+        checkPointPosition = new Position(110, 0, 0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0,0);
+        assertEquals(new ToolsToUse(2,2),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseCheckpoint109Meters(){
+        checkPointPosition = new Position(109, 0, 0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0,0);
+        assertEquals(new ToolsToUse(1,1),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseCheckpoint40Radius150Meters(){
+        checkPointPosition = new Position(150, 0, 0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0,100);
+        assertEquals(new ToolsToUse(1,1),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseCheckpoint1000Radius1100Meters(){
+        checkPointPosition = new Position(1100, 0, 0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0,1000);
+        assertEquals(new ToolsToUse(1,1),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseCheckpoint100metersPidiv3Angle(){ // 1/2 * 100 , sqrt(3)/2 * 100
+        checkPointPosition = new Position(50, 86.60, 0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0,0);
+        assertEquals(new ToolsToUse(0,2),turnStrat.getToolsToUse());
+    }
+
+    @Test
+    void toolsToUseCheckpoint100metersPidiv6Angle(){ // sqrt(3)/2 * 100 , 1/2 * 100
+        checkPointPosition = new Position(86.60, 50, 0);
+        turnStrat = new TurnStrat(checkPointPosition,shipIn0_0,0);
+        assertEquals(new ToolsToUse(0,1),turnStrat.getToolsToUse());
     }
 }

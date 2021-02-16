@@ -35,7 +35,7 @@ public class processing {
     }
 
     public List<Action> actionForTheRound(){
-        TurnStrat turnStrat = new TurnStrat(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition(),informationGame.getShip().getPosition(),((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius()*2);
+        TurnStrat turnStrat = new TurnStrat(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition(),informationGame.getShip().getPosition(),((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius());
         CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), turnStrat.getToolsToUse());
         return createActions.getActions();
     }
