@@ -23,7 +23,6 @@ public class TurnStrat {
         double shipAngle = shipPosition.getOrientation();
         double checkPointX = checkPointPosition.getX();
         double checkPointY = checkPointPosition.getY();
-
         double angle = 0;
 
         if(checkPointY-shipY==0 && checkPointX-shipX < 0){
@@ -53,6 +52,13 @@ public class TurnStrat {
         return angle;
     }
 
+    boolean slowDownForFutureCheckpoint(int nbLeftOar, int nbRightOar){
+        Position nextPostion;
+        for(int i = 0; i<100; i++){
+
+        }
+    }
+
     ToolsToUse findToolsToUse(){
         double angle = calculateAngle();
         boolean positiveAngle = true;
@@ -77,7 +83,7 @@ public class TurnStrat {
             nbRightOar = 2;
         }
 
-        if(checkPointPosition.getNorme(shipPosition) < 110 - checkPointLength) {
+        if(checkPointPosition.getNorme(shipPosition) < 110 - checkPointLength/2 || slowDownForFutureCheckpoint(nbLeftOar,nbRightOar)) {
             nbLeftOar--;
             nbRightOar--;
         }
