@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.CreateActions;
-import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.TurnStrat;
+import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.Strat;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
@@ -40,8 +40,8 @@ public class Processing {
 
 
     public List<Action> actionForTheRound(){
-        TurnStrat turnStrat = new TurnStrat(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition(),informationGame.getShip().getPosition(),((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius());
-        CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), turnStrat.getToolsToUse());
+        Strat strat = new Strat(((RegattaGoal) informationGame.getGoal()),informationGame.getShip(),((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius());
+        CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), strat.getToolsToUse());
         return createActions.getActions();
     }
 }

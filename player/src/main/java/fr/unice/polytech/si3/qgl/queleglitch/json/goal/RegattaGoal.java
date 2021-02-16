@@ -16,20 +16,33 @@ public class RegattaGoal extends Goal {
 
     public RegattaGoal(){}
 
-    public RegattaGoal(Checkpoint checkpoint){
-        checkpoints = new Checkpoint[1];
+    public RegattaGoal(Checkpoint checkpoint, int nbCheckpoint){
+        checkpoints = new Checkpoint[nbCheckpoint];
         checkpoints[0] = checkpoint;
+    }
+
+    public void addCheckpoint(Checkpoint checkpoint, int place){
+        checkpoints[place] = checkpoint;
     }
 
     public Checkpoint getActualCheckpoint(){
         return checkpoints[numActualCheckpoint];
     }
 
+    public Checkpoint getNextCheckpoint(){
+        return checkpoints[numActualCheckpoint+1];
+    }
+
     public void checkpointReached(){
-        if(numActualCheckpoint+1 < checkpoints.length){
+        if(!isLastCheckpoint()){
             numActualCheckpoint++;
         }
     }
+
+    public boolean isLastCheckpoint(){
+        return numActualCheckpoint + 1 >= checkpoints.length;
+    }
+
 
     /**
      * <p>Override of toString method, allow to print a different string to give the Checkpoints' informations</p>
