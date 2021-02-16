@@ -52,14 +52,10 @@ public class Cockpit implements ICockpit {
 	 * @return <b>A Json string which contains the actions of all the sailors in a round.</b>
 	 */
 	public String nextRound(String round) {
-		List<Action> actionForTheRound = new ArrayList<>();
 		System.out.println("Next round input: " + round);
 		try {
 			nextRound = objectMapper.readValue(round, NextRound.class);
 			processing.setDataNewRound(nextRound);
-			/*for (Action action:processing.actionForTheRound()) {
-				actionForTheRound.add(action);
-			}*/
 			return objectMapper.writeValueAsString(processing.actionForTheRound());
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();

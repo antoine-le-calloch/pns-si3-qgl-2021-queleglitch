@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
+import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.*;
 
 import java.util.ArrayList;
@@ -18,23 +18,25 @@ public class CreateActions {
         this.toolsToUse = toolsToUse;
     }
 
-    public List<Action> buldingActions() {
-        int x;
-        int y;
+    public List<Action> buildingActions() {
         List<Action> actions = new ArrayList<>();
         List<Action> actionsOar = new ArrayList<>();
+        List<Rame> rightRames = ship.getRamesAtRight();
+        List<Rame> leftRames = ship.getRamesAtLeft();
+        int x;
+        int y;
 
-        for (int i = 0; i < toolsToUse.getNbLeftOar()+toolsToUse.getNbRightOar(); i++) {
-            if(i<toolsToUse.getNbRightOar()) {
-                x = ship.getRamesAtRight().get(0).x - sailors[i].x;
-                y = ship.getRamesAtRight().get(0).y - sailors[i].y;
-                ship.getRamesAtRight().remove(0);
+        for (int i = 0; i < toolsToUse.getNbLeftOarToUse()+toolsToUse.getNbRightOarToUse(); i++) {
+            if(i<toolsToUse.getNbRightOarToUse()) {
+                x = rightRames.get(i).x - sailors[i].x;
+                y = rightRames.get(i).y - sailors[i].y;
             }
             else{
-                x = ship.getRamesAtLeft().get(0).x - sailors[i].x;
-                y = ship.getRamesAtLeft().get(0).y - sailors[i].y;
-                ship.getRamesAtLeft().remove(0);
+                x = leftRames.get(i-toolsToUse.getNbRightOarToUse()).x - sailors[i].x;
+                y = leftRames.get(i-toolsToUse.getNbRightOarToUse()).y - sailors[i].y;
             }
+            sailors[i].x += x;
+            sailors[i].y += y;
             actions.add(new Moving(sailors[i].getId(),x,y));
             actionsOar.add(new Oar(sailors[i].getId()));
         }
@@ -43,6 +45,6 @@ public class CreateActions {
     }
 
     public List<Action> getActions(){
-        return buldingActions();
+        return buildingActions();
     }
 }

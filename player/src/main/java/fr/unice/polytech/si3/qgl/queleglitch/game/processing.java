@@ -21,14 +21,12 @@ import java.util.List;
 
 public class processing {
     InformationGame informationGame;
-    NextRound nextRound;
 
     public processing(InformationGame informationGame) {
         this.informationGame = informationGame;
     }
 
     public void setDataNewRound(NextRound nextRound){
-        this.nextRound = nextRound;
         informationGame.setShip(nextRound.getShip());
 
         if(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition().getNorme(nextRound.getShip().getPosition()) < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius()){
@@ -37,7 +35,7 @@ public class processing {
     }
 
     public List<Action> actionForTheRound(){
-        TurnStrat turnStrat = new TurnStrat(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition(),nextRound.getShip().getPosition(),((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius()*2);
+        TurnStrat turnStrat = new TurnStrat(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition(),informationGame.getShip().getPosition(),((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius()*2);
         CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), turnStrat.getToolsToUse());
         return createActions.getActions();
     }

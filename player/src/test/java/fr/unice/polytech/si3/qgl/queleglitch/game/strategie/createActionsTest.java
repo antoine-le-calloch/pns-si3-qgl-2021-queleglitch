@@ -80,7 +80,7 @@ class createActionsTest {
   @Test
     void TurnToRightAtRight60WithMaxSpeed(){
         createActions = new CreateActions(mockShip, sailors, new ToolsToUse(3,1));
-        List<Action> actions=createActions.getActions();
+        List<Action> actions = createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
         assertTrue(actions.contains(new Oar(2)));
@@ -109,13 +109,13 @@ class createActionsTest {
     void TurnToRightAtLeft30WithMaxSpeed(){
         createActions = new CreateActions(mockShip, sailors, new ToolsToUse(1,2));
         List<Action> actions=createActions.getActions();
+        assertTrue(actions.contains(new Moving(0,0,1)));
+        assertTrue(actions.contains(new Moving(1,1,1)));
+        assertTrue(actions.contains(new Moving(2,0,0)));
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
         assertTrue(actions.contains(new Oar(2)));
         assertFalse(actions.contains(new Oar(3)));
-        assertTrue(actions.contains(new Moving(0,0,1)));
-        assertTrue(actions.contains(new Moving(1,1,1)));
-        assertTrue(actions.contains(new Moving(2,0,0)));
     }
 
     @Test
