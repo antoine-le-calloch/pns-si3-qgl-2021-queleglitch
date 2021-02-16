@@ -19,7 +19,9 @@ public class RegattaGoal extends Goal {
     }
 
     public void checkpointReached(){
-        numActualCheckpoint++;
+        if(numActualCheckpoint+1 < checkpoints.length){
+            numActualCheckpoint++;
+        }
     }
 
     /**
