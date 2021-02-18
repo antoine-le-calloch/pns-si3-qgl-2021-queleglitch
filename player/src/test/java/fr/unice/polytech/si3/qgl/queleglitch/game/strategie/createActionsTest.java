@@ -41,7 +41,7 @@ class createActionsTest {
 
     @Test
     void StraightOn(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(2,2));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,2,2));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
@@ -54,7 +54,7 @@ class createActionsTest {
     }
     @Test
     void TurnToLeftAt90(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,3));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,0,3));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
@@ -66,7 +66,7 @@ class createActionsTest {
     }
     @Test
     void TurnToRightAt90(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(3,0));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,3,0));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
@@ -79,7 +79,7 @@ class createActionsTest {
 
   @Test
     void TurnToRightAtRight60WithMaxSpeed(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(3,1));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,3,1));
         List<Action> actions = createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
@@ -93,7 +93,7 @@ class createActionsTest {
 
   @Test
     void TurnToRightAtLeft60WithMaxSpeed(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(1,3));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,1,3));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
@@ -107,7 +107,7 @@ class createActionsTest {
 
     @Test
     void TurnToRightAtLeft30WithMaxSpeed(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(1,2));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,1,2));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Moving(0,0,1)));
         assertTrue(actions.contains(new Moving(1,1,1)));
@@ -120,7 +120,7 @@ class createActionsTest {
 
     @Test
     void TurnToRightAtRight30WithMaxSpeed(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(2,1));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,2,1));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
@@ -134,7 +134,7 @@ class createActionsTest {
 
   @Test
     void TurnToRightAtRight60WithLowSpeed(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(2,0));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,2,0));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
@@ -146,7 +146,7 @@ class createActionsTest {
 
   @Test
     void TurnToRightAtLeft60WithLowSpeed(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,2));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,0,2));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertTrue(actions.contains(new Oar(1)));
@@ -158,7 +158,7 @@ class createActionsTest {
 
     @Test
     void TurnToRightAtLeft30WithLowSpeed(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,1));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,0,1));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertFalse(actions.contains(new Oar(1)));
@@ -169,7 +169,7 @@ class createActionsTest {
 
     @Test
     void TurnToRightAtRight30WithLowSpeed(){
-        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(1,0));
+        createActions = new CreateActions(mockShip, sailors, new ToolsToUse(0,1,0));
         List<Action> actions=createActions.getActions();
         assertTrue(actions.contains(new Oar(0)));
         assertFalse(actions.contains(new Oar(1)));

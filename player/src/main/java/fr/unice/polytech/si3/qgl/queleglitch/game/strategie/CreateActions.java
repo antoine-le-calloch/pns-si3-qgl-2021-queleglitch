@@ -12,6 +12,8 @@ public class CreateActions {
     Sailor[] sailors;
     ToolsToUse toolsToUse;
 
+    int MAX_ROWER = 4; //A changer
+
     public CreateActions(Ship ship, Sailor[] sailors, ToolsToUse toolsToUse) {
         this.ship = ship;
         this.sailors = sailors;
@@ -21,12 +23,15 @@ public class CreateActions {
     public List<Action> buildingActions() {
         List<Action> actions = new ArrayList<>();
         List<Action> actionsOar = new ArrayList<>();
+        List<Action> actionsTurn = new ArrayList<>();
         List<Rame> rightRames = ship.getRamesAtRight();
         List<Rame> leftRames = ship.getRamesAtLeft();
+        double angle;
+        int i = 0;
         int x;
         int y;
 
-        for (int i = 0; i < toolsToUse.getNbLeftOarToUse()+toolsToUse.getNbRightOarToUse(); i++) {
+        for (;i < toolsToUse.getNbLeftOarToUse()+toolsToUse.getNbRightOarToUse(); i++) {
             if(i<toolsToUse.getNbRightOarToUse()) {
                 x = rightRames.get(i).x - sailors[i].x;
                 y = rightRames.get(i).y - sailors[i].y;
@@ -40,7 +45,14 @@ public class CreateActions {
             actions.add(new Moving(sailors[i].getId(),x,y));
             actionsOar.add(new Oar(sailors[i].getId()));
         }
+        if(i<MAX_ROWER && (angle = toolsToUse.getRudderAngle()) != 0){
+            x = ship.getGouvernail().getX() - sailors[i].x;
+            y = ship.getGouvernail().getY() - sailors[i].y;
+            actions.add(new Moving(sailors[i].getId(),x,y));
+            actionsTurn.add(new Turn(sailors[i].getId(),angle));
+        }
         actions.addAll(actionsOar);
+        actions.addAll(actionsTurn);
         return actions;
     }
 

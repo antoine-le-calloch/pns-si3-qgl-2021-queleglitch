@@ -1,11 +1,12 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
 public class ToolsToUse {
-    public double rudderAngle;
+    public double rudderAngle = 0;
     public int nbLeftOarToUse = 0;
     public int nbRightOarToUse = 0;
 
-    public ToolsToUse(int nbLeftOarToUse, int nbRightOarToUse){
+    public ToolsToUse(double rudderAngle, int nbLeftOarToUse, int nbRightOarToUse){
+        this.rudderAngle = rudderAngle;
         if(nbLeftOarToUse > 0)
             this.nbLeftOarToUse = nbLeftOarToUse;
 
@@ -13,14 +14,25 @@ public class ToolsToUse {
             this.nbRightOarToUse = nbRightOarToUse;
     }
 
+    public ToolsToUse(){}
+
+    public void setRudderAngle(double rudderAngle){
+        this.rudderAngle = rudderAngle;
+    }
+
+    public void setNbLeftOarToUse(int nbLeftOarToUse){
+        this.nbLeftOarToUse = nbLeftOarToUse;
+    }
+
+    public void setNbRightOarToUse(int nbRightOarToUse){
+        this.nbRightOarToUse = nbRightOarToUse;
+    }
+
     public double getRudderAngle(){
         return rudderAngle;
     }
 
-    public int getNbLeftOarToUse(){
-        return nbLeftOarToUse;
-
-    }
+    public int getNbLeftOarToUse(){ return nbLeftOarToUse; }
 
     public int getNbRightOarToUse(){
         return nbRightOarToUse;
