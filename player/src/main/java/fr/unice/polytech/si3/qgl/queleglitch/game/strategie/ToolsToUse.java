@@ -14,6 +14,15 @@ public class ToolsToUse {
             this.nbRightOarToUse = nbRightOarToUse;
     }
 
+    public void setToolsToUse(double rudderAngle, int nbLeftOarToUse, int nbRightOarToUse){
+        this.rudderAngle = rudderAngle;
+        if(nbLeftOarToUse > 0)
+            this.nbLeftOarToUse = nbLeftOarToUse;
+
+        if(nbRightOarToUse > 0)
+            this.nbRightOarToUse = nbRightOarToUse;
+    }
+
     public ToolsToUse(){}
 
     public void setRudderAngle(double rudderAngle){
