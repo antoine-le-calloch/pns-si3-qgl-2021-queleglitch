@@ -36,6 +36,11 @@ public class InformationGame {
 
     public InformationGame(){}
 
+
+    public void setGoal(Goal goal) {
+        this.goal = goal;
+    }
+
     /**
      * @return <b>The list of sailors.</b>
      */

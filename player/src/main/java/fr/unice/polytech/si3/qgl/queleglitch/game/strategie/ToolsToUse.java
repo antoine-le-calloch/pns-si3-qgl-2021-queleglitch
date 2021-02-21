@@ -1,26 +1,20 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
 
 public class ToolsToUse {
-    public double rudderAngle = 0;
-    public int nbLeftOarToUse = 0;
-    public int nbRightOarToUse = 0;
+    public double rudderAngle;
+    public int nbLeftOarToUse;
+    public int nbRightOarToUse;
 
     public ToolsToUse(double rudderAngle, int nbLeftOarToUse, int nbRightOarToUse){
         this.rudderAngle = rudderAngle;
-        if(nbLeftOarToUse > 0)
-            this.nbLeftOarToUse = nbLeftOarToUse;
-
-        if(nbRightOarToUse > 0)
-            this.nbRightOarToUse = nbRightOarToUse;
+        this.nbLeftOarToUse = Math.max(nbLeftOarToUse, 0);
+        this.nbRightOarToUse = Math.max(nbRightOarToUse, 0);
     }
 
     public void setToolsToUse(double rudderAngle, int nbLeftOarToUse, int nbRightOarToUse){
         this.rudderAngle = rudderAngle;
-        if(nbLeftOarToUse > 0)
-            this.nbLeftOarToUse = nbLeftOarToUse;
-
-        if(nbRightOarToUse > 0)
-            this.nbRightOarToUse = nbRightOarToUse;
+        this.nbLeftOarToUse = Math.max(nbLeftOarToUse, 0);
+        this.nbRightOarToUse = Math.max(nbRightOarToUse, 0);
     }
 
     public ToolsToUse(){}
@@ -54,11 +48,11 @@ public class ToolsToUse {
         if (!(obj instanceof ToolsToUse))
             return false;
         ToolsToUse toolsToUse = (ToolsToUse) obj;
-        return this.nbLeftOarToUse == toolsToUse.nbLeftOarToUse && this.nbRightOarToUse == toolsToUse.nbRightOarToUse;
+        return this.nbLeftOarToUse == toolsToUse.nbLeftOarToUse && this.nbRightOarToUse == toolsToUse.nbRightOarToUse && this.rudderAngle == toolsToUse.rudderAngle;
     }
 
     @Override
     public String toString(){
-        return "Nb right oar : " + this.nbRightOarToUse + " Nb left oar : " + this.nbLeftOarToUse;
+        return "Rudder angle : " + this.rudderAngle + ", Nb right oar : " + this.nbRightOarToUse + ", Nb left oar : " + this.nbLeftOarToUse;
     }
 }
