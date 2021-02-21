@@ -118,7 +118,7 @@ public class Ship {
     }
 
     public List<Rame> getRamesAtRight(){
-        return getRames().stream().filter(rame -> rame.getY()==1).collect(Collectors.toList());
+        return getRames().stream().filter(rame -> rame.getY()!=0).collect(Collectors.toList());
     }
 
     public List<Rame> getRamesAtLeft(){
