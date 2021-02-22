@@ -8,13 +8,7 @@ public class ToolsToUse {
     public ToolsToUse(){}
 
     public ToolsToUse(double rudderAngle, int nbLeftOarToUse, int nbRightOarToUse){
-        this.rudderAngle = rudderAngle;
-        this.nbLeftOarToUse = Math.max(nbLeftOarToUse, 0);
-        this.nbRightOarToUse = Math.max(nbRightOarToUse, 0);
-    }
-
-    public void setToolsToUse(double rudderAngle, int nbLeftOarToUse, int nbRightOarToUse){
-        this.rudderAngle = rudderAngle;
+        this.rudderAngle = Math.min(Math.max(rudderAngle, -Math.PI/4), Math.PI/4);
         this.nbLeftOarToUse = Math.max(nbLeftOarToUse, 0);
         this.nbRightOarToUse = Math.max(nbRightOarToUse, 0);
     }
@@ -25,7 +19,7 @@ public class ToolsToUse {
     }
 
     public void setRudderAngle(double rudderAngle){
-        this.rudderAngle = rudderAngle;
+        this.rudderAngle = Math.min(Math.max(rudderAngle, -Math.PI/4), Math.PI/4);
     }
 
     public void setNbLeftOarToUse(int nbLeftOarToUse){ this.nbLeftOarToUse = Math.max(nbLeftOarToUse, 0); }
