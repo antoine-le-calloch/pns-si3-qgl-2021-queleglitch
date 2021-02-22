@@ -93,13 +93,13 @@ public class Strat {
             angleToCheckPoint *= (signe = -1);
         }
 
-        if(angleToCheckPoint > Math.PI / 2) {
+        if(angleToCheckPoint > Math.PI / 4) {
             turnWIthOar((Math.PI / 2)*signe);
             angleToCheckPoint -= Math.PI / 2;
         }
 
-        if(angleToCheckPoint >= 1.0*Math.PI / 180.0)
-            turnWIthRudder(angleToCheckPoint*signe);
+        if(angleToCheckPoint >= 1.0*Math.PI / 180.0 || angleToCheckPoint <= -1.0*Math.PI / 180.0)
+            turnWIthRudder(angleToCheckPoint * signe);
 
         if(slowDown(toolsToUse.getNbLeftOarToUse(),toolsToUse.getNbRightOarToUse())){
             toolsToUse.decreaseNbSailors();
