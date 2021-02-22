@@ -28,8 +28,8 @@ public class Strat {
 
     boolean slowDownForFutureCheckpoint(int nbLeftOarToUse, int nbRightOarToUse){
         if( regattaGoal.isLastCheckpoint() ||
-                (ship.calculateAngleToCheckPoint(regattaGoal.getNextCheckpoint().getPosition()) < Math.PI/2 &&
-                        ship.calculateAngleToCheckPoint(regattaGoal.getNextCheckpoint().getPosition()) > -Math.PI/2))
+                (ship.calculateAngleToCheckPoint(regattaGoal.getNextCheckpoint().getPosition()) < (Math.PI/2) - (5 * Math.PI / 180.0)
+                        && ship.calculateAngleToCheckPoint(regattaGoal.getNextCheckpoint().getPosition()) > (-Math.PI/2) + (5 * Math.PI / 180.0)))
             return false;
 
         return actualCheckPointPosition.getNorme(ship.getPosition()) - checkPointRadius <= (165.0 * (nbLeftOarToUse + nbRightOarToUse - 2) / NB_OAR);
@@ -38,51 +38,40 @@ public class Strat {
     boolean slowDown(int nbLeftOarToUse, int nbRightOarToUse){
         return (actualCheckPointPosition.getNorme(ship.getPosition()) < (165.0 * (nbLeftOarToUse + nbRightOarToUse) / NB_OAR) - checkPointRadius
                 || slowDownForFutureCheckpoint(nbLeftOarToUse,nbRightOarToUse))
-                && !(nbLeftOarToUse-1 <= 0 && nbRightOarToUse-1 <= 0);
+                && nbLeftOarToUse == nbRightOarToUse
+                && nbLeftOarToUse-1 != 0;
     }
 
     void turnWIthOar(double angleToCheckPoint){
         int nbOfBaseAnglesInAngle;
-        int nbLeftOar = NB_ROWER/2,nbRightOar = NB_ROWER/2;
-        if(NB_ROWER%2==1) {
-            nbLeftOar++;
-            nbRightOar++;
-        }
+        int nbLeftOarToUse = NB_OAR/2, nbRightOarToUse = NB_OAR/2;
+        double actualAngle;
 
         nbOfBaseAnglesInAngle = (int) (Math.round(angleToCheckPoint/(Math.PI/NB_OAR)));
 
         if(nbOfBaseAnglesInAngle > 0) {
-            nbLeftOar -= nbOfBaseAnglesInAngle;
-            if(nbLeftOar < 0) {
-                nbRightOar += -nbLeftOar;
-                nbLeftOar = 0;
-            }
+            nbLeftOarToUse -= nbOfBaseAnglesInAngle;
         }
         else {
-            nbRightOar -= -nbOfBaseAnglesInAngle;
-            if(nbRightOar < 0) {
-                nbLeftOar += -nbRightOar;
-                nbRightOar = 0;
-            }
+            nbRightOarToUse += nbOfBaseAnglesInAngle;
         }
 
-        toolsToUse.setNbLeftOarToUse(nbLeftOar);
-        toolsToUse.setNbRightOarToUse(nbRightOar);
-
-        if(slowDown(nbLeftOar,nbRightOar)) {
-            toolsToUse.decreaseNbSailors();
+        while (nbLeftOarToUse+nbRightOarToUse >= NB_ROWER && !(nbLeftOarToUse-1<=0 && nbRightOarToUse-1<=0)){
+            nbLeftOarToUse = Math.max(nbLeftOarToUse-1,0);
+            nbRightOarToUse = Math.max(nbRightOarToUse-1,0);
         }
+
+        actualAngle = (nbRightOarToUse - nbLeftOarToUse)*Math.PI/NB_OAR;
+
+        toolsToUse.setNbLeftOarToUse(nbLeftOarToUse);
+        toolsToUse.setNbRightOarToUse(nbRightOarToUse);
+        toolsToUse.setRudderAngle(angleToCheckPoint - actualAngle);
     }
 
     void turnWIthRudder(double angle){
-        int nbLeftOarToUse = toolsToUse.getNbLeftOarToUse();
-        int nbRightOarToUse = toolsToUse.getNbRightOarToUse();
+        double actualRudderAngle = toolsToUse.getRudderAngle();
 
-        toolsToUse.setRudderAngle(angle);
-
-        if(nbLeftOarToUse+nbRightOarToUse >= NB_ROWER && nbLeftOarToUse == nbRightOarToUse) {
-            toolsToUse.decreaseNbSailors();
-        }
+        toolsToUse.setRudderAngle(actualRudderAngle+angle);
     }
 
     ToolsToUse findToolsToUse(){
@@ -93,18 +82,28 @@ public class Strat {
             angleToCheckPoint *= (signe = -1);
         }
 
-        if(angleToCheckPoint > Math.PI / 4) {
+        if(angleToCheckPoint > 3*Math.PI / 4){
             turnWIthOar((Math.PI / 2)*signe);
-            angleToCheckPoint -= Math.PI / 2;
+            turnWIthRudder((Math.PI / 4)*signe);
         }
-
-        if(angleToCheckPoint >= 1.0*Math.PI / 180.0 || angleToCheckPoint <= -1.0*Math.PI / 180.0)
-            turnWIthRudder(angleToCheckPoint * signe);
+        else if (angleToCheckPoint > Math.PI / 4) {
+            turnWIthOar((Math.PI / 2) * signe);
+            turnWIthRudder((angleToCheckPoint - Math.PI / 2) * signe);
+        }
+        else if (angleToCheckPoint > 1.0 * Math.PI / 180.0) {
+            if(NB_ROWER%2 == 0 && angleToCheckPoint-Math.PI / NB_OAR >= -Math.PI/4) {
+                turnWIthOar(-Math.PI / NB_OAR * signe);
+                turnWIthRudder((angleToCheckPoint-Math.PI / NB_OAR)*signe);
+            }
+            else {
+                turnWIthOar(0.0);
+                turnWIthRudder(angleToCheckPoint * signe);
+            }
+        }
 
         if(slowDown(toolsToUse.getNbLeftOarToUse(),toolsToUse.getNbRightOarToUse())){
             toolsToUse.decreaseNbSailors();
         }
-
         return toolsToUse;
     }
 

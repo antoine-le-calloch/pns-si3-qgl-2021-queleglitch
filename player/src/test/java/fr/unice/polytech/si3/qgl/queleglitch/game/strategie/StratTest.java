@@ -51,7 +51,7 @@ class StratTest {
         Position checkpoint_600_500 = new Position(600,500,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_600_500, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_600_500),1,1), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_600_500)-Math.PI/6,2,1), strat.getToolsToUse());
     }
 
     @Test
@@ -59,7 +59,7 @@ class StratTest {
         Position checkpoint_1000_1000 = new Position(1000,1000,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_1000_1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_1000_1000),1,1), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_1000_1000)-Math.PI/6,2,1), strat.getToolsToUse());
     }
 
     @Test
@@ -75,7 +75,7 @@ class StratTest {
         Position checkpoint_0_1000 = new Position(0,1000,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_0_1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(0,0,3), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_0_1000)-Math.PI/2,0,3), strat.getToolsToUse());
     }
 
     @Test
@@ -91,7 +91,7 @@ class StratTest {
         Position checkpoint_Minus600_500 = new Position(-600,500,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_Minus600_500, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_Minus600_500)-Math.PI/2,0,3), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(Math.PI/4,0,3), strat.getToolsToUse());
     }
 
     @Test
@@ -99,7 +99,7 @@ class StratTest {
         Position checkpoint_Minus1000_0 = new Position(-1000,0,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_Minus1000_0, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_Minus1000_0)-Math.PI/2,0,3), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(Math.PI/4,0,3), strat.getToolsToUse());
     }
 
     @Test
@@ -107,7 +107,7 @@ class StratTest {
         Position checkpoint_Minus600_Minus500 = new Position(-600,-500,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_Minus600_Minus500, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_Minus600_Minus500)+Math.PI/2,3,0), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(-Math.PI/4,3,0), strat.getToolsToUse());
     }
 
     @Test
@@ -123,7 +123,7 @@ class StratTest {
         Position checkpoint_0_Minus1000 = new Position(0,-1000,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_0_Minus1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(0,3,0), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_0_Minus1000)+Math.PI/2,3,0), strat.getToolsToUse());
     }
 
     @Test
@@ -131,7 +131,7 @@ class StratTest {
         Position checkpoint_1000_Minus1000 = new Position(1000,-1000,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_1000_Minus1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_1000_Minus1000),1,1), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_1000_Minus1000)+Math.PI/6,1,2), strat.getToolsToUse());
     }
 
     @Test
@@ -139,7 +139,7 @@ class StratTest {
         Position checkpoint_600_Minus500 = new Position(600,-500,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_600_Minus500, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_600_Minus500),1,1), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_600_Minus500)+Math.PI/6,1,2), strat.getToolsToUse());
     }
 
     /**
@@ -263,11 +263,19 @@ class StratTest {
     }
 
     @Test
+    void _5SailorsToolsToUseShip0_0Checkpoint_500_1000(){
+        Position checkpoint_500_1000 = new Position(500,1000,0);
+        infoGame6Rames5Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_500_1000, new Circle(100))}));
+        strat = new Strat(infoGame6Rames5Sailors);
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_500_1000)-Math.PI/2,0,3), strat.getToolsToUse());
+    }
+
+    @Test
     void _5SailorsToolsToUseShip0_0Checkpoint_0_1000(){
         Position checkpoint_0_1000 = new Position(0,1000,0);
         infoGame6Rames5Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_0_1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames5Sailors);
-        assertEquals(new ToolsToUse(0,0,3), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_0_1000)-Math.PI/2,0,3), strat.getToolsToUse());
     }
 
     @Test
@@ -283,7 +291,7 @@ class StratTest {
         Position checkpoint_Minus600_500 = new Position(-600,500,0);
         infoGame6Rames5Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_Minus600_500, new Circle(100))}));
         strat = new Strat(infoGame6Rames5Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_Minus600_500)-Math.PI/2,0,3), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(Math.PI/4,0,3), strat.getToolsToUse());
     }
 
     @Test
@@ -291,7 +299,7 @@ class StratTest {
         Position checkpoint_Minus1000_0 = new Position(-1000,0,0);
         infoGame6Rames5Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_Minus1000_0, new Circle(100))}));
         strat = new Strat(infoGame6Rames5Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_Minus1000_0)-Math.PI/2,0,3), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(Math.PI/4,0,3), strat.getToolsToUse());
     }
 
     @Test
@@ -299,7 +307,7 @@ class StratTest {
         Position checkpoint_Minus600_Minus500 = new Position(-600,-500,0);
         infoGame6Rames5Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_Minus600_Minus500, new Circle(100))}));
         strat = new Strat(infoGame6Rames5Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_Minus600_Minus500)+Math.PI/2,3,0), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(-Math.PI/4,3,0), strat.getToolsToUse());
     }
 
     @Test
@@ -315,7 +323,7 @@ class StratTest {
         Position checkpoint_0_Minus1000 = new Position(0,-1000,0);
         infoGame6Rames5Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_0_Minus1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames5Sailors);
-        assertEquals(new ToolsToUse(0,3,0), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_0_Minus1000)+Math.PI/2,3,0), strat.getToolsToUse());
     }
 
     @Test
@@ -467,7 +475,7 @@ class StratTest {
         Position checkpoint_Minus1000_1000 = new Position(-1000,1000,0);
         infoGame6Rames5SailorsShipIn_Minus1_Minus1_orient45.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_Minus1000_1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames5SailorsShipIn_Minus1_Minus1_orient45);
-        assertEquals(new ToolsToUse(0,0,3), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship_Minus1_Minus1_orient45.calculateAngleToCheckPoint(checkpoint_Minus1000_1000)-Math.PI/2,0,3), strat.getToolsToUse());
     }
 
     @Test
@@ -491,7 +499,7 @@ class StratTest {
         Position checkpoint_Minus600_Minus500 = new Position(-600,-500,0);
         infoGame6Rames5SailorsShipIn_Minus1_Minus1_orient45.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_Minus600_Minus500, new Circle(100))}));
         strat = new Strat(infoGame6Rames5SailorsShipIn_Minus1_Minus1_orient45);
-        assertEquals(new ToolsToUse(ship_Minus1_Minus1_orient45.calculateAngleToCheckPoint(checkpoint_Minus600_Minus500)-Math.PI/2,0,3), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(Math.PI/4,0,3), strat.getToolsToUse());
     }
 
     @Test
@@ -499,7 +507,7 @@ class StratTest {
         Position checkpoint_Minus1000_Minus1000 = new Position(-1000,-1000,0);
         infoGame6Rames5SailorsShipIn_Minus1_Minus1_orient45.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_Minus1000_Minus1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames5SailorsShipIn_Minus1_Minus1_orient45);
-        assertEquals(new ToolsToUse(ship_Minus1_Minus1_orient45.calculateAngleToCheckPoint(checkpoint_Minus1000_Minus1000)+Math.PI/2,3,0), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(-Math.PI/4,3,0), strat.getToolsToUse());
     }
 
     @Test
@@ -515,7 +523,7 @@ class StratTest {
         Position checkpoint_1000_Minus1000 = new Position(1000,-1000,0);
         infoGame6Rames5SailorsShipIn_Minus1_Minus1_orient45.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_1000_Minus1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames5SailorsShipIn_Minus1_Minus1_orient45);
-        assertEquals(new ToolsToUse(0,3,0), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship_Minus1_Minus1_orient45.calculateAngleToCheckPoint(checkpoint_1000_Minus1000)+Math.PI/2,3,0), strat.getToolsToUse());
     }
 
     @Test
