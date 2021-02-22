@@ -1,12 +1,14 @@
 package fr.unice.polytech.si3.qgl.queleglitch;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.queleglitch.game.Processing;
+import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
@@ -23,9 +25,10 @@ import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
 public class Cockpit implements ICockpit {
 
-	InformationGame informationGame;
 	NextRound nextRound;
 	Processing processing;
+	String actionsThisRound;
+	InformationGame informationGame;
 	ObjectMapper objectMapper = new ObjectMapper();
 
 	/**
@@ -55,7 +58,9 @@ public class Cockpit implements ICockpit {
 		try {
 			nextRound = objectMapper.readValue(round, NextRound.class);
 			processing.setDataNewRound(nextRound);
-			return objectMapper.writeValueAsString(processing.actionForTheRound());
+			actionsThisRound = objectMapper.writeValueAsString(processing.actionForTheRound());
+			getLogs();
+			return actionsThisRound;
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
@@ -70,20 +75,12 @@ public class Cockpit implements ICockpit {
 	public List<String> getLogs() {
 		ArrayList<String> logs = new ArrayList<>();
 		logs.add("NEW TURN");
-		logs.add("Ship coordinates: ");
+		logs.add("Ship coord: " + informationGame.getShip().toString());
 		logs.add(informationGame.getShip().toString());
-		logs.add(" ---- ");
-		logs.add("Checkpoint coordinates: ");
-		RegattaGoal regattaGoal = (RegattaGoal) informationGame.getGoal();
-		logs.add(regattaGoal.toString());
 		for (int i = 0; i < informationGame.getSailors().length; i++) {
-			logs.add(" ---- ");
-			logs.add(informationGame.getSailors()[i].toString());
+			logs.add(informationGame.getSailors()[i].toString() + "---");
 		}
+		logs.add("Turn angle : " + actionsThisRound.split("TURN")[1]);
 		return logs;
-	}
-
-	public InformationGame getInitGame() {
-		return informationGame;
 	}
 }

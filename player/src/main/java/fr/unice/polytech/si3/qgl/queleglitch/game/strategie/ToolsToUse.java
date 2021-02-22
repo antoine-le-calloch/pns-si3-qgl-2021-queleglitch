@@ -19,6 +19,11 @@ public class ToolsToUse {
         this.nbRightOarToUse = Math.max(nbRightOarToUse, 0);
     }
 
+    public void decreaseNbSailors(){
+        nbLeftOarToUse--;
+        nbRightOarToUse--;
+    }
+
     public void setRudderAngle(double rudderAngle){
         this.rudderAngle = rudderAngle;
     }
@@ -50,6 +55,6 @@ public class ToolsToUse {
 
     @Override
     public String toString(){
-        return "Rudder angle : " + this.rudderAngle + ", Nb right oar : " + this.nbRightOarToUse + ", Nb left oar : " + this.nbLeftOarToUse;
+        return "Rudder angle : " + this.rudderAngle + ", Nb left oar : " + this.nbLeftOarToUse + ", Nb right oar : " + this.nbRightOarToUse;
     }
 }
