@@ -59,6 +59,7 @@ public class Cockpit implements ICockpit {
 			nextRound = objectMapper.readValue(round, NextRound.class);
 			processing.setDataNewRound(nextRound);
 			actionsThisRound = objectMapper.writeValueAsString(processing.actionForTheRound());
+			getLogs();
 			return actionsThisRound;
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
