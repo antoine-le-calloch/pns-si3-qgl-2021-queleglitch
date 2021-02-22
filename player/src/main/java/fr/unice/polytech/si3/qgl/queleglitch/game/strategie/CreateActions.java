@@ -12,12 +12,13 @@ public class CreateActions {
     Sailor[] sailors;
     ToolsToUse toolsToUse;
 
-    int MAX_ROWER = 4; //A changer
+    int MAX_ROWER;
 
     public CreateActions(Ship ship, Sailor[] sailors, ToolsToUse toolsToUse) {
         this.ship = ship;
         this.sailors = sailors;
         this.toolsToUse = toolsToUse;
+        this.MAX_ROWER = sailors.length;
     }
 
     public List<Action> buildingActions() {
@@ -45,9 +46,11 @@ public class CreateActions {
             actions.add(new Moving(sailors[i].getId(),x,y));
             actionsOar.add(new Oar(sailors[i].getId()));
         }
-        if(i<MAX_ROWER && (angle = toolsToUse.getRudderAngle()) != 0){
+        if(i<MAX_ROWER && (angle = toolsToUse.getRudderAngle()) != 0.0){
             x = ship.getGouvernail().getX() - sailors[i].x;
             y = ship.getGouvernail().getY() - sailors[i].y;
+            sailors[i].x += x;
+            sailors[i].y += y;
             actions.add(new Moving(sailors[i].getId(),x,y));
             actionsTurn.add(new Turn(sailors[i].getId(),angle));
         }

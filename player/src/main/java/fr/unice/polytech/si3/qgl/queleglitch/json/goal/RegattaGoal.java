@@ -20,15 +20,6 @@ public class RegattaGoal extends Goal {
         this.checkpoints = checkpoints;
     }
 
-    public void setCheckpoints(Checkpoint[] checkpoints) {
-        this.checkpoints = checkpoints;
-        numActualCheckpoint = 0;
-    }
-
-    public void addCheckpoint(Checkpoint checkpoint, int place){
-        checkpoints[place] = checkpoint;
-    }
-
     public Checkpoint getActualCheckpoint(){
         return checkpoints[numActualCheckpoint];
     }

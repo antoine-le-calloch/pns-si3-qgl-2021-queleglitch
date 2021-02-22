@@ -36,12 +36,12 @@ public class Strat {
     }
 
     boolean slowDown(int nbLeftOar, int nbRightOar){
-        return (actualCheckPointPosition.getNorme(ship.getPosition()) < (165.0 * (NB_ROWER) / NB_OAR) - checkPointRadius || slowDownForFutureCheckpoint(nbLeftOar,nbRightOar)) && !(nbLeftOar-1 == 0 && nbRightOar-1 == 0);
+        return (actualCheckPointPosition.getNorme(ship.getPosition()) < (165.0 * (nbLeftOar + nbRightOar) / NB_OAR) - checkPointRadius || slowDownForFutureCheckpoint(nbLeftOar,nbRightOar)) && !(nbLeftOar-1 == 0 && nbRightOar-1 == 0);
     }
 
     void turnWIthOar(double angleToCheckPoint){
         int nbOfBaseAnglesInAngle;
-        int nbLeftOar = NB_ROWER/2,nbRightOar = NB_ROWER/2; // a tester
+        int nbLeftOar = NB_ROWER/2,nbRightOar = NB_ROWER/2;
         if(NB_ROWER%2==1) {
             nbLeftOar++;
             nbRightOar++;
@@ -77,7 +77,7 @@ public class Strat {
         int nbRightOar = toolsToUse.getNbRightOarToUse();
 
         if(nbLeftOar+nbRightOar < NB_ROWER)
-            toolsToUse.setToolsToUse(angle,nbLeftOar,nbRightOar);
+            toolsToUse.setRudderAngle(angle);
         else if(nbLeftOar == nbRightOar)
             toolsToUse.setToolsToUse(angle,--nbLeftOar,--nbRightOar);
     }
@@ -90,12 +90,12 @@ public class Strat {
             angleToCheckPoint *= (signe = -1);
         }
 
-        if(angleToCheckPoint >= Math.PI / 2) {
+        if(angleToCheckPoint > Math.PI / 2) {
             turnWIthOar((Math.PI / 2)*signe);
             angleToCheckPoint -= Math.PI / 2;
         }
 
-        if(angleToCheckPoint >= 3*Math.PI / 180)
+        if(angleToCheckPoint >= 1.0*Math.PI / 180.0)
             turnWIthRudder(angleToCheckPoint*signe);
 
         if(slowDown(toolsToUse.getNbLeftOarToUse(),toolsToUse.getNbRightOarToUse())){

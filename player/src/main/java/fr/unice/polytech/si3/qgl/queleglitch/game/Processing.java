@@ -38,7 +38,6 @@ public class Processing {
         return ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition().getNorme(informationGame.getShip().getPosition()) < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
     }
 
-
     public List<Action> actionForTheRound(){
         Strat strat = new Strat(informationGame);
         CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), strat.getToolsToUse());

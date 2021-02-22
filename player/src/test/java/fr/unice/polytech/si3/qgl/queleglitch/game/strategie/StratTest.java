@@ -24,7 +24,7 @@ class StratTest {
 
     @BeforeEach
     void setUp() {
-        ship = new Ship(new Position(0, 0, 0), new Entities[]{new Rame(), new Rame(), new Rame(), new Rame(), new Rame(), new Rame()}, "initGameFile", new Deck(), new Rectangle());
+        ship = new Ship(new Position(0, 0, 0), new Entities[]{new Rame(), new Rame(), new Rame(), new Rame(), new Rame(), new Rame()}, "src/initGameFile", new Deck(), new Rectangle());
         infoGame6Rames4Sailors = new InformationGame(new Sailor[]{new Sailor(),new Sailor(),new Sailor(),new Sailor()},ship,new RegattaGoal());
     }
 
@@ -61,7 +61,7 @@ class StratTest {
         Position checkpoint_0_1000 = new Position(0,1000,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_0_1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_0_1000)-Math.PI/2,0,3), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_0_1000),1,1), strat.getToolsToUse());
     }
 
     @Test
@@ -109,7 +109,7 @@ class StratTest {
         Position checkpoint_0_Minus1000 = new Position(0,-1000,0);
         infoGame6Rames4Sailors.setGoal(new RegattaGoal(new Checkpoint[]{new Checkpoint(checkpoint_0_Minus1000, new Circle(100))}));
         strat = new Strat(infoGame6Rames4Sailors);
-        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_0_Minus1000)+Math.PI/2,3,0), strat.getToolsToUse());
+        assertEquals(new ToolsToUse(ship.calculateAngleToCheckPoint(checkpoint_0_Minus1000),1,1), strat.getToolsToUse());
     }
 
     @Test
