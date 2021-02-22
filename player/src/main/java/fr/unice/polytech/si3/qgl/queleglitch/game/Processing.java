@@ -40,7 +40,7 @@ public class Processing {
 
 
     public List<Action> actionForTheRound(){
-        Strat strat = new Strat(informationGame,((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius());
+        Strat strat = new Strat(informationGame);
         CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), strat.getToolsToUse());
         return createActions.getActions();
     }

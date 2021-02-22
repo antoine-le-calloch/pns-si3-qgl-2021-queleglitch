@@ -27,7 +27,7 @@ class ProcessingTest {
     @BeforeEach
     void setUp() {
         checkpoint = new Checkpoint();
-        regattaGoal = new RegattaGoal(checkpoint,1);
+        regattaGoal = new RegattaGoal(new Checkpoint[]{checkpoint});
 
         ship = new Ship();
 
