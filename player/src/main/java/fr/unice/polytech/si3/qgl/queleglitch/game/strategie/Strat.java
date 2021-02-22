@@ -28,8 +28,8 @@ public class Strat {
 
     boolean slowDownForFutureCheckpoint(int nbLeftOarToUse, int nbRightOarToUse){
         if( regattaGoal.isLastCheckpoint() ||
-                (ship.calculateAngleToCheckPoint(regattaGoal.getNextCheckpoint().getPosition()) < Math.PI/2 &&
-                        ship.calculateAngleToCheckPoint(regattaGoal.getNextCheckpoint().getPosition()) > -Math.PI/2))
+                (ship.calculateAngleToCheckPoint(regattaGoal.getNextCheckpoint().getPosition()) < (Math.PI/2) - (5 * Math.PI / 180.0)
+                        && ship.calculateAngleToCheckPoint(regattaGoal.getNextCheckpoint().getPosition()) > (-Math.PI/2) + (5 * Math.PI / 180.0)))
             return false;
 
         return actualCheckPointPosition.getNorme(ship.getPosition()) - checkPointRadius <= (165.0 * (nbLeftOarToUse + nbRightOarToUse - 2) / NB_OAR);
