@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.Strat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -5,15 +5,14 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Game {
+public class Processing {
 
     InformationGame informationGame;
     RegattaResolver regattaResolver;
 
-    public Game(InformationGame informationGame) {
+    public Processing(InformationGame informationGame) {
         this.informationGame = informationGame;
         this.regattaResolver= new RegattaResolver(informationGame);
     }
@@ -27,8 +26,9 @@ public class Game {
     }
 
     public List<Action> actionForTheRound(){
-        regattaResolver.resolveRegatta();
-        //return createActions.getActions();
+        ToolsToUse toolsToUse = regattaResolver.resolveRegatta();
+        CreateAction createAction = new CreateAction(informationGame.getShip(), informationGame.getSailors(), toolsToUse);
+        return createAction.buildingActions();
     }
 
 

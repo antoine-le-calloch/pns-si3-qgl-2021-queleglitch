@@ -11,10 +11,9 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
+import fr.unice.polytech.si3.qgl.queleglitch.refactoring.ToolsToUse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StratTest {
 

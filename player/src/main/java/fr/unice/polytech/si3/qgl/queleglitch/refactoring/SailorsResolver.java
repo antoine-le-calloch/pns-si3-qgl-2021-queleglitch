@@ -14,15 +14,7 @@ public abstract class SailorsResolver {
         NB_OARS = informationGame.getShip().getRames().size();
     }
 
-    RudderActionSailorsResolver rudderResolver;
-    SailActionSailorsResolver sailActionSailorsResolver;
-    OarActionResolver oarActionResolver;
+    public abstract double actionResolver(Double angleToCorrect);
 
-    public int sailResolver() {
-        return 0;
-    }
 
-    public double oarResolver() {
-        return 0;
-    }
 }

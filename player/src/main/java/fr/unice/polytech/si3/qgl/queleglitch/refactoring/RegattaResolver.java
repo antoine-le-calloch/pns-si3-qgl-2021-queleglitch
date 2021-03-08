@@ -1,30 +1,31 @@
 package fr.unice.polytech.si3.qgl.queleglitch.refactoring;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 
 public class RegattaResolver {
 
     InformationGame informationGame;
     PositionResolver positionResolver;
-    WindResolver windResolver;
-    SailorsResolver sailorsResolver;
+    OarActionSailorsResolver oarAction;
+    RudderActionSailorsResolver rudderAction;
 
 
     public RegattaResolver(InformationGame informationGame) {
         this.informationGame = informationGame;
-        positionResolver=new PositionResolver(informationGame);
+        positionResolver = new PositionResolver(informationGame);
     }
 
-    void resolveRegatta(){
+    ToolsToUse resolveRegatta(){
+
         Double angleToCorrect = positionResolver.calculateAngleToCheckPoint();
-        //sailorsResolver.rudderResolver();
-        Boolean isJudiciousToOpenTheSails = windResolver.resolveWind();
-        sailorsResolver.sailResolver();
-        sailorsResolver.oarResolver();
+        double numberOfSailor = oarAction.actionResolver(angleToCorrect);
+        double angleRudder = rudderAction.actionResolver(angleToCorrect);
+        double numberOfSail = 0;
+
+        return new ToolsToUse(angleRudder,numberOfSailor,numberOfSail);
+
     }
+
 
 
 }

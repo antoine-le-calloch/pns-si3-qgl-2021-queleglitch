@@ -10,6 +10,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
+import fr.unice.polytech.si3.qgl.queleglitch.refactoring.Processing;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

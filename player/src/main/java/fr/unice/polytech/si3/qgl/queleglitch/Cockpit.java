@@ -1,17 +1,14 @@
 package fr.unice.polytech.si3.qgl.queleglitch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.unice.polytech.si3.qgl.queleglitch.game.Processing;
-import fr.unice.polytech.si3.qgl.queleglitch.game.strategie.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
+import fr.unice.polytech.si3.qgl.queleglitch.refactoring.Processing;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
 /**
