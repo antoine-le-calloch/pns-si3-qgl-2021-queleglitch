@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch.refactoring;
+package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 public class WindResolver {
 

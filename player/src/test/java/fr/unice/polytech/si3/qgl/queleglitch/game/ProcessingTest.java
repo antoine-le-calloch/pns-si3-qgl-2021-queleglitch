@@ -2,7 +2,6 @@ package fr.unice.polytech.si3.qgl.queleglitch.game;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
@@ -10,12 +9,8 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
-import fr.unice.polytech.si3.qgl.queleglitch.refactoring.Processing;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 
 
 class ProcessingTest {

@@ -1,12 +1,12 @@
-package fr.unice.polytech.si3.qgl.queleglitch.refactoring;
+package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 
-public class OarActionSailorsResolver extends SailorsResolver {
+public class OarActionStrategie extends Strategie {
 
     private final int NB_OAR;
 
-    public OarActionSailorsResolver(InformationGame informationGame) {
+    public OarActionStrategie(InformationGame informationGame) {
         super(informationGame);
         this.NB_OAR = informationGame.getShip().getRames().size();
     }

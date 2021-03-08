@@ -1,14 +1,14 @@
-package fr.unice.polytech.si3.qgl.queleglitch.refactoring;
+package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 
-public abstract class SailorsResolver {
+public abstract class Strategie {
 
     InformationGame informationGame;
     final int NB_ROWERS ;
     final int NB_OARS;
 
-    public SailorsResolver(InformationGame informationGame) {
+    public Strategie(InformationGame informationGame) {
         this.informationGame = informationGame;
         NB_ROWERS = informationGame.getSailors().length;
         NB_OARS = informationGame.getShip().getRames().size();

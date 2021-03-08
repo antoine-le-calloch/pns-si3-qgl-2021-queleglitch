@@ -1,19 +1,21 @@
-package fr.unice.polytech.si3.qgl.queleglitch.refactoring;
+package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 
-public class PositionResolver {
+public class Geometry {
 
     InformationGame informationGame;
+    Position actualCheckPointPosition;
     Position nextCheckPointPosition;
     Position currentBoatPosition;
 
-    public PositionResolver(InformationGame informationGame) {
+    public Geometry(InformationGame informationGame) {
         this.informationGame = informationGame;
-        this.nextCheckPointPosition=((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition();
+        this.nextCheckPointPosition=((RegattaGoal) informationGame.getGoal()).getNextCheckpoint().getPosition();
+        this.actualCheckPointPosition = ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition();
         this.currentBoatPosition=informationGame.getShip().getPosition();
     }
 
@@ -22,6 +24,28 @@ public class PositionResolver {
         return nextCheckPointPosition.getNorme(informationGame.getShip().getPosition()) < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
     }
 
+    // renvoie le max de sailors qui rament pour que ce soit opti
+    int slowDown(){
+        int NB_OARS = informationGame.getShip().getRames().size();
+        double radius = ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
+
+        // il y a un prochain checkpoint au bon angle , et la distance bateau / point le plus proche du checkpoint < 165
+        // -> longueur < n * (165/ nbRadius) <=> longueur / 165/nbRadius
+        if (!((RegattaGoal) informationGame.getGoal()).isLastCheckpoint() &&
+                (calculateAngleToCheckPoint() > (Math.PI / 2) - (5 * Math.PI / 180.0) &&
+                calculateAngleToCheckPoint() < (-Math.PI / 2) + (5 * Math.PI / 180.0)) &&
+                (actualCheckPointPosition.getNorme(currentBoatPosition) - radius) - 165 < 0)
+            return (int) ((actualCheckPointPosition.getNorme(currentBoatPosition) - radius) / (165.0 / NB_OARS));
+
+        // la distance bateau / point le plus eloigné du checkpoint < 165
+        // -> longueur < n * (165/ nbRadius) <=> longueur / 165/nbRadius
+        if ((actualCheckPointPosition.getNorme(currentBoatPosition) + radius) - 165 < 0)
+            return (int) ((actualCheckPointPosition.getNorme(currentBoatPosition) + radius) / (165.0 / NB_OARS));
+
+        // si aucun des cas, osef , on prend le max
+        return NB_OARS;
+
+    }
 
     public double calculateAngleToCheckPoint(){
         double checkPointX = nextCheckPointPosition.getX();

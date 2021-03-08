@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.refactoring.Processing;
+import fr.unice.polytech.si3.qgl.queleglitch.game.Processing;
 import fr.unice.polytech.si3.qgl.regatta.cockpit.ICockpit;
 
 /**

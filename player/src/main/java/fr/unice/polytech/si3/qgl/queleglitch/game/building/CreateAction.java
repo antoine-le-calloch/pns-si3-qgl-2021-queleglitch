@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch.refactoring;
+package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Moving;
@@ -30,8 +30,8 @@ public class CreateAction {
         int compteur = 0;
         int x;
         int y;
-        int i=0;
-        int j=0;
+        int i = 0;
+        int j = 0;
         List<Rame> rightRames = ship.getRamesAtRight();
         List<Rame> leftRames = ship.getRamesAtLeft();
 
@@ -41,7 +41,7 @@ public class CreateAction {
             y = ship.getGouvernail().getY() - sailors[compteur].y;
             sailors[compteur].x += x;
             sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(),x,y));
+            actions.add(new Moving(sailors[compteur].getId(), x, y));
             actions.add(new Turn(sailors[compteur++].getId(), toolsToUse.getAngleRudder()));
         }
 
@@ -53,11 +53,10 @@ public class CreateAction {
                     y = rightRames.get(i).y - sailors[compteur].y;
                     sailors[compteur].x += x;
                     sailors[compteur].y += y;
-                    actions.add(new Moving(sailors[compteur].getId(),x,y));
+                    actions.add(new Moving(sailors[compteur].getId(), x, y));
                     actions.add(new Oar(sailors[compteur++].getId()));
                 }
-            }
-            else {
+            } else {
                 //MOVING
                 double max = toolsToUse.numberOfSailor * (-1);
                 for (; j < max; j++) {
@@ -65,7 +64,7 @@ public class CreateAction {
                     y = leftRames.get(j).y - sailors[compteur].y;
                     sailors[compteur].x += x;
                     sailors[compteur].y += y;
-                    actions.add(new Moving(sailors[compteur].getId(),x,y));
+                    actions.add(new Moving(sailors[compteur].getId(), x, y));
                     actions.add(new Oar(sailors[compteur++].getId()));
                 }
             }
@@ -76,20 +75,20 @@ public class CreateAction {
             //SAIL
         }*/
 
-        while(MAX_ROWER-compteur >= 2 && i< rightRames.size()-1 && j< rightRames.size()-1){
+        while (MAX_ROWER - compteur >= 2 && i < rightRames.size() - 1 && j < rightRames.size() - 1 && toolsToUse.numberOfSailorMaxBeforeSlowDown < compteur) {
             //MOVING
             x = rightRames.get(i).x - sailors[compteur].x;
             y = rightRames.get(i).y - sailors[compteur].y;
             sailors[compteur].x += x;
             sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(),x,y));
+            actions.add(new Moving(sailors[compteur].getId(), x, y));
             actions.add(new Oar(sailors[compteur++].getId()));
             //MOVING
             x = leftRames.get(j).x - sailors[compteur].x;
             y = leftRames.get(j).y - sailors[compteur].y;
             sailors[compteur].x += x;
             sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(),x,y));
+            actions.add(new Moving(sailors[compteur].getId(), x, y));
             actions.add(new Oar(sailors[compteur++].getId()));
             i++;
             j++;
@@ -98,4 +97,9 @@ public class CreateAction {
         return actions;
     }
 
+
+
+
 }
+
+

@@ -1,14 +1,16 @@
-package fr.unice.polytech.si3.qgl.queleglitch.refactoring;
+package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
 public class ToolsToUse {
     public double angleRudder;
     public double numberOfSailor;
     public double numberOfSail;
+    public int numberOfSailorMaxBeforeSlowDown;
 
-    public ToolsToUse(double angleRudder, double numberOfSailor, double numberOfSail){
+    public ToolsToUse(double angleRudder, double numberOfSailor, double numberOfSail, int numberOfSailorMaxBeforeSlowDown){
         this.angleRudder = angleRudder;
         this.numberOfSailor = numberOfSailor;
         this.numberOfSail = numberOfSail;
+        this.numberOfSailorMaxBeforeSlowDown = numberOfSailorMaxBeforeSlowDown;
     }
 
     public double getAngleRudder() {
@@ -23,6 +25,10 @@ public class ToolsToUse {
         return numberOfSailor;
     }
 
+    public int getNumberOfSailorMaxBeforeSlowDown() {
+        return numberOfSailorMaxBeforeSlowDown;
+    }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -31,7 +37,10 @@ public class ToolsToUse {
         if (!(obj instanceof ToolsToUse))
             return false;
         ToolsToUse toolsToUse = (ToolsToUse) obj;
-        return this.angleRudder == toolsToUse.angleRudder && this.numberOfSailor == toolsToUse.numberOfSailor && this.numberOfSail == toolsToUse.numberOfSail;
+        return this.angleRudder == toolsToUse.angleRudder &&
+                this.numberOfSailor == toolsToUse.numberOfSailor &&
+                this.numberOfSail == toolsToUse.numberOfSail &&
+                this.numberOfSailorMaxBeforeSlowDown == toolsToUse.numberOfSailorMaxBeforeSlowDown;
     }
 
     @Override

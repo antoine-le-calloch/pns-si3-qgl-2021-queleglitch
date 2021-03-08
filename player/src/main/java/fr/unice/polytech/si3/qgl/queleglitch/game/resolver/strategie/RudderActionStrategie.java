@@ -1,12 +1,12 @@
-package fr.unice.polytech.si3.qgl.queleglitch.refactoring;
+package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 
-public class RudderActionSailorsResolver extends SailorsResolver {
+public class RudderActionStrategie extends Strategie {
 
     double rudderAngle;
 
-    public RudderActionSailorsResolver(InformationGame informationGame) {
+    public RudderActionStrategie(InformationGame informationGame) {
         super(informationGame);
         this.rudderAngle = 0;
     }

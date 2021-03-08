@@ -6,7 +6,6 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
-import fr.unice.polytech.si3.qgl.queleglitch.refactoring.ToolsToUse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 class createActionsTest {
-
+/*
     Sailor[] sailors = {new Sailor(0, 0,0),new Sailor(0, 0,1),new Sailor(0, 0,2),new Sailor(0, 0,3)};
     Ship mockShip;
     CreateActions createActions;
@@ -177,5 +176,5 @@ class createActionsTest {
         assertFalse(actions.contains(new Oar(2)));
         assertFalse(actions.contains(new Oar(3)));
         assertTrue(actions.contains(new Moving(0,0,0)));
-    }
+    }*/
 }
