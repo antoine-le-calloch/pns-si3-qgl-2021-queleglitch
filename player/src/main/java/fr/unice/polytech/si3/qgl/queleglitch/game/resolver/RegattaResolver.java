@@ -16,6 +16,15 @@ public class RegattaResolver {
     public RegattaResolver(InformationGame informationGame) {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame);
+        oarAction =new OarActionStrategie(informationGame);
+        rudderAction =new RudderActionStrategie(informationGame);
+    }
+
+    public RegattaResolver(InformationGame informationGame,Geometry geometry,OarActionStrategie oarActionStrategie,RudderActionStrategie rudderActionStrategie){
+        this.informationGame=informationGame;
+        this.geometry=geometry;
+        this.oarAction=oarActionStrategie;
+        this.rudderAction=rudderActionStrategie;
     }
 
     public ToolsToUse resolveRegatta(){
