@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
+import com.sun.security.jgss.GSSUtil;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
@@ -19,6 +20,12 @@ public class Geometry {
         this.currentBoatPosition=informationGame.getShip().getPosition();
     }
 
+    public Geometry(InformationGame informationGame, Position actualCheckPointPosition, Position nextCheckPointPosition, Position currentBoatPosition) {
+        this.informationGame = informationGame;
+        this.actualCheckPointPosition = actualCheckPointPosition;
+        this.nextCheckPointPosition = nextCheckPointPosition;
+        this.currentBoatPosition = currentBoatPosition;
+    }
 
     public boolean isCheckpointReached() {
         return nextCheckPointPosition.getNorme(informationGame.getShip().getPosition()) < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
@@ -55,6 +62,7 @@ public class Geometry {
         double shipY = currentBoatPosition.getY();
         double angle = 0;
 
+
         if(checkPointY-shipY==0 && checkPointX-shipX < 0){
             angle = Math.PI;
         }
@@ -74,9 +82,11 @@ public class Geometry {
         }
         angle -= shipAngle;
         if(angle > Math.PI) {
+
             angle = (-2*Math.PI)+angle;
         }
         else if(angle < -Math.PI) {
+
             angle = (2*Math.PI)+angle;
         }
         return angle;
