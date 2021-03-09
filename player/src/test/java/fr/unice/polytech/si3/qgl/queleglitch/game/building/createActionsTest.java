@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch.game.strategie;
+package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.CreateAction;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;

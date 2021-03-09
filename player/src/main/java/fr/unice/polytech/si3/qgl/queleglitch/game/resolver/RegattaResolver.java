@@ -4,6 +4,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.OarActionStrategie;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.RudderActionStrategie;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
 public class RegattaResolver {
 
@@ -29,7 +30,7 @@ public class RegattaResolver {
 
     public ToolsToUse resolveRegatta(){
 
-        Double angleToCorrect = geometry.calculateAngleToCheckPoint();
+        Double angleToCorrect = geometry.calculateAngleToCheckPoint(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition());
         int numberOfSailorMaxBeforeSlowDown = geometry.slowDown();
         double numberOfSailor = oarAction.actionResolver(angleToCorrect);
         double angleRudder = rudderAction.actionResolver(angleToCorrect);

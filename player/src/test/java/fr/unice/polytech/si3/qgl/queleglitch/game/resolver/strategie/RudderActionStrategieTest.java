@@ -20,14 +20,17 @@ class RudderActionStrategieTest {
     void angleToCorrectPositiveLessThanLimitRudder(){
         assertEquals(Math.PI/8,rudderActionStrategie.actionResolver(Math.PI/8));
     }
+
     @Test
     void angleToCorrectNegativeLessThanLimitRudder(){
         assertEquals(-Math.PI/8,rudderActionStrategie.actionResolver(-Math.PI/8));
     }
+
     @Test
     void angleToCorrectPositiveMoreThanLimitRudder(){
         assertEquals(Math.PI/4,rudderActionStrategie.actionResolver(Math.PI/2));
     }
+
     @Test
     void angleToCorrectNegativeMoreThanLimitRudder(){
         assertEquals(-Math.PI/4,rudderActionStrategie.actionResolver(-Math.PI/2));
