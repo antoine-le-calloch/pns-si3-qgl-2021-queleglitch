@@ -3,8 +3,10 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.OarActionStrategie;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.RudderActionStrategie;
+import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.WindActionStrategie;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 
 public class RegattaResolver {
 
@@ -12,13 +14,15 @@ public class RegattaResolver {
     Geometry geometry;
     OarActionStrategie oarAction;
     RudderActionStrategie rudderAction;
+    WindActionStrategie windAction;
 
 
-    public RegattaResolver(InformationGame informationGame) {
+    public RegattaResolver(InformationGame informationGame, NextRound nextRound) {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame);
         oarAction =new OarActionStrategie(informationGame);
         rudderAction =new RudderActionStrategie(informationGame);
+        windAction = new WindActionStrategie(informationGame,nextRound);
     }
 
     public RegattaResolver(InformationGame informationGame,Geometry geometry,OarActionStrategie oarActionStrategie,RudderActionStrategie rudderActionStrategie){
@@ -34,7 +38,7 @@ public class RegattaResolver {
         int numberOfSailorMaxBeforeSlowDown = geometry.slowDown();
         double numberOfSailor = oarAction.actionResolver(angleToCorrect);
         double angleRudder = rudderAction.actionResolver(angleToCorrect);
-        double numberOfSail = 0;
+        double numberOfSail = windAction.windResolver();
 
         return new ToolsToUse(angleRudder,numberOfSailor,numberOfSail,numberOfSailorMaxBeforeSlowDown);
 

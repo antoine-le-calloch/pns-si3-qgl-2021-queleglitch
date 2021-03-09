@@ -4,7 +4,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.building.CreateAction;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.NextRound;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
@@ -21,7 +21,7 @@ public class Processing {
 
     public void setDataNewRound(NextRound nextRound){
         informationGame.setShip(nextRound.getShip());
-        regattaResolver = new RegattaResolver(informationGame);
+        regattaResolver = new RegattaResolver(informationGame, nextRound);
 
         if(regattaResolver.getGeometry().isCheckpointReached()){
             ((RegattaGoal) informationGame.getGoal()).checkpointReached();
