@@ -16,7 +16,7 @@ class CockpitTest {
     String output = "";
     Cockpit cockpit;
 
-    /*@BeforeEach
+    @BeforeEach
     void setUp() throws IOException {
         BufferedReader initGameFile = new BufferedReader(new FileReader("initGameFile"));
         String line;
@@ -46,5 +46,5 @@ class CockpitTest {
 
         String nextRoundOut = cockpit.nextRound(nextRound);
         assertEquals(output,nextRoundOut);
-    }*/
+    }
 }
