@@ -13,7 +13,6 @@ class OarActionStrategieTest {
     @BeforeEach
     void setUp(){
         oarActionStrategie = new OarActionStrategie(new InformationGame(),2);
-
     }
 
     @Test
@@ -28,7 +27,7 @@ class OarActionStrategieTest {
     }
 
     @Test
-    void test(){
-
+    void angleNegativeToCorrectWithOars(){
+        assertEquals(-1,oarActionStrategie.actionResolver(-Math.PI));
     }
 }
