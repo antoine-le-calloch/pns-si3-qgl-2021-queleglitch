@@ -1,9 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
-import fr.unice.polytech.si3.qgl.queleglitch.json.action.Moving;
-import fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar;
-import fr.unice.polytech.si3.qgl.queleglitch.json.action.Turn;
+import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
@@ -72,10 +69,27 @@ public class CreateAction {
             }
         }
 
-        /*
-        if (compteur > toolsToUse.numberOfSail) {
-            //SAIL
-        }*/
+
+        if (toolsToUse.getNumberOfSail() == 1 && !ship.getVoile().openned && compteur < MAX_ROWER) {
+            //MOVING
+            x = ship.getVoile().getX() - sailors[compteur].x;
+            y = ship.getVoile().getY() - sailors[compteur].y;
+            sailors[compteur].x += x;
+            sailors[compteur].y += y;
+            actions.add(new Moving(sailors[compteur].getId(), x, y));
+            actions.add(new LIFT_SAIL(sailors[compteur++].getId()));
+            ship.getVoile().setOpenned(true);
+        }
+
+        else if (toolsToUse.getNumberOfSail() == 0 && ship.getVoile().openned && compteur < MAX_ROWER){
+            x = ship.getVoile().getX() - sailors[compteur].x;
+            y = ship.getVoile().getY() - sailors[compteur].y;
+            sailors[compteur].x += x;
+            sailors[compteur].y += y;
+            actions.add(new Moving(sailors[compteur].getId(), x, y));
+            actions.add(new LOWER_SAIL(sailors[compteur++].getId()));
+            ship.getVoile().setOpenned(false);
+        }
 
         while (MAX_ROWER - compteur >= 2 && i < rightRames.size()  && j < rightRames.size()  && toolsToUse.numberOfSailorMaxBeforeSlowDown > compteur) {
             //MOVING
