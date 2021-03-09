@@ -17,11 +17,11 @@ public class Processing {
 
     public Processing(InformationGame informationGame) {
         this.informationGame = informationGame;
-        this.regattaResolver= new RegattaResolver(informationGame);
     }
 
     public void setDataNewRound(NextRound nextRound){
         informationGame.setShip(nextRound.getShip());
+        regattaResolver = new RegattaResolver(informationGame);
 
         if(regattaResolver.getGeometry().isCheckpointReached()){
             ((RegattaGoal) informationGame.getGoal()).checkpointReached();
