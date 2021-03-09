@@ -40,7 +40,7 @@ public class RegattaResolver {
 
     }
 
-    public Geometry getPositionResolver() {
+    public Geometry getGeometry() {
         return geometry;
     }
 }

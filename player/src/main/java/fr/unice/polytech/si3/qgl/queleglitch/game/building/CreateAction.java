@@ -35,7 +35,7 @@ public class CreateAction {
         List<Rame> rightRames = ship.getRamesAtRight();
         List<Rame> leftRames = ship.getRamesAtLeft();
 
-        if (compteur < MAX_ROWER && toolsToUse.getAngleRudder() != 0) {
+        if (toolsToUse.getAngleRudder() != 0) {
             //MOVING
             x = ship.getGouvernail().getX() - sailors[compteur].x;
             y = ship.getGouvernail().getY() - sailors[compteur].y;

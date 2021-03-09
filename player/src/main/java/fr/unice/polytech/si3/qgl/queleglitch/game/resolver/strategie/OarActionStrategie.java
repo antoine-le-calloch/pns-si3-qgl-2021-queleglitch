@@ -33,6 +33,4 @@ public class OarActionStrategie extends Strategie {
     int turnWIthOar(double angleToCheckPoint){
         return (int) (Math.round(angleToCheckPoint/(Math.PI/NB_OARS)));
     }
-
-
 }

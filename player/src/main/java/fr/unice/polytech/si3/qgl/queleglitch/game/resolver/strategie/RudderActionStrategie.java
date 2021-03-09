@@ -19,10 +19,13 @@ public class RudderActionStrategie extends Strategie {
         }
 
         if (angleToCorrect > Math.PI / 4) {
-            angleToCorrect = Math.min(angleToCorrect,Math.PI/4);
+            angleToCorrect = angleToCorrect-Math.PI/2;
         }
 
-        return angleToCorrect * signe;
+        if(angleToCorrect < 3*Math.PI / 180 && angleToCorrect > -3*Math.PI / 180)
+            return 0;
+
+        return Math.min(Math.max(angleToCorrect*signe, -Math.PI/4), Math.PI/4);
     }
 
 }
