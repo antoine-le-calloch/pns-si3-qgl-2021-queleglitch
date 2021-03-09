@@ -6,6 +6,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Moving;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Deck;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,6 +38,7 @@ class createActionsTest {
         rameAtLeft.add(new Rame(1,0));
         rameAtLeft.add(new Rame(2,0));
         Mockito.when(mockShip.getRamesAtLeft()).thenReturn(rameAtLeft);//donne le nombre de rame à gauche
+        Mockito.when(mockShip.getDeck()).thenReturn(new Deck(3,5));//donne le nombre de rame à gauche
         Mockito.when(mockShip.getRamesAtRight()).thenReturn(rameAtRight);//donne le nombre de rame à gauche
     }
 

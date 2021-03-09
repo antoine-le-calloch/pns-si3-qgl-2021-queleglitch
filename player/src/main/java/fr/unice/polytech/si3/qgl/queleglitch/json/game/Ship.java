@@ -63,6 +63,10 @@ public class Ship {
         return entities;
     }
 
+    public Deck getDeck() {
+        return deck;
+    }
+
     public List<Rame> getRames(){
         List<Rame> rames=new ArrayList<>();
         for (Entities entitie:entities){

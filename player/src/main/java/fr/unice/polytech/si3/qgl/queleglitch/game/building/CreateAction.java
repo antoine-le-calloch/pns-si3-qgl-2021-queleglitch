@@ -27,75 +27,98 @@ public class CreateAction {
     public List<Action> buildingActions() {
         List<Action> actions = new ArrayList<>();
 
-        int compteur = 0;
         int x;
         int y;
-        int i = 0;
-        int j = 0;
+        int nbSailorForOar = MAX_ROWER;
+        int minx = 5;
+        int miny = 5;
+        Sailor[] orderSailor = new Sailor[MAX_ROWER];
+        int cptRightRames = 0;
+        int cptLeftRames = 0;
+        int cptSailor;
         List<Rame> rightRames = ship.getRamesAtRight();
         List<Rame> leftRames = ship.getRamesAtLeft();
+        List<Sailor> orderSailors = new ArrayList<>();
 
-        if (toolsToUse.getAngleRudder() != 0) {
-            //MOVING
-            x = ship.getGouvernail().getX() - sailors[compteur].x;
-            y = ship.getGouvernail().getY() - sailors[compteur].y;
-            sailors[compteur].x += x;
-            sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(), x, y));
-            actions.add(new Turn(sailors[compteur++].getId(), toolsToUse.getAngleRudder()));
+        for (int k = MAX_ROWER; k >= 0; k--) {
+            for (Sailor sailor  : sailors) {
+                if(sailor.getX() < minx)
+                    orderSailor[k] = sailor;
+            }
         }
+        sailors = orderSailor;
 
-        if (compteur < Math.abs(toolsToUse.getNumberOfSailor())) {
-            if (toolsToUse.moreSailorsOnTheRightThanOnTheLeft > 0) {
-                //MOVING
-                for (; i < toolsToUse.moreSailorsOnTheRightThanOnTheLeft; i++) {
-                    x = rightRames.get(i).x - sailors[compteur].x;
-                    y = rightRames.get(i).y - sailors[compteur].y;
-                    sailors[compteur].x += x;
-                    sailors[compteur].y += y;
-                    actions.add(new Moving(sailors[compteur].getId(), x, y));
-                    actions.add(new Oar(sailors[compteur++].getId()));
+        if (toolsToUse.getAngleRudder() != 0)
+            nbSailorForOar--;
+        /*if (toolsToUse.isWind())
+            nbSailorForOar--;*/
+
+        cptSailor = MAX_ROWER - nbSailorForOar;
+
+        while (nbSailorForOar > 0) {
+            if(toolsToUse.moreSailorsOnTheRightThanOnTheLeft >= 0) {
+                if (cptRightRames-cptLeftRames < toolsToUse.moreSailorsOnTheRightThanOnTheLeft) {
+                    x = rightRames.get(cptRightRames).x - sailors[nbSailorForOar].x;
+                    y = rightRames.get(cptRightRames).y - sailors[nbSailorForOar].y;
+                    if(Math.abs(x) + Math.abs(x) <= 5) {
+                        sailors[nbSailorForOar].x += x;
+                        sailors[nbSailorForOar].y += y;
+                        actions.add(new Moving(sailors[nbSailorForOar].getId(), x, y));
+                        actions.add(new Oar(sailors[nbSailorForOar].getId()));
+                    }
+                    cptRightRames++;
+                    nbSailorForOar--;
                 }
-
-
-            } else {
-                //MOVING
-                double max = toolsToUse.moreSailorsOnTheRightThanOnTheLeft * (-1);
-                for (; j < max; j++) {
-                    x = leftRames.get(j).x - sailors[compteur].x;
-                    y = leftRames.get(j).y - sailors[compteur].y;
-                    sailors[compteur].x += x;
-                    sailors[compteur].y += y;
-                    actions.add(new Moving(sailors[compteur].getId(), x, y));
-                    actions.add(new Oar(sailors[compteur++].getId()));
+                if (nbSailorForOar - toolsToUse.moreSailorsOnTheRightThanOnTheLeft > 0) {
+                    x = leftRames.get(cptLeftRames).x - sailors[nbSailorForOar].x;
+                    y = leftRames.get(cptLeftRames).y - sailors[nbSailorForOar].y;
+                    if(Math.abs(x) + Math.abs(x) <= 5) {
+                        sailors[nbSailorForOar].x += x;
+                        sailors[nbSailorForOar].y += y;
+                        actions.add(new Moving(sailors[nbSailorForOar].getId(), x, y));
+                        actions.add(new Oar(sailors[nbSailorForOar].getId()));
+                    }
+                    cptLeftRames++;
+                    nbSailorForOar--;
+                }
+            }
+            else if(toolsToUse.moreSailorsOnTheRightThanOnTheLeft < 0) {
+                if (cptLeftRames-cptRightRames < Math.abs(toolsToUse.moreSailorsOnTheRightThanOnTheLeft)) {
+                    x = leftRames.get(cptLeftRames).x - sailors[nbSailorForOar].x;
+                    y = leftRames.get(cptLeftRames).y - sailors[nbSailorForOar].y;
+                    if(Math.abs(x) + Math.abs(x) <= 5) {
+                        sailors[nbSailorForOar].x += x;
+                        sailors[nbSailorForOar].y += y;
+                        actions.add(new Moving(sailors[nbSailorForOar].getId(), x, y));
+                        actions.add(new Oar(sailors[nbSailorForOar].getId()));
+                    }
+                    cptLeftRames++;
+                    nbSailorForOar--;
+                }
+                if (nbSailorForOar - Math.abs(toolsToUse.moreSailorsOnTheRightThanOnTheLeft) > 0) {
+                    x = rightRames.get(cptRightRames).x - sailors[nbSailorForOar].x;
+                    y = rightRames.get(cptRightRames).y - sailors[nbSailorForOar].y;
+                    if(Math.abs(x) + Math.abs(x) <= 5) {
+                        sailors[nbSailorForOar].x += x;
+                        sailors[nbSailorForOar].y += y;
+                        actions.add(new Moving(sailors[nbSailorForOar].getId(), x, y));
+                        actions.add(new Oar(sailors[nbSailorForOar].getId()));
+                    }
+                    cptRightRames++;
+                    nbSailorForOar--;
                 }
             }
         }
 
-        /*
-        if (compteur > toolsToUse.numberOfSail) {
-            //SAIL
-        }*/
-
-        while (MAX_ROWER - compteur >= 2 && i < rightRames.size()  && j < rightRames.size()  && toolsToUse.numberOfSailorMaxBeforeSlowDown > compteur) {
+        if (toolsToUse.getAngleRudder() != 0) {
             //MOVING
-            x = rightRames.get(i).x - sailors[compteur].x;
-            y = rightRames.get(i).y - sailors[compteur].y;
-            sailors[compteur].x += x;
-            sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(), x, y));
-            actions.add(new Oar(sailors[compteur++].getId()));
-            //MOVING
-            x = leftRames.get(j).x - sailors[compteur].x;
-            y = leftRames.get(j).y - sailors[compteur].y;
-            sailors[compteur].x += x;
-            sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(), x, y));
-            actions.add(new Oar(sailors[compteur++].getId()));
-            i++;
-            j++;
+            x = ship.getGouvernail().getX() - sailors[cptSailor].x;
+            y = ship.getGouvernail().getY() - sailors[cptSailor].y;
+            sailors[cptSailor].x += x;
+            sailors[cptSailor].y += y;
+            actions.add(new Moving(sailors[cptSailor].getId(), x, y));
+            actions.add(new Turn(sailors[cptSailor].getId(), toolsToUse.getAngleRudder()));
         }
-
         return actions;
     }
 
