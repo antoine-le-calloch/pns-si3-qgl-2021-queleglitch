@@ -7,4 +7,16 @@ public class LIFT_SAIL extends Action {
     public LIFT_SAIL(int sailorId) {
         super(sailorId);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof LIFT_SAIL)) {
+            return false;
+        }
+        LIFT_SAIL l = (LIFT_SAIL) o;
+        return sailorId== l.sailorId;
+    }
 }
