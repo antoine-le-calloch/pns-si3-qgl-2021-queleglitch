@@ -29,7 +29,7 @@ class CockpitTest {
         cockpit.initGame(initGame.replaceAll("\\s", ""));
 
     }
-
+/*
     @Test
     void nextRoundTest() throws IOException {
         BufferedReader nextRoundFile = new BufferedReader(new FileReader("nextRoundFile"));
@@ -46,5 +46,5 @@ class CockpitTest {
 
         String nextRoundOut = cockpit.nextRound(nextRound);
         assertEquals(output,nextRoundOut);
-    }
+    }*/
 }

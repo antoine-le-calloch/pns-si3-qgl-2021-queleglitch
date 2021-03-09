@@ -29,6 +29,8 @@ public class Geometry {
 
     // renvoie le max de sailors qui rament pour que ce soit opti
     int slowDown(){
+        return informationGame.getShip().getRames().size();
+        /*
         int NB_OARS = informationGame.getShip().getRames().size();
         double radius = ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
 
@@ -45,8 +47,7 @@ public class Geometry {
         if ((actualCheckPointPosition.getNorme(currentBoatPosition) + radius) - 165 < 0)
             return (int) ((actualCheckPointPosition.getNorme(currentBoatPosition) + radius) / (165.0 / NB_OARS));
 
-        // si aucun des cas, osef , on prend le max
-        return NB_OARS;
+        // si aucun des cas, osef , on prend le max*/
 
     }
 
