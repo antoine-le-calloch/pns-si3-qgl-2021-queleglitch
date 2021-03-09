@@ -4,17 +4,23 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 
 public class OarActionStrategie extends Strategie {
 
-    private final int NB_OAR;
+
+    private final int NB_OARS;
 
     public OarActionStrategie(InformationGame informationGame) {
         super(informationGame);
-        this.NB_OAR = informationGame.getShip().getRames().size();
+        NB_OARS = informationGame.getShip().getRames().size();
     }
+
+    public OarActionStrategie(InformationGame informationGame,int nb_Oars){
+        super(informationGame);
+        this.NB_OARS=nb_Oars;
+    }
+
 
     @Override
     public double actionResolver(Double angleToCorrect) {
         int signe = 1;
-
         if(angleToCorrect < 0)
             angleToCorrect *= (signe = -1);
 
@@ -25,7 +31,7 @@ public class OarActionStrategie extends Strategie {
     }
 
     int turnWIthOar(double angleToCheckPoint){
-        return (int) (Math.round(angleToCheckPoint/(Math.PI/NB_OAR)));
+        return (int) (Math.round(angleToCheckPoint/(Math.PI/NB_OARS)));
     }
 
 

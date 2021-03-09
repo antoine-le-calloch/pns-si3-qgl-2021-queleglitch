@@ -12,8 +12,11 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertFalse;
+
 
 class ProcessingTest {
+    /*
     InformationGame informationGame;
     Processing processing;
     Ship ship;
@@ -34,7 +37,7 @@ class ProcessingTest {
 
     /**
      * <h1><u>isCheckpointReached</u></h1>
-     */
+
 
     @Test
     void checkpointisReached(){
@@ -78,7 +81,8 @@ class ProcessingTest {
     /**
      * <h1><u>setDataNewRound</u></h1>
      */
-/*
+
+    /*
     @Test
     void isInformationGameGetNewRoundInformation(){
         Position firstPosition = new Position(0,0,0);
