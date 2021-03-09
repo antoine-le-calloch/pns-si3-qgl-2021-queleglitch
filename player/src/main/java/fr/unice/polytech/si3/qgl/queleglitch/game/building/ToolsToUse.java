@@ -44,6 +44,11 @@ public class ToolsToUse {
     }
 
     @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
     public String toString(){
         return "Rudder angle : " + this.angleRudder + ", Nb sailors : " + this.numberOfSailor + ", Nb sail : " + this.numberOfSail;
     }
