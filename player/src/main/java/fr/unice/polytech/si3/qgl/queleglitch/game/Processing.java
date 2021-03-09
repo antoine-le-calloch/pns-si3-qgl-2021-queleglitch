@@ -33,6 +33,4 @@ public class Processing {
         CreateAction createAction = new CreateAction(informationGame.getShip(), informationGame.getSailors(), toolsToUse);
         return createAction.buildingActions();
     }
-
-
 }

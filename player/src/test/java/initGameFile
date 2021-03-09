@@ -4,8 +4,8 @@
     "checkpoints": [
       {
         "position": {
-          "x": 738.7448840381987,
-          "y": -382.4324324324324,
+          "x": 1000,
+          "y": 0,
           "orientation": 0
         },
         "shape": {
@@ -15,8 +15,8 @@
       },
       {
         "position": {
-          "x": 477.4897680763976,
-          "y": -54.054054054053665,
+          "x": 1000,
+          "y": 0,
           "orientation": 0
         },
         "shape": {
@@ -30,9 +30,9 @@
     "type": "ship",
     "life": 100,
     "position": {
-      "x": 1084.5839017735332,
-      "y": -54.05405405405337,
-      "orientation": 2.8448843811168246
+      "x": 0,
+      "y": 0,
+      "orientation": 0
     },
     "name": "Les copaings d'abord!",
     "deck": {
@@ -118,6 +118,12 @@
       "x": 1,
       "y": 1,
       "id": 4,
+      "name": "Jack Teach"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "id": 5,
       "name": "Jack Teach"
     }
   ]
