@@ -45,10 +45,10 @@ public class CreateAction {
             actions.add(new Turn(sailors[compteur++].getId(), toolsToUse.getAngleRudder()));
         }
 
-        if (compteur > Math.abs(toolsToUse.getNumberOfSailor())) {
-            if (toolsToUse.numberOfSailor > 0) {
+        if (compteur < Math.abs(toolsToUse.getNumberOfSailor())) {
+            if (toolsToUse.moreSailorsOnTheRightThanOnTheLeft > 0) {
                 //MOVING
-                for (; i < toolsToUse.numberOfSailor; i++) {
+                for (; i < toolsToUse.moreSailorsOnTheRightThanOnTheLeft; i++) {
                     x = rightRames.get(i).x - sailors[compteur].x;
                     y = rightRames.get(i).y - sailors[compteur].y;
                     sailors[compteur].x += x;
@@ -56,9 +56,11 @@ public class CreateAction {
                     actions.add(new Moving(sailors[compteur].getId(), x, y));
                     actions.add(new Oar(sailors[compteur++].getId()));
                 }
+
+
             } else {
                 //MOVING
-                double max = toolsToUse.numberOfSailor * (-1);
+                double max = toolsToUse.moreSailorsOnTheRightThanOnTheLeft * (-1);
                 for (; j < max; j++) {
                     x = leftRames.get(j).x - sailors[compteur].x;
                     y = leftRames.get(j).y - sailors[compteur].y;
@@ -75,7 +77,7 @@ public class CreateAction {
             //SAIL
         }*/
 
-        while (MAX_ROWER - compteur >= 2 && i < rightRames.size() - 1 && j < rightRames.size() - 1 && toolsToUse.numberOfSailorMaxBeforeSlowDown < compteur) {
+        while (MAX_ROWER - compteur >= 2 && i < rightRames.size()  && j < rightRames.size()  && toolsToUse.numberOfSailorMaxBeforeSlowDown > compteur) {
             //MOVING
             x = rightRames.get(i).x - sailors[compteur].x;
             y = rightRames.get(i).y - sailors[compteur].y;
