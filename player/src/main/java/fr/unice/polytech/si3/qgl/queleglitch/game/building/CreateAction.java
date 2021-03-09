@@ -36,10 +36,12 @@ public class CreateAction {
             //MOVING
             x = ship.getGouvernail().getX() - sailors[compteur].x;
             y = ship.getGouvernail().getY() - sailors[compteur].y;
-            sailors[compteur].x += x;
-            sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(), x, y));
-            actions.add(new Turn(sailors[compteur++].getId(), toolsToUse.getAngleRudder()));
+            if(Math.abs(x) + Math.abs(x) <= 5) {
+                sailors[compteur].x += x;
+                sailors[compteur].y += y;
+                actions.add(new Moving(sailors[compteur].getId(), x, y));
+                actions.add(new Turn(sailors[compteur++].getId(), toolsToUse.getAngleRudder()));
+            }
         }
 
         if (compteur < Math.abs(toolsToUse.getNumberOfSailor())) {
@@ -48,10 +50,12 @@ public class CreateAction {
                 for (; i < toolsToUse.moreSailorsOnTheRightThanOnTheLeft; i++) {
                     x = rightRames.get(i).x - sailors[compteur].x;
                     y = rightRames.get(i).y - sailors[compteur].y;
-                    sailors[compteur].x += x;
-                    sailors[compteur].y += y;
-                    actions.add(new Moving(sailors[compteur].getId(), x, y));
-                    actions.add(new Oar(sailors[compteur++].getId()));
+                    if(Math.abs(x) + Math.abs(x) <= 5) {
+                        sailors[compteur].x += x;
+                        sailors[compteur].y += y;
+                        actions.add(new Moving(sailors[compteur].getId(), x, y));
+                        actions.add(new Oar(sailors[compteur++].getId()));
+                    }
                 }
 
 
@@ -61,10 +65,12 @@ public class CreateAction {
                 for (; j < max; j++) {
                     x = leftRames.get(j).x - sailors[compteur].x;
                     y = leftRames.get(j).y - sailors[compteur].y;
-                    sailors[compteur].x += x;
-                    sailors[compteur].y += y;
-                    actions.add(new Moving(sailors[compteur].getId(), x, y));
-                    actions.add(new Oar(sailors[compteur++].getId()));
+                    if(Math.abs(x) + Math.abs(x) <= 5) {
+                        sailors[compteur].x += x;
+                        sailors[compteur].y += y;
+                        actions.add(new Moving(sailors[compteur].getId(), x, y));
+                        actions.add(new Oar(sailors[compteur++].getId()));
+                    }
                 }
             }
         }
@@ -74,48 +80,51 @@ public class CreateAction {
             //MOVING
             x = ship.getVoile().getX() - sailors[compteur].x;
             y = ship.getVoile().getY() - sailors[compteur].y;
-            sailors[compteur].x += x;
-            sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(), x, y));
-            actions.add(new LIFT_SAIL(sailors[compteur++].getId()));
-            ship.getVoile().setOpenned(true);
+            if(Math.abs(x) + Math.abs(x) <= 5) {
+                sailors[compteur].x += x;
+                sailors[compteur].y += y;
+                actions.add(new Moving(sailors[compteur].getId(), x, y));
+                actions.add(new LIFT_SAIL(sailors[compteur++].getId()));
+                ship.getVoile().setOpenned(true);
+            }
         }
 
         else if (toolsToUse.getNumberOfSail() == 0 && ship.getVoile().openned && compteur < MAX_ROWER){
             x = ship.getVoile().getX() - sailors[compteur].x;
             y = ship.getVoile().getY() - sailors[compteur].y;
-            sailors[compteur].x += x;
-            sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(), x, y));
-            actions.add(new LOWER_SAIL(sailors[compteur++].getId()));
-            ship.getVoile().setOpenned(false);
+            if(Math.abs(x) + Math.abs(x) <= 5) {
+                sailors[compteur].x += x;
+                sailors[compteur].y += y;
+                actions.add(new Moving(sailors[compteur].getId(), x, y));
+                actions.add(new LOWER_SAIL(sailors[compteur++].getId()));
+                ship.getVoile().setOpenned(false);
+            }
         }
 
         while (MAX_ROWER - compteur >= 2 && i < rightRames.size()  && j < rightRames.size()  && toolsToUse.numberOfSailorMaxBeforeSlowDown > compteur) {
             //MOVING
             x = rightRames.get(i).x - sailors[compteur].x;
             y = rightRames.get(i).y - sailors[compteur].y;
-            sailors[compteur].x += x;
-            sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(), x, y));
-            actions.add(new Oar(sailors[compteur++].getId()));
+            if(Math.abs(x) + Math.abs(x) <= 5) {
+                sailors[compteur].x += x;
+                sailors[compteur].y += y;
+                actions.add(new Moving(sailors[compteur].getId(), x, y));
+                actions.add(new Oar(sailors[compteur++].getId()));
+            }
             //MOVING
             x = leftRames.get(j).x - sailors[compteur].x;
             y = leftRames.get(j).y - sailors[compteur].y;
-            sailors[compteur].x += x;
-            sailors[compteur].y += y;
-            actions.add(new Moving(sailors[compteur].getId(), x, y));
-            actions.add(new Oar(sailors[compteur++].getId()));
+            if(Math.abs(x) + Math.abs(x) <= 5) {
+                sailors[compteur].x += x;
+                sailors[compteur].y += y;
+                actions.add(new Moving(sailors[compteur].getId(), x, y));
+                actions.add(new Oar(sailors[compteur++].getId()));
+            }
             i++;
             j++;
         }
-
         return actions;
     }
-
-
-
-
 }
 
 
