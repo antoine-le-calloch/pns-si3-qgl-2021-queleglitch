@@ -4,13 +4,13 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 
-public class WindActionStrategie extends Strategie{
+public class WindActionStrategie {
 
     InformationGame informationGame;
     Wind wind;
 
     public WindActionStrategie(InformationGame informationGame, NextRound nextRound) {
-        super(informationGame);
+        this.informationGame = informationGame;
         wind = nextRound.getWind();
     }
 
@@ -21,11 +21,6 @@ public class WindActionStrategie extends Strategie{
         return 0;
     }
 
-
-    @Override
-    public double actionResolver(Double angleToCorrect) {
-        return 0;
-    }
 
 
 }

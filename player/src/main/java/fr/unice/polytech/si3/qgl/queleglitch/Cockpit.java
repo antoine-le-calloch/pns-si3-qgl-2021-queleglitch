@@ -76,7 +76,7 @@ public class Cockpit implements ICockpit {
 		for (int i = 0; i < informationGame.getSailors().length; i++) {
 			logs.add(informationGame.getSailors()[i].toString() + "---");
 		}
-		logs.add("Turn angle : " + actionsThisRound.split("TURN")[1]);
+		logs.add("Turn angle : " + actionsThisRound.split("TURN")[0]);
 		return logs;
 	}
 }
