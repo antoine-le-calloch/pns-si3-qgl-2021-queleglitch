@@ -1,31 +1,20 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
-/**
- * Classe representant les marins
- * @author Huot-Marchand Antoine
- * @author Naud Eric
- * @author Madern Loic
- * @author Le Calloch Antoine
- * @version 2021.01.26
- */
-
-public class Sailor {
+public class MoveSailor {
     public int x;
     public int y;
     public int id;
 
-    public Sailor(int x, int y, int id){
+    public MoveSailor(int x, int y, int id){
         this.id = id;
         this.x = x;
         this.y = y;
     }
 
-    public Sailor(int x, int y){
+    public MoveSailor(int x, int y){
         this.x = x;
         this.y = y;
     }
-
-    public Sailor(){}
 
     /**
      * @return <b>The id of the sailor</b>
@@ -47,6 +36,6 @@ public class Sailor {
      */
     @Override
     public String toString(){
-        return "Marin " + id + " | position x : " + x + " | position y : " + y;
+        return "Marin " + id + " | move in x of : " + x + " | move in y of : " + y;
     }
 }
