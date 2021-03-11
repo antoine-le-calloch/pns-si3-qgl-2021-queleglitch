@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch.json.entitie;
+package fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

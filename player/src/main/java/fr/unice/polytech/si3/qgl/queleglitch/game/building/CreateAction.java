@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Rame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 

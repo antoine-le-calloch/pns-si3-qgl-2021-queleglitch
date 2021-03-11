@@ -1,9 +1,9 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Entities;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Gouvernail;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Voile;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Gouvernail;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Rame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Voile;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 import java.util.ArrayList;
