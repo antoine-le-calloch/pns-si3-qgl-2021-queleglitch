@@ -2,24 +2,24 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 
-public class OarActionStrategie extends Strategie {
+public class OarActionStrategie {
 
 
     private final int NB_OARS;
+    InformationGame informationGame;
 
     public OarActionStrategie(InformationGame informationGame) {
-        super(informationGame);
+        this.informationGame=informationGame;
         NB_OARS = informationGame.getShip().getRames().size();
     }
 
     public OarActionStrategie(InformationGame informationGame,int nb_Oars){
-        super(informationGame);
+        this.informationGame=informationGame;
         this.NB_OARS=nb_Oars;
     }
 
 
-    @Override
-    public double actionResolver(Double angleToCorrect) {
+    public double oarActionResolver(Double angleToCorrect) {
         int signe = 1;
         if(angleToCorrect < 0)
             angleToCorrect *= (signe = -1);

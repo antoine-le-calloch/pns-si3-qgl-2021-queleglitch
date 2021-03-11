@@ -15,7 +15,7 @@ public class WindActionStrategie {
     }
 
     public double windResolver() {
-        if ( Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) < (Math.PI))
+        if ( Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) < (Math.PI/2))
             return 1;
 
         return 0;

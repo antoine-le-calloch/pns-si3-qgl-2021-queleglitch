@@ -36,8 +36,8 @@ public class RegattaResolver {
 
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition());
         int numberOfSailorMaxBeforeSlowDown = geometry.slowDown();
-        double numberOfSailor = oarAction.actionResolver(angleToCorrect);
-        double angleRudder = rudderAction.actionResolver(angleToCorrect);
+        double numberOfSailor = oarAction.oarActionResolver(angleToCorrect);
+        double angleRudder = rudderAction.rudderActionResolver(angleToCorrect);
         double numberOfSail = windAction.windResolver();
 
         return new ToolsToUse(angleRudder,numberOfSailor,numberOfSail,numberOfSailorMaxBeforeSlowDown);

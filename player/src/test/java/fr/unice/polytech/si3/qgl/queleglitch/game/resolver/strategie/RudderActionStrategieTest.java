@@ -18,56 +18,56 @@ class RudderActionStrategieTest {
 
     @Test
     void angleToCorrectPositiveLessThanLimitRudder(){
-        assertEquals(Math.PI/8,rudderActionStrategie.actionResolver(Math.PI/8));
+        assertEquals(Math.PI/8,rudderActionStrategie.rudderActionResolver(Math.PI/8));
     }
 
     @Test
     void angleToCorrectNegativeLessThanLimitRudder(){
-        assertEquals(-Math.PI/8,rudderActionStrategie.actionResolver(-Math.PI/8));
+        assertEquals(-Math.PI/8,rudderActionStrategie.rudderActionResolver(-Math.PI/8));
     }
 
     @Test
     void angleToCorrectPositiveMoreThanLimitRudder(){
-        assertEquals(0,rudderActionStrategie.actionResolver(Math.PI/2));
+        assertEquals(0,rudderActionStrategie.rudderActionResolver(Math.PI/2));
     }
 
     @Test
     void angleToCorrectNegativeMoreThanLimitRudder(){
-        assertEquals(0,rudderActionStrategie.actionResolver(-Math.PI/2));
+        assertEquals(0,rudderActionStrategie.rudderActionResolver(-Math.PI/2));
     }
 
     @Test
     void angleToCorrectPositiveMoreThanLimitRudderLessThanLimitOar(){
-        assertEquals(-Math.PI/8,rudderActionStrategie.actionResolver(3*Math.PI/8));
+        assertEquals(-Math.PI/8,rudderActionStrategie.rudderActionResolver(3*Math.PI/8));
     }
 
     @Test
     void angleToCorrectNegativeMoreThanLimitRudderLessThanLimitOar(){
-        assertEquals(Math.PI/8,rudderActionStrategie.actionResolver(-3*Math.PI/8));
+        assertEquals(Math.PI/8,rudderActionStrategie.rudderActionResolver(-3*Math.PI/8));
     }
 
     @Test
     void angleToCorrectPositiveMoreThanLimitRudderMoreThanLimitOar(){
-        assertEquals(Math.PI/8,rudderActionStrategie.actionResolver(5*Math.PI/8));
+        assertEquals(Math.PI/8,rudderActionStrategie.rudderActionResolver(5*Math.PI/8));
     }
 
     @Test
     void angleToCorrectNegativeMoreThanLimitRudderMoreThanLimitOar(){
-        assertEquals(-Math.PI/8,rudderActionStrategie.actionResolver(-5*Math.PI/8));
+        assertEquals(-Math.PI/8,rudderActionStrategie.rudderActionResolver(-5*Math.PI/8));
     }
 
     @Test
     void angleToCorrectPositiveMoreThanLimitRudderPlusThanLimitOar(){
-        assertEquals(Math.PI/4,rudderActionStrategie.actionResolver(7*Math.PI/8));
+        assertEquals(Math.PI/4,rudderActionStrategie.rudderActionResolver(7*Math.PI/8));
     }
 
     @Test
     void angleToCorrectNegativeMoreThanLimitRudderPlusThanLimitOar(){
-        assertEquals(-Math.PI/4,rudderActionStrategie.actionResolver(-7*Math.PI/8));
+        assertEquals(-Math.PI/4,rudderActionStrategie.rudderActionResolver(-7*Math.PI/8));
     }
 
     @Test
     void angleToCorrectInTheBack(){
-        assertEquals(Math.PI/4,rudderActionStrategie.actionResolver(Math.PI));
+        assertEquals(Math.PI/4,rudderActionStrategie.rudderActionResolver(Math.PI));
     }
 }

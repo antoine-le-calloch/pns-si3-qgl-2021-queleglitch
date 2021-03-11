@@ -7,6 +7,10 @@ public class Wind {
 
     Wind(){}
 
+    public Wind(Double orientation){
+        this.orientation=orientation;
+    }
+
     public void setWind(Wind wind){
         this.orientation = wind.orientation;
         this.strength = wind.strength;

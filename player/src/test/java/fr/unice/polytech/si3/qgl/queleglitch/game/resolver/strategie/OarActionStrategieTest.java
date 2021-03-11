@@ -17,17 +17,17 @@ class OarActionStrategieTest {
 
     @Test
     void noAngleToCorrectWithOars(){
-        assertEquals(0,oarActionStrategie.actionResolver(Math.PI/8));
+        assertEquals(0,oarActionStrategie.oarActionResolver(Math.PI/8));
     }
 
 
     @Test
     void anglePositiveToCorrectWithOars(){
-        assertEquals(1,oarActionStrategie.actionResolver(Math.PI));
+        assertEquals(1,oarActionStrategie.oarActionResolver(Math.PI));
     }
 
     @Test
     void angleNegativeToCorrectWithOars(){
-        assertEquals(-1,oarActionStrategie.actionResolver(-Math.PI));
+        assertEquals(-1,oarActionStrategie.oarActionResolver(-Math.PI));
     }
 }
