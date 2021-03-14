@@ -1,9 +1,10 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Entities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Gouvernail;
+import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Voile;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.MoveSailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.PositionSailor;
@@ -15,47 +16,111 @@ import java.util.List;
 
 public class MoveActionStrategie {
 
-    ToolsToUse toolsToUse;
-    Sailor []sailors;
-    Gouvernail gouvernail;
-    Voile voile;
     List<Entities> entitiesToFar;
+    List<MoveSailor> movingActionsList;
+    ToolsToUse toolsToUse;
+    Gouvernail gouvernail;
+    Sailor []sailors;
+    Voile []voiles;
+    Rame []leftRames;
+    Rame []rightRames;
 
     public MoveActionStrategie(){
     }
 
     public MoveActionStrategie(ToolsToUse toolsToUse, InformationGame informationGame){
+        movingActionsList = new ArrayList<>();
+        entitiesToFar = new ArrayList<>();
+
         this.toolsToUse = toolsToUse;
         this.sailors = informationGame.getSailors();
         this.gouvernail = informationGame.getShip().getGouvernail();
-        //this.voile = informationGame.getShip().get;
-        List<Entities> entitiesToFar = new ArrayList<>();
+        this.voiles = informationGame.getShip().getVoiles().toArray(Voile[]::new);
+        this.leftRames = informationGame.getShip().getRamesAtLeft().toArray(Rame[]::new);
+        this.rightRames = informationGame.getShip().getRamesAtRight().toArray(Rame[]::new);
     }
 
-    public List<MoveSailor> movingStrat(int nbLeftOar, int nbRightOar, double rudderAngle, int nbSailToUse){
-        int nbSailorToUse = nbLeftOar+nbRightOar+nbSailToUse+(rudderAngle != 0 ? 1 : 0);
-        List<MoveSailor> moveSailors = new ArrayList<>();
+    public List<MoveSailor> movingStrat(int nbLeftRames, int nbRightRames, double rudderAngle){
         List<Sailor> sailorsList = Arrays.asList(sailors.clone());
-        Sailor sailorToMove;
 
+        movingToGouvernail(rudderAngle, sailorsList);
+
+        movingToVoiles(sailorsList);
+
+        movingToRames(nbLeftRames, nbRightRames, sailorsList);
+
+        for (Entities entitie : entitiesToFar) {
+            movingActionsList.add(buldMovingAction(sailorsList.get(0),entitie));
+            sailorsList.remove(0);
+        }
+
+        return movingActionsList;
+    }
+
+    private void movingToGouvernail(double rudderAngle, List<Sailor> sailorsList){
+        Sailor sailorToMove;
         if(rudderAngle != 0){
             if((sailorToMove = nearestSailorBehind5(new PositionSailor(gouvernail.getX(),gouvernail.getY()),sailorsList)) != null)
-                moveSailors.add(moveSailorBuld(sailorToMove,gouvernail));
+                movingActionsList.add(buldMovingAction(sailorToMove,gouvernail));
             else
                 entitiesToFar.add(gouvernail);
         }
-
-        if(nbSailToUse != 0){
-            if((sailorToMove = nearestSailorBehind5(new PositionSailor(gouvernail.getX(),gouvernail.getY()),sailorsList)) != null)
-                moveSailors.add(moveSailorBuld(sailorToMove,gouvernail));
-            else
-                entitiesToFar.add(gouvernail);
-        }
-        return null;
     }
 
-    private MoveSailor moveSailorBuld(Sailor sailor, Entities destination){
-        return new MoveSailor(sailor.getX()-destination.getX(),sailor.getY()-destination.getY(),sailor.getId());
+    private void movingToVoiles(List<Sailor> sailorsList){
+        Sailor sailorToMove;
+        for (Voile voile : voiles) {
+            if((sailorToMove = nearestSailorBehind5(new PositionSailor(voile.getX(),voile.getY()),sailorsList)) != null){
+                movingActionsList.add(buldMovingAction(sailorToMove,gouvernail));
+                break;
+            }
+            else
+                entitiesToFar.add(voile);
+        }
+    }
+
+    private void movingToRames(int nbLeftRames, int nbRightRames, List<Sailor> sailorsList){
+        Sailor sailorToMove;
+        for (int i = 0; i < nbLeftRames; i++) {
+            for (int j = i; j < leftRames.length; j++) {
+                if((sailorToMove = nearestSailorBehind5(new PositionSailor(leftRames[j].getX(),leftRames[j].getY()),sailorsList)) != null) {
+                    movingActionsList.add(buldMovingAction(sailorToMove, leftRames[j]));
+                    break;
+                }
+                if(leftRames.length - j <= nbLeftRames - i) {
+                    entitiesToFar.add(leftRames[j]);
+                    break;
+                }
+            }
+        }
+
+        for (int i = 0; i < nbRightRames; i++) {
+            for (int j = i; j < rightRames.length; j++) {
+                if((sailorToMove = nearestSailorBehind5(new PositionSailor(rightRames[j].getX(),rightRames[j].getY()),sailorsList)) != null) {
+                    movingActionsList.add(buldMovingAction(sailorToMove, rightRames[j]));
+                    break;
+                }
+                if(rightRames.length - j <= nbRightRames - i) {
+                    entitiesToFar.add(rightRames[j]);
+                    break;
+                }
+            }
+        }
+    }
+
+    private MoveSailor buldMovingAction(Sailor sailor, Entities destination){
+        int moveOnX = Math.min(Math.max(sailor.getX()-destination.getX(), -5), 5);
+        int moveOnY = Math.min(Math.max(sailor.getY()-destination.getY(), -5), 5);
+
+        if(Math.abs(moveOnX) + Math.abs(moveOnY) > 5) {
+            if(moveOnY >= 0)
+                moveOnY = (moveOnY > 1) ? moveOnY - 1 : 0;
+            else
+                moveOnY = moveOnY + 1;
+            moveOnX = (moveOnX < 0) ? -5 + Math.abs(moveOnY) : 5 - Math.abs(moveOnY);
+        }
+
+        return new MoveSailor(moveOnX,moveOnY,sailor.getId());
     }
 
     private Sailor nearestSailorBehind5(PositionSailor placeToMove, List<Sailor> sailors){

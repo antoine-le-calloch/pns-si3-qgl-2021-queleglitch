@@ -16,6 +16,11 @@ class MoveActionStrategieTest {
         moveActionStrategie = new MoveActionStrategie();
     }
 
+
+    ////////////////
+    // test nbBoxBetweenSailorAndPlace()
+    ////////////////
+
     @Test
     void normBetween_0_0And_100_0(){
         assertEquals(100,moveActionStrategie.nbBoxBetweenSailorAndPlace(new Sailor(0,0),new PositionSailor(100,0)));
@@ -107,4 +112,7 @@ class MoveActionStrategieTest {
     void normBetween_0_0And_0_5(){
         assertEquals(5,moveActionStrategie.nbBoxBetweenSailorAndPlace(new Sailor(0,0),new PositionSailor(0,5)));
     }
+
+    ///////////////////
+    //
 }

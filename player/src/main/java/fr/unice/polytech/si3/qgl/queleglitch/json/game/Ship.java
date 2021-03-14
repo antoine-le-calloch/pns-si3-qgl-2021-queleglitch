@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Entities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Gouvernail;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Voile;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 import java.util.ArrayList;
@@ -74,7 +75,17 @@ public class Ship {
                 rames.add((Rame) entitie);
             }
         }
-        return new ArrayList<>(rames);
+        return rames;
+    }
+
+    public List<Voile> getVoiles(){
+        List<Voile> voiles=new ArrayList<>();
+        for (Entities entitie : entities){
+            if(entitie instanceof Voile) {
+                voiles.add((Voile) entitie);
+            }
+        }
+        return voiles;
     }
 
     public Gouvernail getGouvernail(){
