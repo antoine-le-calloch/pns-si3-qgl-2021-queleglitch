@@ -1,13 +1,10 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Entities;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Gouvernail;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Voile;
+import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.MoveSailor;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.PositionSailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,60 +12,112 @@ import java.util.List;
 
 public class MoveActionStrategie {
 
+    Box centralPlace;
     List<MoveSailor> movingActionsList;
     List<Entities> entitiesToFar;
+    List<Sailor> sailorsToMove;
     Gouvernail gouvernail;
-    Sailor []sailors;
     Voile []voiles;
     Rame []leftRames;
     Rame []rightRames;
+    Ship ship;
 
     public MoveActionStrategie(){
+    }
+
+    public MoveActionStrategie(List<Sailor> sailorsToMove, Gouvernail gouvernail, Box centralPlace, Voile[] voiles, Rame[] leftRames, Rame[] rightRames){
+        movingActionsList = new ArrayList<>();
+        entitiesToFar = new ArrayList<>();
+
+        this.sailorsToMove = sailorsToMove;
+        this.gouvernail = gouvernail;
+        this.centralPlace = centralPlace;
+        this.voiles = voiles;
+        this.leftRames = leftRames;
+        this.rightRames = rightRames;
     }
 
     public MoveActionStrategie(InformationGame informationGame){
         movingActionsList = new ArrayList<>();
         entitiesToFar = new ArrayList<>();
 
-        this.sailors = informationGame.getSailors();
+        this.ship = informationGame.getShip();
+        this.sailorsToMove = Arrays.asList(informationGame.getSailors().clone());
         this.gouvernail = informationGame.getShip().getGouvernail();
+        this.centralPlace = informationGame.getShip().getCentralPosition();
         this.voiles = informationGame.getShip().getVoiles().toArray(Voile[]::new);
         this.leftRames = informationGame.getShip().getRamesAtLeft().toArray(Rame[]::new);
         this.rightRames = informationGame.getShip().getRamesAtRight().toArray(Rame[]::new);
     }
 
     public List<MoveSailor> movingStrat(int nbLeftRamesToUse, int nbRightRamesToUse, double rudderAngle){
-        List<Sailor> sailorsList = Arrays.asList(sailors.clone());
+        List<MoveSailor> movingActionsList = this.movingActionsList;
+        List<Entities> entitiesToFar = this.entitiesToFar;
+        List<Sailor> sailorsToMove = this.sailorsToMove;
 
-        movingToGouvernail(rudderAngle, sailorsList);
 
-        movingToVoiles(sailorsList);
+        movingToGouvernail(rudderAngle,movingActionsList,sailorsToMove,entitiesToFar);
 
-        movingToRames(nbLeftRamesToUse, leftRames, nbRightRamesToUse, rightRames, sailorsList);
+        movingToVoiles(movingActionsList, sailorsToMove, entitiesToFar);
 
-        for (Entities entitie : entitiesToFar) {
-            movingActionsList.add(buildMovingAction(sailorsList.get(0),entitie));
-            sailorsList.remove(0);
-        }
+        movingToRames(nbLeftRamesToUse, leftRames, nbRightRamesToUse, rightRames, movingActionsList, sailorsToMove, entitiesToFar);
+
+        movingToEntitiesToFar(movingActionsList, sailorsToMove, entitiesToFar);
+
+        movingToCenter(movingActionsList, sailorsToMove);
 
         return movingActionsList;
     }
 
-    public void movingToGouvernail(double rudderAngle, List<Sailor> sailorsList){
-        Sailor sailorToMove;
-        if(rudderAngle != 0){
-            if((sailorToMove = nearestSailorBehind5(new PositionSailor(gouvernail.getX(),gouvernail.getY()),sailorsList)) != null)
-                movingActionsList.add(buildMovingAction(sailorToMove,gouvernail));
-            else
-                entitiesToFar.add(gouvernail);
+    public void movingToCenter(List<MoveSailor> movingActionsList, List<Sailor> sailorsToMove){
+        for(Sailor sailor : sailorsToMove){
+            movingActionsList.add(buildMovingAction(sailor,ship.getCentralPosition()));
         }
     }
 
-    public void movingToVoiles(List<Sailor> sailorsList){
+    public void movingToEntitiesToFar(List<MoveSailor> movingActionsList, List<Sailor> sailorsToMove, List<Entities> entitiesToFar){
+        for (Entities entitie : entitiesToFar) {
+            movingActionsList.add(buildMovingAction(sailorsToMove.get(0),entitie));
+            sailorsToMove.remove(0);
+        }
+    }
+    public void movingToRames(int nbLeftRamesToUse, Rame []leftRames, int nbRightRamesToUse, Rame []rightRames, List<MoveSailor> movingActionsList, List<Sailor> sailorsToMove, List<Entities> entitiesToFar){
+        Sailor sailorToMove = null;
+        for (int i = 0; i < nbLeftRamesToUse; i++) {
+            for (int j = leftRames.length - i; j >= nbLeftRamesToUse - i; j--) {
+                if((sailorToMove = nearestSailorBehind5(leftRames[j], sailorsToMove)) != null) {
+                    movingActionsList.add(buildMovingAction(sailorToMove, leftRames[j]));
+                    sailorsToMove.remove(sailorToMove);
+                    break;
+                }
+            }
+            if(sailorToMove == null) {
+                entitiesToFar.add(leftRames[(i == 0) ? nbLeftRamesToUse : leftRames.length-i]);
+                break;
+            }
+        }
+
+        for (int i = 0; i < nbRightRamesToUse; i++) {
+            for (int j = leftRames.length - i; j >= nbRightRamesToUse - i; j--) {
+                if((sailorToMove = nearestSailorBehind5(rightRames[j], sailorsToMove)) != null) {
+                    movingActionsList.add(buildMovingAction(sailorToMove, rightRames[j]));
+                    sailorsToMove.remove(sailorToMove);
+                    break;
+                }
+            }
+            if(sailorToMove == null) {
+                entitiesToFar.add(rightRames[(i == 0) ? nbLeftRamesToUse : leftRames.length-i]);
+                break;
+            }
+        }
+    }
+
+    public void movingToVoiles(List<MoveSailor> movingActionsList, List<Sailor> sailorsToMove, List<Entities> entitiesToFar){
         Sailor sailorToMove;
         for (Voile voile : voiles) {
-            if((sailorToMove = nearestSailorBehind5(new PositionSailor(voile.getX(),voile.getY()),sailorsList)) != null){
+            if((sailorToMove = nearestSailorBehind5(voile, sailorsToMove)) != null){
                 movingActionsList.add(buildMovingAction(sailorToMove,gouvernail));
+                sailorsToMove.remove(sailorToMove);
                 break;
             }
             else
@@ -76,32 +125,15 @@ public class MoveActionStrategie {
         }
     }
 
-    public void movingToRames(int nbLeftRamesToUse, Rame []leftRames, int nbRightRamesToUse, Rame []rightRames, List<Sailor> sailorsList){
+    public void movingToGouvernail(double rudderAngle, List<MoveSailor> movingActionsList, List<Sailor> sailorsToMove, List<Entities> entitiesToFar){
         Sailor sailorToMove;
-        for (int i = 0; i < nbLeftRamesToUse; i++) {
-            for (int j = i; j < leftRames.length; j++) {
-                if((sailorToMove = nearestSailorBehind5(new PositionSailor(leftRames[j].getX(),leftRames[j].getY()),sailorsList)) != null) {
-                    movingActionsList.add(buildMovingAction(sailorToMove, leftRames[j]));
-                    break;
-                }
-                if(leftRames.length - j <= nbLeftRamesToUse - i) {
-                    entitiesToFar.add(leftRames[j]);
-                    break;
-                }
+        if(rudderAngle != 0){
+            if((sailorToMove = nearestSailorBehind5(gouvernail, sailorsToMove)) != null) {
+                movingActionsList.add(buildMovingAction(sailorToMove, gouvernail));
+                sailorsToMove.remove(sailorToMove);
             }
-        }
-
-        for (int i = 0; i < nbRightRamesToUse; i++) {
-            for (int j = i; j < rightRames.length; j++) {
-                if((sailorToMove = nearestSailorBehind5(new PositionSailor(rightRames[j].getX(),rightRames[j].getY()),sailorsList)) != null) {
-                    movingActionsList.add(buildMovingAction(sailorToMove, rightRames[j]));
-                    break;
-                }
-                if(rightRames.length - j <= nbRightRamesToUse - i) {
-                    entitiesToFar.add(rightRames[j]);
-                    break;
-                }
-            }
+            else
+                entitiesToFar.add(gouvernail);
         }
     }
 
@@ -118,7 +150,7 @@ public class MoveActionStrategie {
         return new MoveSailor(moveOnX,moveOnY,sailor.getId());
     }
 
-    public Sailor nearestSailorBehind5(PositionSailor placeToMove, List<Sailor> sailors){
+    public Sailor nearestSailorBehind5(Entities placeToMove, List<Sailor> sailors){
         int minBox = 6;
         Sailor sailorToReturn = null;
         for (Sailor sailor : sailors) {
@@ -130,7 +162,7 @@ public class MoveActionStrategie {
         return sailorToReturn;
     }
 
-    public int nbBoxBetweenSailorAndPlace(Sailor sailor, PositionSailor position2){
-        return Math.abs(sailor.getX()-position2.getX()) + Math.abs(sailor.getY()-position2.getY());
+    public int nbBoxBetweenSailorAndPlace(Sailor sailor, Entities place){
+        return Math.abs(sailor.getX()-place.getX()) + Math.abs(sailor.getY()-place.getY());
     }
 }
