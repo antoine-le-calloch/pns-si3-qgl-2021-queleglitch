@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Entities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Gouvernail;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
@@ -16,9 +15,8 @@ import java.util.List;
 
 public class MoveActionStrategie {
 
-    List<Entities> entitiesToFar;
     List<MoveSailor> movingActionsList;
-    ToolsToUse toolsToUse;
+    List<Entities> entitiesToFar;
     Gouvernail gouvernail;
     Sailor []sailors;
     Voile []voiles;
@@ -28,11 +26,10 @@ public class MoveActionStrategie {
     public MoveActionStrategie(){
     }
 
-    public MoveActionStrategie(ToolsToUse toolsToUse, InformationGame informationGame){
+    public MoveActionStrategie(InformationGame informationGame){
         movingActionsList = new ArrayList<>();
         entitiesToFar = new ArrayList<>();
 
-        this.toolsToUse = toolsToUse;
         this.sailors = informationGame.getSailors();
         this.gouvernail = informationGame.getShip().getGouvernail();
         this.voiles = informationGame.getShip().getVoiles().toArray(Voile[]::new);
@@ -40,38 +37,38 @@ public class MoveActionStrategie {
         this.rightRames = informationGame.getShip().getRamesAtRight().toArray(Rame[]::new);
     }
 
-    public List<MoveSailor> movingStrat(int nbLeftRames, int nbRightRames, double rudderAngle){
+    public List<MoveSailor> movingStrat(int nbLeftRamesToUse, int nbRightRamesToUse, double rudderAngle){
         List<Sailor> sailorsList = Arrays.asList(sailors.clone());
 
         movingToGouvernail(rudderAngle, sailorsList);
 
         movingToVoiles(sailorsList);
 
-        movingToRames(nbLeftRames, nbRightRames, sailorsList);
+        movingToRames(nbLeftRamesToUse, leftRames, nbRightRamesToUse, rightRames, sailorsList);
 
         for (Entities entitie : entitiesToFar) {
-            movingActionsList.add(buldMovingAction(sailorsList.get(0),entitie));
+            movingActionsList.add(buildMovingAction(sailorsList.get(0),entitie));
             sailorsList.remove(0);
         }
 
         return movingActionsList;
     }
 
-    private void movingToGouvernail(double rudderAngle, List<Sailor> sailorsList){
+    public void movingToGouvernail(double rudderAngle, List<Sailor> sailorsList){
         Sailor sailorToMove;
         if(rudderAngle != 0){
             if((sailorToMove = nearestSailorBehind5(new PositionSailor(gouvernail.getX(),gouvernail.getY()),sailorsList)) != null)
-                movingActionsList.add(buldMovingAction(sailorToMove,gouvernail));
+                movingActionsList.add(buildMovingAction(sailorToMove,gouvernail));
             else
                 entitiesToFar.add(gouvernail);
         }
     }
 
-    private void movingToVoiles(List<Sailor> sailorsList){
+    public void movingToVoiles(List<Sailor> sailorsList){
         Sailor sailorToMove;
         for (Voile voile : voiles) {
             if((sailorToMove = nearestSailorBehind5(new PositionSailor(voile.getX(),voile.getY()),sailorsList)) != null){
-                movingActionsList.add(buldMovingAction(sailorToMove,gouvernail));
+                movingActionsList.add(buildMovingAction(sailorToMove,gouvernail));
                 break;
             }
             else
@@ -79,28 +76,28 @@ public class MoveActionStrategie {
         }
     }
 
-    private void movingToRames(int nbLeftRames, int nbRightRames, List<Sailor> sailorsList){
+    public void movingToRames(int nbLeftRamesToUse, Rame []leftRames, int nbRightRamesToUse, Rame []rightRames, List<Sailor> sailorsList){
         Sailor sailorToMove;
-        for (int i = 0; i < nbLeftRames; i++) {
+        for (int i = 0; i < nbLeftRamesToUse; i++) {
             for (int j = i; j < leftRames.length; j++) {
                 if((sailorToMove = nearestSailorBehind5(new PositionSailor(leftRames[j].getX(),leftRames[j].getY()),sailorsList)) != null) {
-                    movingActionsList.add(buldMovingAction(sailorToMove, leftRames[j]));
+                    movingActionsList.add(buildMovingAction(sailorToMove, leftRames[j]));
                     break;
                 }
-                if(leftRames.length - j <= nbLeftRames - i) {
+                if(leftRames.length - j <= nbLeftRamesToUse - i) {
                     entitiesToFar.add(leftRames[j]);
                     break;
                 }
             }
         }
 
-        for (int i = 0; i < nbRightRames; i++) {
+        for (int i = 0; i < nbRightRamesToUse; i++) {
             for (int j = i; j < rightRames.length; j++) {
                 if((sailorToMove = nearestSailorBehind5(new PositionSailor(rightRames[j].getX(),rightRames[j].getY()),sailorsList)) != null) {
-                    movingActionsList.add(buldMovingAction(sailorToMove, rightRames[j]));
+                    movingActionsList.add(buildMovingAction(sailorToMove, rightRames[j]));
                     break;
                 }
-                if(rightRames.length - j <= nbRightRames - i) {
+                if(rightRames.length - j <= nbRightRamesToUse - i) {
                     entitiesToFar.add(rightRames[j]);
                     break;
                 }
@@ -108,22 +105,20 @@ public class MoveActionStrategie {
         }
     }
 
-    private MoveSailor buldMovingAction(Sailor sailor, Entities destination){
-        int moveOnX = Math.min(Math.max(sailor.getX()-destination.getX(), -5), 5);
-        int moveOnY = Math.min(Math.max(sailor.getY()-destination.getY(), -5), 5);
+    public MoveSailor buildMovingAction(Sailor sailor, Entities destination){
+        int moveOnX = Math.min(Math.max(destination.getX()-sailor.getX(), -5), 5);
+        int moveOnY = Math.min(Math.max(destination.getY()-sailor.getY(), -5), 5);
 
         if(Math.abs(moveOnX) + Math.abs(moveOnY) > 5) {
-            if(moveOnY >= 0)
-                moveOnY = (moveOnY > 1) ? moveOnY - 1 : 0;
-            else
-                moveOnY = moveOnY + 1;
+            if(moveOnY == 5 || moveOnY == -5)
+                moveOnY = (moveOnY > 0) ? moveOnY - 1 : moveOnY + 1;
             moveOnX = (moveOnX < 0) ? -5 + Math.abs(moveOnY) : 5 - Math.abs(moveOnY);
         }
 
         return new MoveSailor(moveOnX,moveOnY,sailor.getId());
     }
 
-    private Sailor nearestSailorBehind5(PositionSailor placeToMove, List<Sailor> sailors){
+    public Sailor nearestSailorBehind5(PositionSailor placeToMove, List<Sailor> sailors){
         int minBox = 6;
         Sailor sailorToReturn = null;
         for (Sailor sailor : sailors) {
