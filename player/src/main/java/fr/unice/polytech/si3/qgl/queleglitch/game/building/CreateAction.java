@@ -117,7 +117,7 @@ public class CreateAction {
             sailors[cptSailor].x += x;
             sailors[cptSailor].y += y;
             actions.add(new Moving(sailors[cptSailor].getId(), x, y));
-            actions.add(new Turn(sailors[cptSailor].getId(), toolsToUse.getAngleRudder()));
+            actions.add(new Turn(toolsToUse.getAngleRudder(),sailors[cptSailor].getId()));
         }
         return actions;
     }

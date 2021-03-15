@@ -20,11 +20,6 @@ public class Sailor {
         this.y = y;
     }
 
-    public Sailor(int x, int y){
-        this.x = x;
-        this.y = y;
-    }
-
     public Sailor(){}
 
     /**
@@ -48,5 +43,17 @@ public class Sailor {
     @Override
     public String toString(){
         return "Marin " + id + " | position x : " + x + " | position y : " + y;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Sailor))
+            return false;
+        Sailor sailor = (Sailor) obj;
+        return this.x == sailor.x &&
+                this.y == sailor.y &&
+                this.id == sailor.id;
     }
 }
