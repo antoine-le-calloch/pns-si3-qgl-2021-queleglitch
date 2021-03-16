@@ -30,7 +30,7 @@ public class CreateActionsStrategie {
 
         this.ship = ship;
         this.sailors = sailors;
-        this.sailorsAvailable = new ArrayList<>(Arrays.asList(sailors));// maybe clone(), eric le bouf
+        this.sailorsAvailable = new ArrayList<>(Arrays.asList(sailors));// maybe clone(), Eric le bouf
         this.gouvernail = ship.getGouvernail();
         this.voiles = ship.getVoiles().toArray(Voile[]::new);
         this.leftRames = ship.getRamesAtLeft().toArray(Rame[]::new);

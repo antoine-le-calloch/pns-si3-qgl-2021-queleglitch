@@ -25,7 +25,7 @@ public class CreateAction {
     }
 
     public List<Action> buildingActions() {
-        List<Action> actions = new ArrayList<>();
+        /*List<Action> actions = new ArrayList<>();
 
         int x;
         int y;
@@ -50,8 +50,8 @@ public class CreateAction {
 
         if (toolsToUse.getAngleRudder() != 0)
             nbSailorForOar--;
-        /*if (toolsToUse.isWind())
-            nbSailorForOar--;*/
+        *//*if (toolsToUse.isWind())
+            nbSailorForOar--;*//*
 
         cptSailor = MAX_ROWER - nbSailorForOar;
 
@@ -119,7 +119,8 @@ public class CreateAction {
             actions.add(new Moving(sailors[cptSailor].getId(), x, y));
             actions.add(new Turn(toolsToUse.getAngleRudder(),sailors[cptSailor].getId()));
         }
-        return actions;
+        return actions;*/
+        return null;
     }
 }
 

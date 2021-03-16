@@ -14,6 +14,6 @@ public class Deck {
     }
 
     public Box getCentralPosition(){
-        return new Box((int) Math.round(length/2.0),(int) Math.round(width/2.0));
+        return new Box((int) Math.round(length/2.0)-1,(int) Math.round(width/2.0)-1);
     }
 }
