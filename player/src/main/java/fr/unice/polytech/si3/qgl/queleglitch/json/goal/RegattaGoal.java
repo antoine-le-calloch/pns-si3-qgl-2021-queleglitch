@@ -48,23 +48,24 @@ public class RegattaGoal extends Goal {
         int tabSize = checkpoints.length;
         double angleBetween2Points;
         double distanceToTheNewPoints;
-        optiCheckpoints = new Checkpoint[tabSize];
-        optiCheckpoints[tabSize-1] = checkpoints[tabSize-1];
+        optiCheckpoints = checkpoints.clone();
 
-        for (int i = tabSize-2; i >= 0; i--) {
+        for (int i = tabSize-1; i > 0; i--) {
             angleBetween2Points = optiCheckpoints[i].getAngleToAPlace(optiCheckpoints[i-1].position);
             distanceToTheNewPoints = optiCheckpoints[i].getDistanceToAPlace(optiCheckpoints[i-1].position) - ((Circle) optiCheckpoints[i-1].shape).radius;
-            optiCheckpoints[i].position.x = Math.cos(angleBetween2Points)*distanceToTheNewPoints;
-            optiCheckpoints[i].position.y = Math.sin(angleBetween2Points)*distanceToTheNewPoints;
+            optiCheckpoints[i-1].position = movePosition1ByPosition2(optiCheckpoints[i].position,findHowManyToMovePosition(angleBetween2Points,distanceToTheNewPoints));
         }
     }
 
-    public Position findNewPosition(double angleBetween2Points, double distanceToTheNewPoints){
+    public Position findHowManyToMovePosition(double angleBetween2Points, double distanceToTheNewPoints){
         double x = Math.cos(angleBetween2Points)*distanceToTheNewPoints;
         double y = Math.sin(angleBetween2Points)*distanceToTheNewPoints;
         return new Position(x,y,0);
     }
 
+    public Position movePosition1ByPosition2(Position toMove, Position by){
+        return new Position(toMove.x + by.x, toMove.y + by.y,0);
+    }
 
     /**
      * <p>Override of toString method, allow to print a different string to give the Checkpoints' informations</p>
