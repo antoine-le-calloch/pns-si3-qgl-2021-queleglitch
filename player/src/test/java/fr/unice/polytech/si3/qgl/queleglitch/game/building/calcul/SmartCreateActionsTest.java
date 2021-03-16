@@ -1,9 +1,8 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building.calcul;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.calcul.SmartCreateActions;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.*;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
