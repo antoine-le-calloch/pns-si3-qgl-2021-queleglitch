@@ -25,12 +25,12 @@ public class RegattaGoal extends Goal {
     }
 
     public Checkpoint getActualCheckpoint(){
-        return checkpoints[numActualCheckpoint];
+        return optiCheckpoints[numActualCheckpoint];
     }
 
     public Checkpoint getNextCheckpoint(){
         if (checkpoints.length > numActualCheckpoint + 1)
-            return checkpoints[numActualCheckpoint+1];
+            return optiCheckpoints[numActualCheckpoint+1];
         return null;
     }
 

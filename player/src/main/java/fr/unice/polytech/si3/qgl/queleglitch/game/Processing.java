@@ -17,6 +17,7 @@ public class Processing {
 
     public Processing(InformationGame informationGame) {
         this.informationGame = informationGame;
+        ((RegattaGoal) informationGame.getGoal()).calculateOptiCheckpoint();
     }
 
     public void setDataNewRound(NextRound nextRound){

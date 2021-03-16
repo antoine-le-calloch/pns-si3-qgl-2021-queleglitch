@@ -312,7 +312,7 @@ class GeometryTest {
     /**
      * <h1><u>isCheckpointReached</u></h1>
      **/
-
+/*
     @Nested
     class IsCheckpointReached {
 
@@ -345,7 +345,7 @@ class GeometryTest {
             checkpoint.setPosition(positionCheckpoint);
 
             assertTrue(geometry.isCheckpointReached());
-        }
+        }*/
 
         /*
     public Geometry(InformationGame informationGame) {
@@ -359,7 +359,7 @@ class GeometryTest {
         return actualCheckPointPosition.getNorme(informationGame.getShip().getPosition()) <
                 ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
     }*/
-
+/*
         @Test
         void checkpointisntReachedFar() {
             Position positionCheckpoint = new Position(100, 0, 0);
@@ -385,9 +385,5 @@ class GeometryTest {
 
             assertFalse(geometry.isCheckpointReached());
         }
-    }
-
-
-
-
+    }*/
 }
