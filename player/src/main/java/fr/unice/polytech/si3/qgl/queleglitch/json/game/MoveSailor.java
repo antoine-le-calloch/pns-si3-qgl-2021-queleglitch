@@ -1,8 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Entities;
 
 public class MoveSailor {
     public int x;
