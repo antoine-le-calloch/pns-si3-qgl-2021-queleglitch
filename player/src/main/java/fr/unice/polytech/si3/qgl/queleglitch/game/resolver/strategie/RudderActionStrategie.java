@@ -27,5 +27,4 @@ public class RudderActionStrategie {
 
         return Math.min(Math.max(angleToCorrect*signe, -Math.PI/4), Math.PI/4);
     }
-
 }
