@@ -38,7 +38,7 @@ public class RegattaResolver {
         int numberOfSailorMaxBeforeSlowDown = geometry.slowDown();
         double numberOfSailor = oarAction.actionResolver(angleToCorrect);
         double angleRudder = rudderAction.actionResolver(angleToCorrect);
-        double numberOfSail = windAction.windResolver();
+        int numberOfSail = windAction.windResolver();
 
         return new ToolsToUse(angleRudder,numberOfSailor,numberOfSail,numberOfSailorMaxBeforeSlowDown);
 
