@@ -28,6 +28,10 @@ public class RegattaGoal extends Goal {
         return optiCheckpoints[numActualCheckpoint];
     }
 
+    public Checkpoint getActualReelCheckpoint(){
+        return checkpoints[numActualCheckpoint];
+    }
+
     public Checkpoint getNextCheckpoint(){
         if (checkpoints.length > numActualCheckpoint + 1)
             return optiCheckpoints[numActualCheckpoint+1];
@@ -52,7 +56,7 @@ public class RegattaGoal extends Goal {
 
         for (int i = tabSize-1; i > 0; i--) {
             angleBetween2Points = optiCheckpoints[i].getAngleToAPlace(optiCheckpoints[i-1].position);
-            distanceToTheNewPoints = optiCheckpoints[i].getDistanceToAPlace(optiCheckpoints[i-1].position) - ((Circle) optiCheckpoints[i-1].shape).radius;
+            distanceToTheNewPoints = optiCheckpoints[i].getDistanceToAPlace(optiCheckpoints[i-1].position) - ((Circle) optiCheckpoints[i-1].shape).radius + 25;
             optiCheckpoints[i-1].position = movePosition1ByPosition2(optiCheckpoints[i].position,findHowManyToMovePosition(angleBetween2Points,distanceToTheNewPoints));
         }
     }

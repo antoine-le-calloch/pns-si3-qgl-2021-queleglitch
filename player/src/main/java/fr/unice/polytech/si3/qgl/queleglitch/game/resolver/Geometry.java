@@ -24,7 +24,7 @@ public class Geometry {
 
 
     public boolean isCheckpointReached(){
-        return ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition().getNorme(informationGame.getShip().getPosition()) < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
+        return ((RegattaGoal) informationGame.getGoal()).getActualReelCheckpoint().getPosition().getNorme(informationGame.getShip().getPosition()) < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
     }
 
     // renvoie le max de sailors qui rament pour que ce soit opti

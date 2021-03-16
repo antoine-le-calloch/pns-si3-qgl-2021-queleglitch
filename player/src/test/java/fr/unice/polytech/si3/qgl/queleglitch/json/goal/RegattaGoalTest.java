@@ -62,7 +62,7 @@ class RegattaGoalTest {
     void calculateOptiCheckpoint_100_100_To_100_Minus5(){
         regattaGoal = new RegattaGoal(new Checkpoint[]{new Checkpoint(new Position(100,-5,0), new Circle(5)), new Checkpoint(new Position(100,100,0), new Circle(5))});
         regattaGoal.calculateOptiCheckpoint();
-        assertEquals(new Position(100,0,0) ,regattaGoal.optiCheckpoints[0].position);
+        assertEquals(new Position(100.00000000000001,-25,0) ,regattaGoal.optiCheckpoints[0].position);
         assertEquals(new Position(100,100,0) ,regattaGoal.optiCheckpoints[1].position);
     }
 }
