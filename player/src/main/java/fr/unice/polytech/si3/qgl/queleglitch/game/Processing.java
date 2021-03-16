@@ -1,12 +1,11 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.CreateAction;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.CreateActions;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
 import java.util.List;
@@ -31,7 +30,7 @@ public class Processing {
 
     public List<Action> actionForTheRound(){
         ToolsToUse toolsToUse = regattaResolver.resolveRegatta();
-        CreateAction createAction = new CreateAction(informationGame.getShip(), informationGame.getSailors(), toolsToUse);
-        return createAction.buildingActions();
+        CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), toolsToUse);
+        return createActions.buildingActions();
     }
 }
