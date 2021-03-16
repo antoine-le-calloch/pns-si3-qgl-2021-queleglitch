@@ -53,4 +53,21 @@ public class Position {
     public double getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return " | Position | x : " + x + " | y : " + y + " | orientation : " + orientation;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Position))
+            return false;
+        Position position = (Position) obj;
+        return this.x == position.x &&
+                this.y == position.y &&
+                this.orientation == position.orientation;
+    }
 }

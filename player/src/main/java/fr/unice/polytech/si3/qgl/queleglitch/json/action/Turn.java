@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.action;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.MoveSailor;
 
 public class Turn extends Action{
     public double rotation;

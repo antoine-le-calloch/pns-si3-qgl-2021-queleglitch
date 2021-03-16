@@ -1,5 +1,8 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
+
 /**
  * Classe permettant de définir le mode Regatta
  * @author Huot-Marchand Antoine
@@ -12,6 +15,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 public class RegattaGoal extends Goal {
 
     public Checkpoint[] checkpoints;
+    public Checkpoint[] optiCheckpoints;
     public int numActualCheckpoint = 0;
 
     public RegattaGoal(){}
@@ -38,6 +42,27 @@ public class RegattaGoal extends Goal {
 
     public boolean isLastCheckpoint(){
         return numActualCheckpoint + 1 >= checkpoints.length;
+    }
+
+    public void calculateOptiCheckpoint(){
+        int tabSize = checkpoints.length;
+        double angleBetween2Points;
+        double distanceToTheNewPoints;
+        optiCheckpoints = new Checkpoint[tabSize];
+        optiCheckpoints[tabSize-1] = checkpoints[tabSize-1];
+
+        for (int i = tabSize-2; i >= 0; i--) {
+            angleBetween2Points = optiCheckpoints[i].getAngleToAPlace(optiCheckpoints[i-1].position);
+            distanceToTheNewPoints = optiCheckpoints[i].getDistanceToAPlace(optiCheckpoints[i-1].position) - ((Circle) optiCheckpoints[i-1].shape).radius;
+            optiCheckpoints[i].position.x = Math.cos(angleBetween2Points)*distanceToTheNewPoints;
+            optiCheckpoints[i].position.y = Math.sin(angleBetween2Points)*distanceToTheNewPoints;
+        }
+    }
+
+    public Position findNewPosition(double angleBetween2Points, double distanceToTheNewPoints){
+        double x = Math.cos(angleBetween2Points)*distanceToTheNewPoints;
+        double y = Math.sin(angleBetween2Points)*distanceToTheNewPoints;
+        return new Position(x,y,0);
     }
 
 

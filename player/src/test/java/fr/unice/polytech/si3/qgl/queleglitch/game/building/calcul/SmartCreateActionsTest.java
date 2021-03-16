@@ -16,7 +16,6 @@ class SmartCreateActionsTest {
     Ship ship;
     Sailor[] sailors;
     List<Sailor> sailorsList;
-    List<MoveSailor> movingActionsList;
     SmartCreateActions smartCreateActions;
 
     @BeforeEach
@@ -28,7 +27,6 @@ class SmartCreateActionsTest {
 
         sailors = new Sailor[]{new Sailor(0, 0, 0), new Sailor(1, 1, 1), new Sailor(-1, -1, 2)};
         sailorsList = Arrays.asList(sailors.clone());
-        movingActionsList = new ArrayList<>();
         smartCreateActions = new SmartCreateActions(sailors, ship);
     }
 

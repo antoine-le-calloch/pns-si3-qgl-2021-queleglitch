@@ -1,9 +1,7 @@
-package fr.unice.polytech.si3.qgl.queleglitch;
+/*package fr.unice.polytech.si3.qgl.queleglitch;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -30,7 +28,7 @@ class CockpitTest {
         cockpit.initGame(initGame.replaceAll("\\s", ""));
 
     }
-/*
+
     @Test
     void nextRoundTest() throws IOException {
         BufferedReader nextRoundFile = new BufferedReader(new FileReader("nextRoundFile"));
@@ -55,5 +53,5 @@ class CockpitTest {
 
         String round2Out = cockpit.nextRound(round2);
         System.out.println(round2Out);
-    }*/
-}
+    }
+}*/
