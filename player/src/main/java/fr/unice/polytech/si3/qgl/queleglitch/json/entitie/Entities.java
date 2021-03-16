@@ -16,6 +16,13 @@ public abstract class Entities {
     public int x;
     public int y;
 
+    public Entities(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    public Entities(){}
+
     public int getX(){
         return x;
     }

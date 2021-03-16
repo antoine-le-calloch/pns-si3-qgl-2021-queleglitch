@@ -4,6 +4,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Entities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Gouvernail;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Voile;
+import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 import java.util.ArrayList;
@@ -64,6 +65,10 @@ public class Ship {
         return entities;
     }
 
+    public Deck getDeck() {
+        return deck;
+    }
+
     public List<Rame> getRames(){
         List<Rame> rames=new ArrayList<>();
         for (Entities entitie:entities){
@@ -71,7 +76,17 @@ public class Ship {
                 rames.add((Rame) entitie);
             }
         }
-        return new ArrayList<>(rames);
+        return rames;
+    }
+
+    public List<Voile> getVoiles(){
+        List<Voile> voiles=new ArrayList<>();
+        for (Entities entitie : entities){
+            if(entitie instanceof Voile) {
+                voiles.add((Voile) entitie);
+            }
+        }
+        return voiles;
     }
 
     public Gouvernail getGouvernail(){
@@ -83,13 +98,8 @@ public class Ship {
         return null;
     }
 
-    public Voile getVoile(){
-        for (Entities entitie:entities){
-            if(entitie instanceof Voile) {
-                return (Voile) entitie;
-            }
-        }
-        return null;
+    public Box getCentralPosition(){
+        return deck.getCentralPosition();
     }
 
     public List<Rame> getRamesAtRight(){
