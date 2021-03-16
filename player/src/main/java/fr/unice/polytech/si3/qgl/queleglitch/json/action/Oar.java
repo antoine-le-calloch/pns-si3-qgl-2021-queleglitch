@@ -1,7 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.action;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
-
 import java.util.Objects;
 
 public class Oar extends Action {

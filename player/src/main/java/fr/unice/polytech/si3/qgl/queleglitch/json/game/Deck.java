@@ -1,6 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Box;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Box;
 
 public class Deck {
     public int width;

@@ -1,9 +1,9 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Voile;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Voile;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;

@@ -1,9 +1,12 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building.calcul;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Gouvernail;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Rame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Voile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +17,7 @@ public class SmartCreateActions {
     private final Ship ship;
     private final Sailor []sailors;
     private final Rame []leftRames;
-    private final Rame []rightRames;
+    private final Rame[]rightRames;
     private final Gouvernail gouvernail;
     private final List<Voile> voiles;
     private final List<Sailor> sailorsAvailable;
