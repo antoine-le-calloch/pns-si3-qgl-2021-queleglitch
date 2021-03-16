@@ -1,12 +1,11 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.CreateActionsStrategie;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.calcul.SmartCreateActions;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.calcul.SmartFindNbOar;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
-import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.Rame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreateActions {
@@ -23,19 +22,10 @@ public class CreateActions {
     }
 
     public List<Action> buildingActions() {
-        List<Action> actions = new ArrayList<>();
-        CreateActionsStrategie createActionsStrategie = new CreateActionsStrategie(sailors, ship);
-        int nbSailorForOar = MAX_ROWER;
-        int nbLeftRamesToUse = 0;
-        int nbRightRamesToUse = 0;
+        SmartFindNbOar smartFindNbOar = new SmartFindNbOar(MAX_ROWER,toolsToUse.moreSailorsOnTheRightThanOnTheLeft);
+        SmartCreateActions smartCreateActions = new SmartCreateActions(sailors,ship);
+        int []nbLeftAndRightOar = smartFindNbOar.getNbLeftAndRightOar(toolsToUse.angleRudder != 0, toolsToUse.numberOfSail != 0);
 
-        if (toolsToUse.getAngleRudder() != 0)
-            nbSailorForOar--;
-        if (toolsToUse.getNumberOfSail() != 0)
-            nbSailorForOar--;
-
-        ///A faire
-
-        return createActionsStrategie.createActions(nbLeftRamesToUse,nbRightRamesToUse,toolsToUse.angleRudder, toolsToUse.numberOfSail);
+        return smartCreateActions.createActions(nbLeftAndRightOar[0],nbLeftAndRightOar[1],toolsToUse.angleRudder,toolsToUse.numberOfSail);
     }
 }

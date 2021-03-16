@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
+package fr.unice.polytech.si3.qgl.queleglitch.game.building.calcul;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.entitie.*;
@@ -9,19 +9,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateActionsStrategie {
+public class SmartCreateActions {
 
     private final Ship ship;
     private final Sailor []sailors;
-    private final Voile []voiles;
     private final Rame []leftRames;
     private final Rame []rightRames;
     private final Gouvernail gouvernail;
+    private final List<Voile> voiles;
     private final List<Sailor> sailorsAvailable;
     public final List<Entities> entitiesTooFar;
     public final List<Action> actionsList;
 
-    public CreateActionsStrategie(Sailor[] sailors, Ship ship){
+    public SmartCreateActions(Sailor[] sailors, Ship ship){
         actionsList = new ArrayList<>();
         entitiesTooFar = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class CreateActionsStrategie {
         this.sailors = sailors;
         this.sailorsAvailable = new ArrayList<>(Arrays.asList(sailors));// maybe clone(), Eric le bouf
         this.gouvernail = ship.getGouvernail();
-        this.voiles = ship.getVoiles().toArray(Voile[]::new);
+        this.voiles = ship.getVoiles();
         this.leftRames = ship.getRamesAtLeft().toArray(Rame[]::new);
         this.rightRames = ship.getRamesAtRight().toArray(Rame[]::new);
     }
@@ -101,10 +101,11 @@ public class CreateActionsStrategie {
                 actionsList.add(buildMovingAction(sailorToMove,voile));
                 actionsList.add((useVoile > 0) ? new LIFT_SAIL(sailorToMove.getId()) : new LOWER_SAIL(sailorToMove.getId()));
                 sailorsAvailable.remove(sailorToMove);
-                break;
+                voile.changeVoile();
             }
-            else
+            else {
                 entitiesTooFar.add(voile);
+            }
         }
     }
 
