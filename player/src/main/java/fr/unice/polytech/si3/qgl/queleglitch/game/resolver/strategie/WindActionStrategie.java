@@ -11,12 +11,15 @@ public class WindActionStrategie {
 
     public WindActionStrategie(InformationGame informationGame, NextRound nextRound) {
         this.informationGame = informationGame;
-        wind = nextRound.getWind();
+        this.wind = nextRound.getWind();
     }
 
-    public double windResolver() {
-        if ( Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) < (Math.PI))
+    public int windResolver() {
+        if (Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) < (Math.PI/2) && !informationGame.getShip().getVoiles().get(0).opened)
             return 1;
+
+        if(Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) > (Math.PI/2) && informationGame.getShip().getVoiles().get(0).opened)
+            return -1;
 
         return 0;
     }

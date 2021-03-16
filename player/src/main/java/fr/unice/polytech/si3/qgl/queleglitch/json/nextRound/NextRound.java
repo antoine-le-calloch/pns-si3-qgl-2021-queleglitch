@@ -34,4 +34,8 @@ public class NextRound {
     public  NextRound(Ship ship){
         this.ship = ship;
     }
+
+    public  NextRound(Wind wind){
+        this.wind = wind;
+    }
 }

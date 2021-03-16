@@ -6,13 +6,17 @@ public class Moving extends Action {
 
     public String type = "MOVING";
 
-    public Moving(int sailorId,int xdistance,int ydistance) {
+    public Moving(int xdistance, int ydistance, int sailorId) {
 
         super(sailorId);
         this.xdistance=xdistance;
         this.ydistance=ydistance;
     }
 
+    @Override
+    public String toString(){
+        return "Marin " + sailorId + " | move in x of : " + xdistance + " | move in y of : " + ydistance;
+    }
 
     @Override
     public boolean equals(Object o) {

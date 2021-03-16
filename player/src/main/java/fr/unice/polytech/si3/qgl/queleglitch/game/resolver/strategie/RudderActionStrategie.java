@@ -2,17 +2,17 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 
-public class RudderActionStrategie extends Strategie {
+public class RudderActionStrategie {
 
     double rudderAngle;
+    InformationGame informationGame;
 
     public RudderActionStrategie(InformationGame informationGame) {
-        super(informationGame);
+        this.informationGame =informationGame;
         this.rudderAngle = 0;
     }
 
-    @Override
-    public double actionResolver(Double angleToCorrect) {
+    public double rudderActionResolver(Double angleToCorrect) {
         int signe = 1;
         if (angleToCorrect < 0) {
             angleToCorrect *= (signe = -1);
@@ -27,5 +27,4 @@ public class RudderActionStrategie extends Strategie {
 
         return Math.min(Math.max(angleToCorrect*signe, -Math.PI/4), Math.PI/4);
     }
-
 }

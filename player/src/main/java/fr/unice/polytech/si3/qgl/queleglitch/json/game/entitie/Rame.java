@@ -4,23 +4,11 @@ import java.util.Objects;
 
 public class Rame extends Entities{
 
-    public int x;
-    public int y;
-
     public Rame(int x, int y){
-        this.x = x;
-        this.y = y;
+        super(x,y);
     }
 
     public Rame(){}
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 
     @Override
     public String toString() {
@@ -35,8 +23,6 @@ public class Rame extends Entities{
         return Objects.hash(x, y);
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -49,5 +35,4 @@ public class Rame extends Entities{
         return Double.compare(x, r.x) == 0
                 && Double.compare(y, r.y) == 0;
     }
-
 }
