@@ -22,7 +22,7 @@ public class CreateActions {
     }
 
     public List<Action> buildingActions() {
-        SmartFindNbOar smartFindNbOar = new SmartFindNbOar(MAX_ROWER,toolsToUse.moreSailorsOnTheRightThanOnTheLeft);
+        SmartFindNbOar smartFindNbOar = new SmartFindNbOar(MAX_ROWER,ship.getRames().size(),toolsToUse.moreSailorsOnTheRightThanOnTheLeft);
         SmartCreateActions smartCreateActions = new SmartCreateActions(sailors,ship);
         int []nbLeftAndRightOar = smartFindNbOar.getNbLeftAndRightOar(toolsToUse.angleRudder != 0, toolsToUse.numberOfSail != 0);
 

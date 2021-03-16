@@ -9,9 +9,7 @@ public class Voile extends Entities {
         this.opened = opened;
     }
 
-    public Voile(){
-
-    }
+    public Voile(){}
 
     public void changeVoile() {
         this.opened = !opened;
