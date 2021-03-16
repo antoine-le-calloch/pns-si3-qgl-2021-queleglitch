@@ -3,10 +3,10 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 public class ToolsToUse {
     public double angleRudder;
     public double moreSailorsOnTheRightThanOnTheLeft;
-    public double numberOfSail;
+    public int numberOfSail;
     public int numberOfSailorMaxBeforeSlowDown;
 
-    public ToolsToUse(double angleRudder, double moreSailorsOnTheRightThanOnTheLeft, double numberOfSail, int numberOfSailorMaxBeforeSlowDown){
+    public ToolsToUse(double angleRudder, double moreSailorsOnTheRightThanOnTheLeft, int numberOfSail, int numberOfSailorMaxBeforeSlowDown){
         this.angleRudder = angleRudder;
         this.moreSailorsOnTheRightThanOnTheLeft = moreSailorsOnTheRightThanOnTheLeft;
         this.numberOfSail = numberOfSail;
@@ -17,7 +17,7 @@ public class ToolsToUse {
         return angleRudder;
     }
 
-    public double getNumberOfSail() {
+    public int getNumberOfSail() {
         return numberOfSail;
     }
 
