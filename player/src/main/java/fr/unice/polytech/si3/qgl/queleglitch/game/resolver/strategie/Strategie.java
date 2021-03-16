@@ -12,7 +12,4 @@ public abstract class Strategie {
     }
 
     public abstract double actionResolver(Double angleToCorrect);
-
-
-
 }

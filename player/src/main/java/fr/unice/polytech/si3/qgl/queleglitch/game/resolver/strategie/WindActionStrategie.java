@@ -15,10 +15,10 @@ public class WindActionStrategie {
     }
 
     public int windResolver() {
-        if (Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) < (Math.PI) && !informationGame.getShip().getVoiles().get(0).openned)
+        if (Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) < (Math.PI) && !informationGame.getShip().getVoiles().get(0).opened)
             return 1;
 
-        if(Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) > (Math.PI) && informationGame.getShip().getVoiles().get(0).openned)
+        if(Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) > (Math.PI) && informationGame.getShip().getVoiles().get(0).opened)
             return -1;
 
         return 0;
