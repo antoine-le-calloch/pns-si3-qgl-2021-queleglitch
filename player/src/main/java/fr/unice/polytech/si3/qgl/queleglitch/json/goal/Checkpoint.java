@@ -42,20 +42,6 @@ public class Checkpoint {
         this.shape = shape;
     }
 
-    public double getAngleToAPlace(Position position){
-        double adj = position.x - this.position.x;
-        double opo = position.y - this.position.y;
-        if(adj < 0)
-            return -Math.atan(adj/opo) + (opo < 0 ? -Math.PI/2 : Math.PI/2);
-        return Math.atan(opo/adj);
-    }
-
-    public double getDistanceToAPlace(Position position){
-        double adj = position.x - this.position.x;
-        double opo = position.y - this.position.y;
-        return Math.sqrt(Math.pow(adj,2) + Math.pow(opo,2));
-    }
-
     /**
      * <p>Override of toString method, allow to print a different string to give the Checkpoint's informations</p>
      */

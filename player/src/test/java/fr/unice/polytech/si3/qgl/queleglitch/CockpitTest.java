@@ -1,57 +1,44 @@
-/*package fr.unice.polytech.si3.qgl.queleglitch;
+package fr.unice.polytech.si3.qgl.queleglitch;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import fr.unice.polytech.si3.qgl.queleglitch.fileReader.FileOpener;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
-
 class CockpitTest {
 
-    String initGame = "";
-    String nextRound = "";
-    String round2 = "";
-    String output = "";
-    Cockpit cockpit;
+    FileOpener fileOpener;
+    Cockpit cockpitGame2;
 
     @BeforeEach
-    void setUp() throws IOException {
-        BufferedReader initGameFile = new BufferedReader(new FileReader("initGameFile"));
-        String line;
+    void setUp() {
+        fileOpener = new FileOpener("src\\test\\java\\fr\\unice\\polytech\\si3\\qgl\\queleglitch\\txtJson\\test");
 
-        while ((line = initGameFile.readLine()) != null)
-            initGame += line;
-        initGameFile.close();
-
-        cockpit = new Cockpit();
-        cockpit.initGame(initGame.replaceAll("\\s", ""));
-
+        cockpitGame2 = new Cockpit();
+        cockpitGame2.initGame(fileOpener.getTxtInFile("2\\initGameFile"));
     }
 
     @Test
-    void nextRoundTest() throws IOException {
-        BufferedReader nextRoundFile = new BufferedReader(new FileReader("nextRoundFile"));
-        BufferedReader round2File = new BufferedReader(new FileReader("round2File"));
-        BufferedReader outputFile = new BufferedReader(new FileReader("outputFile"));
-        String line;
+    void Test_input1() {
+        Cockpit cockpitGame1 = new Cockpit();
+        cockpitGame1.initGame(fileOpener.getTxtInFile("1\\initGameFile"));
+        String actualOutput = cockpitGame1.nextRound(fileOpener.getTxtInFile("1\\nextRoundFile"));
 
-        while ((line = nextRoundFile.readLine()) != null)
-            nextRound += line;
-        nextRoundFile.close();
-
-        while ((line = outputFile.readLine()) != null)
-            output += line.replaceAll("\\s", "");
-        outputFile.close();
-
-        String nextRoundOut = cockpit.nextRound(nextRound);
-        System.out.println(nextRoundOut);
-
-        while ((line = round2File.readLine()) != null)
-            round2 += line;
-        round2File.close();
-
-        String round2Out = cockpit.nextRound(round2);
-        System.out.println(round2Out);
+        assertEquals(fileOpener.getTxtInFile("1\\outputFile"),actualOutput);
     }
-}*/
+
+    @Test
+    void Test_input2() {
+        String actualOutput = cockpitGame2.nextRound(fileOpener.getTxtInFile("2\\nextRoundFile"));
+
+        assertEquals(fileOpener.getTxtInFile("2\\outputFile"),actualOutput);
+    }
+
+    @Test
+    void Test_input2_roundNext() {
+        String actualOutput = cockpitGame2.nextRound(fileOpener.getTxtInFile("2\\nextRoundFile_roundNext"));
+
+        assertEquals(fileOpener.getTxtInFile("2\\outputFile_roundNext"),actualOutput);
+    }
+}

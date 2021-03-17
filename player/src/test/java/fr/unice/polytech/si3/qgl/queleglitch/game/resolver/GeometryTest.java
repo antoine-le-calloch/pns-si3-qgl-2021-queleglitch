@@ -312,7 +312,31 @@ class GeometryTest {
     /**
      * <h1><u>isCheckpointReached</u></h1>
      **/
-/*
+
+    @Test
+    void shipNotInCheckpointBefore1(){
+        Checkpoint checkpoint = new Checkpoint(new Position(8019.417976524843,1210.6559684684694,0), new Circle(100));
+        InformationGame informationGame = new InformationGame(new RegattaGoal(new Checkpoint[]{checkpoint}), new Ship(new Position(7921.4982795349215,1166.9421361241718,0)));
+        geometry = new Geometry(informationGame);
+        assertFalse(geometry.isCheckpointReached());
+    }
+
+    @Test
+    void shipNotInCheckpointAfter1(){
+        Checkpoint checkpoint = new Checkpoint(new Position(8019.417976524843,1210.6559684684694,0), new Circle(100));
+        InformationGame informationGame = new InformationGame(new RegattaGoal(new Checkpoint[]{checkpoint}), new Ship(new Position(8052.533587531556,1315.439151056136,0)));
+        geometry = new Geometry(informationGame);
+        assertFalse(geometry.isCheckpointReached());
+    }
+
+    @Test
+    void shipNotInCheckpointAfter2(){
+        Checkpoint checkpoint = new Checkpoint(new Position(8112.831793212056,1482.1268397862239,0), new Circle(100));
+        InformationGame informationGame = new InformationGame(new RegattaGoal(new Checkpoint[]{checkpoint}), new Ship(new Position(8052.533587531556,1315.439151056136,0)));
+        geometry = new Geometry(informationGame);
+        assertFalse(geometry.isCheckpointReached());
+    }
+
     @Nested
     class IsCheckpointReached {
 
@@ -322,16 +346,8 @@ class GeometryTest {
         Checkpoint checkpoint;
         Goal regattaGoal;
 
-
         @BeforeEach
         void setUp() {
-            checkpoint = new Checkpoint();
-            regattaGoal = new RegattaGoal(new Checkpoint[]{checkpoint});
-
-            ship = new Ship();
-
-            informationGame = new InformationGame(regattaGoal,ship);
-            geometry = new Geometry(informationGame);
         }
 
         @Test
@@ -340,35 +356,26 @@ class GeometryTest {
             Position positionShip = new Position(49, 0, 0);
             Shape shapeCheckpoint = new Circle(50);
 
-            ship.setPosition(positionShip);
-            checkpoint.setShape(shapeCheckpoint);
-            checkpoint.setPosition(positionCheckpoint);
+            checkpoint = new Checkpoint(positionCheckpoint,shapeCheckpoint);
+            ship = new Ship(positionShip);
+            regattaGoal = new RegattaGoal(new Checkpoint[]{checkpoint});
+            informationGame = new InformationGame(regattaGoal,ship);
+            geometry = new Geometry(informationGame);
 
             assertTrue(geometry.isCheckpointReached());
-        }*/
+        }
 
-        /*
-    public Geometry(InformationGame informationGame) {
-        this.informationGame = informationGame;
-        this.actualCheckPointPosition = ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition();
-        this.currentBoatPosition=informationGame.getShip().getPosition();
-    }
-         */
-
-        /*    public boolean isCheckpointReached() {
-        return actualCheckPointPosition.getNorme(informationGame.getShip().getPosition()) <
-                ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
-    }*/
-/*
         @Test
         void checkpointisntReachedFar() {
             Position positionCheckpoint = new Position(100, 0, 0);
             Position positionShip = new Position(149, 0, 0);
             Shape shapeCheckpoint = new Circle(50);
 
-            ship.setPosition(positionShip);
-            checkpoint.setShape(shapeCheckpoint);
-            checkpoint.setPosition(positionCheckpoint);
+            checkpoint = new Checkpoint(positionCheckpoint,shapeCheckpoint);
+            ship = new Ship(positionShip);
+            regattaGoal = new RegattaGoal(new Checkpoint[]{checkpoint});
+            informationGame = new InformationGame(regattaGoal,ship);
+            geometry = new Geometry(informationGame);
 
             assertTrue(geometry.isCheckpointReached());
         }
@@ -379,11 +386,13 @@ class GeometryTest {
             Position positionShip = new Position(50, 0, 0);
             Shape shapeCheckpoint = new Circle(50);
 
-            ship.setPosition(positionShip);
-            checkpoint.setShape(shapeCheckpoint);
-            checkpoint.setPosition(positionCheckpoint);
+            checkpoint = new Checkpoint(positionCheckpoint,shapeCheckpoint);
+            ship = new Ship(positionShip);
+            regattaGoal = new RegattaGoal(new Checkpoint[]{checkpoint});
+            informationGame = new InformationGame(regattaGoal,ship);
+            geometry = new Geometry(informationGame);
 
             assertFalse(geometry.isCheckpointReached());
         }
-    }*/
+    }
 }

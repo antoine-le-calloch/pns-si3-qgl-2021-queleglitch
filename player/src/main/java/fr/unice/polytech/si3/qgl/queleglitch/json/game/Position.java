@@ -33,6 +33,15 @@ public class Position {
         return distance;
     }
 
+    public double getAngleToAPlace(Position position){
+        double adj = position.x - x;
+        double opo = position.y - y;
+        if(adj < 0)
+            return -Math.atan(adj/opo) + (opo < 0 ? -Math.PI/2 : Math.PI/2);
+        return Math.atan(opo/adj);
+    }
+
+
     /**
      * @return <b>The orientation.</b>
      */

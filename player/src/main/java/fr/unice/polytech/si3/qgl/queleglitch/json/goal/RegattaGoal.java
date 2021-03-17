@@ -15,26 +15,28 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 public class RegattaGoal extends Goal {
 
     public Checkpoint[] checkpoints;
-    public Checkpoint[] optiCheckpoints;
-    public int numActualCheckpoint = 0;
+    public Position[] positionOptiCheckpoints;
+    public int numActualCheckpoint = 2;
 
-    public RegattaGoal(){}
+    public RegattaGoal(){
+    }
 
     public RegattaGoal(Checkpoint[] checkpoints){
         this.checkpoints = checkpoints;
+        calculateOptiCheckpoint();
+    }
+
+    public Position getPositionActualOptiCheckpoint(){
+        return positionOptiCheckpoints[numActualCheckpoint];
     }
 
     public Checkpoint getActualCheckpoint(){
-        return optiCheckpoints[numActualCheckpoint];
-    }
-
-    public Checkpoint getActualReelCheckpoint(){
         return checkpoints[numActualCheckpoint];
     }
 
-    public Checkpoint getNextCheckpoint(){
+    public Position getPositionNextOptiCheckpoint(){
         if (checkpoints.length > numActualCheckpoint + 1)
-            return optiCheckpoints[numActualCheckpoint+1];
+            return positionOptiCheckpoints[numActualCheckpoint+1];
         return null;
     }
 
@@ -52,12 +54,13 @@ public class RegattaGoal extends Goal {
         int tabSize = checkpoints.length;
         double angleBetween2Points;
         double distanceToTheNewPoints;
-        optiCheckpoints = checkpoints.clone();
+        positionOptiCheckpoints = new Position[tabSize];
+        positionOptiCheckpoints[tabSize-1] = new Position(checkpoints[tabSize-1].position.x,checkpoints[tabSize-1].position.y,0);
 
         for (int i = tabSize-1; i > 0; i--) {
-            angleBetween2Points = optiCheckpoints[i].getAngleToAPlace(optiCheckpoints[i-1].position);
-            distanceToTheNewPoints = optiCheckpoints[i].getDistanceToAPlace(optiCheckpoints[i-1].position) - ((Circle) optiCheckpoints[i-1].shape).radius + 25;
-            optiCheckpoints[i-1].position = movePosition1ByPosition2(optiCheckpoints[i].position,findHowManyToMovePosition(angleBetween2Points,distanceToTheNewPoints));
+            angleBetween2Points = positionOptiCheckpoints[i].getAngleToAPlace(checkpoints[i-1].position);
+            distanceToTheNewPoints = positionOptiCheckpoints[i].getNorme(checkpoints[i-1].position) - ((Circle) checkpoints[i-1].shape).radius + 25;
+            positionOptiCheckpoints[i-1] = movePosition1ByPosition2(positionOptiCheckpoints[i],findHowManyToMovePosition(angleBetween2Points,distanceToTheNewPoints));
         }
     }
 

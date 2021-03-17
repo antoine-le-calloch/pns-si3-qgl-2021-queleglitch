@@ -2,18 +2,21 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 
 public class Geometry {
 
     InformationGame informationGame;
-    Position actualCheckPointPosition;
+    Checkpoint actualCheckpoint;
+    Position positionActualOptiCheckpoint;
     Position currentBoatPosition;
 
     public Geometry(InformationGame informationGame) {
         this.informationGame = informationGame;
-        this.actualCheckPointPosition = ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getPosition();
+        this.actualCheckpoint = ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint();
+        this.positionActualOptiCheckpoint = ((RegattaGoal) informationGame.getGoal()).getPositionActualOptiCheckpoint();
         this.currentBoatPosition = informationGame.getShip().getPosition();
     }
 
@@ -24,12 +27,12 @@ public class Geometry {
 
 
     public boolean isCheckpointReached(){
-        return ((RegattaGoal) informationGame.getGoal()).getActualReelCheckpoint().getPosition().getNorme(informationGame.getShip().getPosition()) < ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();
+        return actualCheckpoint.position.getNorme(currentBoatPosition) < ((Circle) actualCheckpoint.getShape()).getRadius();
     }
 
     // renvoie le max de sailors qui rament pour que ce soit opti
     int slowDown(){
-        return informationGame.getShip().getRames().size();
+        return 0;//informationGame.getShip().getRames().size();
         /*
         int NB_OARS = informationGame.getShip().getRames().size();
         double radius = ((Circle) ((RegattaGoal) informationGame.getGoal()).getActualCheckpoint().getShape()).getRadius();

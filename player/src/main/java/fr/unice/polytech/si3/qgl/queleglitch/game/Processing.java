@@ -22,7 +22,6 @@ public class Processing {
 
     public void setDataNewRound(NextRound nextRound){
         informationGame.setShip(nextRound.getShip());
-        informationGame.setShip(nextRound.getShip());
         regattaResolver = new RegattaResolver(informationGame, nextRound);
 
         if(regattaResolver.getGeometry().isCheckpointReached()){
