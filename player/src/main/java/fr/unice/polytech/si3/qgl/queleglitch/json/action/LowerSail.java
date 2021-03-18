@@ -1,10 +1,10 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.action;
 
-public class LIFT_SAIL extends Action {
+public class LowerSail extends Action{
 
-    public String type = "LIFT_SAIL";
+    public String type = "LOWER_SAIL";
 
-    public LIFT_SAIL(int sailorId) {
+    public LowerSail(int sailorId) {
         super(sailorId);
     }
 
@@ -13,10 +13,10 @@ public class LIFT_SAIL extends Action {
         if (o == this) {
             return true;
         }
-        if (!(o instanceof LIFT_SAIL)) {
+        if (!(o instanceof LowerSail)) {
             return false;
         }
-        LIFT_SAIL l = (LIFT_SAIL) o;
+        LowerSail l = (LowerSail) o;
         return sailorId== l.sailorId;
     }
 }
