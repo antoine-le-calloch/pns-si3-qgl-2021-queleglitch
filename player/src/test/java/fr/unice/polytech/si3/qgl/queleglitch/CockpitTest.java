@@ -16,7 +16,7 @@ class CockpitTest {
 
     @BeforeEach
     void setUp() {
-        path = "txtJson\\test";
+        path = "\\txtJson\\test";
 
         cockpitGame2 = new Cockpit();
         cockpitGame2.initGame(getTxtInFile("2\\initGameFile"));
