@@ -27,11 +27,12 @@ public class RegattaStrategy {
     public ToolsToUse resolveRegatta(){
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(((RegattaGoal) informationGame.getGoal()).getPositionActualOptiCheckpoint());
 
-        double rudderAngle = this.rudderStrategy.getRudderStrategy(angleToCorrect);
-        int actionsOnVoiles = this.voilesStrategy.getVoilesStrategy();
-        int differenceOarRightLeft = (int) oarStrategy.getDifferenceOarRightLeftStrategy(angleToCorrect);
+        double rudderAngle = this.rudderStrategy.getRudderAngle(angleToCorrect);
+        int actionOnVoiles = this.voilesStrategy.getVoilesAction();
+        int differenceOarRightLeft = oarStrategy.getDifferenceOarRightLeft(angleToCorrect);
+        int[] tabNbLeftAndRightOar = oarStrategy.getNbLeftAndRightOar(rudderAngle != 0, Math.abs(actionOnVoiles), differenceOarRightLeft);
 
-        return new ToolsToUse(rudderStrategy,numberOfSailor,voilesStrategy);
+        return new ToolsToUse(rudderAngle,actionOnVoiles,tabNbLeftAndRightOar[0],tabNbLeftAndRightOar[1]);
     }
 
     public Geometry getGeometry() {

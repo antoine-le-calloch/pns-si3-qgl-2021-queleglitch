@@ -12,7 +12,7 @@ public class RudderStrategy {
         this.rudderAngle = 0;
     }
 
-    public double getRudderStrategy(Double angleToCorrect) {
+    public double getRudderAngle(Double angleToCorrect) {
         int signe = 1;
         if (angleToCorrect < 0) {
             angleToCorrect *= (signe = -1);

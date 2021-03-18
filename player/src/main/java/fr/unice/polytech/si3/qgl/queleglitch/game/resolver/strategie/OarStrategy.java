@@ -17,7 +17,7 @@ public class OarStrategy {
         this.NB_RAMES = nbRames;
     }
 
-    public double getDifferenceOarRightLeftStrategy(Double angleToCorrect) {
+    public int getDifferenceOarRightLeft(Double angleToCorrect) {
         int signe = 1;
         if(angleToCorrect < 0)
             angleToCorrect *= (signe = -1);
@@ -28,15 +28,15 @@ public class OarStrategy {
         return 0;
     }
 
-    public int[] getNbLeftAndRightOar(boolean useRudder, boolean useSail, int differenceOarRightLeft) {
+    public int[] getNbLeftAndRightOar(boolean useRudder, int nbSailToUse, int differenceOarRightLeft) {
         int nbLeftRamesToUse = -Math.min(0,differenceOarRightLeft);
         int nbRightRamesToUse = Math.max(0,differenceOarRightLeft);
         int nbSailorsForOar = informationGame.sailors.length;
 
         if (useRudder)
             nbSailorsForOar--;
-        if (useSail)
-            nbSailorsForOar--;
+
+        nbSailorsForOar -= nbSailToUse;
 
         while (nbLeftRamesToUse + nbRightRamesToUse <= nbSailorsForOar - 2) {
             if(nbLeftRamesToUse >= NB_RAMES/2 || nbRightRamesToUse >= NB_RAMES/2)

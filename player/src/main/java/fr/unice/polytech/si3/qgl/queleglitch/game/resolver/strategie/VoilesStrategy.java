@@ -15,19 +15,21 @@ public class VoilesStrategy {
 
     InformationGame informationGame;
     Voile voile1;
+    int nbVoiles;
     Wind wind;
 
     public VoilesStrategy(InformationGame informationGame, NextRound nextRound) {
+        this.wind = nextRound.getWind();
         this.informationGame = informationGame;
         this.voile1 = informationGame.ship.getVoiles().get(0);
-        this.wind = nextRound.getWind();
+        this.nbVoiles = informationGame.ship.getVoiles().size();
     }
 
-    public int getVoilesStrategy() {
+    public int getVoilesAction() {
         if (Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) < (Math.PI / 2) && !voile1.opened)
-            return LIFT;
+            return LIFT*nbVoiles;
         else if (Math.abs(informationGame.getShip().getPosition().orientation - wind.orientation) > (Math.PI / 2) && voile1.opened)
-            return LOWER;
+            return LOWER*nbVoiles;
         else
             return NOT_USE;
     }

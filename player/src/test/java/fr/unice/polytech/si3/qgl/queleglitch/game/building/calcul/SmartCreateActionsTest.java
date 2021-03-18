@@ -761,7 +761,7 @@ class SmartCreateActionsTest {
                                new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(sailors, ship);
 
-        List<Action> actionList = smartCreateActions.createActions(2,2,Math.PI/4, 1);
+        List<Action> actionList = smartCreateActions.createActions(Math.PI/4, 1,2,2);
 
         assertEquals(12, actionList.size());
     }
@@ -772,7 +772,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(sailors, ship);
 
-        List<Action> actionList = smartCreateActions.createActions(1,1,Math.PI/4, 1);
+        List<Action> actionList = smartCreateActions.createActions(Math.PI/4, 1,1,1);
 
         assertEquals(10, actionList.size());
     }
@@ -783,7 +783,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(sailors, ship);
 
-        List<Action> actionList = smartCreateActions.createActions(0,0,Math.PI/4, 1);
+        List<Action> actionList = smartCreateActions.createActions(Math.PI/4,1,0,0);
 
         assertEquals(8, actionList.size());
     }
@@ -794,7 +794,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(sailors, ship);
 
-        List<Action> actionList = smartCreateActions.createActions(0,0,0,1);
+        List<Action> actionList = smartCreateActions.createActions(0,1,0,0);
 
         assertEquals(7, actionList.size()); //need to change
     }

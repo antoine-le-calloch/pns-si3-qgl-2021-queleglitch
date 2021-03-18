@@ -1,32 +1,16 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
 public class ToolsToUse {
-    public double angleRudder;
-    public int moreSailorsOnTheRightThanOnTheLeft;
-    public int numberOfSail;
-    public int numberOfSailorMaxBeforeSlowDown;
+    public double rudderAngle;
+    public int actionOnVoiles;
+    public int nbLeftRamesToUse;
+    public int nbRightRamesToUse;
 
-    public ToolsToUse(double angleRudder, int moreSailorsOnTheRightThanOnTheLeft, int numberOfSail, int numberOfSailorMaxBeforeSlowDown){
-        this.angleRudder = angleRudder;
-        this.moreSailorsOnTheRightThanOnTheLeft = moreSailorsOnTheRightThanOnTheLeft;
-        this.numberOfSail = numberOfSail;
-        this.numberOfSailorMaxBeforeSlowDown = numberOfSailorMaxBeforeSlowDown;
-    }
-
-    public double getAngleRudder() {
-        return angleRudder;
-    }
-
-    public double getNumberOfSailor() {
-        return moreSailorsOnTheRightThanOnTheLeft;
-    }
-
-    public int getNumberOfSailorMaxBeforeSlowDown() {
-        return numberOfSailorMaxBeforeSlowDown;
-    }
-
-    public int getNumberOfSail() {
-        return numberOfSail;
+    public ToolsToUse(double rudderAngle, int actionOnVoiles, int nbLeftRamesToUse, int nbRightRamesToUse){
+        this.rudderAngle = rudderAngle;
+        this.actionOnVoiles = actionOnVoiles;
+        this.nbLeftRamesToUse = nbLeftRamesToUse;
+        this.nbRightRamesToUse = nbRightRamesToUse;
     }
 
 
@@ -37,10 +21,10 @@ public class ToolsToUse {
         if (!(obj instanceof ToolsToUse))
             return false;
         ToolsToUse toolsToUse = (ToolsToUse) obj;
-        return this.angleRudder == toolsToUse.angleRudder &&
-                this.moreSailorsOnTheRightThanOnTheLeft == toolsToUse.moreSailorsOnTheRightThanOnTheLeft &&
-                this.numberOfSail == toolsToUse.numberOfSail &&
-                this.numberOfSailorMaxBeforeSlowDown == toolsToUse.numberOfSailorMaxBeforeSlowDown;
+        return this.rudderAngle == toolsToUse.rudderAngle &&
+                this.actionOnVoiles == toolsToUse.actionOnVoiles &&
+                this.nbLeftRamesToUse == toolsToUse.nbLeftRamesToUse &&
+                this.nbRightRamesToUse == toolsToUse.nbRightRamesToUse;
     }
 
     @Override
@@ -50,6 +34,6 @@ public class ToolsToUse {
 
     @Override
     public String toString(){
-        return "Rudder angle : " + this.angleRudder + ", Nb sailors : " + this.moreSailorsOnTheRightThanOnTheLeft + ", Nb sail : " + this.numberOfSail;
+        return "Rudder angle : " + this.rudderAngle + ", nb sail : " + this.actionOnVoiles + ", nb left oar to use : " + this.nbLeftRamesToUse + ", nb left oar to use : " + this.nbRightRamesToUse;
     }
 }

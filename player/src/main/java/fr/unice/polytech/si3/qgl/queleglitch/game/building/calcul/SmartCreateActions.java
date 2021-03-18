@@ -37,7 +37,7 @@ public class SmartCreateActions {
         this.sailorsAvailable = new ArrayList<>(Arrays.asList(sailors));
     }
 
-    public List<Action> createActions(int nbLeftRamesToUse, int nbRightRamesToUse, double rudderAngle, int useVoile){
+    public List<Action> createActions(double rudderAngle, int useVoile, int nbLeftRamesToUse, int nbRightRamesToUse){
         if(rudderAngle != 0) {
             movingAndUseGouvernail(rudderAngle);
         }
