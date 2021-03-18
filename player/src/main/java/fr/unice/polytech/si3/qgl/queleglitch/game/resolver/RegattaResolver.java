@@ -8,7 +8,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 
-public class RegattaStrategy {
+public class RegattaResolver {
 
     Geometry geometry;
     OarStrategy oarStrategy;
@@ -16,7 +16,7 @@ public class RegattaStrategy {
     VoilesStrategy voilesStrategy;
     InformationGame informationGame;
 
-    public RegattaStrategy(InformationGame informationGame, NextRound nextRound) {
+    public RegattaResolver(InformationGame informationGame, NextRound nextRound) {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame);
         oarStrategy = new OarStrategy(informationGame);

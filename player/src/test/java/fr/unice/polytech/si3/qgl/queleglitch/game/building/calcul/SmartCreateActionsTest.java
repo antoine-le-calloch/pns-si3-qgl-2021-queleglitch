@@ -617,8 +617,8 @@ class SmartCreateActionsTest {
     @Test
     void useRames_MovesPossible3Sailors_v2() {
         sailors = new Sailor[]{new Sailor(-4, 0, 0),
-                new Sailor(-3, 0, 2),
-                new Sailor(-2, 0, 4)};
+                               new Sailor(-3, 0, 2),
+                               new Sailor(-2, 0, 4)};
         smartCreateActions = new SmartCreateActions(sailors, ship);
 
         smartCreateActions.movingAndUseRames(3, 0);

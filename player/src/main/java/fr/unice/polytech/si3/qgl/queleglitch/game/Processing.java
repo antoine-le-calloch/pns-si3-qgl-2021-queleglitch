@@ -2,7 +2,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.game;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.CreateActions;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
-import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaStrategy;
+import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
@@ -13,7 +13,7 @@ import java.util.List;
 public class Processing {
 
     InformationGame informationGame;
-    RegattaStrategy regattaStrategy;
+    RegattaResolver regattaResolver;
 
     public Processing(InformationGame informationGame) {
         this.informationGame = informationGame;
@@ -22,15 +22,15 @@ public class Processing {
 
     public void setDataNewRound(NextRound nextRound){
         informationGame.setShip(nextRound.getShip());
-        regattaStrategy = new RegattaStrategy(informationGame, nextRound);
+        regattaResolver = new RegattaResolver(informationGame, nextRound);
 
-        if(regattaStrategy.getGeometry().isCheckpointReached()){
+        if(regattaResolver.getGeometry().isCheckpointReached()){
             ((RegattaGoal) informationGame.getGoal()).checkpointReached();
         }
     }
 
     public List<Action> actionForTheRound(){
-        ToolsToUse toolsToUse = regattaStrategy.resolveRegatta();
+        ToolsToUse toolsToUse = regattaResolver.resolveRegatta();
         CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), toolsToUse);
         return createActions.buildingActions();
     }
