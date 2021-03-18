@@ -16,22 +16,22 @@ class CockpitTest {
 
     @BeforeEach
     void setUp() {
-        path = "\\txtJson\\test";
+        path = "txtJson\\test";
 
         cockpitGame2 = new Cockpit();
-        cockpitGame2.initGame(getTxtInFile("2\\initGameFile"));
+        //cockpitGame2.initGame(getTxtInFile("initGameFile"));
     }
 
     @Test
     void Test_input1() {
         Cockpit cockpitGame1 = new Cockpit();
-        cockpitGame1.initGame(getTxtInFile("1\\initGameFile"));
-        String actualOutput = cockpitGame1.nextRound(getTxtInFile("1\\nextRoundFile"));
+        cockpitGame1.initGame(getTxtInFile("initGameFile"));
+        String actualOutput = cockpitGame1.nextRound(getTxtInFile("\\nextRoundFile"));
 
-        assertEquals(getTxtInFile("1\\outputFile"),actualOutput);
+        assertEquals(getTxtInFile("\\outputFile"),actualOutput);
     }
 
-    @Test
+    /*@Test
     void Test_input2_HowToReachCheckpoint2WEEK6() {
         ((RegattaGoal) cockpitGame2.informationGame.goal).numActualCheckpoint = 2;
 
@@ -47,11 +47,11 @@ class CockpitTest {
         String actualOutput = cockpitGame2.nextRound(getTxtInFile("2\\nextRoundFile_roundNext"));
 
         assertEquals(getTxtInFile("2\\outputFile_roundNext"),actualOutput);
-    }
+    }*/
 
     private String getTxtInFile(String fileName){
         try {
-            InputStream inputStream = CockpitTest.class.getResourceAsStream(path + fileName);
+            InputStream inputStream = CockpitTest.class.getResourceAsStream(fileName);
             InputStreamReader isReader = new InputStreamReader(inputStream);
             BufferedReader reader = new BufferedReader(isReader);
             StringBuilder sb = new StringBuilder();
