@@ -6,28 +6,28 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class OarActionStrategieTest {
+class OarStrategyTest {
 
-    OarActionStrategie oarActionStrategie;
+    OarStrategy oarStrategy;
 
     @BeforeEach
     void setUp(){
-        oarActionStrategie = new OarActionStrategie(new InformationGame(),2);
+        oarStrategy = new OarStrategy(new InformationGame(),2);
     }
 
     @Test
     void noAngleToCorrectWithOars(){
-        assertEquals(0,oarActionStrategie.oarActionResolver(Math.PI/8));
+        assertEquals(0, oarStrategy.getDifferenceOarRightLeftStrategy(Math.PI/8));
     }
 
 
     @Test
     void anglePositiveToCorrectWithOars(){
-        assertEquals(1,oarActionStrategie.oarActionResolver(Math.PI));
+        assertEquals(1, oarStrategy.getDifferenceOarRightLeftStrategy(Math.PI));
     }
 
     @Test
     void angleNegativeToCorrectWithOars(){
-        assertEquals(-1,oarActionStrategie.oarActionResolver(-Math.PI));
+        assertEquals(-1, oarStrategy.getDifferenceOarRightLeftStrategy(-Math.PI));
     }
 }

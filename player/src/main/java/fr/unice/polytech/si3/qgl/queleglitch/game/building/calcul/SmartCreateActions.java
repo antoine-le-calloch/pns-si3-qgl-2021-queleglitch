@@ -30,11 +30,11 @@ public class SmartCreateActions {
 
         this.ship = ship;
         this.sailors = sailors;
-        this.sailorsAvailable = new ArrayList<>(Arrays.asList(sailors));// maybe clone(), Eric le bouf
-        this.gouvernail = ship.getGouvernail();
         this.voiles = ship.getVoiles();
+        this.gouvernail = ship.getGouvernail();
         this.leftRames = ship.getRamesAtLeft().toArray(Rame[]::new);
         this.rightRames = ship.getRamesAtRight().toArray(Rame[]::new);
+        this.sailorsAvailable = new ArrayList<>(Arrays.asList(sailors));
     }
 
     public List<Action> createActions(int nbLeftRamesToUse, int nbRightRamesToUse, double rudderAngle, int useVoile){
@@ -102,7 +102,7 @@ public class SmartCreateActions {
         for (Voile voile : voiles) {
             if((sailorToMove = nearestSailorBehind5(voile, sailorsAvailable)) != null){
                 actionsList.add(buildMovingAction(sailorToMove,voile));
-                actionsList.add((useVoile > 0) ? new LIFT_SAIL(sailorToMove.getId()) : new LOWER_SAIL(sailorToMove.getId()));
+                actionsList.add((useVoile > 0) ? new LiftSail(sailorToMove.getId()) : new LowerSail(sailorToMove.getId()));
                 sailorsAvailable.remove(sailorToMove);
                 voile.changeVoile();
             }

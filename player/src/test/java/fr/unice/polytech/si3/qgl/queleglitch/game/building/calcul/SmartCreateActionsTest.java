@@ -491,7 +491,7 @@ class SmartCreateActionsTest {
         smartCreateActions.movingAndUseVoiles(1);
 
         assertEquals(new Moving(5, 0, 0), smartCreateActions.actionsList.get(0));
-        assertEquals(new LIFT_SAIL(0), smartCreateActions.actionsList.get(1));
+        assertEquals(new LiftSail(0), smartCreateActions.actionsList.get(1));
         assertEquals(0, smartCreateActions.entitiesTooFar.size());
     }
 
@@ -515,7 +515,7 @@ class SmartCreateActionsTest {
         smartCreateActions.movingAndUseVoiles(-1);
 
         assertEquals(new Moving(-4, -1, 0), smartCreateActions.actionsList.get(0));
-        assertEquals(new LOWER_SAIL(0), smartCreateActions.actionsList.get(1));
+        assertEquals(new LowerSail(0), smartCreateActions.actionsList.get(1));
         assertEquals(0, smartCreateActions.entitiesTooFar.size());
     }
 
@@ -539,7 +539,7 @@ class SmartCreateActionsTest {
         smartCreateActions.movingAndUseVoiles(1);
 
         assertEquals(new Moving(0, -5, 0), smartCreateActions.actionsList.get(0));
-        assertEquals(new LIFT_SAIL(0), smartCreateActions.actionsList.get(1));
+        assertEquals(new LiftSail(0), smartCreateActions.actionsList.get(1));
         assertEquals(0, smartCreateActions.entitiesTooFar.size());
     }
 
