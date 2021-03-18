@@ -23,7 +23,4 @@ public class WindActionStrategie {
 
         return 0;
     }
-
-
-
 }
