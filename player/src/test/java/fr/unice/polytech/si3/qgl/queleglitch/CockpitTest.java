@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.queleglitch;
 import static org.junit.jupiter.api.Assertions.*;
 
 import fr.unice.polytech.si3.qgl.queleglitch.fileReader.FileOpener;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,14 +30,18 @@ class CockpitTest {
     }
 
     @Test
-    void Test_input2() {
+    void Test_input2_HowToReachCheckpoint2WEEK6() {
+        ((RegattaGoal) cockpitGame2.informationGame.goal).numActualCheckpoint = 2;
+
         String actualOutput = cockpitGame2.nextRound(fileOpener.getTxtInFile("2\\nextRoundFile"));
 
         assertEquals(fileOpener.getTxtInFile("2\\outputFile"),actualOutput);
     }
 
     @Test
-    void Test_input2_roundNext() {
+    void Test_input2_HowToReachCheckpoint2WEEK6_NextRound() {
+        ((RegattaGoal) cockpitGame2.informationGame.goal).numActualCheckpoint = 2;
+
         String actualOutput = cockpitGame2.nextRound(fileOpener.getTxtInFile("2\\nextRoundFile_roundNext"));
 
         assertEquals(fileOpener.getTxtInFile("2\\outputFile_roundNext"),actualOutput);

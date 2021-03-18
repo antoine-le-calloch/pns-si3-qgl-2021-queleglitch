@@ -16,7 +16,7 @@ public class RegattaGoal extends Goal {
 
     public Checkpoint[] checkpoints;
     public Position[] positionOptiCheckpoints;
-    public int numActualCheckpoint = 2;
+    public int numActualCheckpoint = 0;
 
     public RegattaGoal(){
     }
