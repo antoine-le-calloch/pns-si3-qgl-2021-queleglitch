@@ -3,11 +3,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.json;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
 /**
  * Classe permettant de gerer les éléments principaux du jeux : {@link Ship}, {@link Sailor}
@@ -36,36 +32,11 @@ public class InformationGame {
 
     public InformationGame(){}
 
-
-    public void setGoal(Goal goal) {
-        this.goal = goal;
-    }
-
     /**
      * @return <b>The list of sailors.</b>
      */
     public Sailor[] getSailors(){
         return sailors;
-    }
-
-    public List<Sailor> getSailorsAtRight(){
-        List<Sailor> sailorAtRight = new ArrayList<>();
-        for (Sailor sailor : sailors) {
-            if(sailor.getY()==ship.deck.width-1){
-                sailorAtRight.add(sailor);
-            }
-        }
-        return sailorAtRight;
-    }
-
-    public List<Sailor> getSailorsAtLeft(){
-        List<Sailor> sailorAtLeft = new ArrayList<>();
-        for (Sailor sailor : sailors) {
-            if(sailor.getY()==0){
-                sailorAtLeft.add(sailor);
-            }
-        }
-        return sailorAtLeft;
     }
 
     /**
@@ -82,5 +53,17 @@ public class InformationGame {
 
     public void setShip(Ship ship){
         this.ship = ship;
+    }
+
+    public void setGoal(Goal goal) {
+        this.goal = goal;
+    }
+
+    public boolean isCheckpointReached() {
+        return ship.isCheckpointReached(((RegattaGoal) goal).getActualCheckpoint());
+    }
+
+    public void moveToNextCheckpoint() {
+        ((RegattaGoal) goal).checkpointReached();
     }
 }

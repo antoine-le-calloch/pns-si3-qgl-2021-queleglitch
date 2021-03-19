@@ -41,6 +41,19 @@ public class Position {
         return Math.atan(opo/adj);
     }
 
+    public Position positionNextRound(double angle,double vitesse){
+        int numberOfIterations=100;
+        Position newPosition=new Position(x,y,orientation);
+
+        for(int i=0;i<numberOfIterations;i++){
+            newPosition.x+=Math.cos(angle*i/numberOfIterations)*(vitesse/numberOfIterations);
+            newPosition.y+=Math.sin(angle*i/numberOfIterations)*(vitesse/numberOfIterations);
+            newPosition.orientation+=angle/numberOfIterations;
+        }
+
+        return newPosition;
+
+    }
 
     /**
      * @return <b>The orientation.</b>

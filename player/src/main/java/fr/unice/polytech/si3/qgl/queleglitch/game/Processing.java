@@ -24,13 +24,13 @@ public class Processing {
         informationGame.setShip(nextRound.getShip());
         regattaResolver = new RegattaResolver(informationGame, nextRound);
 
-        if(regattaResolver.getGeometry().isCheckpointReached()){
-            ((RegattaGoal) informationGame.getGoal()).checkpointReached();
+        if(informationGame.isCheckpointReached()){
+            informationGame.moveToNextCheckpoint();
         }
     }
 
     public List<Action> actionForTheRound(){
-        ToolsToUse toolsToUse = regattaResolver.resolveRegatta();
+        ToolsToUse toolsToUse = regattaResolver.getToolsToUse();
         CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), toolsToUse);
         return createActions.buildingActions();
     }

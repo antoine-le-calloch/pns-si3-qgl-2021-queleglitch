@@ -5,16 +5,11 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 public class OarStrategy {
 
     private final int NB_RAMES;
-    private final InformationGame informationGame;
+    private final int NB_SAILORS;
 
-    public OarStrategy(InformationGame informationGame) {
-        this.informationGame=informationGame;
-        NB_RAMES = informationGame.getShip().getRames().size();
-    }
-
-    public OarStrategy(InformationGame informationGame, int nbRames){
-        this.informationGame = informationGame;
-        this.NB_RAMES = nbRames;
+    public OarStrategy(int nbSailors, int nbRames) {
+        NB_RAMES = nbRames;
+        NB_SAILORS = nbSailors;
     }
 
     public int getDifferenceOarRightLeft(Double angleToCorrect) {
@@ -31,7 +26,7 @@ public class OarStrategy {
     public int[] getNbLeftAndRightOar(boolean useRudder, int nbSailToUse, int differenceOarRightLeft) {
         int nbLeftRamesToUse = -Math.min(0,differenceOarRightLeft);
         int nbRightRamesToUse = Math.max(0,differenceOarRightLeft);
-        int nbSailorsForOar = informationGame.sailors.length;
+        int nbSailorsForOar = NB_SAILORS;
 
         if (useRudder)
             nbSailorsForOar--;

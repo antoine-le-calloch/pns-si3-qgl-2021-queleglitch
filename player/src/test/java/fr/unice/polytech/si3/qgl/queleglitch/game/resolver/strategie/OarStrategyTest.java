@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.calcul.SmartFindNbOar;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,13 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class OarStrategyTest {
 
     OarStrategy oarStrategy;
-    SmartFindNbOar smartFindNbOar;
     int []nbRightAndLeftOar;
 
     @BeforeEach
     void setUp(){
-        oarStrategy = new OarStrategy(new InformationGame(),2);
-    }
+        oarStrategy = new OarStrategy(6,2);    }
 
     @Test
     void noAngleToCorrectWithOars(){
@@ -33,36 +30,36 @@ class OarStrategyTest {
         assertEquals(-1, oarStrategy.getDifferenceOarRightLeft(-Math.PI));
     }
 
-    ///////////
+    ///////////getNbLeftAndRightOar(boolean useRudder, int nbSailToUse, int differenceOarRightLeft)
 
     @Test
     void NbOarBySide_5Sailors_2MoreOnRight_UseRudder_UseSail(){
-        smartFindNbOar = new SmartFindNbOar(5,20,2);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(true, true);
+        oarStrategy = new OarStrategy(5,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 1, 2);
         assertEquals(0,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_4Sailors_2MoreOnRight_UseRudder_UseSail(){
-        smartFindNbOar = new SmartFindNbOar(4,20,2);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(true, true);
+        oarStrategy = new OarStrategy(4,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 1, 2);
         assertEquals(0,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_13Sailors_6MoreOnLeft_UseRudder_UseSail(){
-        smartFindNbOar = new SmartFindNbOar(13,20,-6);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(true, true);
+        oarStrategy = new OarStrategy(13,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 1, -6);
         assertEquals(8,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_12Sailors_6MoreOnLeft_UseRudder_UseSail(){
-        smartFindNbOar = new SmartFindNbOar(12,20,-6);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(true, true);
+        oarStrategy = new OarStrategy(12,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 1,-6);
         assertEquals(8,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -71,32 +68,32 @@ class OarStrategyTest {
 
     @Test
     void NbOarBySide_5Sailors_2MoreOnRight_UseRudder_NotUseSail(){
-        smartFindNbOar = new SmartFindNbOar(5,20,2);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(true, false);
+        oarStrategy = new OarStrategy(5,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 0,2);
         assertEquals(1,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_4Sailors_2MoreOnRight_UseRudder_NotUseSail(){
-        smartFindNbOar = new SmartFindNbOar(4,20,2);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(true, false);
+        oarStrategy = new OarStrategy(4,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 0,2);
         assertEquals(0,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_13Sailors_6MoreOnLeft_UseRudder_NotUseSail(){
-        smartFindNbOar = new SmartFindNbOar(13,20,-6);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(true, false);
+        oarStrategy = new OarStrategy(13,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 0,-6);
         assertEquals(9,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_12Sailors_6MoreOnLeft_UseRudder_NotUseSail(){
-        smartFindNbOar = new SmartFindNbOar(12,20,-6);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(true, false);
+        oarStrategy = new OarStrategy(12,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 0,-6);
         assertEquals(8,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -105,32 +102,32 @@ class OarStrategyTest {
 
     @Test
     void NbOarBySide_5Sailors_2MoreOnRight_NotUseRudder_UseSail(){
-        smartFindNbOar = new SmartFindNbOar(5,20,2);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(false, true);
+        oarStrategy = new OarStrategy(5,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 1, 2);
         assertEquals(1,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_4Sailors_2MoreOnRight_NotUseRudder_UseSail(){
-        smartFindNbOar = new SmartFindNbOar(4,20,2);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(false, true);
+        oarStrategy = new OarStrategy(4,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 1, 2);
         assertEquals(0,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_13Sailors_6MoreOnLeft_NotUseRudder_UseSail(){
-        smartFindNbOar = new SmartFindNbOar(13,20,-6);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(false, true);
+        oarStrategy = new OarStrategy(13,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 1, -6);
         assertEquals(9,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_12Sailors_6MoreOnLeft_NotUseRudder_UseSail(){
-        smartFindNbOar = new SmartFindNbOar(12,20,-6);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(false, true);
+        oarStrategy = new OarStrategy(12,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 1, -6);
         assertEquals(8,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -139,32 +136,32 @@ class OarStrategyTest {
 
     @Test
     void NbOarBySide_5Sailors_2MoreOnRight_NotUseRudder_NotUseSail(){
-        smartFindNbOar = new SmartFindNbOar(5,20,2);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(false, false);
+        oarStrategy = new OarStrategy(5,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 0,2);
         assertEquals(1,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_4Sailors_2MoreOnRight_NotUseRudder_NotUseSail(){
-        smartFindNbOar = new SmartFindNbOar(4,20,2);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(false, false);
+        oarStrategy = new OarStrategy(4,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 0,2);
         assertEquals(1,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_13Sailors_6MoreOnLeft_NotUseRudder_NotUseSail(){
-        smartFindNbOar = new SmartFindNbOar(13,20,-6);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(false, false);
+        oarStrategy = new OarStrategy(13,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 0,-6);
         assertEquals(9,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
 
     @Test
     void NbOarBySide_12Sailors_6MoreOnLeft_NotUseRudder_NotUseSail(){
-        smartFindNbOar = new SmartFindNbOar(12,20,-6);
-        nbRightAndLeftOar = smartFindNbOar.getNbLeftAndRightOar(false, false);
+        oarStrategy = new OarStrategy(12,20);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 0, -6);
         assertEquals(9,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }

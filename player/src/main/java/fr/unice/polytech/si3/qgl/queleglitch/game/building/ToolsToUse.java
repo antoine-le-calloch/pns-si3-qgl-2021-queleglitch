@@ -13,6 +13,15 @@ public class ToolsToUse {
         this.nbRightRamesToUse = nbRightRamesToUse;
     }
 
+    //angle we are going to turn using the elements given by this object
+    public double angle(){
+        return rudderAngle + (nbRightRamesToUse - nbLeftRamesToUse);
+    }
+
+    //speed we are going to have using the elements given by this object
+    public double speed(int nbRames){
+        return 165.0*(nbLeftRamesToUse+nbRightRamesToUse)/nbRames;
+    }
 
     @Override
     public boolean equals(Object obj) {

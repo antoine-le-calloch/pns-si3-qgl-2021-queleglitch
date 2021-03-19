@@ -1,8 +1,7 @@
-//package fr.unice.polytech.si3.qgl.queleglitch;
-
-/*import static org.junit.jupiter.api.Assertions.*;
+package fr.unice.polytech.si3.qgl.queleglitch;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,22 +14,22 @@ class CockpitTest {
 
     @BeforeEach
     void setUp() {
-        path = "txtJson\\test";
+        path = "\\txtJson\\test";
 
         cockpitGame2 = new Cockpit();
-        //cockpitGame2.initGame(getTxtInFile("initGameFile"));
+        cockpitGame2.initGame(getTxtInFile("2\\initGameFile"));
     }
 
     @Test
     void Test_input1() {
         Cockpit cockpitGame1 = new Cockpit();
-        cockpitGame1.initGame(getTxtInFile("initGameFile"));
-        String actualOutput = cockpitGame1.nextRound(getTxtInFile("\\nextRoundFile"));
+        cockpitGame1.initGame(getTxtInFile("1\\initGameFile"));
+        String actualOutput = cockpitGame1.nextRound(getTxtInFile("1\\nextRoundFile"));
 
         assertEquals(getTxtInFile("1\\outputFile"), actualOutput);
     }
 
-    /*@Test
+    @Test
     void Test_input2_HowToReachCheckpoint2WEEK6() {
         ((RegattaGoal) cockpitGame2.informationGame.goal).numActualCheckpoint = 2;
 
@@ -50,7 +49,7 @@ class CockpitTest {
 
     private String getTxtInFile(String fileName) {
         try {
-            InputStream inputStream = CockpitTest.class.getResourceAsStream(fileName);
+            InputStream inputStream = CockpitTest.class.getResourceAsStream(path + fileName);
             InputStreamReader isReader = new InputStreamReader(inputStream);
             BufferedReader reader = new BufferedReader(isReader);
             StringBuilder sb = new StringBuilder();
@@ -64,4 +63,4 @@ class CockpitTest {
             return null;
         }
     }
-}*/
+}

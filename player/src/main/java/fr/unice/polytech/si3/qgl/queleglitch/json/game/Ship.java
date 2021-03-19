@@ -2,6 +2,8 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.*;
 
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 import java.util.ArrayList;
@@ -37,6 +39,10 @@ public class Ship {
         this.name = name;
         this.deck = deck;
         this.shape = shape;
+    }
+
+    public boolean isCheckpointReached(Checkpoint checkpoint){
+        return checkpoint.position.getNorme(position) < ((Circle) checkpoint.getShape()).getRadius();
     }
 
     /**
