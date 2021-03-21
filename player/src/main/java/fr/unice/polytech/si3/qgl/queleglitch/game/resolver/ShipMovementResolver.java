@@ -6,8 +6,6 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 
 public class ShipMovementResolver {
 
-    private final int LIFT = 1;
-    private final int LOWER = -1;
     private final int DO_NOTHING = 0;
 
     private final int NB_RAMES;
@@ -37,15 +35,27 @@ public class ShipMovementResolver {
     }
 
     //angle we are going to turn using the elements given by this object
-    public double getAngle(){
+    public double getAngleToTurn(){
         return rudderAngle + ((nbRightRamesToUse - nbLeftRamesToUse)*Math.PI/NB_RAMES);
     }
 
 
     //speed we are going to have using the elements given by this object
-    public double getSpeed(){
+    public double getSpeed(double shipOrientation){
         double speedWithRames = 165.0*(nbLeftRamesToUse+nbRightRamesToUse)/NB_RAMES;
-        double speedWithWind = (1.0* nbVoilesHigh/NB_VOILES)*wind.strength*Math.cos(Math.abs(ship.getPosition().orientation - wind.orientation));
+        double speedWithWind = (1.0* nbVoilesHigh/NB_VOILES)*wind.strength*Math.cos(Math.abs(shipOrientation - wind.orientation));
         return speedWithRames + speedWithWind;
+    }
+
+    public Position resolveNextTurnPosition(int nbPart){
+        double anglePart = getAngleToTurn()/nbPart;
+        double speedPart;
+        Position newPosition = new Position(ship.getPosition().x,ship.getPosition().y,ship.getPosition().orientation);
+
+        for (double i = 0; i < nbPart; i++) {
+            speedPart = getSpeed(newPosition.orientation)/nbPart;
+            newPosition = newPosition.calculateNewPosition(anglePart,speedPart);
+        }
+        return newPosition;
     }
 }

@@ -3,7 +3,6 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.*;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
@@ -43,7 +42,7 @@ public class Ship {
     }
 
     public boolean isCheckpointReached(Checkpoint checkpoint){
-        return checkpoint.position.getNorme(position) < ((Circle) checkpoint.getShape()).getRadius();
+        return checkpoint.position.getNorm(position) < ((Circle) checkpoint.getShape()).getRadius();
     }
 
     /**

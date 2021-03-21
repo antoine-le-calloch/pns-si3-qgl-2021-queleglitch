@@ -57,41 +57,41 @@ class ShipMovementResolverTest {
     void Angle_Rudder0_0Left_0RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(0,-1,0,0);
-        assertEquals(0, shipMovementResolver.getAngle());
+        assertEquals(0, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_Rudder0_1Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(0,-1,1,1);
-        assertEquals(0, shipMovementResolver.getAngle());
+        assertEquals(0, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_Rudder0_1Left_0RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(0,-1,1,0);
-        assertEquals(-Math.PI/2, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/2, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_Rudder0_2Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip4Rames1Voile,null);
         shipMovementResolver.setNewShipState(0,-1,2,1);
-        assertEquals(-Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_Rudder0_3Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(0,-1,3,1);
-        assertEquals(-2*Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-2*Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
     @Test
     void Angle_Rudder0_3Left_2RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(0,-1,3,2);
-        assertEquals(-1*Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-1*Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     /////////more right than left
@@ -100,28 +100,28 @@ class ShipMovementResolverTest {
     void Angle_Rudder0_0Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(0,-1,0,1);
-        assertEquals(Math.PI/2, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/2, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_Rudder0_1Left_2RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip4Rames1Voile,null);
         shipMovementResolver.setNewShipState(0,-1,1,2);
-        assertEquals(Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_Rudder0_2Left_3RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(0,-1,2,3);
-        assertEquals(1*Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(1*Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_Rudder0_1Left_3RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(0,-1,1,3);
-        assertEquals(2*Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(2*Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     /////////
@@ -132,41 +132,41 @@ class ShipMovementResolverTest {
     void Angle_RudderPIon6_0Left_0RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/6,-1,0,0);
-        assertEquals(Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon6_1Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/6,-1,1,1);
-        assertEquals(Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon6_1Left_0RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/6,-1,1,0);
-        assertEquals(-Math.PI/2+Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/2+Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon6_2Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip4Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/6,-1,2,1);
-        assertEquals(-Math.PI/4+Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/4+Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon6_3Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/6,-1,3,1);
-        assertEquals(-2*Math.PI/6+Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-2*Math.PI/6+Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
     @Test
     void Angle_RudderPIon6_3Left_2RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/6,-1,3,2);
-        assertEquals(-1*Math.PI/6+Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-1*Math.PI/6+Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     /////////more right than left
@@ -175,28 +175,28 @@ class ShipMovementResolverTest {
     void Angle_RudderPIon6_0Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/6,-1,0,1);
-        assertEquals(Math.PI/2+Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/2+Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon6_1Left_2RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip4Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/6,-1,1,2);
-        assertEquals(Math.PI/4+Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/4+Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon6_2Left_3RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/6,-1,2,3);
-        assertEquals(1*Math.PI/6+Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(1*Math.PI/6+Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon6_1Left_3RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/6,-1,1,3);
-        assertEquals(2*Math.PI/6+Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(2*Math.PI/6+Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     /////////
@@ -207,41 +207,41 @@ class ShipMovementResolverTest {
     void Angle_RudderPIon4_0Left_0RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/4,-1,0,0);
-        assertEquals(Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon4_1Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/4,-1,1,1);
-        assertEquals(Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon4_1Left_0RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/4,-1,1,0);
-        assertEquals(-Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon4_2Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip4Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/4,-1,2,1);
-        assertEquals(0, shipMovementResolver.getAngle());
+        assertEquals(0, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon4_3Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/4,-1,3,1);
-        assertEquals(-2*Math.PI/6+Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(-2*Math.PI/6+Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
     @Test
     void Angle_RudderPIon4_3Left_2RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/4,-1,3,2);
-        assertEquals(-1*Math.PI/6+Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(-1*Math.PI/6+Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     /////////more right than left
@@ -250,28 +250,28 @@ class ShipMovementResolverTest {
     void Angle_RudderPIon4_0Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/4,-1,0,1);
-        assertEquals(Math.PI/2+Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/2+Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon4_1Left_2RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip4Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/4,-1,1,2);
-        assertEquals(Math.PI/4+Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/4+Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon4_2Left_3RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/4,-1,2,3);
-        assertEquals(1*Math.PI/6+Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(1*Math.PI/6+Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderPIon4_1Left_3RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(Math.PI/4,-1,1,3);
-        assertEquals(2*Math.PI/6+Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(2*Math.PI/6+Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     /////////
@@ -282,41 +282,41 @@ class ShipMovementResolverTest {
     void Angle_RudderMinusPIon6_0Left_0RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/6,-1,0,0);
-        assertEquals(-Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon6_1Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/6,-1,1,1);
-        assertEquals(-Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon6_1Left_0RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/6,-1,1,0);
-        assertEquals(-Math.PI/2-Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/2-Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon6_2Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip4Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/6,-1,2,1);
-        assertEquals(-Math.PI/4-Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/4-Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon6_3Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/6,-1,3,1);
-        assertEquals(-2*Math.PI/6-Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-2*Math.PI/6-Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
     @Test
     void Angle_RudderMinusPIon6_3Left_2RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/6,-1,3,2);
-        assertEquals(-1*Math.PI/6-Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(-1*Math.PI/6-Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     /////////more right than left
@@ -325,28 +325,28 @@ class ShipMovementResolverTest {
     void Angle_RudderMinusPIon6_0Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/6,-1,0,1);
-        assertEquals(Math.PI/2-Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/2-Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon6_1Left_2RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip4Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/6,-1,1,2);
-        assertEquals(Math.PI/4-Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/4-Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon6_2Left_3RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/6,-1,2,3);
-        assertEquals(1*Math.PI/6-Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(1*Math.PI/6-Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon6_1Left_3RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/6,-1,1,3);
-        assertEquals(2*Math.PI/6-Math.PI/6, shipMovementResolver.getAngle());
+        assertEquals(2*Math.PI/6-Math.PI/6, shipMovementResolver.getAngleToTurn());
     }
 
     /////////
@@ -357,41 +357,41 @@ class ShipMovementResolverTest {
     void Angle_RudderMinusPIon4_0Left_0RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/4,-1,0,0);
-        assertEquals(-Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon4_1Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/4,-1,1,1);
-        assertEquals(-Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon4_1Left_0RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/4,-1,1,0);
-        assertEquals(-3*Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(-3*Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon4_2Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip4Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/4,-1,2,1);
-        assertEquals(-Math.PI/2, shipMovementResolver.getAngle());
+        assertEquals(-Math.PI/2, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon4_3Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/4,-1,3,1);
-        assertEquals(-2*Math.PI/6-Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(-2*Math.PI/6-Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
     @Test
     void Angle_RudderMinusPIon4_3Left_2RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/4,-1,3,2);
-        assertEquals(-1*Math.PI/6-Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(-1*Math.PI/6-Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     /////////more right than left
@@ -400,28 +400,28 @@ class ShipMovementResolverTest {
     void Angle_RudderMinusPIon4_0Left_1RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip2Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/4,-1,0,1);
-        assertEquals(Math.PI/2-Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/2-Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon4_1Left_2RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip4Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/4,-1,1,2);
-        assertEquals(Math.PI/4-Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(Math.PI/4-Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon4_2Left_3RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/4,-1,2,3);
-        assertEquals(1*Math.PI/6-Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(1*Math.PI/6-Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     @Test
     void Angle_RudderMinusPIon4_1Left_3RightOarUse() {
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,null);
         shipMovementResolver.setNewShipState(-Math.PI/4,-1,1,3);
-        assertEquals(2*Math.PI/6-Math.PI/4, shipMovementResolver.getAngle());
+        assertEquals(2*Math.PI/6-Math.PI/4, shipMovementResolver.getAngleToTurn());
     }
 
     ////////////////// Runner test
@@ -429,7 +429,7 @@ class ShipMovementResolverTest {
     void Angle_RunnerTest() {
         shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,null);
         shipMovementResolver.setNewShipState(0.0930508042072854,-1,5,5);
-        assertEquals(0.0930508042072854, shipMovementResolver.getAngle());
+        assertEquals(0.0930508042072854, shipMovementResolver.getAngleToTurn());
     }
 
     //////////////////////////////////////////    Test de speed()     //////////////////////////////////////////
@@ -445,7 +445,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(0,0));
         shipMovementResolver.setNewShipState(0,-1,0,0);
-        assertEquals(0, shipMovementResolver.getSpeed());
+        assertEquals(0, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -455,9 +455,9 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(0,0));
         shipMovementResolver.setNewShipState(0,-1,0,1);
-        assertEquals(165/6.0, shipMovementResolver.getSpeed());
+        assertEquals(165/6.0, shipMovementResolver.getSpeed(0));
         shipMovementResolver.setNewShipState(0,-1,1,0);
-        assertEquals(165/6.0, shipMovementResolver.getSpeed());
+        assertEquals(165/6.0, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -467,7 +467,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(0,0));
         shipMovementResolver.setNewShipState(0,-1,1,1);
-        assertEquals(165/3.0, shipMovementResolver.getSpeed());
+        assertEquals(165/3.0, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -477,7 +477,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(0,0));
         shipMovementResolver.setNewShipState(0,-1,2,2);
-        assertEquals(2*165/3.0, shipMovementResolver.getSpeed());
+        assertEquals(2*165/3.0, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -487,7 +487,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(0,0));
         shipMovementResolver.setNewShipState(0,-1,3,3);
-        assertEquals(165, shipMovementResolver.getSpeed());
+        assertEquals(165, shipMovementResolver.getSpeed(0));
     }
 
     /////////
@@ -502,7 +502,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(10,0));
         shipMovementResolver.setNewShipState(0,0,0,0);
-        assertEquals(10, shipMovementResolver.getSpeed());
+        assertEquals(10, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -512,7 +512,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(10,0));
         shipMovementResolver.setNewShipState(0,1,0,0);
-        assertEquals(10, shipMovementResolver.getSpeed());
+        assertEquals(10, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -522,7 +522,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(10,0));
         shipMovementResolver.setNewShipState(0,-1,0,0);
-        assertEquals(0, shipMovementResolver.getSpeed());
+        assertEquals(0, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -532,7 +532,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(10,0));
         shipMovementResolver.setNewShipState(0,0,0,0);
-        assertEquals(0, shipMovementResolver.getSpeed());
+        assertEquals(0, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -542,7 +542,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(10,0));
         shipMovementResolver.setNewShipState(0,1,0,0);
-        assertEquals(10, shipMovementResolver.getSpeed());
+        assertEquals(10, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -552,7 +552,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(10,0));
         shipMovementResolver.setNewShipState(0,-1,0,0);
-        assertEquals(0, shipMovementResolver.getSpeed());
+        assertEquals(0, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -562,7 +562,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(10,Math.PI/2));
         shipMovementResolver.setNewShipState(0,-1,0,0);
-        assertEquals(0, shipMovementResolver.getSpeed());
+        assertEquals(0, shipMovementResolver.getSpeed(Math.PI/2));
     }
 
     /////////wind with a different angle than ship
@@ -573,7 +573,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(20,0));
         shipMovementResolver.setNewShipState(0,0,3,3);
-        assertEquals(185, shipMovementResolver.getSpeed());
+        assertEquals(185, shipMovementResolver.getSpeed(0));
     }
 
     @Test
@@ -583,7 +583,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(20,0));
         shipMovementResolver.setNewShipState(0,0,3,3);
-        assertEquals(165+20*Math.cos(Math.PI/4), shipMovementResolver.getSpeed());
+        assertEquals(165+20*Math.cos(Math.PI/4), shipMovementResolver.getSpeed(Math.PI/4));
     }
 
     @Test
@@ -593,7 +593,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(20,0));
         shipMovementResolver.setNewShipState(0,0,3,3);
-        assertEquals(165-20*Math.cos(Math.PI/4), shipMovementResolver.getSpeed());
+        assertEquals(165-20*Math.cos(Math.PI/4), shipMovementResolver.getSpeed(3*Math.PI/4));
     }
 
     @Test
@@ -603,7 +603,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(20,0));
         shipMovementResolver.setNewShipState(0,0,3,3);
-        assertEquals(165+20*Math.cos(Math.PI/4), shipMovementResolver.getSpeed());
+        assertEquals(165+20*Math.cos(Math.PI/4), shipMovementResolver.getSpeed(-Math.PI/4));
     }
 
     @Test
@@ -613,7 +613,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(20,0));
         shipMovementResolver.setNewShipState(0,0,3,3);
-        assertEquals(165, shipMovementResolver.getSpeed());
+        assertEquals(165, shipMovementResolver.getSpeed(Math.PI/2));
     }
 
     @Test
@@ -623,7 +623,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(20,0));
         shipMovementResolver.setNewShipState(0,0,3,3);
-        assertEquals(165, shipMovementResolver.getSpeed());
+        assertEquals(165, shipMovementResolver.getSpeed(-Math.PI/2));
     }
 
     @Test
@@ -633,7 +633,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(20,0));
         shipMovementResolver.setNewShipState(0,0,3,3);
-        assertEquals(145, shipMovementResolver.getSpeed());
+        assertEquals(145, shipMovementResolver.getSpeed(Math.PI));
     }
 
     @Test
@@ -643,7 +643,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(20,0));
         shipMovementResolver.setNewShipState(0,-1,3,3);
-        assertEquals(165, shipMovementResolver.getSpeed());
+        assertEquals(165, shipMovementResolver.getSpeed(Math.PI));
     }
 
     @Test
@@ -653,7 +653,7 @@ class ShipMovementResolverTest {
 
         shipMovementResolver = new ShipMovementResolver(mockShip6Rames1Voile,new Wind(20,3*Math.PI/4));
         shipMovementResolver.setNewShipState(0,0,3,3);
-        assertEquals(165+20*Math.cos(Math.PI/4), shipMovementResolver.getSpeed());
+        assertEquals(165+20*Math.cos(Math.PI/4), shipMovementResolver.getSpeed(Math.PI));
     }
 
     ////////////////// Runner test
@@ -661,11 +661,64 @@ class ShipMovementResolverTest {
     @Test
     void speed_RunnerTest() {
         Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,false));
-        Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(2852.173913043478,1978.827361563518,-1.0297442586766543));
 
         shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
         shipMovementResolver.setNewShipState(0.0930508042072854,1,5,5);
-        assertEquals(165+50*Math.cos(1.0297442586766543), shipMovementResolver.getSpeed());
+        assertEquals(165+50*Math.cos(1.0297442586766543), shipMovementResolver.getSpeed(1.0297442586766543));
+    }
+
+    //////////////////////////////////////    Test de resolveNewPosition()     //////////////////////////////////////
+
+    @Test
+    void nextPosition_0OarToUse_0Voile_0Rudder() {
+        Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,false));
+        Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(0,0,0));
+        shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
+        shipMovementResolver.setNewShipState(0,0,0,0);
+
+        assertEquals(new Position(0,0,0),shipMovementResolver.resolveNextTurnPosition(100));
+    }
+
+    @Test
+    void nextPosition_0OarToUse_1Voile_0Rudder() {
+        Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,true));
+        Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(0,0,0));
+        shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
+        shipMovementResolver.setNewShipState(0,0,0,0);
+
+        assertEquals(new Position(50,0,0),shipMovementResolver.resolveNextTurnPosition(100));
+    }
+
+    @Test
+    void nextPosition_AllOarToUse_0Voile_0Rudder() {
+        Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,false));
+        Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(0,0,0));
+        shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
+        shipMovementResolver.setNewShipState(0,0,5,5);
+
+        assertEquals(new Position(165.0000000000003,0,0),shipMovementResolver.resolveNextTurnPosition(100));
+    }
+
+    ////////////////// Runner test
+
+    @Test
+    void rudderTestRound0() {
+        Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,false));
+        Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(2852.173913043478,1978.827361563518,-1.0297442586766543));
+        shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
+        shipMovementResolver.setNewShipState(0.0930508042072854,1,5,5);
+
+        assertEquals(new Position(2958.9016642451215, 1818.4806682445735, -0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(100));
+    }
+
+    @Test
+    void rudderTestRound1() {
+        Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,false));
+        Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(2958.9016642451215, 1818.4806682445735, -0.9366934544693667));
+        shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
+        shipMovementResolver.setNewShipState(0.0,1,5,5);
+
+        assertEquals(new Position(3074.2068908993306,1661.6918931870753,-0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(100));
     }
 
 }
