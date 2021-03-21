@@ -5,14 +5,10 @@ public class Wind {
     public double orientation;
     public double strength;
 
-    Wind(){}
+    public Wind(){}
 
-    public Wind(Double orientation){
+    public Wind(double strength, double orientation){
         this.orientation=orientation;
-    }
-
-    public void setWind(Wind wind){
-        this.orientation = wind.orientation;
-        this.strength = wind.strength;
+        this.strength = strength;
     }
 }

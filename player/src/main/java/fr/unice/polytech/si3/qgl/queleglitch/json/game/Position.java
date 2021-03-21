@@ -41,18 +41,18 @@ public class Position {
         return Math.atan(opo/adj);
     }
 
-    public Position positionNextRound(double angle,double vitesse){
-        int numberOfIterations=100;
-        Position newPosition=new Position(x,y,orientation);
+    public Position getNextPosition(double angle, double speed){
+        final double NB_PART = 100.0;
+        double speedPart = speed/NB_PART;
+        double anglePart = angle/NB_PART;
+        Position newPosition = new Position(x,y,orientation);
 
-        for(int i=0;i<numberOfIterations;i++){
-            newPosition.x+=Math.cos(angle*i/numberOfIterations)*(vitesse/numberOfIterations);
-            newPosition.y+=Math.sin(angle*i/numberOfIterations)*(vitesse/numberOfIterations);
-            newPosition.orientation+=angle/numberOfIterations;
+        for (double i = 0.0; i < NB_PART; i++) {
+            newPosition.orientation += anglePart;
+            newPosition.x += Math.cos(orientation)*speedPart;
+            newPosition.y += Math.sin(orientation)*speedPart;
         }
-
         return newPosition;
-
     }
 
     /**

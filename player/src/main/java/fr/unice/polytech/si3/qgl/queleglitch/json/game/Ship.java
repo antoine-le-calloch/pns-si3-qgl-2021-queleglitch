@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.*;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
@@ -55,14 +56,6 @@ public class Ship {
     public void setPosition(Position position) {
         this.position = position;
     }
-    /**
-     * <p>Override of toString method, allow to print a different string to give the Ship's informations</p>
-     */
-    @Override
-    public String toString(){
-        return "Bateau | orientation : " + position.orientation +
-                " | x : " + position.x + " | y : " + position.y;
-    }
 
     public Entities[] getEntities() {
         return entities;
@@ -111,5 +104,14 @@ public class Ship {
 
     public List<Rame> getRamesAtLeft(){
         return getRames().stream().filter(rame -> rame.getY()==0).collect(Collectors.toList());
+    }
+
+    /**
+     * <p>Override of toString method, allow to print a different string to give the Ship's informations</p>
+     */
+    @Override
+    public String toString(){
+        return "Bateau | orientation : " + position.orientation +
+                " | x : " + position.x + " | y : " + position.y;
     }
 }

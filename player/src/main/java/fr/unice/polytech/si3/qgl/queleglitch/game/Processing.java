@@ -22,7 +22,8 @@ public class Processing {
 
     public void setDataNewRound(NextRound nextRound){
         informationGame.setShip(nextRound.getShip());
-        regattaResolver = new RegattaResolver(informationGame, nextRound);
+        informationGame.setWind(nextRound.getWind());
+        regattaResolver = new RegattaResolver(informationGame);
 
         if(informationGame.isCheckpointReached()){
             informationGame.moveToNextCheckpoint();
@@ -30,7 +31,7 @@ public class Processing {
     }
 
     public List<Action> actionForTheRound(){
-        ToolsToUse toolsToUse = regattaResolver.getToolsToUse();
+        ToolsToUse toolsToUse = regattaResolver.resolveToolsToUse();
         CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), toolsToUse);
         return createActions.buildingActions();
     }

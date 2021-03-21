@@ -4,6 +4,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 
 /**
  * Classe permettant de gerer les éléments principaux du jeux : {@link Ship}, {@link Sailor}
@@ -18,6 +19,7 @@ public class InformationGame {
     public Sailor[] sailors;
     public Ship ship;
     public Goal goal;
+    public Wind wind;
 
     public InformationGame(Sailor[] sailors, Ship ship, Goal goal){
         this.sailors = sailors;
@@ -25,9 +27,10 @@ public class InformationGame {
         this.goal = goal;
     }
 
-    public InformationGame(Goal goal, Ship ship){
+    public InformationGame(Goal goal, Ship ship, Wind wind){
         this.goal = goal;
         this.ship = ship;
+        this.wind = wind;
     }
 
     public InformationGame(){}
@@ -51,12 +54,23 @@ public class InformationGame {
         return goal;
     }
 
+    /**
+     * @return <b>The Wind.</b>
+     */
+    public Wind getWind() {
+        return wind;
+    }
+
     public void setShip(Ship ship){
         this.ship = ship;
     }
 
     public void setGoal(Goal goal) {
         this.goal = goal;
+    }
+
+    public void setWind(Wind wind){
+        this.wind = wind;
     }
 
     public boolean isCheckpointReached() {

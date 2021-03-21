@@ -18,16 +18,16 @@ public class RegattaResolver {
     VoilesStrategy voilesStrategy;
     InformationGame informationGame;
 
-    public RegattaResolver(InformationGame informationGame, NextRound nextRound) {
+    public RegattaResolver(InformationGame informationGame) {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame.getShip().getPosition());
         strategy = new Strategy(informationGame);
         oarStrategy = new OarStrategy(informationGame.sailors.length, informationGame.ship.getRames().size());
         rudderStrategy = new RudderStrategy(informationGame);
-        voilesStrategy = new VoilesStrategy(informationGame,nextRound);
+        voilesStrategy = new VoilesStrategy(informationGame);
     }
 
-    public ToolsToUse getToolsToUse(){
+    public ToolsToUse resolveToolsToUse(){
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(((RegattaGoal) informationGame.getGoal()).getPositionActualOptiCheckpoint());
 
         double rudderAngle = this.rudderStrategy.getRudderAngle(angleToCorrect);
@@ -36,9 +36,5 @@ public class RegattaResolver {
         int[] tabNbLeftAndRightOar = oarStrategy.getNbLeftAndRightOar(rudderAngle != 0, Math.abs(actionOnVoiles), differenceOarRightLeft);
 
         return strategy.getToolsToUse(rudderAngle,actionOnVoiles,tabNbLeftAndRightOar[0],tabNbLeftAndRightOar[1]);
-    }
-
-    public Geometry getGeometry() {
-        return geometry;
     }
 }

@@ -62,7 +62,7 @@ class ShipTest {
             checkpoint = new Checkpoint(positionCheckpoint,shapeCheckpoint);
             ship = new Ship(positionShip);
             regattaGoal = new RegattaGoal(new Checkpoint[]{checkpoint});
-            informationGame = new InformationGame(regattaGoal,ship);
+            informationGame = new InformationGame(regattaGoal,ship,null);
 
             assertTrue(ship.isCheckpointReached(checkpoint));
         }
@@ -76,7 +76,7 @@ class ShipTest {
             checkpoint = new Checkpoint(positionCheckpoint,shapeCheckpoint);
             ship = new Ship(positionShip);
             regattaGoal = new RegattaGoal(new Checkpoint[]{checkpoint});
-            informationGame = new InformationGame(regattaGoal,ship);
+            informationGame = new InformationGame(regattaGoal,ship,null);
 
             assertTrue(ship.isCheckpointReached(checkpoint));
         }
@@ -90,7 +90,7 @@ class ShipTest {
             checkpoint = new Checkpoint(positionCheckpoint,shapeCheckpoint);
             ship = new Ship(positionShip);
             regattaGoal = new RegattaGoal(new Checkpoint[]{checkpoint});
-            informationGame = new InformationGame(regattaGoal,ship);
+            informationGame = new InformationGame(regattaGoal,ship,null);
 
             assertFalse(ship.isCheckpointReached(checkpoint));
         }
