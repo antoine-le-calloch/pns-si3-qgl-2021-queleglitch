@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch;
+/*package fr.unice.polytech.si3.qgl.queleglitch;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,4 +63,4 @@ class CockpitTest {
             return null;
         }
     }
-}
+}*/
