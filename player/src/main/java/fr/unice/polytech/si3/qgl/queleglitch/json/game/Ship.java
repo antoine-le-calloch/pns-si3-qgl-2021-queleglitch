@@ -42,7 +42,7 @@ public class Ship {
     }
 
     public boolean isCheckpointReached(Checkpoint checkpoint){
-        return checkpoint.position.getNorme(position) < ((Circle) checkpoint.getShape()).getRadius();
+        return checkpoint.position.getNorm(position) < ((Circle) checkpoint.getShape()).getRadius();
     }
 
     /**
@@ -54,14 +54,6 @@ public class Ship {
 
     public void setPosition(Position position) {
         this.position = position;
-    }
-    /**
-     * <p>Override of toString method, allow to print a different string to give the Ship's informations</p>
-     */
-    @Override
-    public String toString(){
-        return "Bateau | orientation : " + position.orientation +
-                " | x : " + position.x + " | y : " + position.y;
     }
 
     public Entities[] getEntities() {
@@ -111,5 +103,14 @@ public class Ship {
 
     public List<Rame> getRamesAtLeft(){
         return getRames().stream().filter(rame -> rame.getY()==0).collect(Collectors.toList());
+    }
+
+    /**
+     * <p>Override of toString method, allow to print a different string to give the Ship's informations</p>
+     */
+    @Override
+    public String toString(){
+        return "Bateau | orientation : " + position.orientation +
+                " | x : " + position.x + " | y : " + position.y;
     }
 }

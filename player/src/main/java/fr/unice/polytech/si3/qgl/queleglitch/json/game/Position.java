@@ -20,11 +20,9 @@ public class Position {
         this.orientation = orientation;
     }
 
-    public Position(){
+    public Position(){ }
 
-    }
-
-    public double getNorme(Position position){
+    public double getNorm(Position position){
         double distance;
 
         distance = Math.pow(x-position.getX(),2);
@@ -41,18 +39,14 @@ public class Position {
         return Math.atan(opo/adj);
     }
 
-    public Position positionNextRound(double angle,double vitesse){
-        int numberOfIterations=100;
-        Position newPosition=new Position(x,y,orientation);
+    public Position calculateNewPosition(double angle, double speed){
+        Position nextPosition = new Position(x,y,orientation);
 
-        for(int i=0;i<numberOfIterations;i++){
-            newPosition.x+=Math.cos(angle*i/numberOfIterations)*(vitesse/numberOfIterations);
-            newPosition.y+=Math.sin(angle*i/numberOfIterations)*(vitesse/numberOfIterations);
-            newPosition.orientation+=angle/numberOfIterations;
-        }
+        nextPosition.x += Math.cos(nextPosition.orientation)*speed;
+        nextPosition.y += Math.sin(nextPosition.orientation)*speed;
+        nextPosition.orientation += angle;
 
-        return newPosition;
-
+        return nextPosition;
     }
 
     /**
