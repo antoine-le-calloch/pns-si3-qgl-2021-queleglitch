@@ -3,38 +3,47 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.OarStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.RudderStrategy;
-import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.Strategy;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.VoilesStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 
 public class RegattaResolver {
 
     Geometry geometry;
-    Strategy strategy;
     OarStrategy oarStrategy;
     RudderStrategy rudderStrategy;
     VoilesStrategy voilesStrategy;
     InformationGame informationGame;
+    ShipMovementResolver shipMovementResolver;
 
     public RegattaResolver(InformationGame informationGame) {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame.getShip().getPosition());
-        strategy = new Strategy(informationGame);
         oarStrategy = new OarStrategy(informationGame.sailors.length, informationGame.ship.getRames().size());
         rudderStrategy = new RudderStrategy(informationGame);
         voilesStrategy = new VoilesStrategy(informationGame);
+        shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
     }
 
-    public ToolsToUse resolveToolsToUse(){
-        Double angleToCorrect = geometry.calculateAngleToCheckPoint(((RegattaGoal) informationGame.getGoal()).getPositionActualOptiCheckpoint());
-
+    public ToolsToUse resolveToolsToUse(Position positionCheckpointToReach) {
+        Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
         double rudderAngle = this.rudderStrategy.getRudderAngle(angleToCorrect);
         int actionOnVoiles = this.voilesStrategy.getVoilesAction();
         int differenceOarRightLeft = oarStrategy.getDifferenceOarRightLeft(angleToCorrect);
         int[] tabNbLeftAndRightOar = oarStrategy.getNbLeftAndRightOar(rudderAngle != 0, Math.abs(actionOnVoiles), differenceOarRightLeft);
 
-        return strategy.getToolsToUse(rudderAngle,actionOnVoiles,tabNbLeftAndRightOar[0],tabNbLeftAndRightOar[1]);
+        if(Math.abs(angleToCorrect) < Math.PI/4) {
+            while (shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnVoiles, tabNbLeftAndRightOar)) {
+                if (tabNbLeftAndRightOar[0] >= 1 && tabNbLeftAndRightOar[1] >= 1) {
+                    tabNbLeftAndRightOar[0]--;
+                    tabNbLeftAndRightOar[1]--;
+                } else if (actionOnVoiles != -1)
+                    actionOnVoiles = informationGame.getShip().getVoiles().get(0).opened ? -1 : 0;
+                else
+                    return null;
+            }
+        }
+        return new ToolsToUse(rudderAngle,actionOnVoiles,tabNbLeftAndRightOar[0],tabNbLeftAndRightOar[1]);
     }
 }

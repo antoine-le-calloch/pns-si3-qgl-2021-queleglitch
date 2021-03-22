@@ -55,6 +55,15 @@ public class InformationGame {
     }
 
     /**
+     * @return <b>The RegattaGoal.</b>
+     */
+    public RegattaGoal getRegattaGoal() {
+        if(goal instanceof RegattaGoal)
+            return (RegattaGoal) goal;
+        return null;
+    }
+
+    /**
      * @return <b>The Wind.</b>
      */
     public Wind getWind() {
