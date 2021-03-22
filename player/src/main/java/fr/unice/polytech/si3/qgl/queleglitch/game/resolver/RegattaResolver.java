@@ -6,7 +6,6 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.RudderStrat
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.VoilesStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
 public class RegattaResolver {
 
@@ -28,8 +27,8 @@ public class RegattaResolver {
 
     public ToolsToUse resolveToolsToUse(Position positionCheckpointToReach) {
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
-        double rudderAngle = this.rudderStrategy.getRudderAngle(angleToCorrect);
-        int actionOnVoiles = this.voilesStrategy.getVoilesAction();
+        double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
+        int actionOnVoiles = voilesStrategy.getVoilesAction();
         int differenceOarRightLeft = oarStrategy.getDifferenceOarRightLeft(angleToCorrect);
         int[] tabNbLeftAndRightOar = oarStrategy.getNbLeftAndRightOar(rudderAngle != 0, Math.abs(actionOnVoiles), differenceOarRightLeft);
 
@@ -39,7 +38,7 @@ public class RegattaResolver {
                     tabNbLeftAndRightOar[0]--;
                     tabNbLeftAndRightOar[1]--;
                 } else if (actionOnVoiles != -1)
-                    actionOnVoiles = informationGame.getShip().getVoiles().get(0).opened ? -1 : 0;
+                    actionOnVoiles = informationGame.getShip().getVoiles().get(0).getOpenned() ? -1 : 0;
                 else
                     return null;
             }

@@ -104,7 +104,6 @@ public class SmartCreateActions {
                 actionsList.add(buildMovingAction(sailorToMove,voile));
                 actionsList.add((useVoile > 0) ? new LiftSail(sailorToMove.getId()) : new LowerSail(sailorToMove.getId()));
                 sailorsAvailable.remove(sailorToMove);
-                voile.changeVoile();
             }
             else {
                 entitiesTooFar.add(voile);

@@ -18,8 +18,6 @@ public class CreateActions {
     }
 
     public List<Action> buildingActions() {
-
-
         return smartCreateActions.createActions(toolsToUse.rudderAngle, toolsToUse.actionOnVoiles, toolsToUse.nbLeftRamesToUse, toolsToUse.nbRightRamesToUse);
     }
 }

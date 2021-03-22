@@ -39,6 +39,9 @@ public class Processing {
         ToolsToUse toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getPositionActualOptiCheckpoint());
         if(toolsToUse == null)
             toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getActualCheckpoint().getPosition());
+        if(toolsToUse == null)
+            toolsToUse = new ToolsToUse(0,0,1,1);
+
         CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), toolsToUse);
         return createActions.buildingActions();
     }

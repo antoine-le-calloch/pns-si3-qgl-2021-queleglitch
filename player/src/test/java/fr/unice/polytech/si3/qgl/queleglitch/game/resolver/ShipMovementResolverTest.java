@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Rame;
@@ -494,35 +493,31 @@ class ShipMovementResolverTest {
 
     //////////////////////////////////////    Test de resolveNewPosition()     //////////////////////////////////////
 
-    /*@Test
-    void nextPosition_0OarToUse_0Voile_0Rudder() {
+    @Test
+    void nextTurnPosition_0OarToUse_0Voile_0Rudder() {
         Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,false));
         Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(0,0,0));
-        shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
-        shipMovementResolver.isCheckpointPassed(new ToolsToUse(0,0,0,0));
+        ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0), null);
 
-        assertEquals(new Position(0,0,0),shipMovementResolver.resolveNextTurnPosition(100));
-        assertEquals(165+50*Math.cos(1.0297442586766543), shipMovementResolver.getSpeed(1, new int[]{5,5},1.0297442586766543));
+        assertEquals(new Position(0,0,0),shipMovementResolver.resolveNextTurnPosition(0,0,new int[] {0,0}));
     }
 
     @Test
     void nextPosition_0OarToUse_1Voile_0Rudder() {
         Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,true));
         Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(0,0,0));
-        shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
-        shipMovementResolver.isCheckpointPassed(new ToolsToUse(0,0,0,0));
+        ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0),null);
 
-        assertEquals(new Position(50,0,0),shipMovementResolver.resolveNextTurnPosition(100));
+        assertEquals(new Position(50,0,0),shipMovementResolver.resolveNextTurnPosition(0,0,new int[] {0,0}));
     }
 
     @Test
     void nextPosition_AllOarToUse_0Voile_0Rudder() {
         Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,false));
         Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(0,0,0));
-        shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
-        shipMovementResolver.isCheckpointPassed(new ToolsToUse(0,0,5,5));
+        ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0), null);
 
-        assertEquals(new Position(165.0000000000003,0,0),shipMovementResolver.resolveNextTurnPosition(100));
+        assertEquals(new Position(165.0000000000003,0,0),shipMovementResolver.resolveNextTurnPosition(0,0,new int[] {5,5}));
     }
 
     ////////////////// Runner test
@@ -531,20 +526,17 @@ class ShipMovementResolverTest {
     void rudderTestRound0() {
         Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,false));
         Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(2852.173913043478,1978.827361563518,-1.0297442586766543));
-        shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
-        shipMovementResolver.isCheckpointPassed(new ToolsToUse(0.0930508042072854,1,5,5));
+        ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0),null);
 
-        assertEquals(new Position(2958.9016642451215, 1818.4806682445735, -0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(100));
+        assertEquals(new Position(2958.9016642451215, 1818.4806682445735, -0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(0.0930508042072854,1,new int[] {5,5}));
     }
 
     @Test
     void rudderTestRound1() {
         Mockito.when(mockList1Voile.get(0)).thenReturn(new Voile(0,0,false));
         Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(2958.9016642451215, 1818.4806682445735, -0.9366934544693667));
-        shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0));
-        shipMovementResolver.isCheckpointPassed(new ToolsToUse(0.0,1,5,5));
+        ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0),null);
 
-        assertEquals(new Position(3074.2068908993306,1661.6918931870753,-0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(100));
-    }*/
-
+        assertEquals(new Position(3074.2068908993306, 1661.6918931870753, -0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(0.0,1,new int[] {5,5}));
+    }
 }

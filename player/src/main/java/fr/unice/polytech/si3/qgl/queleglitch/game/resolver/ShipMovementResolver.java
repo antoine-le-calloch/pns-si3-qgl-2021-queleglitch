@@ -10,7 +10,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 
 public class ShipMovementResolver {
 
-    private final int LIFT = 0;
+    private final int LIFT = 1;
     private final int DO_NOTHING = 0;
     final double NB_PART = 100.0;
 
@@ -28,29 +28,8 @@ public class ShipMovementResolver {
         NB_VOILES = ship.getVoiles().size();
     }
 
-    public Boolean isCheckpointPassed(Position checkpointPosition, double rudderAngle, int actionOnVoiles, int []tabNbLeftAndRightOar){
-        Position nextTurnPosition = resolveNextTurnPosition(rudderAngle, actionOnVoiles, tabNbLeftAndRightOar);
-        Geometry geometry = new Geometry(nextTurnPosition);
-        if(Math.abs(geometry.calculateAngleToCheckPoint(checkpointPosition)) > Math.PI/2)
-            return regattaGoal.getActualCheckpoint().position.getNorm(ship.getPosition()) > ((Circle) regattaGoal.getActualCheckpoint().getShape()).radius;
-        return false;
-    }
-
-    //angle we are going to turn using the elements given by this object
-    public double getAngleToTurn(double rudderAngle, int[] tabNbLeftAndRightOar){
-        return rudderAngle + ((tabNbLeftAndRightOar[1] - tabNbLeftAndRightOar[0])*Math.PI/NB_RAMES);
-    }
-
-
-    //speed we are going to have using the elements given by this object
-    public double getSpeed(int nbHighVoiles, int[] tabNbLeftAndRightOar, double shipOrientation){
-        double speedWithRames = 165.0*(tabNbLeftAndRightOar[0]+tabNbLeftAndRightOar[1])/NB_RAMES;
-        double speedWithWind = (1.0* nbHighVoiles/NB_VOILES)*wind.strength*Math.cos(Math.abs(shipOrientation - wind.orientation));
-        return speedWithRames + speedWithWind;
-    }
-
     public Position resolveNextTurnPosition(double rudderAngle, int actionOnVoiles, int[] tabNbLeftAndRightOar){
-        int nbHighVoiles = (actionOnVoiles == DO_NOTHING && ship.getVoiles().get(0).opened) || (actionOnVoiles == LIFT)?NB_VOILES:0;
+        int nbHighVoiles = (actionOnVoiles == DO_NOTHING && ship.getVoiles().get(0).getOpenned()) || (actionOnVoiles == LIFT)?NB_VOILES:0;
         double anglePart = getAngleToTurn(rudderAngle, tabNbLeftAndRightOar)/NB_PART;
         double speedPart;
         Position newPosition = new Position(ship.getPosition().x,ship.getPosition().y,ship.getPosition().orientation);
@@ -60,5 +39,26 @@ public class ShipMovementResolver {
             newPosition = newPosition.calculateNewPosition(anglePart,speedPart);
         }
         return newPosition;
+    }
+
+    //angle we are going to turn using the elements given
+    public double getAngleToTurn(double rudderAngle, int[] tabNbLeftAndRightOar){
+        return rudderAngle + ((tabNbLeftAndRightOar[1] - tabNbLeftAndRightOar[0])*Math.PI/NB_RAMES);
+    }
+
+
+    //speed we are going to have using the elements given
+    public double getSpeed(int nbHighVoiles, int[] tabNbLeftAndRightOar, double shipOrientation){
+        double speedWithRames = 165.0*(tabNbLeftAndRightOar[0]+tabNbLeftAndRightOar[1])/NB_RAMES;
+        double speedWithWind = (1.0* nbHighVoiles/NB_VOILES)*wind.strength*Math.cos(shipOrientation - wind.orientation);
+        return speedWithRames + speedWithWind;
+    }
+
+    public Boolean isCheckpointPassed(Position checkpointPosition, double rudderAngle, int actionOnVoiles, int []tabNbLeftAndRightOar){
+        Position nextTurnPosition = resolveNextTurnPosition(rudderAngle, actionOnVoiles, tabNbLeftAndRightOar);
+        Geometry geometry = new Geometry(nextTurnPosition);
+        if(Math.abs(geometry.calculateAngleToCheckPoint(checkpointPosition)) > Math.PI/2)
+            return regattaGoal.getActualCheckpoint().position.getNorm(ship.getPosition()) > ((Circle) regattaGoal.getActualCheckpoint().getShape()).radius;
+        return false;
     }
 }
