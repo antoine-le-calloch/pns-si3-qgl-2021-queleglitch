@@ -205,6 +205,7 @@ class GeometryTest {
             assertEquals(-Math.PI/4, geometry.calculateAngleToCheckPoint(checkPointPosition));
         }
 
+
     }
 
     @Nested

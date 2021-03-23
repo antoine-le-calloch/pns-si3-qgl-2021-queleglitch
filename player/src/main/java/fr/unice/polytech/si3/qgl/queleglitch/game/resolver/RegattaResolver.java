@@ -26,6 +26,16 @@ public class RegattaResolver {
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
     }
 
+
+    public RegattaResolver(Geometry geometry, OarStrategy oarStrategy, RudderStrategy rudderStrategy, VoilesStrategy voilesStrategy,ShipMovementResolver shipMovementResolver) {
+        this.geometry = geometry;
+        this.oarStrategy = oarStrategy;
+        this.rudderStrategy = rudderStrategy;
+        this.voilesStrategy = voilesStrategy;
+        this.informationGame = new InformationGame();
+        this.shipMovementResolver = shipMovementResolver;
+    }
+
     public ToolsToUse resolveToolsToUse(Position positionCheckpointToReach) {
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);

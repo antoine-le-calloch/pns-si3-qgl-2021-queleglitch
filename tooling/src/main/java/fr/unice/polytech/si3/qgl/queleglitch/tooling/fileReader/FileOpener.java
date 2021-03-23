@@ -1,4 +1,4 @@
-package fr.unice.polytech.si3.qgl.queleglitch.fileReader;
+package fr.unice.polytech.si3.qgl.queleglitch.tooling.fileReader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

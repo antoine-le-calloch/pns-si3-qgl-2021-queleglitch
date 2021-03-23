@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
+import fr.unice.polytech.si3.qgl.queleglitch.Cockpit;
 import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,9 @@ class ToolsToUseTest {
     void NotEquals_All1_All0(){
         assertNotEquals(toolsToUse1, toolsToUse0);
     }
+
+    @Test
+    void NotEquals_NotInstanceOf(){ assertNotEquals(toolsToUse0,new Cockpit());}
 
     ///////////////////////////////////////////////// toString() ////////////////////////////////////////////
 
