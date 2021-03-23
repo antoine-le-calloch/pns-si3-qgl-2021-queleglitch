@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
+import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.OarStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.RudderStrategy;
@@ -28,21 +29,21 @@ public class RegattaResolver {
     public ToolsToUse resolveToolsToUse(Position positionCheckpointToReach) {
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
-        int actionOnVoiles = voilesStrategy.getVoilesAction();
+        VoileAction actionOnVoiles = voilesStrategy.getVoilesAction();
         int differenceOarRightLeft = oarStrategy.getDifferenceOarRightLeft(angleToCorrect);
-        int[] tabNbLeftAndRightOar = oarStrategy.getNbLeftAndRightOar(rudderAngle != 0, Math.abs(actionOnVoiles), differenceOarRightLeft);
+        int[] tabNbLeftAndRightOar = oarStrategy.getNbLeftAndRightOar(rudderAngle != 0,actionOnVoiles != VoileAction.DO_NOTHING, differenceOarRightLeft);
 
         if(Math.abs(angleToCorrect) < Math.PI/4) {
             while (shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnVoiles, tabNbLeftAndRightOar)) {
                 if (tabNbLeftAndRightOar[0] >= 1 && tabNbLeftAndRightOar[1] >= 1) {
                     tabNbLeftAndRightOar[0]--;
                     tabNbLeftAndRightOar[1]--;
-                } else if (actionOnVoiles != -1)
-                    actionOnVoiles = informationGame.getShip().getVoiles().get(0).getOpenned() ? -1 : 0;
+                } else if (actionOnVoiles != VoileAction.LOWER)
+                    actionOnVoiles = informationGame.getShip().getVoiles().get(0).getOpenned() ? VoileAction.LOWER : VoileAction.DO_NOTHING;
                 else
                     return null;
             }
         }
-        return new ToolsToUse(rudderAngle,actionOnVoiles,tabNbLeftAndRightOar[0],tabNbLeftAndRightOar[1]);
+        return new ToolsToUse(rudderAngle,actionOnVoiles,tabNbLeftAndRightOar);
     }
 }

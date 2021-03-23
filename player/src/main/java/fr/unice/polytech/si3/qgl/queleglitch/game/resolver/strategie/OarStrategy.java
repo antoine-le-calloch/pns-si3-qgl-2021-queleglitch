@@ -23,15 +23,13 @@ public class OarStrategy {
         return 0;
     }
 
-    public int[] getNbLeftAndRightOar(boolean useRudder, int nbSailToUse, int differenceOarRightLeft) {
+    public int[] getNbLeftAndRightOar(boolean useGouvernail, boolean useVoile, int differenceOarRightLeft) {
         int nbLeftRamesToUse = -Math.min(0,differenceOarRightLeft);
         int nbRightRamesToUse = Math.max(0,differenceOarRightLeft);
         int nbSailorsForOar = NB_SAILORS;
 
-        if (useRudder)
-            nbSailorsForOar--;
-
-        nbSailorsForOar -= nbSailToUse;
+        nbSailorsForOar -= (useGouvernail) ? 1 : 0;
+        nbSailorsForOar -= (useVoile) ? 1 : 0;
 
         while (nbLeftRamesToUse + nbRightRamesToUse <= nbSailorsForOar - 2) {
             if(nbLeftRamesToUse >= NB_RAMES/2 || nbRightRamesToUse >= NB_RAMES/2)

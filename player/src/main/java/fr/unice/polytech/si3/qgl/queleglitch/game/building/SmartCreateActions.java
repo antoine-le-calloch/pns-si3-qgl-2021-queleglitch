@@ -1,5 +1,6 @@
-package fr.unice.polytech.si3.qgl.queleglitch.game.building.calcul;
+package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
+import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
@@ -24,7 +25,7 @@ public class SmartCreateActions {
     public final List<Entities> entitiesTooFar;
     public final List<Action> actionsList;
 
-    public SmartCreateActions(Sailor[] sailors, Ship ship){
+    public SmartCreateActions(Ship ship, Sailor[] sailors){
         actionsList = new ArrayList<>();
         entitiesTooFar = new ArrayList<>();
 
@@ -37,14 +38,14 @@ public class SmartCreateActions {
         this.sailorsAvailable = new ArrayList<>(Arrays.asList(sailors));
     }
 
-    public List<Action> createActions(double rudderAngle, int useVoile, int nbLeftRamesToUse, int nbRightRamesToUse){
-        if(rudderAngle != 0) {
-            movingAndUseGouvernail(rudderAngle);
+    public List<Action> createActions(ToolsToUse toolsToUse){
+        if(toolsToUse.getRudderAngle() != 0) {
+            movingAndUseGouvernail(toolsToUse.getRudderAngle());
         }
-        if(useVoile != 0) {
-            movingAndUseVoiles(useVoile);
+        if(toolsToUse.getActionOnVoile() != VoileAction.DO_NOTHING) {
+            movingAndUseVoiles(toolsToUse.getActionOnVoile());
         }
-        movingAndUseRames(nbLeftRamesToUse, nbRightRamesToUse);
+        movingAndUseRames(toolsToUse.getTabNbLeftAndRightOar());
         movingToEntitiesTooFar();
         movingToCenter();
 
@@ -64,10 +65,10 @@ public class SmartCreateActions {
         }
     }
 
-    public void movingAndUseRames(int nbLeftRamesToUse, int nbRightRamesToUse){
+    public void movingAndUseRames(int[] tabNbLeftAndRightOar){
         Sailor sailorToMove = null;
-        for (int i = 0; i < nbLeftRamesToUse; i++) {
-            for (int j = leftRames.length - i - 1; j >= nbLeftRamesToUse - i -1; j--) {
+        for (int i = 0; i < tabNbLeftAndRightOar[0]; i++) {
+            for (int j = leftRames.length - i - 1; j >= tabNbLeftAndRightOar[0] - i -1; j--) {
                 if((sailorToMove = nearestSailorBehind5(leftRames[j], sailorsAvailable)) != null) {
                     actionsList.add(buildMovingAction(sailorToMove, leftRames[j]));
                     actionsList.add(new Oar(sailorToMove.getId()));
@@ -76,13 +77,13 @@ public class SmartCreateActions {
                 }
             }
             if(sailorToMove == null) {
-                entitiesTooFar.add(leftRames[(i == 0) ? nbLeftRamesToUse : leftRames.length-i]);
+                entitiesTooFar.add(leftRames[(i == 0) ? tabNbLeftAndRightOar[0] : leftRames.length-i]);
                 break;
             }
         }
 
-        for (int i = 0; i < nbRightRamesToUse; i++) {
-            for (int j = leftRames.length - i - 1; j >= nbRightRamesToUse - i - 1; j--) {
+        for (int i = 0; i < tabNbLeftAndRightOar[1]; i++) {
+            for (int j = leftRames.length - i - 1; j >= tabNbLeftAndRightOar[1] - i - 1; j--) {
                 if((sailorToMove = nearestSailorBehind5(rightRames[j], sailorsAvailable)) != null) {
                     actionsList.add(buildMovingAction(sailorToMove, rightRames[j]));
                     actionsList.add(new Oar(sailorToMove.getId()));
@@ -91,18 +92,18 @@ public class SmartCreateActions {
                 }
             }
             if(sailorToMove == null) {
-                entitiesTooFar.add(rightRames[(i == 0) ? nbLeftRamesToUse : leftRames.length-i]);
+                entitiesTooFar.add(rightRames[(i == 0) ? tabNbLeftAndRightOar[1] : leftRames.length-i]);
                 break;
             }
         }
     }
 
-    public void movingAndUseVoiles(int useVoile){
+    public void movingAndUseVoiles(VoileAction actionOnVoile){
         Sailor sailorToMove;
         for (Voile voile : voiles) {
             if((sailorToMove = nearestSailorBehind5(voile, sailorsAvailable)) != null){
                 actionsList.add(buildMovingAction(sailorToMove,voile));
-                actionsList.add((useVoile > 0) ? new LiftSail(sailorToMove.getId()) : new LowerSail(sailorToMove.getId()));
+                actionsList.add((actionOnVoile == VoileAction.LIFT) ? new LiftSail(sailorToMove.getId()) : new LowerSail(sailorToMove.getId()));
                 sailorsAvailable.remove(sailorToMove);
             }
             else {

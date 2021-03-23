@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
+import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Rame;
@@ -499,7 +500,7 @@ class ShipMovementResolverTest {
         Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(0,0,0));
         ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0), null);
 
-        assertEquals(new Position(0,0,0),shipMovementResolver.resolveNextTurnPosition(0,0,new int[] {0,0}));
+        assertEquals(new Position(0,0,0),shipMovementResolver.resolveNextTurnPosition(0, VoileAction.DO_NOTHING,new int[] {0,0}));
     }
 
     @Test
@@ -508,7 +509,7 @@ class ShipMovementResolverTest {
         Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(0,0,0));
         ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0),null);
 
-        assertEquals(new Position(50,0,0),shipMovementResolver.resolveNextTurnPosition(0,0,new int[] {0,0}));
+        assertEquals(new Position(50,0,0),shipMovementResolver.resolveNextTurnPosition(0,VoileAction.DO_NOTHING,new int[] {0,0}));
     }
 
     @Test
@@ -517,7 +518,7 @@ class ShipMovementResolverTest {
         Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(0,0,0));
         ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0), null);
 
-        assertEquals(new Position(165.0000000000003,0,0),shipMovementResolver.resolveNextTurnPosition(0,0,new int[] {5,5}));
+        assertEquals(new Position(165.0000000000003,0,0),shipMovementResolver.resolveNextTurnPosition(0,VoileAction.DO_NOTHING,new int[] {5,5}));
     }
 
     ////////////////// Runner test
@@ -528,7 +529,7 @@ class ShipMovementResolverTest {
         Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(2852.173913043478,1978.827361563518,-1.0297442586766543));
         ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0),null);
 
-        assertEquals(new Position(2958.9016642451215, 1818.4806682445735, -0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(0.0930508042072854,1,new int[] {5,5}));
+        assertEquals(new Position(2958.9016642451215, 1818.4806682445735, -0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(0.0930508042072854,VoileAction.LIFT,new int[] {5,5}));
     }
 
     @Test
@@ -537,6 +538,6 @@ class ShipMovementResolverTest {
         Mockito.when(mockShip10Rames1Voile.getPosition()).thenReturn(new Position(2958.9016642451215, 1818.4806682445735, -0.9366934544693667));
         ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Rames1Voile,new Wind(50,0),null);
 
-        assertEquals(new Position(3074.2068908993306, 1661.6918931870753, -0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(0.0,1,new int[] {5,5}));
+        assertEquals(new Position(3074.2068908993306, 1661.6918931870753, -0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(0.0,VoileAction.LIFT,new int[] {5,5}));
     }
 }

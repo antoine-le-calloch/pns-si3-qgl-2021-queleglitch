@@ -1,17 +1,13 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
+import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 
 public class ShipMovementResolver {
 
-    private final int LIFT = 1;
-    private final int DO_NOTHING = 0;
     final double NB_PART = 100.0;
 
     private final int NB_RAMES;
@@ -28,8 +24,8 @@ public class ShipMovementResolver {
         NB_VOILES = ship.getVoiles().size();
     }
 
-    public Position resolveNextTurnPosition(double rudderAngle, int actionOnVoiles, int[] tabNbLeftAndRightOar){
-        int nbHighVoiles = (actionOnVoiles == DO_NOTHING && ship.getVoiles().get(0).getOpenned()) || (actionOnVoiles == LIFT)?NB_VOILES:0;
+    public Position resolveNextTurnPosition(double rudderAngle, VoileAction actionOnVoiles, int[] tabNbLeftAndRightOar){
+        int nbHighVoiles = (actionOnVoiles == VoileAction.DO_NOTHING && ship.getVoiles().get(0).getOpenned()) || (actionOnVoiles == VoileAction.LIFT) ? NB_VOILES : 0;
         double anglePart = getAngleToTurn(rudderAngle, tabNbLeftAndRightOar)/NB_PART;
         double speedPart;
         Position newPosition = new Position(ship.getPosition().x,ship.getPosition().y,ship.getPosition().orientation);
@@ -49,12 +45,12 @@ public class ShipMovementResolver {
 
     //speed we are going to have using the elements given
     public double getSpeed(int nbHighVoiles, int[] tabNbLeftAndRightOar, double shipOrientation){
-        double speedWithRames = 165.0*(tabNbLeftAndRightOar[0]+tabNbLeftAndRightOar[1])/NB_RAMES;
-        double speedWithWind = (1.0* nbHighVoiles/NB_VOILES)*wind.strength*Math.cos(shipOrientation - wind.orientation);
+        double speedWithRames = 165.0*(tabNbLeftAndRightOar[0] + tabNbLeftAndRightOar[1])/NB_RAMES;
+        double speedWithWind = (1.0*nbHighVoiles/NB_VOILES)*wind.strength*Math.cos(shipOrientation - wind.orientation);
         return speedWithRames + speedWithWind;
     }
 
-    public Boolean isCheckpointPassed(Position checkpointPosition, double rudderAngle, int actionOnVoiles, int []tabNbLeftAndRightOar){
+    public Boolean isCheckpointPassed(Position checkpointPosition, double rudderAngle, VoileAction actionOnVoiles, int []tabNbLeftAndRightOar){
         Position nextTurnPosition = resolveNextTurnPosition(rudderAngle, actionOnVoiles, tabNbLeftAndRightOar);
         Geometry geometry = new Geometry(nextTurnPosition);
         if(Math.abs(geometry.calculateAngleToCheckPoint(checkpointPosition)) > Math.PI/2)

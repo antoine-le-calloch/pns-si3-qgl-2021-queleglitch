@@ -35,7 +35,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_5Sailors_2MoreOnRight_UseRudder_UseSail(){
         oarStrategy = new OarStrategy(5,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 1, 2);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, true, 2);
         assertEquals(0,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -43,7 +43,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_4Sailors_2MoreOnRight_UseRudder_UseSail(){
         oarStrategy = new OarStrategy(4,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 1, 2);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, true, 2);
         assertEquals(0,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -51,7 +51,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_13Sailors_6MoreOnLeft_UseRudder_UseSail(){
         oarStrategy = new OarStrategy(13,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 1, -6);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, true, -6);
         assertEquals(8,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -59,7 +59,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_12Sailors_6MoreOnLeft_UseRudder_UseSail(){
         oarStrategy = new OarStrategy(12,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 1,-6);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, true,-6);
         assertEquals(8,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -69,7 +69,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_5Sailors_2MoreOnRight_UseRudder_NotUseSail(){
         oarStrategy = new OarStrategy(5,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 0,2);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, false,2);
         assertEquals(1,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
@@ -77,7 +77,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_4Sailors_2MoreOnRight_UseRudder_NotUseSail(){
         oarStrategy = new OarStrategy(4,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 0,2);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, false,2);
         assertEquals(0,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -85,7 +85,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_13Sailors_6MoreOnLeft_UseRudder_NotUseSail(){
         oarStrategy = new OarStrategy(13,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 0,-6);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, false,-6);
         assertEquals(9,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
@@ -93,7 +93,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_12Sailors_6MoreOnLeft_UseRudder_NotUseSail(){
         oarStrategy = new OarStrategy(12,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, 0,-6);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(true, false,-6);
         assertEquals(8,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -103,7 +103,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_5Sailors_2MoreOnRight_NotUseRudder_UseSail(){
         oarStrategy = new OarStrategy(5,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 1, 2);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, true, 2);
         assertEquals(1,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
@@ -111,7 +111,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_4Sailors_2MoreOnRight_NotUseRudder_UseSail(){
         oarStrategy = new OarStrategy(4,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 1, 2);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, true, 2);
         assertEquals(0,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -119,7 +119,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_13Sailors_6MoreOnLeft_NotUseRudder_UseSail(){
         oarStrategy = new OarStrategy(13,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 1, -6);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, true, -6);
         assertEquals(9,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
@@ -127,7 +127,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_12Sailors_6MoreOnLeft_NotUseRudder_UseSail(){
         oarStrategy = new OarStrategy(12,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 1, -6);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, true, -6);
         assertEquals(8,nbRightAndLeftOar[0]);
         assertEquals(2,nbRightAndLeftOar[1]);
     }
@@ -137,7 +137,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_5Sailors_2MoreOnRight_NotUseRudder_NotUseSail(){
         oarStrategy = new OarStrategy(5,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 0,2);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, false,2);
         assertEquals(1,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
@@ -145,7 +145,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_4Sailors_2MoreOnRight_NotUseRudder_NotUseSail(){
         oarStrategy = new OarStrategy(4,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 0,2);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, false,2);
         assertEquals(1,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
@@ -153,7 +153,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_13Sailors_6MoreOnLeft_NotUseRudder_NotUseSail(){
         oarStrategy = new OarStrategy(13,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 0,-6);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, false,-6);
         assertEquals(9,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }
@@ -161,7 +161,7 @@ class OarStrategyTest {
     @Test
     void NbOarBySide_12Sailors_6MoreOnLeft_NotUseRudder_NotUseSail(){
         oarStrategy = new OarStrategy(12,20);
-        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, 0, -6);
+        nbRightAndLeftOar = oarStrategy.getNbLeftAndRightOar(false, false, -6);
         assertEquals(9,nbRightAndLeftOar[0]);
         assertEquals(3,nbRightAndLeftOar[1]);
     }

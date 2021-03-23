@@ -1,16 +1,28 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
+import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
+
 public class ToolsToUse {
     public double rudderAngle;
-    public int actionOnVoiles;
-    public int nbLeftRamesToUse;
-    public int nbRightRamesToUse;
+    public VoileAction actionOnVoile;
+    public int[] tabNbLeftAndRightOar;
 
-    public ToolsToUse(double rudderAngle, int actionOnVoiles, int nbLeftRamesToUse, int nbRightRamesToUse){
+    public ToolsToUse(double rudderAngle, VoileAction actionOnVoile, int[] tabNbLeftAndRightOar){
         this.rudderAngle = rudderAngle;
-        this.actionOnVoiles = actionOnVoiles;
-        this.nbLeftRamesToUse = nbLeftRamesToUse;
-        this.nbRightRamesToUse = nbRightRamesToUse;
+        this.actionOnVoile = actionOnVoile;
+        this.tabNbLeftAndRightOar = tabNbLeftAndRightOar;
+    }
+
+    public double getRudderAngle() {
+        return rudderAngle;
+    }
+
+    public VoileAction getActionOnVoile() {
+        return actionOnVoile;
+    }
+
+    public int[] getTabNbLeftAndRightOar() {
+        return tabNbLeftAndRightOar;
     }
 
     @Override
@@ -21,18 +33,13 @@ public class ToolsToUse {
             return false;
         ToolsToUse toolsToUse = (ToolsToUse) obj;
         return this.rudderAngle == toolsToUse.rudderAngle &&
-                this.actionOnVoiles == toolsToUse.actionOnVoiles &&
-                this.nbLeftRamesToUse == toolsToUse.nbLeftRamesToUse &&
-                this.nbRightRamesToUse == toolsToUse.nbRightRamesToUse;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+                this.actionOnVoile == toolsToUse.actionOnVoile &&
+                this.tabNbLeftAndRightOar[0] == toolsToUse.tabNbLeftAndRightOar[0] &&
+                this.tabNbLeftAndRightOar[1] == toolsToUse.tabNbLeftAndRightOar[1];
     }
 
     @Override
     public String toString(){
-        return "Rudder angle : " + this.rudderAngle + ", nb sail : " + this.actionOnVoiles + ", nb left oar to use : " + this.nbLeftRamesToUse + ", nb left oar to use : " + this.nbRightRamesToUse;
+        return "Angle du gouvernail : " + this.rudderAngle + ", nb Voiles : " + this.actionOnVoile + ", nb left rames to use : " + this.tabNbLeftAndRightOar[0] + ", nb right rames to use : " + this.tabNbLeftAndRightOar[1];
     }
 }

@@ -1,14 +1,13 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.CreateActions;
+import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.SmartCreateActions;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.ShipMovementResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 
 import java.util.List;
@@ -40,9 +39,9 @@ public class Processing {
         if(toolsToUse == null)
             toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getActualCheckpoint().getPosition());
         if(toolsToUse == null)
-            toolsToUse = new ToolsToUse(0,0,1,1);
+            toolsToUse = new ToolsToUse(0, VoileAction.DO_NOTHING,new int[]{1,1});
 
-        CreateActions createActions = new CreateActions(informationGame.getShip(), informationGame.getSailors(), toolsToUse);
-        return createActions.buildingActions();
+        SmartCreateActions smartCreateActions = new SmartCreateActions(informationGame.getShip(), informationGame.getSailors());
+        return smartCreateActions.createActions(toolsToUse);
     }
 }
