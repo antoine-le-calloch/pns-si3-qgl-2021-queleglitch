@@ -58,7 +58,7 @@ public class ShipMovementResolver {
         Position nextTurnPosition = resolveNextTurnPosition(rudderAngle, actionOnVoiles, tabNbLeftAndRightOar);
         Geometry geometry = new Geometry(nextTurnPosition);
         if(Math.abs(geometry.calculateAngleToCheckPoint(checkpointPosition)) > Math.PI/2)
-            return regattaGoal.getActualCheckpoint().position.getNorm(ship.getPosition()) > ((Circle) regattaGoal.getActualCheckpoint().getShape()).radius;
+            return regattaGoal.getActualCheckpoint().position.getNorm(ship.getPosition()) > regattaGoal.getActualCheckpoint().getRadius();
         return false;
     }
 }

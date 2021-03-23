@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Polygone;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
@@ -25,13 +26,17 @@ public class Checkpoint {
         this.shape = shape;
     }
 
+    /**
+     * @return <b>The radius of the circle checkpoint.</b>
+     */
+    public double getRadius() {
+        if(shape instanceof Circle)
+            return ((Circle) shape).radius;
+        return -1;
+    }
 
     public Position getPosition(){
         return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 
     public Shape getShape(){
@@ -40,6 +45,10 @@ public class Checkpoint {
 
     public void setShape(Shape shape) {
         this.shape = shape;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     /**

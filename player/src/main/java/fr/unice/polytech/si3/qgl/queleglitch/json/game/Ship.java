@@ -42,7 +42,7 @@ public class Ship {
     }
 
     public boolean isCheckpointReached(Checkpoint checkpoint){
-        return checkpoint.position.getNorm(position) < ((Circle) checkpoint.getShape()).getRadius();
+        return checkpoint.position.getNorm(position) < checkpoint.getRadius();
     }
 
     /**
