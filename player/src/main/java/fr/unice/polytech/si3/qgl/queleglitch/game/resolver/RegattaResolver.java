@@ -39,7 +39,7 @@ public class RegattaResolver {
                     tabNbLeftAndRightOar[0]--;
                     tabNbLeftAndRightOar[1]--;
                 } else if (actionOnVoiles != VoileAction.LOWER)
-                    actionOnVoiles = informationGame.getShip().getVoiles().get(0).getOpenned() ? VoileAction.LOWER : VoileAction.DO_NOTHING;
+                    actionOnVoiles = informationGame.getShip().getVoiles().get(0).isOpenned() ? VoileAction.LOWER : VoileAction.DO_NOTHING;
                 else
                     return null;
             }

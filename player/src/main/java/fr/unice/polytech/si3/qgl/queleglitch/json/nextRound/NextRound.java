@@ -10,17 +10,6 @@ public class NextRound {
     private Ship ship;
     private Wind wind;
     private VisibleEntities[] visibleEntities;
-
-    public  NextRound(){}
-
-    public VisibleEntities getCourant(){
-        for (VisibleEntities visibleEntities:visibleEntities){
-            if(visibleEntities instanceof Courant) {
-                return (Courant) visibleEntities;
-            }
-        }
-        return null;
-    }
     
     /**
      * <p>Getter.</p>

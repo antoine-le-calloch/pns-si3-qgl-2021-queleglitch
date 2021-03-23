@@ -25,7 +25,7 @@ public class ShipMovementResolver {
     }
 
     public Position resolveNextTurnPosition(double rudderAngle, VoileAction actionOnVoiles, int[] tabNbLeftAndRightOar){
-        int nbHighVoiles = (actionOnVoiles == VoileAction.DO_NOTHING && ship.getVoiles().get(0).getOpenned()) || (actionOnVoiles == VoileAction.LIFT) ? NB_VOILES : 0;
+        int nbHighVoiles = (actionOnVoiles == VoileAction.DO_NOTHING && ship.getVoiles().get(0).isOpenned()) || (actionOnVoiles == VoileAction.LIFT) ? NB_VOILES : 0;
         double anglePart = getAngleToTurn(rudderAngle, tabNbLeftAndRightOar)/NB_PART;
         double speedPart;
         Position newPosition = new Position(ship.getPosition().x,ship.getPosition().y,ship.getPosition().orientation);
@@ -54,7 +54,7 @@ public class ShipMovementResolver {
         Position nextTurnPosition = resolveNextTurnPosition(rudderAngle, actionOnVoiles, tabNbLeftAndRightOar);
         Geometry geometry = new Geometry(nextTurnPosition);
         if(Math.abs(geometry.calculateAngleToCheckPoint(checkpointPosition)) > Math.PI/2)
-            return regattaGoal.getActualCheckpoint().position.getNorm(ship.getPosition()) > regattaGoal.getActualCheckpoint().getRadius();
+            return regattaGoal.getActualCheckpoint().getPosition().getNorm(ship.getPosition()) > regattaGoal.getActualCheckpoint().getRadius();
         return false;
     }
 }

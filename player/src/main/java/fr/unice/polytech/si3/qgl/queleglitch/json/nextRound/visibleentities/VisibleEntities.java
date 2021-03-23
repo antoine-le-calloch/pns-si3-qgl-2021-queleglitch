@@ -16,8 +16,6 @@ public class VisibleEntities {
     private Position position;
     private Shape shape;
 
-    public VisibleEntities(){}
-
     /**
      * <p>Getter.</p>
      */

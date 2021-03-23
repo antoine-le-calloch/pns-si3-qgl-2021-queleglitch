@@ -6,9 +6,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.building.SmartCreateActions;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.ShipMovementResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 
 import java.util.List;
 

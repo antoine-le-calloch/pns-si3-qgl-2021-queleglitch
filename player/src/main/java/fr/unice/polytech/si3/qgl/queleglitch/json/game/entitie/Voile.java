@@ -1,17 +1,26 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie;
 
 public class Voile extends Entities {
-    public boolean openned;
-
-    public Voile(int x,int y,boolean opened){
-        this.x=x;
-        this.y=y;
-        this.openned = opened;
-    }
+    private boolean openned;
 
     public Voile(){}
 
-    public boolean getOpenned(){
+    public Voile(int x,int y,boolean opened){
+        super(x,y);
+        this.openned = opened;
+    }
+
+    /**
+     * <p>Getter.</p>
+     */
+    public boolean isOpenned(){
         return openned;
+    }
+
+    /**
+     * <p>Setter.</p>
+     */
+    public void setOpenned(boolean openned) {
+        this.openned = openned;
     }
 }

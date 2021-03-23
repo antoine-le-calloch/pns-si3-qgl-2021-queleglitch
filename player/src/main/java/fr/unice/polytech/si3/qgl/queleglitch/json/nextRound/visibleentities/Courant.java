@@ -5,8 +5,6 @@ public class Courant extends VisibleEntities{
     private String type = "stream";
     private double strength;
 
-    public Courant(){}
-
     /**
      * <p>Getter.</p>
      */

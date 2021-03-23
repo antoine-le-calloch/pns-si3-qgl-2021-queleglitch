@@ -17,9 +17,9 @@ public class VoilesStrategy {
     }
 
     public VoileAction getVoilesAction() {
-        if (Math.cos(informationGame.getShip().getPosition().getOrientation() - wind.getOrientation()) > 0 && !voile1.getOpenned())
+        if (Math.cos(informationGame.getShip().getPosition().getOrientation() - wind.getOrientation()) > 0 && !voile1.isOpenned())
             return VoileAction.LIFT;
-        else if (Math.cos(informationGame.getShip().getPosition().getOrientation() - wind.getOrientation()) < 0 && voile1.getOpenned())
+        else if (Math.cos(informationGame.getShip().getPosition().getOrientation() - wind.getOrientation()) < 0 && voile1.isOpenned())
             return VoileAction.LOWER;
         else
             return VoileAction.DO_NOTHING;

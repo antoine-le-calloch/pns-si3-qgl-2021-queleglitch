@@ -16,8 +16,8 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 public class Checkpoint {
 
-    public Position position;
-    public Shape shape;
+    private Position position;
+    private Shape shape;
 
     public Checkpoint(){}
 
@@ -35,6 +35,9 @@ public class Checkpoint {
         return -1;
     }
 
+    /**
+     * <p>Getter.</p>
+     */
     public Position getPosition(){
         return position;
     }
@@ -43,16 +46,19 @@ public class Checkpoint {
         return shape;
     }
 
-    public void setShape(Shape shape) {
-        this.shape = shape;
-    }
-
+    /**
+     * <p>Setter.</p>
+     */
     public void setPosition(Position position) {
         this.position = position;
     }
 
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
+
     /**
-     * <p>Override of toString method, allow to print a different string to give the Checkpoint's informations</p>
+     * <p>Override of toString method, allow to print a different string to give the Checkpoint information</p>
      */
     @Override
     public String toString() {

@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 
 /**
  * Classe permettant de définir le mode Regatta
@@ -14,9 +13,9 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 
 public class RegattaGoal extends Goal {
 
-    public Checkpoint[] checkpoints;
-    public Position[] positionOptiCheckpoints;
-    public int numActualCheckpoint = 0;
+    private Checkpoint[] checkpoints;
+    private Position[] positionOptiCheckpoints;
+    private int numActualCheckpoint = 0;
 
     public RegattaGoal(){
     }
@@ -26,40 +25,16 @@ public class RegattaGoal extends Goal {
         calculateOptiCheckpoint();
     }
 
-    public Position getPositionActualOptiCheckpoint(){
-        return positionOptiCheckpoints[numActualCheckpoint];
-    }
-
-    public Checkpoint getActualCheckpoint(){
-        return checkpoints[numActualCheckpoint];
-    }
-
-    public Position getPositionNextOptiCheckpoint(){
-        if (checkpoints.length > numActualCheckpoint + 1)
-            return positionOptiCheckpoints[numActualCheckpoint+1];
-        return null;
-    }
-
-    public void checkpointReached(){
-        if(!isLastCheckpoint()){
-            numActualCheckpoint++;
-        }
-    }
-
-    public boolean isLastCheckpoint(){
-        return numActualCheckpoint + 1 >= checkpoints.length;
-    }
-
     public void calculateOptiCheckpoint(){
         int tabSize = checkpoints.length;
         double angleBetween2Points;
         double distanceToTheNewPoints;
         positionOptiCheckpoints = new Position[tabSize];
-        positionOptiCheckpoints[tabSize-1] = new Position(checkpoints[tabSize-1].position.x,checkpoints[tabSize-1].position.y,0);
+        positionOptiCheckpoints[tabSize-1] = new Position(checkpoints[tabSize-1].getPosition().x,checkpoints[tabSize-1].getPosition().y,0);
 
         for (int i = tabSize-1; i > 0; i--) {
-            angleBetween2Points = positionOptiCheckpoints[i].getAngleToAPlace(checkpoints[i-1].position);
-            distanceToTheNewPoints = positionOptiCheckpoints[i].getNorm(checkpoints[i-1].position) - checkpoints[i-1].getRadius();
+            angleBetween2Points = positionOptiCheckpoints[i].getAngleToAPlace(checkpoints[i-1].getPosition());
+            distanceToTheNewPoints = positionOptiCheckpoints[i].getNorm(checkpoints[i-1].getPosition()) - checkpoints[i-1].getRadius();
             positionOptiCheckpoints[i-1] = movePosition1ByPosition2(positionOptiCheckpoints[i],findHowManyToMovePosition(angleBetween2Points,distanceToTheNewPoints));
         }
     }
@@ -74,15 +49,39 @@ public class RegattaGoal extends Goal {
         return new Position(toMove.x + by.x, toMove.y + by.y,0);
     }
 
+    public void checkpointReached(){
+        if(numActualCheckpoint + 1 < checkpoints.length){
+            numActualCheckpoint++;
+        }
+    }
+
     /**
-     * <p>Override of toString method, allow to print a different string to give the Checkpoints' informations</p>
+     * <p>Getter.</p>
+     */
+    public Position[] getPositionOptiCheckpoints() { return positionOptiCheckpoints; }
+
+    public Checkpoint getActualCheckpoint(){ return checkpoints[numActualCheckpoint]; }
+
+    public Position getPositionActualOptiCheckpoint(){
+        return positionOptiCheckpoints[numActualCheckpoint];
+    }
+
+    /**
+     * <p>Setter.</p>
+     */
+    public void setCheckpoints(Checkpoint[] checkpoints) {
+        this.checkpoints = checkpoints;
+    }
+
+    /**
+     * <p>Override of toString method, allow to print a different string to give the Checkpoints information</p>
      */
     @Override
     public String toString(){
-        StringBuilder informationsCheckpoint = new StringBuilder();
+        StringBuilder informationCheckpoint = new StringBuilder();
         for(Checkpoint checkpoint : checkpoints){
-            informationsCheckpoint.append(checkpoint.toString());
+            informationCheckpoint.append(checkpoint.toString());
         }
-        return informationsCheckpoint.toString();
+        return informationCheckpoint.toString();
     }
 }
