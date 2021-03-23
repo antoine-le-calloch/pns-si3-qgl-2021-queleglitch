@@ -23,15 +23,10 @@ public class Processing {
         informationGame.getRegattaGoal().calculateOptiCheckpoint();
     }
 
-    public void setDataNewRound(Ship ship, Wind wind){
-        shipMovementResolver = new ShipMovementResolver(ship,wind, informationGame.getRegattaGoal());
-        informationGame.setShip(ship);
-        informationGame.setWind(wind);
+    public void processDataNewRound(){
+        shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
         regattaResolver = new RegattaResolver(informationGame);
-
-        if(informationGame.isCheckpointReached()){
-            informationGame.moveToNextCheckpoint();
-        }
+        if(informationGame.isCheckpointReached()){ informationGame.moveToNextCheckpoint(); }
     }
 
     public List<Action> actionForTheRound(){

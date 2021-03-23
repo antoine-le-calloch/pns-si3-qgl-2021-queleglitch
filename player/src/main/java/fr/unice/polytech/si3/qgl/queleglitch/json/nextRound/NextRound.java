@@ -7,17 +7,11 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Visi
 /* classe qui sert juste de variable pour mettre à jour le informationGame*/
 
 public class NextRound {
-    public Ship ship;
-    public Wind wind;
-    public VisibleEntities[] visibleEntities;
+    private Ship ship;
+    private Wind wind;
+    private VisibleEntities[] visibleEntities;
 
-    public Ship getShip(){
-        return ship;
-    }
-
-    public Wind getWind() {
-        return wind;
-    }
+    public  NextRound(){}
 
     public VisibleEntities getCourant(){
         for (VisibleEntities visibleEntities:visibleEntities){
@@ -27,15 +21,34 @@ public class NextRound {
         }
         return null;
     }
+    
+    /**
+     * <p>Getter.</p>
+     */
+    public Ship getShip(){
+        return ship;
+    }
 
+    public Wind getWind() {
+        return wind;
+    }
 
-    public  NextRound(){}
+    public VisibleEntities[] getVisibleEntities() {
+        return visibleEntities;
+    }
 
-    public  NextRound(Ship ship){
+    /**
+     * <p>Setter.</p>
+     */
+    public void setShip(Ship ship) {
         this.ship = ship;
     }
 
-    public  NextRound(Wind wind){
+    public void setWind(Wind wind) {
         this.wind = wind;
+    }
+
+    public void setVisibleEntities(VisibleEntities[] visibleEntities) {
+        this.visibleEntities = visibleEntities;
     }
 }

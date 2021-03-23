@@ -20,7 +20,7 @@ public class RegattaResolver {
     public RegattaResolver(InformationGame informationGame) {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame.getShip().getPosition());
-        oarStrategy = new OarStrategy(informationGame.sailors.length, informationGame.ship.getRames().size());
+        oarStrategy = new OarStrategy(informationGame.getSailors().length, informationGame.getShip().getRames().size());
         rudderStrategy = new RudderStrategy(informationGame);
         voilesStrategy = new VoilesStrategy(informationGame);
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());

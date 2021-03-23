@@ -46,7 +46,7 @@ public class ShipMovementResolver {
     //speed we are going to have using the elements given
     public double getSpeed(int nbHighVoiles, int[] tabNbLeftAndRightOar, double shipOrientation){
         double speedWithRames = 165.0*(tabNbLeftAndRightOar[0] + tabNbLeftAndRightOar[1])/NB_RAMES;
-        double speedWithWind = (1.0*nbHighVoiles/NB_VOILES)*wind.strength*Math.cos(shipOrientation - wind.orientation);
+        double speedWithWind = (1.0*nbHighVoiles/NB_VOILES)*wind.getStrength()*Math.cos(shipOrientation - wind.getOrientation());
         return speedWithRames + speedWithWind;
     }
 

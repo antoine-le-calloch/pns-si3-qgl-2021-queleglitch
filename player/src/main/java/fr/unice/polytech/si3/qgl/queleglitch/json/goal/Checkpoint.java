@@ -31,7 +31,7 @@ public class Checkpoint {
      */
     public double getRadius() {
         if(shape instanceof Circle)
-            return ((Circle) shape).radius;
+            return ((Circle) shape).getRadius();
         return -1;
     }
 

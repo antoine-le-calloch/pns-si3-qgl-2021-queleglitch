@@ -13,9 +13,14 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 public class VisibleEntities {
 
-    public Position position;
-    public Shape shape;
+    private Position position;
+    private Shape shape;
 
+    public VisibleEntities(){}
+
+    /**
+     * <p>Getter.</p>
+     */
     public Position getPosition() {
         return position;
     }
@@ -24,4 +29,14 @@ public class VisibleEntities {
         return shape;
     }
 
+    /**
+     * <p>Setter.</p>
+     */
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
 }

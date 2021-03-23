@@ -55,7 +55,8 @@ public class Cockpit implements ICockpit {
 		System.out.println("Next round input: " + round);
 		try {
 			nextRound = objectMapper.readValue(round, NextRound.class);
-			processing.setDataNewRound(nextRound.getShip(), nextRound.getWind());
+			informationGame.setNewRound(nextRound);
+			processing.processDataNewRound();
 			actionsThisRound = objectMapper.writeValueAsString(processing.actionForTheRound());
 			return actionsThisRound;
 		} catch (JsonProcessingException e) {

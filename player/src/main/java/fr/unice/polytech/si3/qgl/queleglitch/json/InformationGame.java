@@ -4,7 +4,10 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Courant;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.VisibleEntities;
 
 /**
  * Classe permettant de gerer les éléments principaux du jeux : {@link Ship}, {@link Sailor}
@@ -16,10 +19,13 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
  */
 
 public class InformationGame {
-    public Sailor[] sailors;
-    public Ship ship;
-    public Goal goal;
-    public Wind wind;
+    private VisibleEntities[] visibleEntities;
+    private Sailor[] sailors;
+    private Ship ship;
+    private Goal goal;
+    private Wind wind;
+
+    public InformationGame(){}
 
     public InformationGame(Sailor[] sailors, Ship ship, Goal goal){
         this.sailors = sailors;
@@ -33,60 +39,58 @@ public class InformationGame {
         this.wind = wind;
     }
 
-    public InformationGame(){}
-
-    /**
-     * @return <b>The list of sailors.</b>
-     */
-    public Sailor[] getSailors(){
-        return sailors;
-    }
-
-    /**
-     * @return <b>The ship.</b>
-     */
-    public Ship getShip() {return ship;}
-
-    /**
-     * @return <b>The Goal.</b>
-     */
-    public Goal getGoal() {
-        return goal;
-    }
-
-    /**
-     * @return <b>The RegattaGoal.</b>
-     */
-    public RegattaGoal getRegattaGoal() {
-        if(goal instanceof RegattaGoal)
-            return (RegattaGoal) goal;
-        return null;
-    }
-
-    /**
-     * @return <b>The Wind.</b>
-     */
-    public Wind getWind() {
-        return wind;
-    }
-
-    public void setShip(Ship ship){
-        this.ship = ship;
-    }
-
-    public void setGoal(Goal goal) {
-        this.goal = goal;
-    }
-
-    public void setWind(Wind wind){
-        this.wind = wind;
-    }
-
     public boolean isCheckpointReached() {
         return ship.isCheckpointReached(((RegattaGoal) goal).getActualCheckpoint());
     }
 
     public void moveToNextCheckpoint() {
         ((RegattaGoal) goal).checkpointReached();
+    }
+
+    public RegattaGoal getRegattaGoal() {
+        if(goal instanceof RegattaGoal)
+            return (RegattaGoal) goal;
+        return null;
+    }
+
+    public VisibleEntities getCourant(){
+        for (VisibleEntities visibleEntities:visibleEntities){
+            if(visibleEntities instanceof Courant) {
+                return (Courant) visibleEntities;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * <p>Getter.</p>
+     */
+    public VisibleEntities[] getVisibleEntities() { return visibleEntities; }
+
+    public Sailor[] getSailors(){
+        return sailors;
+    }
+
+    public Ship getShip() {return ship;}
+
+    public Goal getGoal() {
+        return goal;
+    }
+
+    public Wind getWind() { return wind; }
+
+    /**
+     * <p>Setter.</p>
+     */
+    public void setSailors(Sailor[] sailors) { this.sailors = sailors; }
+
+    public void setGoal(Goal goal) {
+        this.goal = goal;
+    }
+
+    public void setNewRound(NextRound nextRound){
+        this.visibleEntities = nextRound.getVisibleEntities();
+        this.ship = nextRound.getShip();
+        this.wind = nextRound.getWind();
     }
 }
