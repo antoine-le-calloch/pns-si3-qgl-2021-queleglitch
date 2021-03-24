@@ -4,14 +4,11 @@ import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbOarsUsed;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Oar;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Sail;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -529,4 +526,30 @@ class ShipMovementResolverTest {
 
         assertEquals(new Position(3074.2068908993306, 1661.6918931870753, -0.9366934544693667),shipMovementResolver.resolveNextTurnPosition(0.0,SailAction.LIFT,new NbOarsUsed(5,5)));
     }
+
+    @Nested
+    class CheckPoint{
+
+        ShipMovementResolver shipMovementResolverMock;
+        Position checkPosition;
+        double rudderAngleMock=0.0;
+        Position boatPosition;
+
+        @BeforeEach
+        void setUp(){
+            boatPosition=new Position(100,200,0);
+            shipMovementResolverMock=Mockito.mock(ShipMovementResolver.class);
+            Mockito.when(shipMovementResolverMock.resolveNextTurnPosition(rudderAngleMock,SailAction.DO_NOTHING,new NbOarsUsed(1,1))).thenReturn(boatPosition);
+            Mockito.when(shipMovementResolverMock.isBoatIsOutofTheCheckpoint(boatPosition)).thenReturn(true);
+            checkPosition=new Position(100,240,1);
+        }
+        @Test
+        void checkPointNotPassed(){
+            assertFalse( shipMovementResolverMock.isCheckpointMissed(checkPosition,rudderAngleMock,SailAction.DO_NOTHING,new NbOarsUsed(1,1)));
+        }
+
+
+    }
+
+
 }

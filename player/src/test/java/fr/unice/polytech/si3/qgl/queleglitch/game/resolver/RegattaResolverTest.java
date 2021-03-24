@@ -35,7 +35,7 @@ class RegattaResolverTest {
         Mockito.when(sailStrategyMock.getSailsAction()).thenReturn( SailAction.LOWER);
         Mockito.when(oarStrategyMock.getDifferenceOarRightLeft(angleMock)).thenReturn(2);
         Mockito.when(oarStrategyMock.getNbOarsUsed(true,true,2)).thenReturn(new NbOarsUsed(2,2));
-        Mockito.when(shipMovementResolver.isCheckpointPassed(new Position(),angleMock,SailAction.LOWER,new NbOarsUsed(2,2) )).thenReturn(false);
+        Mockito.when(shipMovementResolver.isCheckpointMissed(new Position(),angleMock,SailAction.LOWER,new NbOarsUsed(2,2) )).thenReturn(false);
         regattaResolver = new RegattaResolver(geometryMock, oarStrategyMock,rudderStrategyMock, sailStrategyMock,shipMovementResolver);
     }
 

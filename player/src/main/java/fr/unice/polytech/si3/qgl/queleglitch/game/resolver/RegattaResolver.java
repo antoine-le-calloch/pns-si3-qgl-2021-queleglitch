@@ -48,7 +48,7 @@ public class RegattaResolver {
         boolean changeSailSetting = false;
 
         if(Math.abs(angleToCorrect) < Math.PI/4) {
-            while (shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnSails, nbOarsUsed)) {
+            while (shipMovementResolver.isCheckpointMissed(positionCheckpointToReach, rudderAngle, actionOnSails, nbOarsUsed)) {
                 if (nbOarsUsed.onLeft() >= 1 && nbOarsUsed.onRight() >= 1 && (nbOarsUsed.onLeft() != nbOarsUsed.onRight() || nbOarsUsed.onLeft() != 1))
                     nbOarsUsed.decreaseLeftAndRight(1);
 
@@ -60,7 +60,7 @@ public class RegattaResolver {
                     return null;
             }
             if(changeSailSetting) {
-                while (!shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnSails, new NbOarsUsed(nbOarsUsed.onLeft()+1,nbOarsUsed.onRight()+1))) {
+                while (!shipMovementResolver.isCheckpointMissed(positionCheckpointToReach, rudderAngle, actionOnSails, new NbOarsUsed(nbOarsUsed.onLeft()+1,nbOarsUsed.onRight()+1))) {
                     if (nbOarsUsed.onLeft()+1 > maxLeftOarUse || nbOarsUsed.onRight()+1 > maxRightOarUse)
                         break;
                     nbOarsUsed.increaseLeftAndRight(1);
