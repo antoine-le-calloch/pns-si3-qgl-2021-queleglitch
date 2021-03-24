@@ -26,9 +26,9 @@ public class ShipMovementResolver {
     public Position resolveNextTurnPosition(double rudderAngle, SailAction actionOnSails, NbOarsUsed nbOarsUsed){
         final double NB_PART = 100;
         int nbHighSails = (actionOnSails == SailAction.DO_NOTHING && ship.getSails().get(0).isOpenned()) || (actionOnSails == SailAction.LIFT) ? NB_VOILES : 0;
+        Position newPosition = new Position(ship.getPosition().getX(),ship.getPosition().getY(),ship.getPosition().getOrientation());
         double anglePart = getAngleToTurn(rudderAngle, nbOarsUsed)/NB_PART;
         double speedPart;
-        Position newPosition = new Position(ship.getPosition().getX(),ship.getPosition().getY(),ship.getPosition().getOrientation());
 
         for (double i = 0; i < NB_PART; i++) {
             speedPart = getSpeed(nbHighSails, nbOarsUsed, newPosition.getOrientation())/NB_PART;
@@ -53,6 +53,7 @@ public class ShipMovementResolver {
     public Boolean isCheckpointPassed(Position checkpointPosition, double rudderAngle, SailAction actionOnSails, NbOarsUsed nbOarsUsed){
         Position nextTurnPosition = resolveNextTurnPosition(rudderAngle, actionOnSails, nbOarsUsed);
         Geometry geometry = new Geometry(nextTurnPosition);
+
         if(Math.abs(geometry.calculateAngleToCheckPoint(checkpointPosition)) > Math.PI/2)
             return regattaGoal.getActualCheckpoint().getPosition().getNorm(nextTurnPosition) > regattaGoal.getActualCheckpoint().getRadius();
         return false;
