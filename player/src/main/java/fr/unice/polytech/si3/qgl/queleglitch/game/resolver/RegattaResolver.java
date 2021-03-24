@@ -37,21 +37,34 @@ public class RegattaResolver {
     }
 
     public ToolsToUse resolveToolsToUse(Position positionCheckpointToReach) {
+        boolean changeVoileSetting = false;
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
         VoileAction actionOnVoiles = voilesStrategy.getVoilesAction();
         int differenceOarRightLeft = oarStrategy.getDifferenceOarRightLeft(angleToCorrect);
         int[] tabNbLeftAndRightOar = oarStrategy.getNbLeftAndRightOar(rudderAngle != 0,actionOnVoiles != VoileAction.DO_NOTHING, differenceOarRightLeft);
+        int maxLeftOarUse = tabNbLeftAndRightOar[0];
+        int maxRightOarUse = tabNbLeftAndRightOar[1];
 
         if(Math.abs(angleToCorrect) < Math.PI/4) {
             while (shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnVoiles, tabNbLeftAndRightOar)) {
                 if (tabNbLeftAndRightOar[0] >= 1 && tabNbLeftAndRightOar[1] >= 1 && (tabNbLeftAndRightOar[0] != tabNbLeftAndRightOar[1] || tabNbLeftAndRightOar[0] != 1)) {
                     tabNbLeftAndRightOar[0]--;
                     tabNbLeftAndRightOar[1]--;
-                } else if (actionOnVoiles != VoileAction.LOWER)
-                    actionOnVoiles = informationGame.getShip().getVoiles().get(0).isOpenned() ? VoileAction.LOWER : VoileAction.DO_NOTHING;
+                } else if (informationGame.getShip().getVoiles().get(0).isOpenned() && actionOnVoiles != VoileAction.LOWER){
+                    actionOnVoiles = VoileAction.LOWER;
+                    changeVoileSetting = true;
+                }
                 else
                     return null;
+            }
+            if(changeVoileSetting) {
+                while (!shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnVoiles, new int[]{tabNbLeftAndRightOar[0]+1,tabNbLeftAndRightOar[1]+1})) {
+                    if (tabNbLeftAndRightOar[0]+1 > maxLeftOarUse || tabNbLeftAndRightOar[1]+1 > maxRightOarUse)
+                        break;
+                    tabNbLeftAndRightOar[0]++;
+                    tabNbLeftAndRightOar[1]++;
+                }
             }
         }
         return new ToolsToUse(rudderAngle,actionOnVoiles,tabNbLeftAndRightOar);
