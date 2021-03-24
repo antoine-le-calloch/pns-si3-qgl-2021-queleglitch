@@ -45,7 +45,7 @@ public class RegattaResolver {
 
         if(Math.abs(angleToCorrect) < Math.PI/4) {
             while (shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnVoiles, tabNbLeftAndRightOar)) {
-                if (tabNbLeftAndRightOar[0] >= 1 && tabNbLeftAndRightOar[1] >= 1 && tabNbLeftAndRightOar[0] + tabNbLeftAndRightOar[1] != 2) {
+                if (tabNbLeftAndRightOar[0] >= 1 && tabNbLeftAndRightOar[1] >= 1 && (tabNbLeftAndRightOar[0] != tabNbLeftAndRightOar[1] || tabNbLeftAndRightOar[0] != 1)) {
                     tabNbLeftAndRightOar[0]--;
                     tabNbLeftAndRightOar[1]--;
                 } else if (actionOnVoiles != VoileAction.LOWER)
