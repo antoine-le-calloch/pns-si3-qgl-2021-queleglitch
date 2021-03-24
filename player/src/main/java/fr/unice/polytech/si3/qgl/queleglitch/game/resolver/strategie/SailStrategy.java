@@ -2,13 +2,12 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Sail;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 
 public class SailStrategy {
-    InformationGame informationGame;
-    Boolean sailsOpen;
-    Wind wind;
+    private final InformationGame informationGame;
+    private final Boolean sailsOpen;
+    private final Wind wind;
 
     public SailStrategy(InformationGame informationGame) {
         this.wind = informationGame.getWind();

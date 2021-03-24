@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.action;
 
+import java.util.Objects;
+
 public class LiftSail extends Action {
 
     private final String type = "LIFT_SAIL";
@@ -22,5 +24,10 @@ public class LiftSail extends Action {
         if (!(obj instanceof LiftSail)) return false;
         LiftSail liftSail = (LiftSail) obj;
         return sailorId== liftSail.sailorId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sailorId);
     }
 }

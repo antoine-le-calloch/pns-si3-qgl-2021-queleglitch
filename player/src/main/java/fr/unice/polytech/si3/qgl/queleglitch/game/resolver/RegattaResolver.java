@@ -11,18 +11,18 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 
 public class RegattaResolver {
 
-    Geometry geometry;
-    OarStrategy oarStrategy;
-    RudderStrategy rudderStrategy;
-    SailStrategy SailStrategy;
-    InformationGame informationGame;
-    ShipMovementResolver shipMovementResolver;
+    private final Geometry geometry;
+    private final OarStrategy oarStrategy;
+    private final RudderStrategy rudderStrategy;
+    private final SailStrategy SailStrategy;
+    private final InformationGame informationGame;
+    private final ShipMovementResolver shipMovementResolver;
 
     public RegattaResolver(InformationGame informationGame) {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame.getShip().getPosition());
-        oarStrategy = new OarStrategy(informationGame.getSailors().length, informationGame.getShip().getNbOars());
-        rudderStrategy = new RudderStrategy(informationGame);
+        oarStrategy = new OarStrategy(informationGame.getNbSailors(), informationGame.getShip().getNbOars());
+        rudderStrategy = new RudderStrategy();
         SailStrategy = new SailStrategy(informationGame);
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
     }
@@ -39,10 +39,11 @@ public class RegattaResolver {
 
     public ToolsToUse resolveToolsToUse(Position positionCheckpointToReach) {
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
+
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
         SailAction actionOnSails = SailStrategy.getSailsAction();
-        int differenceOarRightLeft = oarStrategy.getDifferenceOarRightLeft(angleToCorrect);
-        NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, differenceOarRightLeft);
+        NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect));
+
         int maxLeftOarUse = nbOarsUsed.onLeft();
         int maxRightOarUse = nbOarsUsed.onRight();
         boolean changeSailSetting = false;
@@ -51,7 +52,6 @@ public class RegattaResolver {
             while (shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnSails, nbOarsUsed)) {
                 if (nbOarsUsed.onLeft() >= 1 && nbOarsUsed.onRight() >= 1 && (nbOarsUsed.onLeft() != nbOarsUsed.onRight() || nbOarsUsed.onLeft() != 1))
                     nbOarsUsed.decreaseLeftAndRight(1);
-
                 else if (informationGame.getShip().isSailsOpen() && actionOnSails != SailAction.LOWER){
                     actionOnSails = SailAction.LOWER;
                     changeSailSetting = true;

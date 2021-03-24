@@ -1,15 +1,14 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbOarsUsed;
-import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 
 public class OarStrategy {
 
-    private final int NB_RAMES;
+    private final int NB_OARS;
     private final int NB_SAILORS;
 
     public OarStrategy(int nbSailors, int nbOars) {
-        NB_RAMES = nbOars;
+        NB_OARS = nbOars;
         NB_SAILORS = nbSailors;
     }
 
@@ -19,7 +18,7 @@ public class OarStrategy {
             angleToCorrect *= (signe = -1);
 
         if(angleToCorrect > Math.PI / 4)
-            return (int) (Math.round(Math.PI / 2 * signe/(Math.PI/ NB_RAMES)));
+            return (int) (Math.round(Math.PI / 2 * signe/(Math.PI/ NB_OARS)));
 
         return 0;
     }
@@ -33,7 +32,7 @@ public class OarStrategy {
         nbSailorsForOar -= (useSail) ? 1 : 0;
 
         while (nbLeftOarsToUse + nbRightOarsToUse <= nbSailorsForOar - 2) {
-            if(nbLeftOarsToUse >= NB_RAMES/2 || nbRightOarsToUse >= NB_RAMES/2)
+            if(nbLeftOarsToUse >= NB_OARS /2 || nbRightOarsToUse >= NB_OARS /2)
                 break;
             nbRightOarsToUse++;
             nbLeftOarsToUse++;

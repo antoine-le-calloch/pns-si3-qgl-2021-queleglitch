@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie;
 
+import java.util.Objects;
+
 public class Oar extends Entities{
 
     public Oar(){}
@@ -25,5 +27,10 @@ public class Oar extends Entities{
         if (!(obj instanceof Oar)) return false;
         Oar oar = (Oar) obj;
         return this.x == oar.x && this.y == oar.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

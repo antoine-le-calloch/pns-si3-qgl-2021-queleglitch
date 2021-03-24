@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
+import java.util.Objects;
+
 /**
  * Classe representant les marins
  * @author Huot-Marchand Antoine
@@ -63,5 +65,10 @@ public class Sailor {
         if (!(obj instanceof Sailor)) return false;
         Sailor sailor = (Sailor) obj;
         return this.x == sailor.x && this.y == sailor.y && this.id == sailor.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x,y,id);
     }
 }

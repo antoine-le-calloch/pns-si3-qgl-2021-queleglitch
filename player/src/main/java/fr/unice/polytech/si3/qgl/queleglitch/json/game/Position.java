@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
+import java.util.Objects;
+
 /**
  * Classe representant le système de position des bâteaux
  * @author Huot-Marchand Antoine
@@ -91,5 +93,10 @@ public class Position {
         if (!(obj instanceof Position)) return false;
         Position position = (Position) obj;
         return this.x == position.x && this.y == position.y && this.orientation == position.orientation;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x,y,orientation);
     }
 }

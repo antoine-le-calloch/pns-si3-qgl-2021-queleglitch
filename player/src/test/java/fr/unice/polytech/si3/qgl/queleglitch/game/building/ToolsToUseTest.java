@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
-import fr.unice.polytech.si3.qgl.queleglitch.Cockpit;
 import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

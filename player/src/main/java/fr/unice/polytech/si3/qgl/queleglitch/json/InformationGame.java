@@ -39,26 +39,19 @@ public class InformationGame {
         this.wind = wind;
     }
 
-    public boolean isCheckpointReached() {
-        return ship.isCheckpointReached(((RegattaGoal) goal).getActualCheckpoint());
-    }
+    public boolean isCheckpointReached() { return ship.isCheckpointReached(((RegattaGoal) goal).getActualCheckpoint()); }
 
     public void moveToNextCheckpoint() {
         ((RegattaGoal) goal).checkpointReached();
     }
 
+    public int getNbSailors(){
+        return sailors.length;
+    }
+
     public RegattaGoal getRegattaGoal() {
         if(goal instanceof RegattaGoal)
             return (RegattaGoal) goal;
-        return null;
-    }
-
-    public VisibleEntities getCourant(){
-        for (VisibleEntities visibleEntities:visibleEntities){
-            if(visibleEntities instanceof Courant) {
-                return (Courant) visibleEntities;
-            }
-        }
         return null;
     }
 

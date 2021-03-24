@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property =  "type", defaultImpl = void.class)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Oar.class, name = "OAR"),
+        @JsonSubTypes.Type(value = Row.class, name = "OAR"),
         @JsonSubTypes.Type(value = Moving.class, name = "MOVING"),
         @JsonSubTypes.Type(value = Turn.class, name = "TURN"),
         @JsonSubTypes.Type(value = LiftSail.class, name = "LIFT_SAIL"),

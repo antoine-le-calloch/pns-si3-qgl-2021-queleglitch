@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.action;
 
+import java.util.Objects;
+
 public class Moving extends Action {
 
     private final String type = "MOVING";
@@ -55,5 +57,10 @@ public class Moving extends Action {
         if (!(obj instanceof Moving)) return false;
         Moving moving = (Moving) obj;
         return xdistance == moving.xdistance && ydistance == moving.ydistance && sailorId== moving.sailorId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(xdistance,ydistance,sailorId);
     }
 }

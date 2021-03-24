@@ -1,10 +1,12 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.action;
 
-public class Oar extends Action {
+import java.util.Objects;
+
+public class Row extends Action {
 
     private final String type = "OAR";
 
-    public Oar(int sailorId) {
+    public Row(int sailorId) {
         super(sailorId);
     }
 
@@ -19,8 +21,13 @@ public class Oar extends Action {
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
-        if (!(obj instanceof Oar)) return false;
-        Oar oar = (Oar) obj;
+        if (!(obj instanceof Row)) return false;
+        Row oar = (Row) obj;
         return sailorId == oar.sailorId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sailorId);
     }
 }

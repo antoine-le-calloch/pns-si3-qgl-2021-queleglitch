@@ -123,10 +123,4 @@ public class Ship {
     public void setDeck(Deck deck) { this.deck = deck; }
 
     public void setShape(Shape shape) { this.shape = shape; }
-
-    /**
-     * <p>Override of toString method, allow to print a different string to give the Ship's information</p>
-     */
-    @Override
-    public String toString(){ return "Ship | orientation : " + position.getOrientation() + " | x : " + position.getX() + " | y : " + position.getY(); }
 }

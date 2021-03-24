@@ -1,6 +1,8 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.action;
 
 
+import java.util.Objects;
+
 public class Turn extends Action{
 
     private final String type = "TURN";
@@ -36,5 +38,10 @@ public class Turn extends Action{
         if (!(obj instanceof Turn)) return false;
         Turn turn = (Turn) obj;
         return this.rotation == turn.rotation && sailorId == turn.sailorId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rotation, sailorId);
     }
 }
