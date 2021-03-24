@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbRamesUsed;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 
 public class OarStrategy {
@@ -23,7 +24,7 @@ public class OarStrategy {
         return 0;
     }
 
-    public int[] getNbLeftAndRightOar(boolean useGouvernail, boolean useVoile, int differenceOarRightLeft) {
+    public NbRamesUsed getNbRamesUsed(boolean useGouvernail, boolean useVoile, int differenceOarRightLeft) {
         int nbLeftRamesToUse = -Math.min(0,differenceOarRightLeft);
         int nbRightRamesToUse = Math.max(0,differenceOarRightLeft);
         int nbSailorsForOar = NB_SAILORS;
@@ -38,6 +39,6 @@ public class OarStrategy {
             nbLeftRamesToUse++;
         }
 
-        return new int[]{Math.min(nbSailorsForOar,nbLeftRamesToUse),Math.min(nbSailorsForOar,nbRightRamesToUse)};
+        return new NbRamesUsed(Math.min(nbSailorsForOar,nbLeftRamesToUse),Math.min(nbSailorsForOar,nbRightRamesToUse));
     }
 }

@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game;
 
 import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbRamesUsed;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.SmartCreateActions;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaResolver;
@@ -32,7 +33,7 @@ public class Processing {
         if(toolsToUse == null)
             toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getActualCheckpoint().getPosition());
         if(toolsToUse == null)
-            toolsToUse = new ToolsToUse(0, VoileAction.DO_NOTHING,new int[]{1,1});
+            toolsToUse = new ToolsToUse(0, VoileAction.DO_NOTHING,new NbRamesUsed(1,1));
 
         SmartCreateActions smartCreateActions = new SmartCreateActions(informationGame.getShip(), informationGame.getSailors());
         return smartCreateActions.createActions(toolsToUse);

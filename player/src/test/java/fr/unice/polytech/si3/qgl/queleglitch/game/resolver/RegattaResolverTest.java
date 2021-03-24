@@ -1,12 +1,12 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
 import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbRamesUsed;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.OarStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.RudderStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.VoilesStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Voile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -34,15 +34,15 @@ class RegattaResolverTest {
         Mockito.when(rudderStrategyMock.getRudderAngle(angleMock)).thenReturn(angleMock);
         Mockito.when(voilesStrategyMock.getVoilesAction()).thenReturn( VoileAction.LOWER);
         Mockito.when(oarStrategyMock.getDifferenceOarRightLeft(angleMock)).thenReturn(2);
-        Mockito.when(oarStrategyMock.getNbLeftAndRightOar(true,true,2)).thenReturn(new int []{2,2});
-        Mockito.when(shipMovementResolver.isCheckpointPassed(new Position(),angleMock,VoileAction.LOWER,new int []{2,2} )).thenReturn(false);
+        Mockito.when(oarStrategyMock.getNbRamesUsed(true,true,2)).thenReturn(new NbRamesUsed(2,2));
+        Mockito.when(shipMovementResolver.isCheckpointPassed(new Position(),angleMock,VoileAction.LOWER,new NbRamesUsed(2,2) )).thenReturn(false);
         regattaResolver = new RegattaResolver(geometryMock,oarStrategyMock,rudderStrategyMock,voilesStrategyMock,shipMovementResolver);
     }
 
 
     @Test
     void RudderNotNull(){
-        assertEquals(new ToolsToUse(angleMock, VoileAction.LOWER, new int []{2,2}),regattaResolver.resolveToolsToUse(new Position()));
+        assertEquals(new ToolsToUse(angleMock, VoileAction.LOWER, new NbRamesUsed(2,2)),regattaResolver.resolveToolsToUse(new Position()));
     }
 
 

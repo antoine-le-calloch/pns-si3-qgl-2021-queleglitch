@@ -14,8 +14,8 @@ class ToolsToUseTest {
 
     @BeforeEach
     void setUp() {
-        toolsToUse0 = new ToolsToUse(0, VoileAction.DO_NOTHING, new int[]{0,0});
-        toolsToUse1 = new ToolsToUse(1, VoileAction.LIFT, new int[]{1,1});
+        toolsToUse0 = new ToolsToUse(0, VoileAction.DO_NOTHING, new NbRamesUsed(0,0));
+        toolsToUse1 = new ToolsToUse(1, VoileAction.LIFT, new NbRamesUsed(1,1));
     }
 
     ///////////////////////////////////////////////// equals() ////////////////////////////////////////////
@@ -27,21 +27,18 @@ class ToolsToUseTest {
 
     @Test
     void equals_All0(){
-        assertEquals(toolsToUse0, new ToolsToUse(0,VoileAction.DO_NOTHING,new int[]{0,0}));
+        assertEquals(toolsToUse0, new ToolsToUse(0,VoileAction.DO_NOTHING,new NbRamesUsed(0,0)));
     }
 
     @Test
     void equals_All1(){
-        assertEquals(toolsToUse1, new ToolsToUse(1,VoileAction.LIFT,new int[]{1,1}));
+        assertEquals(toolsToUse1, new ToolsToUse(1,VoileAction.LIFT,new NbRamesUsed(1,1)));
     }
 
     @Test
     void NotEquals_All1_All0(){
         assertNotEquals(toolsToUse1, toolsToUse0);
     }
-
-    @Test
-    void NotEquals_NotInstanceOf(){ assertNotEquals(toolsToUse0,new Cockpit());}
 
     ///////////////////////////////////////////////// toString() ////////////////////////////////////////////
 

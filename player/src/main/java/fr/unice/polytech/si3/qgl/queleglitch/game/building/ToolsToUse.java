@@ -5,12 +5,12 @@ import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
 public class ToolsToUse {
     public double rudderAngle;
     public VoileAction actionOnVoile;
-    public int[] tabNbLeftAndRightOar;
+    public NbRamesUsed nbRamesUsed;
 
-    public ToolsToUse(double rudderAngle, VoileAction actionOnVoile, int[] tabNbLeftAndRightOar){
+    public ToolsToUse(double rudderAngle, VoileAction actionOnVoile, NbRamesUsed nbRamesUsed){
         this.rudderAngle = rudderAngle;
         this.actionOnVoile = actionOnVoile;
-        this.tabNbLeftAndRightOar = tabNbLeftAndRightOar;
+        this.nbRamesUsed = nbRamesUsed;
     }
 
     public double getRudderAngle() {
@@ -21,8 +21,8 @@ public class ToolsToUse {
         return actionOnVoile;
     }
 
-    public int[] getTabNbLeftAndRightOar() {
-        return tabNbLeftAndRightOar;
+    public NbRamesUsed getNbRamesUsed() {
+        return nbRamesUsed;
     }
 
     @Override
@@ -34,12 +34,12 @@ public class ToolsToUse {
         ToolsToUse toolsToUse = (ToolsToUse) obj;
         return this.rudderAngle == toolsToUse.rudderAngle &&
                 this.actionOnVoile == toolsToUse.actionOnVoile &&
-                this.tabNbLeftAndRightOar[0] == toolsToUse.tabNbLeftAndRightOar[0] &&
-                this.tabNbLeftAndRightOar[1] == toolsToUse.tabNbLeftAndRightOar[1];
+                this.nbRamesUsed.onLeft() == toolsToUse.getNbRamesUsed().onLeft() &&
+                this.nbRamesUsed.onRight() == toolsToUse.getNbRamesUsed().onRight();
     }
 
     @Override
     public String toString(){
-        return "Angle du gouvernail : " + this.rudderAngle + ", nb Voiles : " + this.actionOnVoile + ", nb left rames to use : " + this.tabNbLeftAndRightOar[0] + ", nb right rames to use : " + this.tabNbLeftAndRightOar[1];
+        return "Angle du gouvernail : " + this.rudderAngle + ", nb Voiles : " + this.actionOnVoile + ", nb left rames to use : " + this.nbRamesUsed.onLeft() + ", nb right rames to use : " + this.nbRamesUsed.onRight();
     }
 }

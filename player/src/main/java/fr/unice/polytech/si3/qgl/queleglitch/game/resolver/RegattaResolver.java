@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
 import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbRamesUsed;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.OarStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.RudderStrategy;
@@ -37,21 +38,21 @@ public class RegattaResolver {
     }
 
     public ToolsToUse resolveToolsToUse(Position positionCheckpointToReach) {
-        boolean changeVoileSetting = false;
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
         VoileAction actionOnVoiles = voilesStrategy.getVoilesAction();
         int differenceOarRightLeft = oarStrategy.getDifferenceOarRightLeft(angleToCorrect);
-        int[] tabNbLeftAndRightOar = oarStrategy.getNbLeftAndRightOar(rudderAngle != 0,actionOnVoiles != VoileAction.DO_NOTHING, differenceOarRightLeft);
-        int maxLeftOarUse = tabNbLeftAndRightOar[0];
-        int maxRightOarUse = tabNbLeftAndRightOar[1];
+        NbRamesUsed nbRamesUsed = oarStrategy.getNbRamesUsed(rudderAngle != 0,actionOnVoiles != VoileAction.DO_NOTHING, differenceOarRightLeft);
+        int maxLeftOarUse = nbRamesUsed.onLeft();
+        int maxRightOarUse = nbRamesUsed.onRight();
+        boolean changeVoileSetting = false;
 
         if(Math.abs(angleToCorrect) < Math.PI/4) {
-            while (shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnVoiles, tabNbLeftAndRightOar)) {
-                if (tabNbLeftAndRightOar[0] >= 1 && tabNbLeftAndRightOar[1] >= 1 && (tabNbLeftAndRightOar[0] != tabNbLeftAndRightOar[1] || tabNbLeftAndRightOar[0] != 1)) {
-                    tabNbLeftAndRightOar[0]--;
-                    tabNbLeftAndRightOar[1]--;
-                } else if (informationGame.getShip().getVoiles().get(0).isOpenned() && actionOnVoiles != VoileAction.LOWER){
+            while (shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnVoiles, nbRamesUsed)) {
+                if (nbRamesUsed.onLeft() >= 1 && nbRamesUsed.onRight() >= 1 && (nbRamesUsed.onLeft() != nbRamesUsed.onRight() || nbRamesUsed.onLeft() != 1))
+                    nbRamesUsed.decreaseLeftAndRight(1);
+
+                else if (informationGame.getShip().getVoiles().get(0).isOpenned() && actionOnVoiles != VoileAction.LOWER){
                     actionOnVoiles = VoileAction.LOWER;
                     changeVoileSetting = true;
                 }
@@ -59,14 +60,13 @@ public class RegattaResolver {
                     return null;
             }
             if(changeVoileSetting) {
-                while (!shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnVoiles, new int[]{tabNbLeftAndRightOar[0]+1,tabNbLeftAndRightOar[1]+1})) {
-                    if (tabNbLeftAndRightOar[0]+1 > maxLeftOarUse || tabNbLeftAndRightOar[1]+1 > maxRightOarUse)
+                while (!shipMovementResolver.isCheckpointPassed(positionCheckpointToReach, rudderAngle, actionOnVoiles, new NbRamesUsed(nbRamesUsed.onLeft()+1,nbRamesUsed.onRight()+1))) {
+                    if (nbRamesUsed.onLeft()+1 > maxLeftOarUse || nbRamesUsed.onRight()+1 > maxRightOarUse)
                         break;
-                    tabNbLeftAndRightOar[0]++;
-                    tabNbLeftAndRightOar[1]++;
+                    nbRamesUsed.increaseLeftAndRight(1);
                 }
             }
         }
-        return new ToolsToUse(rudderAngle,actionOnVoiles,tabNbLeftAndRightOar);
+        return new ToolsToUse(rudderAngle,actionOnVoiles,nbRamesUsed);
     }
 }

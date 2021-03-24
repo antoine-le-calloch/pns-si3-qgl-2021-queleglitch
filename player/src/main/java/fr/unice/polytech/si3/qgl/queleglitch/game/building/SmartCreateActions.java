@@ -45,7 +45,7 @@ public class SmartCreateActions {
         if(toolsToUse.getActionOnVoile() != VoileAction.DO_NOTHING) {
             movingAndUseVoiles(toolsToUse.getActionOnVoile());
         }
-        movingAndUseRames(toolsToUse.getTabNbLeftAndRightOar());
+        movingAndUseRames(toolsToUse.getNbRamesUsed());
         movingToEntitiesTooFar();
         movingToCenter();
 
@@ -65,10 +65,10 @@ public class SmartCreateActions {
         }
     }
 
-    public void movingAndUseRames(int[] tabNbLeftAndRightOar){
+    public void movingAndUseRames(NbRamesUsed nbRamesUsed){
         Sailor sailorToMove = null;
-        for (int i = 0; i < tabNbLeftAndRightOar[0]; i++) {
-            for (int j = leftRames.length - i - 1; j >= tabNbLeftAndRightOar[0] - i -1; j--) {
+        for (int i = 0; i < nbRamesUsed.onLeft(); i++) {
+            for (int j = leftRames.length - i - 1; j >= nbRamesUsed.onLeft() - i -1; j--) {
                 if((sailorToMove = nearestSailorBehind5(leftRames[j], sailorsAvailable)) != null) {
                     actionsList.add(buildMovingAction(sailorToMove, leftRames[j]));
                     actionsList.add(new Oar(sailorToMove.getId()));
@@ -77,13 +77,13 @@ public class SmartCreateActions {
                 }
             }
             if(sailorToMove == null) {
-                entitiesTooFar.add(leftRames[(i == 0) ? tabNbLeftAndRightOar[0] : leftRames.length-i]);
+                entitiesTooFar.add(leftRames[(i == 0) ? nbRamesUsed.onLeft() : leftRames.length-i]);
                 break;
             }
         }
 
-        for (int i = 0; i < tabNbLeftAndRightOar[1]; i++) {
-            for (int j = leftRames.length - i - 1; j >= tabNbLeftAndRightOar[1] - i - 1; j--) {
+        for (int i = 0; i < nbRamesUsed.onRight(); i++) {
+            for (int j = leftRames.length - i - 1; j >= nbRamesUsed.onRight() - i - 1; j--) {
                 if((sailorToMove = nearestSailorBehind5(rightRames[j], sailorsAvailable)) != null) {
                     actionsList.add(buildMovingAction(sailorToMove, rightRames[j]));
                     actionsList.add(new Oar(sailorToMove.getId()));
@@ -92,7 +92,7 @@ public class SmartCreateActions {
                 }
             }
             if(sailorToMove == null) {
-                entitiesTooFar.add(rightRames[(i == 0) ? tabNbLeftAndRightOar[1] : leftRames.length-i]);
+                entitiesTooFar.add(rightRames[(i == 0) ? nbRamesUsed.onRight() : leftRames.length-i]);
                 break;
             }
         }

@@ -66,9 +66,8 @@ public class RegattaGoal extends Goal {
         return positionOptiCheckpoints[numActualCheckpoint];
     }
 
-    public int getNumActualCheckpoint(){
-        return numActualCheckpoint;
-    }
+    public int getNumActualCheckpoint(){ return numActualCheckpoint; }
+
     /**
      * <p>Setter.</p>
      */
