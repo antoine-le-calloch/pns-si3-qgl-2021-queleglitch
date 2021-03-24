@@ -27,11 +27,11 @@ class SailStrategyTest {
     void setUp() {
         mockShipSailClose = mock(Ship.class);
         Mockito.when(mockShipSailClose.getPosition()).thenReturn(new Position(2, 4, Math.PI / 2));
-        Mockito.when(mockShipSailClose.getSails()).thenReturn(Arrays.asList(new Sail[]{new Sail(0, 0, false)}.clone()));
+        Mockito.when(mockShipSailClose.isSailsOpen()).thenReturn(false);
 
         mockShipSailOpen = mock(Ship.class);
         Mockito.when(mockShipSailOpen.getPosition()).thenReturn(new Position(2, 4, Math.PI / 2));
-        Mockito.when(mockShipSailOpen.getSails()).thenReturn(Arrays.asList(new Sail[]{new Sail(0, 0, true)}.clone()));
+        Mockito.when(mockShipSailOpen.isSailsOpen()).thenReturn(true);
     }
 
     ////////////////UseWind

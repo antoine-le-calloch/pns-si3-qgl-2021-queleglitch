@@ -25,7 +25,6 @@ class ShipMovementResolverTest {
     Ship mockShip4Oars1Sail;
     Ship mockShip6Oars1Sail;
     Ship mockShip10Oars1Sail;
-    List<Sail> mockList1Sail;
 
     @BeforeEach
     void setUp() {
@@ -34,23 +33,12 @@ class ShipMovementResolverTest {
         mockShip6Oars1Sail = mock(Ship.class);
         mockShip10Oars1Sail = mock(Ship.class);
 
-        List<Oar> mockList2Oars = mock(List.class);
-        List<Oar> mockList4Oars = mock(List.class);
-        List<Oar> mockList6Oars = mock(List.class);
-        List<Oar> mockList10Oars = mock(List.class);
-        mockList1Sail = mock(List.class);
-
-        Mockito.when(mockShip2Oars1Sail.getOars()).thenReturn(mockList2Oars);
-        Mockito.when(mockShip4Oars1Sail.getOars()).thenReturn(mockList4Oars);
-        Mockito.when(mockShip6Oars1Sail.getOars()).thenReturn(mockList6Oars);
-        Mockito.when(mockShip6Oars1Sail.getSails()).thenReturn(mockList1Sail);
-        Mockito.when(mockShip10Oars1Sail.getOars()).thenReturn(mockList10Oars);
-        Mockito.when(mockShip10Oars1Sail.getSails()).thenReturn(mockList1Sail);
-        Mockito.when(mockList2Oars.size()).thenReturn(2);
-        Mockito.when(mockList4Oars.size()).thenReturn(4);
-        Mockito.when(mockList6Oars.size()).thenReturn(6);
-        Mockito.when(mockList10Oars.size()).thenReturn(10);
-        Mockito.when(mockList1Sail.size()).thenReturn(1);
+        Mockito.when(mockShip2Oars1Sail.getNbOars()).thenReturn(2);
+        Mockito.when(mockShip4Oars1Sail.getNbOars()).thenReturn(4);
+        Mockito.when(mockShip6Oars1Sail.getNbOars()).thenReturn(6);
+        Mockito.when(mockShip6Oars1Sail.getNbSails()).thenReturn(1);
+        Mockito.when(mockShip10Oars1Sail.getNbOars()).thenReturn(10);
+        Mockito.when(mockShip10Oars1Sail.getNbSails()).thenReturn(1);
 
         ship2OarsMovementResolver = new ShipMovementResolver(mockShip2Oars1Sail,new Wind(10,0), null);
         ship4OarsMovementResolver = new ShipMovementResolver(mockShip4Oars1Sail,new Wind(10,0), null);
@@ -497,7 +485,7 @@ class ShipMovementResolverTest {
 
     @Test
     void nextTurnPosition_0OarToUse_0Sail_0Rudder() {
-        Mockito.when(mockList1Sail.get(0)).thenReturn(new Sail(0,0,false));
+        Mockito.when(mockShip10Oars1Sail.isSailsOpen()).thenReturn(false);
         Mockito.when(mockShip10Oars1Sail.getPosition()).thenReturn(new Position(0,0,0));
         ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Oars1Sail,new Wind(50,0), null);
 
@@ -506,7 +494,7 @@ class ShipMovementResolverTest {
 
     @Test
     void nextPosition_0OarToUse_1Sail_0Rudder() {
-        Mockito.when(mockList1Sail.get(0)).thenReturn(new Sail(0,0,true));
+        Mockito.when(mockShip10Oars1Sail.isSailsOpen()).thenReturn(true);
         Mockito.when(mockShip10Oars1Sail.getPosition()).thenReturn(new Position(0,0,0));
         ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Oars1Sail,new Wind(50,0),null);
 
@@ -515,7 +503,7 @@ class ShipMovementResolverTest {
 
     @Test
     void nextPosition_AllOarToUse_0Sail_0Rudder() {
-        Mockito.when(mockList1Sail.get(0)).thenReturn(new Sail(0,0,false));
+        Mockito.when(mockShip10Oars1Sail.isSailsOpen()).thenReturn(false);
         Mockito.when(mockShip10Oars1Sail.getPosition()).thenReturn(new Position(0,0,0));
         ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Oars1Sail,new Wind(50,0), null);
 
@@ -526,7 +514,7 @@ class ShipMovementResolverTest {
 
     @Test
     void rudderTestRound0() {
-        Mockito.when(mockList1Sail.get(0)).thenReturn(new Sail(0,0,false));
+        Mockito.when(mockShip10Oars1Sail.isSailsOpen()).thenReturn(false);
         Mockito.when(mockShip10Oars1Sail.getPosition()).thenReturn(new Position(2852.173913043478,1978.827361563518,-1.0297442586766543));
         ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Oars1Sail,new Wind(50,0),null);
 
@@ -535,7 +523,7 @@ class ShipMovementResolverTest {
 
     @Test
     void rudderTestRound1() {
-        Mockito.when(mockList1Sail.get(0)).thenReturn(new Sail(0,0,false));
+        Mockito.when(mockShip10Oars1Sail.isSailsOpen()).thenReturn(false);
         Mockito.when(mockShip10Oars1Sail.getPosition()).thenReturn(new Position(2958.9016642451215, 1818.4806682445735, -0.9366934544693667));
         ShipMovementResolver shipMovementResolver = new ShipMovementResolver(mockShip10Oars1Sail,new Wind(50,0),null);
 

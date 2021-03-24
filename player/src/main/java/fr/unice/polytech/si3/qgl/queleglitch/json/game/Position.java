@@ -22,6 +22,10 @@ public class Position {
         this.orientation = orientation;
     }
 
+    public Position copyOf(){
+        return new Position(x,y,orientation);
+    }
+
     public double getNorm(Position position){
         double distance;
         distance = Math.pow(x-position.getX(),2);

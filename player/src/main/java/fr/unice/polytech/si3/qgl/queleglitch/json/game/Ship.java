@@ -46,6 +46,29 @@ public class Ship {
 
     public List<Oar> getOarsAtLeft(){ return getOars().stream().filter(oar -> oar.getY()==0).collect(Collectors.toList()); }
 
+    public boolean isSailsOpen(){
+        for (Entities entity : entities)
+            if(entity instanceof Sail)
+                return ((Sail) entity).isOpenned();
+        return false;
+    }
+
+    public int getNbSails(){
+        int nbSails = 0;
+        for (Entities entity : entities)
+            if(entity instanceof Sail)
+                nbSails++;
+        return nbSails;
+    }
+
+    public int getNbOars(){
+        int nbOars = 0;
+        for (Entities entity : entities)
+            if(entity instanceof Oar)
+                nbOars++;
+        return nbOars;
+    }
+
     public List<Oar> getOars(){
         List<Oar> oars =new ArrayList<>();
         for (Entities entity:entities)

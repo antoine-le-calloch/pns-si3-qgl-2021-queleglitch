@@ -21,7 +21,7 @@ public class RegattaResolver {
     public RegattaResolver(InformationGame informationGame) {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame.getShip().getPosition());
-        oarStrategy = new OarStrategy(informationGame.getSailors().length, informationGame.getShip().getOars().size());
+        oarStrategy = new OarStrategy(informationGame.getSailors().length, informationGame.getShip().getNbOars());
         rudderStrategy = new RudderStrategy(informationGame);
         SailStrategy = new SailStrategy(informationGame);
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
@@ -52,7 +52,7 @@ public class RegattaResolver {
                 if (nbOarsUsed.onLeft() >= 1 && nbOarsUsed.onRight() >= 1 && (nbOarsUsed.onLeft() != nbOarsUsed.onRight() || nbOarsUsed.onLeft() != 1))
                     nbOarsUsed.decreaseLeftAndRight(1);
 
-                else if (informationGame.getShip().getSails().get(0).isOpenned() && actionOnSails != SailAction.LOWER){
+                else if (informationGame.getShip().isSailsOpen() && actionOnSails != SailAction.LOWER){
                     actionOnSails = SailAction.LOWER;
                     changeSailSetting = true;
                 }
