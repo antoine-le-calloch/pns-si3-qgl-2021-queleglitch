@@ -1,13 +1,13 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
-import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
+import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Gouvernail;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Rame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Voile;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Rudder;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Oar;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Sail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,10 +17,10 @@ public class SmartCreateActions {
 
     private final Ship ship;
     private final Sailor []sailors;
-    private final Rame []leftRames;
-    private final Rame[]rightRames;
-    private final Gouvernail gouvernail;
-    private final List<Voile> voiles;
+    private final Oar[] leftOars;
+    private final Oar[] rightOars;
+    private final Rudder rudder;
+    private final List<Sail> sails;
     private final List<Sailor> sailorsAvailable;
     public final List<Entities> entitiesTooFar;
     public final List<Action> actionsList;
@@ -31,21 +31,21 @@ public class SmartCreateActions {
 
         this.ship = ship;
         this.sailors = sailors;
-        this.voiles = ship.getVoiles();
-        this.gouvernail = ship.getGouvernail();
-        this.leftRames = ship.getRamesAtLeft().toArray(Rame[]::new);
-        this.rightRames = ship.getRamesAtRight().toArray(Rame[]::new);
+        this.sails = ship.getSails();
+        this.rudder = ship.getRudder();
+        this.leftOars = ship.getOarsAtLeft().toArray(Oar[]::new);
+        this.rightOars = ship.getOarsAtRight().toArray(Oar[]::new);
         this.sailorsAvailable = new ArrayList<>(Arrays.asList(sailors));
     }
 
     public List<Action> createActions(ToolsToUse toolsToUse){
         if(toolsToUse.getRudderAngle() != 0) {
-            movingAndUseGouvernail(toolsToUse.getRudderAngle());
+            movingAndUseRudder(toolsToUse.getRudderAngle());
         }
-        if(toolsToUse.getActionOnVoile() != VoileAction.DO_NOTHING) {
-            movingAndUseVoiles(toolsToUse.getActionOnVoile());
+        if(toolsToUse.getActionOnSail() != SailAction.DO_NOTHING) {
+            movingAndUseSails(toolsToUse.getActionOnSail());
         }
-        movingAndUseRames(toolsToUse.getNbRamesUsed());
+        movingAndUseOars(toolsToUse.getNbOarsUsed());
         movingToEntitiesTooFar();
         movingToCenter();
 
@@ -65,62 +65,62 @@ public class SmartCreateActions {
         }
     }
 
-    public void movingAndUseRames(NbRamesUsed nbRamesUsed){
+    public void movingAndUseOars(NbOarsUsed nbOarsUsed){
         Sailor sailorToMove = null;
-        for (int i = 0; i < nbRamesUsed.onLeft(); i++) {
-            for (int j = leftRames.length - i - 1; j >= nbRamesUsed.onLeft() - i -1; j--) {
-                if((sailorToMove = nearestSailorBehind5(leftRames[j], sailorsAvailable)) != null) {
-                    actionsList.add(buildMovingAction(sailorToMove, leftRames[j]));
-                    actionsList.add(new Oar(sailorToMove.getId()));
+        for (int i = 0; i < nbOarsUsed.onLeft(); i++) {
+            for (int j = leftOars.length - i - 1; j >= nbOarsUsed.onLeft() - i -1; j--) {
+                if((sailorToMove = nearestSailorBehind5(leftOars[j], sailorsAvailable)) != null) {
+                    actionsList.add(buildMovingAction(sailorToMove, leftOars[j]));
+                    actionsList.add(new fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar(sailorToMove.getId()));
                     sailorsAvailable.remove(sailorToMove);
                     break;
                 }
             }
             if(sailorToMove == null) {
-                entitiesTooFar.add(leftRames[(i == 0) ? nbRamesUsed.onLeft() : leftRames.length-i]);
+                entitiesTooFar.add(leftOars[(i == 0) ? nbOarsUsed.onLeft() : leftOars.length-i]);
                 break;
             }
         }
 
-        for (int i = 0; i < nbRamesUsed.onRight(); i++) {
-            for (int j = leftRames.length - i - 1; j >= nbRamesUsed.onRight() - i - 1; j--) {
-                if((sailorToMove = nearestSailorBehind5(rightRames[j], sailorsAvailable)) != null) {
-                    actionsList.add(buildMovingAction(sailorToMove, rightRames[j]));
-                    actionsList.add(new Oar(sailorToMove.getId()));
+        for (int i = 0; i < nbOarsUsed.onRight(); i++) {
+            for (int j = leftOars.length - i - 1; j >= nbOarsUsed.onRight() - i - 1; j--) {
+                if((sailorToMove = nearestSailorBehind5(rightOars[j], sailorsAvailable)) != null) {
+                    actionsList.add(buildMovingAction(sailorToMove, rightOars[j]));
+                    actionsList.add(new fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar(sailorToMove.getId()));
                     sailorsAvailable.remove(sailorToMove);
                     break;
                 }
             }
             if(sailorToMove == null) {
-                entitiesTooFar.add(rightRames[(i == 0) ? nbRamesUsed.onRight() : leftRames.length-i]);
+                entitiesTooFar.add(rightOars[(i == 0) ? nbOarsUsed.onRight() : leftOars.length-i]);
                 break;
             }
         }
     }
 
-    public void movingAndUseVoiles(VoileAction actionOnVoile){
+    public void movingAndUseSails(SailAction actionOnSail){
         Sailor sailorToMove;
-        for (Voile voile : voiles) {
-            if((sailorToMove = nearestSailorBehind5(voile, sailorsAvailable)) != null){
-                actionsList.add(buildMovingAction(sailorToMove,voile));
-                actionsList.add((actionOnVoile == VoileAction.LIFT) ? new LiftSail(sailorToMove.getId()) : new LowerSail(sailorToMove.getId()));
+        for (Sail sail : sails) {
+            if((sailorToMove = nearestSailorBehind5(sail, sailorsAvailable)) != null){
+                actionsList.add(buildMovingAction(sailorToMove, sail));
+                actionsList.add((actionOnSail == SailAction.LIFT) ? new LiftSail(sailorToMove.getId()) : new LowerSail(sailorToMove.getId()));
                 sailorsAvailable.remove(sailorToMove);
             }
             else {
-                entitiesTooFar.add(voile);
+                entitiesTooFar.add(sail);
             }
         }
     }
 
-    public void movingAndUseGouvernail(double rudderAngle){
-        Sailor sailorToMove = nearestSailorBehind5(gouvernail, sailorsAvailable);
+    public void movingAndUseRudder(double rudderAngle){
+        Sailor sailorToMove = nearestSailorBehind5(rudder, sailorsAvailable);
         if(sailorToMove != null) {
-            actionsList.add(buildMovingAction(sailorToMove, gouvernail));
+            actionsList.add(buildMovingAction(sailorToMove, rudder));
             actionsList.add(new Turn(rudderAngle,sailorToMove.getId()));
             sailorsAvailable.remove(sailorToMove);
         }
         else
-            entitiesTooFar.add(gouvernail);
+            entitiesTooFar.add(rudder);
     }
 
     public Action buildMovingAction(Sailor sailor, Entities destination){
@@ -135,8 +135,8 @@ public class SmartCreateActions {
 
         for (Sailor pastSailor : sailors) {
             if(pastSailor.getId() == sailor.getId()){
-                pastSailor.x = pastSailor.x + moveOnX;
-                pastSailor.y = pastSailor.y + moveOnY;
+                pastSailor.setX(pastSailor.getX() + moveOnX);
+                pastSailor.setY(pastSailor.getY() + moveOnY);
                 break;
             }
         }

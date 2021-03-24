@@ -10,50 +10,52 @@ import static org.junit.jupiter.api.Assertions.*;
 class RegattaGoalTest {
 
     RegattaGoal regattaGoal;
+    Position position0;
 
     @BeforeEach
     void setUp() {
         regattaGoal = new RegattaGoal();
+        position0 = new Position(0,0,0);
     }
 
     @Test
     void findNewPosition_Angle_0__d_100(){
-        assertEquals(new Position(100,0,0),regattaGoal.findHowManyToMovePosition(0,100));
+        assertEquals(new Position(100,0,0),regattaGoal.findOptiCheckpoints(position0,0,100));
     }
 
     @Test
     void findNewPosition_Angle_PIOn4__d_Sqrt20000(){
-        assertEquals(new Position(100.00000000000001,100,0),regattaGoal.findHowManyToMovePosition(Math.PI/4,Math.sqrt(20000)));
+        assertEquals(new Position(100.00000000000001,100,0),regattaGoal.findOptiCheckpoints(position0,Math.PI/4,Math.sqrt(20000)));
     }
 
     @Test
     void findNewPosition_Angle_PIOn2__d_100(){
-        assertEquals(new Position(6.123233995736766E-15,100,0),regattaGoal.findHowManyToMovePosition(Math.PI/2,100));
+        assertEquals(new Position(6.123233995736766E-15,100,0),regattaGoal.findOptiCheckpoints(position0,Math.PI/2,100));
     }
 
     @Test
     void findNewPosition_Angle_3PIOn4__d_Sqrt20000(){
-        assertEquals(new Position(-100,100.00000000000001,0),regattaGoal.findHowManyToMovePosition(3*Math.PI/4,Math.sqrt(20000)));
+        assertEquals(new Position(-100,100.00000000000001,0),regattaGoal.findOptiCheckpoints(position0,3*Math.PI/4,Math.sqrt(20000)));
     }
 
     @Test
     void findNewPosition_Angle_PI__d_100(){
-        assertEquals(new Position(-100,1.2246467991473532E-14,0),regattaGoal.findHowManyToMovePosition(Math.PI,100));
+        assertEquals(new Position(-100,1.2246467991473532E-14,0),regattaGoal.findOptiCheckpoints(position0,Math.PI,100));
     }
 
     @Test
     void findNewPosition_Angle_Minus3PIOn4__d_Sqrt20000(){
-        assertEquals(new Position(-100,-100.00000000000001,0),regattaGoal.findHowManyToMovePosition(-3*Math.PI/4,Math.sqrt(20000)));
+        assertEquals(new Position(-100,-100.00000000000001,0),regattaGoal.findOptiCheckpoints(position0,-3*Math.PI/4,Math.sqrt(20000)));
     }
 
     @Test
     void findNewPosition_Angle_MinusPIOn2__d_100(){
-        assertEquals(new Position(6.123233995736766E-15,-100,0),regattaGoal.findHowManyToMovePosition(-Math.PI/2,100));
+        assertEquals(new Position(6.123233995736766E-15,-100,0),regattaGoal.findOptiCheckpoints(position0,-Math.PI/2,100));
     }
 
     @Test
     void findNewPosition_Angle_MinusPIOn4__d_Sqrt20000(){
-        assertEquals(new Position(100.00000000000001,-100.0,0),regattaGoal.findHowManyToMovePosition(-Math.PI/4,Math.sqrt(20000)));
+        assertEquals(new Position(100.00000000000001,-100.0,0),regattaGoal.findOptiCheckpoints(position0,-Math.PI/4,Math.sqrt(20000)));
     }
 
     ///////calculateOptiCheckpoint

@@ -1,11 +1,11 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie;
 
-public class Voile extends Entities {
+public class Sail extends Entities {
     private boolean openned;
 
-    public Voile(){}
+    public Sail(){}
 
-    public Voile(int x,int y,boolean opened){
+    public Sail(int x, int y, boolean opened){
         super(x,y);
         this.openned = opened;
     }

@@ -1,12 +1,13 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building.calcul;
 
-import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbRamesUsed;
+import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbOarsUsed;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.SmartCreateActions;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.*;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Oar;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,9 +24,9 @@ class SmartCreateActionsTest {
 
     @BeforeEach
     void setUp() {
-        ship = new Ship(null, new Entities[]{new Gouvernail(7, 1), new Voile(3, 1, false),
-                new Rame(1, 0), new Rame(2, 0), new Rame(3, 0), new Rame(4, 0),
-                new Rame(1, 2), new Rame(2, 2), new Rame(3, 2), new Rame(4, 2)},
+        ship = new Ship(null, new Entities[]{new Rudder(7, 1), new Sail(3, 1, false),
+                new Oar(1, 0), new Oar(2, 0), new Oar(3, 0), new Oar(4, 0),
+                new Oar(1, 2), new Oar(2, 2), new Oar(3, 2), new Oar(4, 2)},
                 "", new Deck(4, 8), new Rectangle());
 
         sailors = new Sailor[]{new Sailor(0, 0, 0), new Sailor(1, 1, 1), new Sailor(-1, -1, 2)};
@@ -326,7 +327,7 @@ class SmartCreateActionsTest {
 
     @Test
     void buildPossibleAction_v1() {
-        Entities entitiesToReach = new Rame(4, 0);
+        Entities entitiesToReach = new Oar(4, 0);
 
         assertEquals(new Sailor(0, 0, 0), sailors[0]);
 
@@ -337,7 +338,7 @@ class SmartCreateActionsTest {
 
     @Test
     void buildNotPossibleAction_v1() {
-        Entities entitiesToReach = new Rame(6, 0);
+        Entities entitiesToReach = new Oar(6, 0);
         Action movingAction = smartCreateActions.buildMovingAction(sailors[0], entitiesToReach);
 
         assertEquals(new Moving(5, 0, 0), movingAction);
@@ -345,7 +346,7 @@ class SmartCreateActionsTest {
 
     @Test
     void buildPossibleAction_v2() {
-        Entities entitiesToReach = new Rame(0, 4);
+        Entities entitiesToReach = new Oar(0, 4);
         Action movingAction = smartCreateActions.buildMovingAction(sailors[0], entitiesToReach);
 
         assertEquals(new Moving(0, 4, 0), movingAction);
@@ -353,7 +354,7 @@ class SmartCreateActionsTest {
 
     @Test
     void buildNotPossibleAction_v2() {
-        Entities entitiesToReach = new Rame(0, 6);
+        Entities entitiesToReach = new Oar(0, 6);
         Action movingAction = smartCreateActions.buildMovingAction(sailors[0], entitiesToReach);
 
         assertEquals(new Moving(0, 5, 0), movingAction);
@@ -361,7 +362,7 @@ class SmartCreateActionsTest {
 
     @Test
     void buildPossibleAction_v3() {
-        Entities entitiesToReach = new Rame(3, 3);
+        Entities entitiesToReach = new Oar(3, 3);
         Action movingAction = smartCreateActions.buildMovingAction(sailors[1], entitiesToReach);
 
         assertEquals(new Moving(2, 2, 1), movingAction);
@@ -369,7 +370,7 @@ class SmartCreateActionsTest {
 
     @Test
     void buildNotPossibleAction_v3() {
-        Entities entitiesToReach = new Rame(4, 4);
+        Entities entitiesToReach = new Oar(4, 4);
         Action movingAction = smartCreateActions.buildMovingAction(sailors[1], entitiesToReach);
 
         assertEquals(new Moving(2, 3, 1), movingAction);
@@ -377,7 +378,7 @@ class SmartCreateActionsTest {
 
     @Test
     void buildPossibleAction_v4() {
-        Entities entitiesToReach = new Rame(0, 3);
+        Entities entitiesToReach = new Oar(0, 3);
         Action movingAction = smartCreateActions.buildMovingAction(sailors[2], entitiesToReach);
 
         assertEquals(new Moving(1, 4, 2), movingAction);
@@ -385,7 +386,7 @@ class SmartCreateActionsTest {
 
     @Test
     void buildNotPossibleAction_v4() {
-        Entities entitiesToReach = new Rame(2, 5);
+        Entities entitiesToReach = new Oar(2, 5);
         Action movingAction = smartCreateActions.buildMovingAction(sailors[2], entitiesToReach);
 
         assertEquals(new Moving(1, 4, 2), movingAction);
@@ -393,7 +394,7 @@ class SmartCreateActionsTest {
 
     @Test
     void buildPossibleAction_v5() {
-        Entities entitiesToReach = new Rame(-5, -2);
+        Entities entitiesToReach = new Oar(-5, -2);
         Action movingAction = smartCreateActions.buildMovingAction(sailors[2], entitiesToReach);
 
         assertEquals(new Moving(-4, -1, 2), movingAction);
@@ -401,22 +402,22 @@ class SmartCreateActionsTest {
 
     @Test
     void buildNotPossibleAction_v5() {
-        Entities entitiesToReach = new Rame(-6, -3);
+        Entities entitiesToReach = new Oar(-6, -3);
         Action movingAction = smartCreateActions.buildMovingAction(sailors[2], entitiesToReach);
 
         assertEquals(new Moving(-3, -2, 2), movingAction);
     }
 
     ////////////////
-    // test movingToGouvernail(), Gouvernail in (7,1)
+    // test movingToRudder(), Rudder in (7,1)
     ////////////////
 
     @Test
-    void useGouvernail_MovePossible_v1() {
+    void useRudder_MovePossible_v1() {
         sailors = new Sailor[]{new Sailor(2, 1, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseGouvernail(Math.PI);
+        smartCreateActions.movingAndUseRudder(Math.PI);
 
         assertEquals(new Moving(5, 0, 0), smartCreateActions.actionsList.get(0));
         assertEquals(new Turn(Math.PI, 0), smartCreateActions.actionsList.get(1));
@@ -424,23 +425,23 @@ class SmartCreateActionsTest {
     }
 
     @Test
-    void useGouvernail_MoveNotPossible_v1() {
+    void useRudder_MoveNotPossible_v1() {
         sailors = new Sailor[]{new Sailor(1, 1, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseGouvernail(1);
+        smartCreateActions.movingAndUseRudder(1);
 
         assertEquals(0, smartCreateActions.actionsList.size());
         assertEquals(1, smartCreateActions.entitiesTooFar.size());
-        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Gouvernail);
+        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Rudder);
     }
 
     @Test
-    void useGouvernail_MovePossible_v2() {
+    void useRudder_MovePossible_v2() {
         sailors = new Sailor[]{new Sailor(11, 2, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseGouvernail(Math.PI);
+        smartCreateActions.movingAndUseRudder(Math.PI);
 
         assertEquals(new Moving(-4, -1, 0), smartCreateActions.actionsList.get(0));
         assertEquals(new Turn(Math.PI, 0), smartCreateActions.actionsList.get(1));
@@ -448,23 +449,23 @@ class SmartCreateActionsTest {
     }
 
     @Test
-    void useGouvernail_MoveNotPossible_v2() {
+    void useRudder_MoveNotPossible_v2() {
         sailors = new Sailor[]{new Sailor(12, 2, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseGouvernail(1);
+        smartCreateActions.movingAndUseRudder(1);
 
         assertEquals(0, smartCreateActions.actionsList.size());
         assertEquals(1, smartCreateActions.entitiesTooFar.size());
-        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Gouvernail);
+        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Rudder);
     }
 
     @Test
-    void useGouvernail_MovePossible_v3() {
+    void useRudder_MovePossible_v3() {
         sailors = new Sailor[]{new Sailor(7, 6, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseGouvernail(Math.PI);
+        smartCreateActions.movingAndUseRudder(Math.PI);
 
         assertEquals(new Moving(0, -5, 0), smartCreateActions.actionsList.get(0));
         assertEquals(new Turn(Math.PI, 0), smartCreateActions.actionsList.get(1));
@@ -472,27 +473,27 @@ class SmartCreateActionsTest {
     }
 
     @Test
-    void useGouvernail_MoveNotPossible_v3() {
+    void useRudder_MoveNotPossible_v3() {
         sailors = new Sailor[]{new Sailor(7, 7, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseGouvernail(1);
+        smartCreateActions.movingAndUseRudder(1);
 
         assertEquals(0, smartCreateActions.actionsList.size());
         assertEquals(1, smartCreateActions.entitiesTooFar.size());
-        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Gouvernail);
+        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Rudder);
     }
 
     ////////////////
-    // test movingToVoiles(), Voile in (3,1)
+    // test movingToSails(), Sail in (3,1)
     ////////////////
 
     @Test
-    void useVoiles_MovePossible_v1() {
+    void useSails_MovePossible_v1() {
         sailors = new Sailor[]{new Sailor(-2, 1, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseVoiles(VoileAction.LIFT);
+        smartCreateActions.movingAndUseSails(SailAction.LIFT);
 
         assertEquals(new Moving(5, 0, 0), smartCreateActions.actionsList.get(0));
         assertEquals(new LiftSail(0), smartCreateActions.actionsList.get(1));
@@ -500,23 +501,23 @@ class SmartCreateActionsTest {
     }
 
     @Test
-    void useVoiles_MoveNotPossible_v1() {
+    void useSails_MoveNotPossible_v1() {
         sailors = new Sailor[]{new Sailor(-3, 1, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseVoiles(VoileAction.LIFT);
+        smartCreateActions.movingAndUseSails(SailAction.LIFT);
 
         assertEquals(0, smartCreateActions.actionsList.size());
         assertEquals(1, smartCreateActions.entitiesTooFar.size());
-        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Voile);
+        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Sail);
     }
 
     @Test
-    void useVoiles_MovePossible_v2() {
+    void useSails_MovePossible_v2() {
         sailors = new Sailor[]{new Sailor(7, 2, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseVoiles(VoileAction.LOWER);
+        smartCreateActions.movingAndUseSails(SailAction.LOWER);
 
         assertEquals(new Moving(-4, -1, 0), smartCreateActions.actionsList.get(0));
         assertEquals(new LowerSail(0), smartCreateActions.actionsList.get(1));
@@ -524,23 +525,23 @@ class SmartCreateActionsTest {
     }
 
     @Test
-    void useVoiles_MoveNotPossible_v2() {
+    void useSails_MoveNotPossible_v2() {
         sailors = new Sailor[]{new Sailor(8, 2, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseVoiles(VoileAction.LOWER);
+        smartCreateActions.movingAndUseSails(SailAction.LOWER);
 
         assertEquals(0, smartCreateActions.actionsList.size());
         assertEquals(1, smartCreateActions.entitiesTooFar.size());
-        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Voile);
+        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Sail);
     }
 
     @Test
-    void useVoiles_MovePossible_v3() {
+    void useSails_MovePossible_v3() {
         sailors = new Sailor[]{new Sailor(3, 6, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseVoiles(VoileAction.LIFT);
+        smartCreateActions.movingAndUseSails(SailAction.LIFT);
 
         assertEquals(new Moving(0, -5, 0), smartCreateActions.actionsList.get(0));
         assertEquals(new LiftSail(0), smartCreateActions.actionsList.get(1));
@@ -548,102 +549,102 @@ class SmartCreateActionsTest {
     }
 
     @Test
-    void useVoiles_MoveNotPossible_v3() {
+    void useSails_MoveNotPossible_v3() {
         sailors = new Sailor[]{new Sailor(3, 7, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseVoiles(VoileAction.LIFT);
+        smartCreateActions.movingAndUseSails(SailAction.LIFT);
 
         assertEquals(0, smartCreateActions.actionsList.size());
         assertEquals(1, smartCreateActions.entitiesTooFar.size());
-        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Voile);
+        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Sail);
     }
 
     ////////////////
-    // test movingAndUseRames(), Rames in (1,0) - (2,0) - (3,0) - (4,0)
+    // test movingAndUseOars(), Oars in (1,0) - (2,0) - (3,0) - (4,0)
     //                                    (1,2) - (2,2) - (3,2) - (4,2)
     ////////////////
 
     @Test
-    void useRames_MovesPossible_v1() {
+    void useOars_MovesPossible_v1() {
         sailors = new Sailor[]{new Sailor(-4, 0, 0), new Sailor(9, 2, 1)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseRames(new NbRamesUsed(1,1));
+        smartCreateActions.movingAndUseOars(new NbOarsUsed(1,1));
 
         assertEquals(new Moving(5, 0, 0), smartCreateActions.actionsList.get(0));
-        assertEquals(new Oar(0), smartCreateActions.actionsList.get(1));
+        assertEquals(new fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar(0), smartCreateActions.actionsList.get(1));
         assertEquals(new Moving(-5, 0, 1), smartCreateActions.actionsList.get(2));
-        assertEquals(new Oar(1), smartCreateActions.actionsList.get(3));
+        assertEquals(new fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar(1), smartCreateActions.actionsList.get(3));
         assertEquals(0, smartCreateActions.entitiesTooFar.size());
     }
 
     @Test
-    void useRames_MovesNotPossible_v1() {
+    void useOars_MovesNotPossible_v1() {
         sailors = new Sailor[]{new Sailor(-5, 0, 0), new Sailor(10, 2, 1)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseRames(new NbRamesUsed(1, 1));
+        smartCreateActions.movingAndUseOars(new NbOarsUsed(1, 1));
 
         assertEquals(2, smartCreateActions.entitiesTooFar.size());
-        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Rame);
-        assertTrue(smartCreateActions.entitiesTooFar.get(1) instanceof Rame);
+        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Oar);
+        assertTrue(smartCreateActions.entitiesTooFar.get(1) instanceof Oar);
     }
 
     @Test
-    void useRames_MoveNotPossibleOnLeft_v1() {
+    void useOars_MoveNotPossibleOnLeft_v1() {
         sailors = new Sailor[]{new Sailor(-5, 0, 0), new Sailor(9, 2, 1)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseRames(new NbRamesUsed(1, 1));
+        smartCreateActions.movingAndUseOars(new NbOarsUsed(1, 1));
 
 
         assertEquals(new Moving(-5, 0, 1), smartCreateActions.actionsList.get(0));
-        assertEquals(new Oar(1), smartCreateActions.actionsList.get(1));
+        assertEquals(new fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar(1), smartCreateActions.actionsList.get(1));
         assertEquals(1, smartCreateActions.entitiesTooFar.size());
-        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Rame);
+        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Oar);
     }
 
     @Test
-    void useRames_MoveNotPossibleOnRight_v1() {
+    void useOars_MoveNotPossibleOnRight_v1() {
         sailors = new Sailor[]{new Sailor(-4, 0, 0), new Sailor(10, 2, 1)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseRames(new NbRamesUsed(1, 1));
+        smartCreateActions.movingAndUseOars(new NbOarsUsed(1, 1));
 
 
         assertEquals(new Moving(5, 0, 0), smartCreateActions.actionsList.get(0));
-        assertEquals(new Oar(0), smartCreateActions.actionsList.get(1));
+        assertEquals(new fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar(0), smartCreateActions.actionsList.get(1));
         assertEquals(1, smartCreateActions.entitiesTooFar.size());
-        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Rame);
+        assertTrue(smartCreateActions.entitiesTooFar.get(0) instanceof Oar);
     }
 
     @Test
-    void useRames_MovesPossible3Sailors_v2() {
+    void useOars_MovesPossible3Sailors_v2() {
         sailors = new Sailor[]{new Sailor(-4, 0, 0),
                                new Sailor(-3, 0, 2),
                                new Sailor(-2, 0, 4)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        smartCreateActions.movingAndUseRames(new NbRamesUsed(3, 0));
+        smartCreateActions.movingAndUseOars(new NbOarsUsed(3, 0));
 
         assertEquals(new Moving(5, 0, 4), smartCreateActions.actionsList.get(0));
-        assertEquals(new Oar(4), smartCreateActions.actionsList.get(1));
+        assertEquals(new fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar(4), smartCreateActions.actionsList.get(1));
         assertEquals(new Moving(5, 0, 2), smartCreateActions.actionsList.get(2));
-        assertEquals(new Oar(2), smartCreateActions.actionsList.get(3));
+        assertEquals(new fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar(2), smartCreateActions.actionsList.get(3));
         assertEquals(new Moving(5, 0, 0), smartCreateActions.actionsList.get(4));
-        assertEquals(new Oar(0), smartCreateActions.actionsList.get(5));
+        assertEquals(new fr.unice.polytech.si3.qgl.queleglitch.json.action.Oar(0), smartCreateActions.actionsList.get(5));
         assertEquals(0, smartCreateActions.entitiesTooFar.size());
     }
 
     /*@Test
-    void useRames_MovesPossible6Sailors_v2(){
+    void useOars_MovesPossible6Sailors_v2(){
         sailors = new Sailor[]{new Sailor(-4,0,0), new Sailor(9,2,1),
                 new Sailor(-3,0,2), new Sailor(8,2,3),
                 new Sailor(-2,0,4), new Sailor(7,2,5)};
         createActionsStrategie = new CreateActionsStrategie(sailors,ship);
 
-        createActionsStrategie.movingAndUseRames(3,0);
+        createActionsStrategie.movingAndUseOars(3,0);
 
         assertEquals(new Moving(5,0,4), createActionsStrategie.actionsList.get(0));
         assertEquals(new Oar(4), createActionsStrategie.actionsList.get(1));
@@ -675,10 +676,10 @@ class SmartCreateActionsTest {
     }
 
     @Test
-    void movingToEntitiesTooFar_1Rame() {
+    void movingToEntitiesTooFar_1Oar() {
         sailors = new Sailor[]{new Sailor(3, 6, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
-        smartCreateActions.entitiesTooFar.add(new Rame(9, 0));
+        smartCreateActions.entitiesTooFar.add(new Oar(9, 0));
 
         smartCreateActions.movingToEntitiesTooFar();
 
@@ -686,10 +687,10 @@ class SmartCreateActionsTest {
     }
 
     @Test
-    void movingToEntitiesTooFar_1Gouvernail() {
+    void movingToEntitiesTooFar_1Rudder() {
         sailors = new Sailor[]{new Sailor(3, 6, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
-        smartCreateActions.entitiesTooFar.add(new Gouvernail(0, 9));
+        smartCreateActions.entitiesTooFar.add(new Rudder(0, 9));
 
         smartCreateActions.movingToEntitiesTooFar();
 
@@ -697,10 +698,10 @@ class SmartCreateActionsTest {
     }
 
     @Test
-    void movingToEntitiesTooFar_1Voile() {
+    void movingToEntitiesTooFar_1Sail() {
         sailors = new Sailor[]{new Sailor(3, 6, 0)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
-        smartCreateActions.entitiesTooFar.add(new Voile(-9, -9, false));
+        smartCreateActions.entitiesTooFar.add(new Sail(-9, -9, false));
 
         smartCreateActions.movingToEntitiesTooFar();
 
@@ -711,9 +712,9 @@ class SmartCreateActionsTest {
     void movingToEntitiesTooFar_3Entities() {
         sailors = new Sailor[]{new Sailor(0, 0, 0), new Sailor(1, 0, 1), new Sailor(2, 0, 2)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
-        smartCreateActions.entitiesTooFar.add(new Rame(9, 0));
-        smartCreateActions.entitiesTooFar.add(new Gouvernail(0, 9));
-        smartCreateActions.entitiesTooFar.add(new Voile(-9, -9, false));
+        smartCreateActions.entitiesTooFar.add(new Oar(9, 0));
+        smartCreateActions.entitiesTooFar.add(new Rudder(0, 9));
+        smartCreateActions.entitiesTooFar.add(new Sail(-9, -9, false));
 
         smartCreateActions.movingToEntitiesTooFar();
 
@@ -740,9 +741,9 @@ class SmartCreateActionsTest {
 
     @Test
     void movingToCenter5W_9L() { //shape = (5 of width, 9 of length) so center on (4, 2)
-        ship = new Ship(null, new Entities[]{new Gouvernail(7, 1), new Voile(3, 1, false),
-                new Rame(1, 0), new Rame(2, 0), new Rame(3, 0), new Rame(4, 0),
-                new Rame(1, 2), new Rame(2, 2), new Rame(3, 2), new Rame(4, 2)},
+        ship = new Ship(null, new Entities[]{new Rudder(7, 1), new Sail(3, 1, false),
+                new Oar(1, 0), new Oar(2, 0), new Oar(3, 0), new Oar(4, 0),
+                new Oar(1, 2), new Oar(2, 2), new Oar(3, 2), new Oar(4, 2)},
                 "", new Deck(5, 9), new Rectangle());
 
         sailors = new Sailor[]{new Sailor(0, 0, 0), new Sailor(1, 1, 1), new Sailor(2, 0, 2)};
@@ -765,7 +766,7 @@ class SmartCreateActionsTest {
                                new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4, VoileAction.LIFT,new NbRamesUsed(2,2)));
+        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4, SailAction.LIFT,new NbOarsUsed(2,2)));
 
         assertEquals(12, actionList.size());
     }
@@ -776,7 +777,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4, VoileAction.LIFT,new NbRamesUsed(1,1)));
+        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4, SailAction.LIFT,new NbOarsUsed(1,1)));
 
         assertEquals(10, actionList.size());
     }
@@ -787,7 +788,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4,VoileAction.LIFT,new NbRamesUsed(0,0)));
+        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4,SailAction.LIFT,new NbOarsUsed(0,0)));
 
         assertEquals(8, actionList.size());
     }
@@ -798,7 +799,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(0,VoileAction.LIFT,new NbRamesUsed(0,0)));
+        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(0,SailAction.LIFT,new NbOarsUsed(0,0)));
 
         assertEquals(7, actionList.size()); //need to change
     }
@@ -809,7 +810,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(0,VoileAction.DO_NOTHING,new NbRamesUsed(0, 0)));
+        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(0, 0)));
 
         assertEquals(6, actionList.size()); //need to change
     }

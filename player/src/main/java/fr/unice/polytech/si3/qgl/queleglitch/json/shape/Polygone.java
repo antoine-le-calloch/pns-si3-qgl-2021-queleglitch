@@ -2,8 +2,8 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.shape;
 
 public class Polygone extends Shape {
 
-    public double orientation;
-    public Point[] vertices;
+    private double orientation;
+    private Point[] vertices;
 
     double positionToPoint(Point point){
         return point.getX();
@@ -13,4 +13,17 @@ public class Polygone extends Shape {
         return 0;
     }
 
+    /**
+     * <p>Getter.</p>
+     */
+    public double getOrientation() { return orientation; }
+
+    public Point[] getVertices() { return vertices; }
+
+    /**
+     * <p>Setter.</p>
+     */
+    public void setOrientation(double orientation) { this.orientation = orientation; }
+
+    public void setVertices(Point[] vertices) { this.vertices = vertices; }
 }

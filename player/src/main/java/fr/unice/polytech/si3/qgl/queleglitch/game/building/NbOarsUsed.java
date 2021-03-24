@@ -1,10 +1,10 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
-public class NbRamesUsed {
+public class NbOarsUsed {
     private int onLeft;
     private int onRight;
 
-    public NbRamesUsed(int onLeft, int onRight){
+    public NbOarsUsed(int onLeft, int onRight){
         this.onLeft = onLeft;
         this.onRight = onRight;
     }

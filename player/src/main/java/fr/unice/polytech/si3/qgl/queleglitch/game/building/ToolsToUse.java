@@ -1,28 +1,28 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
-import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
+import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
 
 public class ToolsToUse {
     public double rudderAngle;
-    public VoileAction actionOnVoile;
-    public NbRamesUsed nbRamesUsed;
+    public SailAction actionOnSail;
+    public NbOarsUsed nbOarsUsed;
 
-    public ToolsToUse(double rudderAngle, VoileAction actionOnVoile, NbRamesUsed nbRamesUsed){
+    public ToolsToUse(double rudderAngle, SailAction actionOnSail, NbOarsUsed nbOarsUsed){
         this.rudderAngle = rudderAngle;
-        this.actionOnVoile = actionOnVoile;
-        this.nbRamesUsed = nbRamesUsed;
+        this.actionOnSail = actionOnSail;
+        this.nbOarsUsed = nbOarsUsed;
     }
 
     public double getRudderAngle() {
         return rudderAngle;
     }
 
-    public VoileAction getActionOnVoile() {
-        return actionOnVoile;
+    public SailAction getActionOnSail() {
+        return actionOnSail;
     }
 
-    public NbRamesUsed getNbRamesUsed() {
-        return nbRamesUsed;
+    public NbOarsUsed getNbOarsUsed() {
+        return nbOarsUsed;
     }
 
     @Override
@@ -33,13 +33,13 @@ public class ToolsToUse {
             return false;
         ToolsToUse toolsToUse = (ToolsToUse) obj;
         return this.rudderAngle == toolsToUse.rudderAngle &&
-                this.actionOnVoile == toolsToUse.actionOnVoile &&
-                this.nbRamesUsed.onLeft() == toolsToUse.getNbRamesUsed().onLeft() &&
-                this.nbRamesUsed.onRight() == toolsToUse.getNbRamesUsed().onRight();
+                this.actionOnSail == toolsToUse.actionOnSail &&
+                this.nbOarsUsed.onLeft() == toolsToUse.getNbOarsUsed().onLeft() &&
+                this.nbOarsUsed.onRight() == toolsToUse.getNbOarsUsed().onRight();
     }
 
     @Override
     public String toString(){
-        return "Angle du gouvernail : " + this.rudderAngle + ", nb Voiles : " + this.actionOnVoile + ", nb left rames to use : " + this.nbRamesUsed.onLeft() + ", nb right rames to use : " + this.nbRamesUsed.onRight();
+        return "Angle du rudder : " + this.rudderAngle + ", nb Sails : " + this.actionOnSail + ", nb left oars to use : " + this.nbOarsUsed.onLeft() + ", nb right oars to use : " + this.nbOarsUsed.onRight();
     }
 }

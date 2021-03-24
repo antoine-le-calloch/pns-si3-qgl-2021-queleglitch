@@ -22,4 +22,5 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * @version 2021.01.26
  */
 public abstract class Goal {
+    public abstract void setCheckpoints(Checkpoint[] checkpoints);
 }
