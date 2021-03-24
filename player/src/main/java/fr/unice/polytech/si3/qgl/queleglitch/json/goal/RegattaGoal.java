@@ -66,12 +66,17 @@ public class RegattaGoal extends Goal {
         return positionOptiCheckpoints[numActualCheckpoint];
     }
 
+    public int getNumActualCheckpoint(){
+        return numActualCheckpoint;
+    }
     /**
      * <p>Setter.</p>
      */
     public void setCheckpoints(Checkpoint[] checkpoints) {
         this.checkpoints = checkpoints;
     }
+
+    public void setNumActualCheckpoint(int numActualCheckpoint){ this.numActualCheckpoint = numActualCheckpoint; }
 
     /**
      * <p>Override of toString method, allow to print a different string to give the Checkpoints information</p>

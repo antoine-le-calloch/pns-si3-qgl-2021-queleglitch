@@ -299,5 +299,12 @@ class GeometryTest {
             geometry = new Geometry(boatPosition);
             assertEquals(-Math.atan(499.0/601.0),geometry.calculateAngleToCheckPoint(checkPointPosition));
         }
+
+        @Test
+        void errorRunner(){
+            boatPosition = new Position(4025.6758696195516,276.126027138292,-0.9675112924526189);
+            geometry = new Geometry(boatPosition);
+            assertEquals(0.8102567219821311,geometry.calculateAngleToCheckPoint(new Position(4138.730832374324, 258.1996058558562,0.0)));
+        }
     }
 }
