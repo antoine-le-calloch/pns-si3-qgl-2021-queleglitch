@@ -50,8 +50,8 @@ public class ShipMovementResolver {
         return speedWithOars + speedWithWind;
     }
 
-    public Boolean isBoatIsOutofTheCheckpoint(Position boatPosition){
-        return regattaGoal.getActualCheckpoint().getPosition().getNorm(boatPosition) > regattaGoal.getActualCheckpoint().getRadius();
+    public Boolean isPositionInCheckpoint(Position boatPosition){
+        return regattaGoal.getActualCheckpoint().getPosition().getNorm(boatPosition) < regattaGoal.getActualCheckpoint().getRadius();
     }
 
 
@@ -60,11 +60,8 @@ public class ShipMovementResolver {
         Geometry geometry = new Geometry(nextTurnPosition);
 
         if(Math.abs(geometry.calculateAngleToCheckPoint(checkpointPosition)) > Math.PI/2){
-
-            return isBoatIsOutofTheCheckpoint(nextTurnPosition);
+            return !isPositionInCheckpoint(nextTurnPosition);
         }
-
-
         return false;
     }
 }

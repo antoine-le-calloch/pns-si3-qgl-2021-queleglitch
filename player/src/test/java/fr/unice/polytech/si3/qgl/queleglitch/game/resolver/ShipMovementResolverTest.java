@@ -4,7 +4,10 @@ import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbOarsUsed;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -528,28 +531,261 @@ class ShipMovementResolverTest {
     }
 
     @Nested
-    class CheckPoint{
+    class checkpointCalculateTest {
 
-        ShipMovementResolver shipMovementResolverMock;
-        Position checkPosition;
-        double rudderAngleMock=0.0;
-        Position boatPosition;
+        ShipMovementResolver shipMovementResolver;
+        Checkpoint checkpoint100RadiusIn0_0;
+        Checkpoint checkpoint60RadiusIn50_Minus50;
+        RegattaGoal mockRegattaGoal;
+        Position position;
+        Ship mockShip;
 
         @BeforeEach
         void setUp(){
-            boatPosition=new Position(100,200,0);
-            shipMovementResolverMock=Mockito.mock(ShipMovementResolver.class);
-            Mockito.when(shipMovementResolverMock.resolveNextTurnPosition(rudderAngleMock,SailAction.DO_NOTHING,new NbOarsUsed(1,1))).thenReturn(boatPosition);
-            Mockito.when(shipMovementResolverMock.isBoatIsOutofTheCheckpoint(boatPosition)).thenReturn(true);
-            checkPosition=new Position(100,240,1);
+            checkpoint100RadiusIn0_0 = new Checkpoint(new Position(0, 0, 0), new Circle(100));
+            checkpoint60RadiusIn50_Minus50 = new Checkpoint(new Position(0, -50, 0), new Circle(60));
+            mockShip = Mockito.mock(Ship.class);
+            Mockito.when(mockShip.getNbOars()).thenReturn(6);
+            Mockito.when(mockShip.getNbSails()).thenReturn(1);
+            mockRegattaGoal = Mockito.mock(RegattaGoal.class);
+            shipMovementResolver = new ShipMovementResolver(mockShip, new Wind(50,0), mockRegattaGoal);
+
         }
+
+        //////////////////////////////////////////////////   isPositionInCheckpoint()   //////////////////////////////////////////////////
+
+        ///// checkpoint 100 radius In 0_0
+
         @Test
-        void checkPointNotPassed(){
-            assertFalse( shipMovementResolverMock.isCheckpointMissed(checkPosition,rudderAngleMock,SailAction.DO_NOTHING,new NbOarsUsed(1,1)));
+        void PositionEqualsCheckpoint_rad0(){
+            position = new Position(0,0,0);
+            Checkpoint checkpoint0Radius = new Checkpoint(new Position(0, 0, 0), new Circle(0));
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint0Radius);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
         }
 
+        @Test
+        void PositionEqualsCheckpoint_rad100(){
+            position = new Position(0,0,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertTrue(shipMovementResolver.isPositionInCheckpoint(position));
+        }
 
+        @Test
+        void PositionFarOf50XOfCheckpoint_rad100(){
+            position = new Position(50,0,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertTrue(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOf50YOfCheckpoint_rad100(){
+            position = new Position(0,50,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertTrue(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOf50Y50XOfCheckpoint_rad100(){
+            position = new Position(50,50,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertTrue(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOfMinus50Y50XOfCheckpoint_rad100(){
+            position = new Position(-50,50,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertTrue(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOfMinus50YMinus50XOfCheckpoint_rad100(){
+            position = new Position(-50,-50,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertTrue(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOf50YMinus50XOfCheckpoint_rad100(){
+            position = new Position(50,-50,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertTrue(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOf100XOfCheckpoint_rad100(){
+            position = new Position(100,0,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOf100YOfCheckpoint_rad100(){
+            position = new Position(0,100,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOf100Y100XOfCheckpoint_rad100(){
+            position = new Position(100,100,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOfMinus100Y100XOfCheckpoint_rad100(){
+            position = new Position(-100,100,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOfMinus100YMinus100XOfCheckpoint_rad100(){
+            position = new Position(-100,-100,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOf100YMinus100XOfCheckpoint_rad100(){
+            position = new Position(100,-100,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionFarOf110XOfCheckpoint_rad100(){
+            position = new Position(110,0,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        ///// checkpoint 60 radius In 50_0
+
+        @Test
+        void PositionIn0_0_rad60(){
+            position = new Position(0,0,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertTrue(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionIn50_0_rad60(){
+            position = new Position(50,0,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionIn0_50_rad60(){
+            position = new Position(0,50,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionIn50_50_rad60(){
+            position = new Position(50,50,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionInMinus50_50_rad60(){
+            position = new Position(-50,50,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionInMinus50_Minus50_rad60(){
+            position = new Position(-50,-50,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertTrue(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionIn50_Minus50_rad60(){
+            position = new Position(50,-50,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertTrue(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void Position100_0_rad60(){
+            position = new Position(100,0,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void Position0_100_rad60(){
+            position = new Position(0,100,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void Position100_100_rad60(){
+            position = new Position(100,100,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionMinus100_100_rad60(){
+            position = new Position(-100,100,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void PositionMinus100_Minus100_rad60(){
+            position = new Position(-100,-100,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void Position100_Minus100_rad60(){
+            position = new Position(100,-100,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        @Test
+        void Position110_0_rad60(){
+            position = new Position(110,0,0);
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint60RadiusIn50_Minus50);
+            assertFalse(shipMovementResolver.isPositionInCheckpoint(position));
+        }
+
+        //////////////////////////////////////////////////   isCheckpointMissed()   //////////////////////////////////////////////////
+
+        @Test
+        void endPositionEqualsCheckpointPosition(){
+            Mockito.when(mockShip.isSailsOpen()).thenReturn(false);
+            Mockito.when(mockShip.getPosition()).thenReturn(new Position(-165,0,0));
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertFalse(shipMovementResolver.isCheckpointMissed(new Position(100,0,0),0,SailAction.DO_NOTHING,new NbOarsUsed(3,3)));
+        }
+
+        @Test
+        void endPositionInCheckpointPosition(){
+            Mockito.when(mockShip.isSailsOpen()).thenReturn(false);
+            Mockito.when(mockShip.getPosition()).thenReturn(new Position(-66,0,0));
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertFalse(shipMovementResolver.isCheckpointMissed(new Position(100,0,0),0,SailAction.DO_NOTHING,new NbOarsUsed(3,3)));
+        }
+
+        @Test
+        void endPositionAfterCheckpointPosition(){
+            Mockito.when(mockShip.isSailsOpen()).thenReturn(false);
+            Mockito.when(mockShip.getPosition()).thenReturn(new Position(-65,0,0));
+            Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint100RadiusIn0_0);
+            assertTrue(shipMovementResolver.isCheckpointMissed(new Position(100,0,0),0,SailAction.DO_NOTHING,new NbOarsUsed(3,3)));
+        }
     }
-
-
 }
