@@ -86,10 +86,11 @@ public class Ship {
     }
 
     public Rudder getRudder(){
-        for (Entities entitie:entities)
+        Rudder rudder = null;
+        for (Entities entitie : entities)
             if(entitie instanceof Rudder)
-                return (Rudder) entitie;
-        return null;
+                rudder = (Rudder) entitie;
+        return rudder;
     }
 
     /**

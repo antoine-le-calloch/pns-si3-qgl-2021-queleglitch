@@ -2,6 +2,9 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.Geometry;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Oar;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Sail;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
@@ -20,6 +23,58 @@ class ShipTest {
 
     @BeforeEach
     void setUp() {
+        ship = new Ship();
+    }
+    /**
+     * <h1><u>isSailsOpen</u></h1>
+     **/
+    @Test
+    void sailsOpen(){
+        ship.setEntities(new Entities[]{new Sail(0,0,true)});
+        assertTrue(ship.isSailsOpen());
+    }
+
+    @Test
+    void sailsNotOpen(){
+        ship.setEntities(new Entities[]{new Sail(0,0,false)});
+        assertFalse(ship.isSailsOpen());
+    }
+
+    @Test
+    void noSail(){
+        ship.setEntities(new Entities[]{});
+        assertFalse(ship.isSailsOpen());
+    }
+
+
+    /**
+     * <h1><u>getNbSails</u></h1>
+     **/
+    @Test
+    void OneSail(){
+        ship.setEntities(new Entities[]{new Sail(0,0,true)});
+        assertEquals(1,ship.getNbSails());
+    }
+
+    @Test
+    void twoSails(){
+        ship.setEntities(new Entities[]{new Sail(0,0,true),new Sail(0,0,true)});
+        assertEquals(2,ship.getNbSails());
+    }
+
+    /**
+     * <h1><u>getNbOars</u></h1>
+     **/
+    @Test
+    void OneOar(){
+        ship.setEntities(new Entities[]{new Oar(0,0)});
+        assertEquals(1,ship.getNbOars());
+    }
+
+    @Test
+    void twoOars(){
+        ship.setEntities(new Entities[]{new Oar(0,0),new Oar(0,0)});
+        assertEquals(2,ship.getNbOars());
     }
 
     /**
