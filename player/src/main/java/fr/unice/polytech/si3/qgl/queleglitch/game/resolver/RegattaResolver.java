@@ -22,19 +22,9 @@ public class RegattaResolver {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame.getShip().getPosition());
         oarStrategy = new OarStrategy(informationGame.getNbSailors(), informationGame.getShip().getNbOars());
+        SailStrategy = new SailStrategy(informationGame.getShip(), informationGame.getWind());
         rudderStrategy = new RudderStrategy();
-        SailStrategy = new SailStrategy(informationGame);
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
-    }
-
-
-    public RegattaResolver(Geometry geometry, OarStrategy oarStrategy, RudderStrategy rudderStrategy, SailStrategy SailStrategy, ShipMovementResolver shipMovementResolver) {
-        this.geometry = geometry;
-        this.oarStrategy = oarStrategy;
-        this.rudderStrategy = rudderStrategy;
-        this.SailStrategy = SailStrategy;
-        this.informationGame = new InformationGame();
-        this.shipMovementResolver = shipMovementResolver;
     }
 
     public ToolsToUse resolveToolsToUse(Position positionCheckpointToReach) {
@@ -61,8 +51,9 @@ public class RegattaResolver {
             }
             if(changeSailSetting) {
                 while (!shipMovementResolver.isCheckpointMissed(positionCheckpointToReach, rudderAngle, actionOnSails, new NbOarsUsed(nbOarsUsed.onLeft()+1,nbOarsUsed.onRight()+1))) {
-                    if (nbOarsUsed.onLeft()+1 > maxLeftOarUse || nbOarsUsed.onRight()+1 > maxRightOarUse)
+                    if (nbOarsUsed.onLeft()+1 > maxLeftOarUse || nbOarsUsed.onRight()+1 > maxRightOarUse){
                         break;
+                    }
                     nbOarsUsed.increaseLeftAndRight(1);
                 }
             }

@@ -1,24 +1,22 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
-import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 
 public class SailStrategy {
-    private final InformationGame informationGame;
-    private final Boolean sailsOpen;
+    private final Ship ship;
     private final Wind wind;
 
-    public SailStrategy(InformationGame informationGame) {
-        this.wind = informationGame.getWind();
-        this.informationGame = informationGame;
-        this.sailsOpen = informationGame.getShip().isSailsOpen();
+    public SailStrategy(Ship ship, Wind wind) {
+        this.wind = wind;
+        this.ship = ship;
     }
 
     public SailAction getSailsAction() {
-        if (Math.cos(informationGame.getShip().getPosition().getOrientation() - wind.getOrientation()) > 0 && !sailsOpen)
+        if (Math.cos(ship.getPosition().getOrientation() - wind.getOrientation()) > 0 && !ship.isSailsOpen())
             return SailAction.LIFT;
-        else if (Math.cos(informationGame.getShip().getPosition().getOrientation() - wind.getOrientation()) < 0 && sailsOpen)
+        else if (Math.cos(ship.getPosition().getOrientation() - wind.getOrientation()) < 0 && ship.isSailsOpen())
             return SailAction.LOWER;
         else
             return SailAction.DO_NOTHING;

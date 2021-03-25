@@ -27,10 +27,11 @@ public class InformationGame {
 
     public InformationGame(){}
 
-    public InformationGame(Sailor[] sailors, Ship ship, Goal goal){
+    public InformationGame(Sailor[] sailors, Ship ship, Goal goal, Wind wind){
         this.sailors = sailors;
         this.ship = ship;
         this.goal = goal;
+        this.wind = wind;
     }
 
     public InformationGame(Goal goal, Ship ship, Wind wind){
