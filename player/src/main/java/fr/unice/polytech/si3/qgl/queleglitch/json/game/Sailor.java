@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
+import java.util.Objects;
+
 /**
  * Classe representant les marins
  * @author Huot-Marchand Antoine
@@ -10,9 +12,11 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
  */
 
 public class Sailor {
-    public int x;
-    public int y;
-    public int id;
+    private int x;
+    private int y;
+    private int id;
+
+    public Sailor(){}
 
     public Sailor(int x, int y, int id){
         this.id = id;
@@ -20,15 +24,9 @@ public class Sailor {
         this.y = y;
     }
 
-    public Sailor(){}
-
     /**
-     * @return <b>The id of the sailor</b>
+     * <p>Getter.</p>
      */
-    public int getId(){
-        return id;
-    }
-
     public int getX() {
         return x;
     }
@@ -37,23 +35,40 @@ public class Sailor {
         return y;
     }
 
+    public int getId(){
+        return id;
+    }
+
     /**
-     * <p>Override of toString method, allow to print a different string to give the Sailor's informations</p>
+     * <p>Setter.</p>
+     */
+    public void setX(int x) { this.x = x; }
+
+    public void setY(int y) { this.y = y; }
+
+    public void setId(int id) { this.id = id; }
+
+    /**
+     * <p>Override of toString method, allow to print a different string to give the Sailor's information</p>
      */
     @Override
     public String toString(){
-        return "Marin " + id + " | position x : " + x + " | position y : " + y;
+        return "Sail " + id + " | position x : " + x + " | position y : " + y;
+    }
+
+    /**
+     * <p>Override of equals method, allow to compare different Sailor by their id and position</p>
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Sailor)) return false;
+        Sailor sailor = (Sailor) obj;
+        return this.x == sailor.x && this.y == sailor.y && this.id == sailor.id;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof Sailor))
-            return false;
-        Sailor sailor = (Sailor) obj;
-        return this.x == sailor.x &&
-                this.y == sailor.y &&
-                this.id == sailor.id;
+    public int hashCode() {
+        return Objects.hash(x,y,id);
     }
 }

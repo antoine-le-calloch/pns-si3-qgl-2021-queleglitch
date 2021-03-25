@@ -62,6 +62,6 @@ public class Checkpoint {
      */
     @Override
     public String toString() {
-        return " | Checkpoint | x : " + position.x + " | y : " + position.y;
+        return " | Checkpoint | x : " + position.getX() + " | y : " + position.getY();
     }
 }

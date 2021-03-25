@@ -1,45 +1,54 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
-import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
+import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
+
+import java.util.Objects;
 
 public class ToolsToUse {
-    public double rudderAngle;
-    public VoileAction actionOnVoile;
-    public int[] tabNbLeftAndRightOar;
 
-    public ToolsToUse(double rudderAngle, VoileAction actionOnVoile, int[] tabNbLeftAndRightOar){
+    private final double rudderAngle;
+    private final SailAction actionOnSail;
+    private final NbOarsUsed nbOarsUsed;
+
+    public ToolsToUse(double rudderAngle, SailAction actionOnSail, NbOarsUsed nbOarsUsed){
         this.rudderAngle = rudderAngle;
-        this.actionOnVoile = actionOnVoile;
-        this.tabNbLeftAndRightOar = tabNbLeftAndRightOar;
+        this.actionOnSail = actionOnSail;
+        this.nbOarsUsed = nbOarsUsed;
     }
 
     public double getRudderAngle() {
         return rudderAngle;
     }
 
-    public VoileAction getActionOnVoile() {
-        return actionOnVoile;
+    public SailAction getActionOnSail() {
+        return actionOnSail;
     }
 
-    public int[] getTabNbLeftAndRightOar() {
-        return tabNbLeftAndRightOar;
+    public NbOarsUsed getNbOarsUsed() {
+        return nbOarsUsed;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof ToolsToUse))
-            return false;
-        ToolsToUse toolsToUse = (ToolsToUse) obj;
-        return this.rudderAngle == toolsToUse.rudderAngle &&
-                this.actionOnVoile == toolsToUse.actionOnVoile &&
-                this.tabNbLeftAndRightOar[0] == toolsToUse.tabNbLeftAndRightOar[0] &&
-                this.tabNbLeftAndRightOar[1] == toolsToUse.tabNbLeftAndRightOar[1];
-    }
-
+    /**
+     * <p>Override of toString method, allow to print a different string to give the Sailor's information</p>
+     */
     @Override
     public String toString(){
-        return "Angle du gouvernail : " + this.rudderAngle + ", nb Voiles : " + this.actionOnVoile + ", nb left rames to use : " + this.tabNbLeftAndRightOar[0] + ", nb right rames to use : " + this.tabNbLeftAndRightOar[1];
+        return "Angle du rudder : " + this.rudderAngle + ", nb Sails : " + this.actionOnSail + ", " + this.nbOarsUsed.toString();
+    }
+
+    /**
+     * <p>Override of equals method, allow to compare different ToolsToUse by their rudderAngle, actionOnSail and their nbOarUsed</p>
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof ToolsToUse)) return false;
+        ToolsToUse toolsToUse = (ToolsToUse) obj;
+        return this.rudderAngle == toolsToUse.rudderAngle && this.actionOnSail == toolsToUse.actionOnSail && this.nbOarsUsed.equals(toolsToUse.nbOarsUsed);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rudderAngle, actionOnSail, nbOarsUsed);
     }
 }

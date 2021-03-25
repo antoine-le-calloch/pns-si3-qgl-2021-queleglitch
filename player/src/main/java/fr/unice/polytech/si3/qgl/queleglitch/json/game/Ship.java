@@ -3,7 +3,6 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.*;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 import java.util.ArrayList;
@@ -20,17 +19,13 @@ import java.util.stream.Collectors;
  */
 
 public class Ship {
-    public Position position;
-    public Entities[] entities;
-    public String name;
-    public Deck deck;
-    public Shape shape;
+    private Position position;
+    private Entities[] entities;
+    private String name;
+    private Deck deck;
+    private Shape shape;
 
     public Ship(){
-    }
-
-    public Ship(Position position){
-        this.position = position;
     }
 
     public Ship(Position position, Entities[] entities, String name, Deck deck, Shape shape){
@@ -45,72 +40,88 @@ public class Ship {
         return checkpoint.getPosition().getNorm(position) < checkpoint.getRadius();
     }
 
+    public Box getCentralPosition(){ return deck.getCentralPosition(); }
+
+    public List<Oar> getOarsAtRight(){ return getOars().stream().filter(oar -> oar.getY()!=0).collect(Collectors.toList()); }
+
+    public List<Oar> getOarsAtLeft(){ return getOars().stream().filter(oar -> oar.getY()==0).collect(Collectors.toList()); }
+
+    public boolean isSailsOpen(){
+        for (Entities entity : entities)
+            if(entity instanceof Sail)
+                return ((Sail) entity).isOpenned();
+        return false;
+    }
+
+    public int getNbSails(){
+        int nbSails = 0;
+        for (Entities entity : entities)
+            if(entity instanceof Sail)
+                nbSails++;
+        return nbSails;
+    }
+
+    public int getNbOars(){
+        int nbOars = 0;
+        for (Entities entity : entities)
+            if(entity instanceof Oar)
+                nbOars++;
+        return nbOars;
+    }
+
+    public List<Oar> getOars(){
+        List<Oar> oars =new ArrayList<>();
+        for (Entities entity:entities)
+            if(entity instanceof Oar)
+                oars.add((Oar) entity);
+        return oars;
+    }
+
+    public List<Sail> getSails(){
+        List<Sail> sails = new ArrayList<>();
+        for (Entities entity : entities)
+            if(entity instanceof Sail)
+                sails.add((Sail) entity);
+        return sails;
+    }
+
+    public Rudder getRudder(){
+        Rudder rudder = null;
+        for (Entities entitie : entities)
+            if(entitie instanceof Rudder)
+                rudder = (Rudder) entitie;
+        return rudder;
+    }
+
     /**
-     * @return <b>The position of the ship.</b>
+     * <p>Getter.</p>
      */
     public Position getPosition() {
         return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 
     public Entities[] getEntities() {
         return entities;
     }
 
-    public Deck getDeck() {
-        return deck;
-    }
+    public String getName() { return name; }
 
-    public List<Rame> getRames(){
-        List<Rame> rames=new ArrayList<>();
-        for (Entities entitie:entities){
-            if(entitie instanceof Rame) {
-                rames.add((Rame) entitie);
-            }
-        }
-        return rames;
-    }
+    public Deck getDeck() { return deck; }
 
-    public List<Voile> getVoiles(){
-        List<Voile> voiles=new ArrayList<>();
-        for (Entities entitie : entities){
-            if(entitie instanceof Voile) {
-                voiles.add((Voile) entitie);
-            }
-        }
-        return voiles;
-    }
-
-    public Gouvernail getGouvernail(){
-        for (Entities entitie:entities){
-            if(entitie instanceof Gouvernail) {
-                return (Gouvernail) entitie;
-            }
-        }
-        return null;
-    }
-
-    public Box getCentralPosition(){
-        return deck.getCentralPosition();
-    }
-
-    public List<Rame> getRamesAtRight(){
-        return getRames().stream().filter(rame -> rame.getY()!=0).collect(Collectors.toList());
-    }
-
-    public List<Rame> getRamesAtLeft(){
-        return getRames().stream().filter(rame -> rame.getY()==0).collect(Collectors.toList());
-    }
+    public Shape getShape() { return shape; }
 
     /**
-     * <p>Override of toString method, allow to print a different string to give the Ship's informations</p>
+     * <p>Setter.</p>
      */
-    @Override
-    public String toString(){
-        return "Bateau | orientation : " + position.orientation +
-                " | x : " + position.x + " | y : " + position.y;
+    public void setPosition(Position position) {
+        this.position = position;
     }
+
+    public void setEntities(Entities[] entities) { this.entities = entities; }
+
+    public void setName(String name) { this.name = name; }
+
+    public void setDeck(Deck deck) { this.deck = deck; }
+
+    public void setShape(Shape shape) { this.shape = shape; }
 }

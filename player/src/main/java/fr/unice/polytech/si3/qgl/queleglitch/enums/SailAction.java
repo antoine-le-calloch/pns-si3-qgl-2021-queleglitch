@@ -1,6 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.enums;
 
-public enum VoileAction {
+public enum SailAction {
 
     LIFT {
         @Override

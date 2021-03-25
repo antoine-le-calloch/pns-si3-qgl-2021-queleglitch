@@ -30,29 +30,24 @@ public class RegattaGoal extends Goal {
         double angleBetween2Points;
         double distanceToTheNewPoints;
         positionOptiCheckpoints = new Position[tabSize];
-        positionOptiCheckpoints[tabSize-1] = new Position(checkpoints[tabSize-1].getPosition().x,checkpoints[tabSize-1].getPosition().y,0);
+        positionOptiCheckpoints[tabSize-1] = new Position(checkpoints[tabSize-1].getPosition().getX(),checkpoints[tabSize-1].getPosition().getY(),0);
 
         for (int i = tabSize-1; i > 0; i--) {
             angleBetween2Points = positionOptiCheckpoints[i].getAngleToAPlace(checkpoints[i-1].getPosition());
-            distanceToTheNewPoints = positionOptiCheckpoints[i].getNorm(checkpoints[i-1].getPosition()) - checkpoints[i-1].getRadius();
-            positionOptiCheckpoints[i-1] = movePosition1ByPosition2(positionOptiCheckpoints[i],findHowManyToMovePosition(angleBetween2Points,distanceToTheNewPoints));
+            distanceToTheNewPoints = positionOptiCheckpoints[i].getNorm(checkpoints[i-1].getPosition()) - checkpoints[i-1].getRadius() + 2;
+            positionOptiCheckpoints[i-1] = findOptiCheckpoints(positionOptiCheckpoints[i],angleBetween2Points,distanceToTheNewPoints);
         }
     }
 
-    public Position findHowManyToMovePosition(double angleBetween2Points, double distanceToTheNewPoints){
+    public Position findOptiCheckpoints(Position checkpointPosition,double angleBetween2Points, double distanceToTheNewPoints){
         double x = Math.cos(angleBetween2Points)*distanceToTheNewPoints;
         double y = Math.sin(angleBetween2Points)*distanceToTheNewPoints;
-        return new Position(x,y,0);
-    }
-
-    public Position movePosition1ByPosition2(Position toMove, Position by){
-        return new Position(toMove.x + by.x, toMove.y + by.y,0);
+        return new Position(checkpointPosition.getX() + x,checkpointPosition.getY() + y,0);
     }
 
     public void checkpointReached(){
-        if(numActualCheckpoint + 1 < checkpoints.length){
+        if(numActualCheckpoint + 1 < checkpoints.length)
             numActualCheckpoint++;
-        }
     }
 
     /**
@@ -66,12 +61,16 @@ public class RegattaGoal extends Goal {
         return positionOptiCheckpoints[numActualCheckpoint];
     }
 
+    public int getNumActualCheckpoint(){ return numActualCheckpoint; }
+
     /**
      * <p>Setter.</p>
      */
     public void setCheckpoints(Checkpoint[] checkpoints) {
         this.checkpoints = checkpoints;
     }
+
+    public void setNumActualCheckpoint(int numActualCheckpoint){ this.numActualCheckpoint = numActualCheckpoint; }
 
     /**
      * <p>Override of toString method, allow to print a different string to give the Checkpoints information</p>

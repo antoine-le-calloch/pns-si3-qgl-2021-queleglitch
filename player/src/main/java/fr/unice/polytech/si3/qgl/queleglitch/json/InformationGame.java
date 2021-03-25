@@ -27,10 +27,11 @@ public class InformationGame {
 
     public InformationGame(){}
 
-    public InformationGame(Sailor[] sailors, Ship ship, Goal goal){
+    public InformationGame(Sailor[] sailors, Ship ship, Goal goal, Wind wind){
         this.sailors = sailors;
         this.ship = ship;
         this.goal = goal;
+        this.wind = wind;
     }
 
     public InformationGame(Goal goal, Ship ship, Wind wind){
@@ -39,26 +40,19 @@ public class InformationGame {
         this.wind = wind;
     }
 
-    public boolean isCheckpointReached() {
-        return ship.isCheckpointReached(((RegattaGoal) goal).getActualCheckpoint());
-    }
+    public boolean isCheckpointReached() { return ship.isCheckpointReached(((RegattaGoal) goal).getActualCheckpoint()); }
 
     public void moveToNextCheckpoint() {
         ((RegattaGoal) goal).checkpointReached();
     }
 
+    public int getNbSailors(){
+        return sailors.length;
+    }
+
     public RegattaGoal getRegattaGoal() {
         if(goal instanceof RegattaGoal)
             return (RegattaGoal) goal;
-        return null;
-    }
-
-    public VisibleEntities getCourant(){
-        for (VisibleEntities visibleEntities:visibleEntities){
-            if(visibleEntities instanceof Courant) {
-                return (Courant) visibleEntities;
-            }
-        }
         return null;
     }
 

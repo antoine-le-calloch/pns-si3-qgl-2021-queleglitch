@@ -1,14 +1,14 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbOarsUsed;
 
 public class OarStrategy {
 
-    private final int NB_RAMES;
+    private final int NB_OARS;
     private final int NB_SAILORS;
 
-    public OarStrategy(int nbSailors, int nbRames) {
-        NB_RAMES = nbRames;
+    public OarStrategy(int nbSailors, int nbOars) {
+        NB_OARS = nbOars;
         NB_SAILORS = nbSailors;
     }
 
@@ -18,26 +18,26 @@ public class OarStrategy {
             angleToCorrect *= (signe = -1);
 
         if(angleToCorrect > Math.PI / 4)
-            return (int) (Math.round(Math.PI / 2 * signe/(Math.PI/ NB_RAMES)));
+            return (int) (Math.round(Math.PI / 2 * signe/(Math.PI/ NB_OARS)));
 
         return 0;
     }
 
-    public int[] getNbLeftAndRightOar(boolean useGouvernail, boolean useVoile, int differenceOarRightLeft) {
-        int nbLeftRamesToUse = -Math.min(0,differenceOarRightLeft);
-        int nbRightRamesToUse = Math.max(0,differenceOarRightLeft);
+    public NbOarsUsed getNbOarsUsed(boolean useRudder, boolean useSail, int differenceOarRightLeft) {
+        int nbLeftOarsToUse = -Math.min(0,differenceOarRightLeft);
+        int nbRightOarsToUse = Math.max(0,differenceOarRightLeft);
         int nbSailorsForOar = NB_SAILORS;
 
-        nbSailorsForOar -= (useGouvernail) ? 1 : 0;
-        nbSailorsForOar -= (useVoile) ? 1 : 0;
+        nbSailorsForOar -= (useRudder) ? 1 : 0;
+        nbSailorsForOar -= (useSail) ? 1 : 0;
 
-        while (nbLeftRamesToUse + nbRightRamesToUse <= nbSailorsForOar - 2) {
-            if(nbLeftRamesToUse >= NB_RAMES/2 || nbRightRamesToUse >= NB_RAMES/2)
+        while (nbLeftOarsToUse + nbRightOarsToUse <= nbSailorsForOar - 2) {
+            if(nbLeftOarsToUse >= NB_OARS /2 || nbRightOarsToUse >= NB_OARS /2)
                 break;
-            nbRightRamesToUse++;
-            nbLeftRamesToUse++;
+            nbRightOarsToUse++;
+            nbLeftOarsToUse++;
         }
 
-        return new int[]{Math.min(nbSailorsForOar,nbLeftRamesToUse),Math.min(nbSailorsForOar,nbRightRamesToUse)};
+        return new NbOarsUsed(Math.min(nbSailorsForOar,nbLeftOarsToUse),Math.min(nbSailorsForOar,nbRightOarsToUse));
     }
 }

@@ -1,6 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
-import fr.unice.polytech.si3.qgl.queleglitch.enums.VoileAction;
+import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +13,8 @@ class ToolsToUseTest {
 
     @BeforeEach
     void setUp() {
-        toolsToUse0 = new ToolsToUse(0, VoileAction.DO_NOTHING, new int[]{0,0});
-        toolsToUse1 = new ToolsToUse(1, VoileAction.LIFT, new int[]{1,1});
+        toolsToUse0 = new ToolsToUse(0, SailAction.DO_NOTHING, new NbOarsUsed(0,0));
+        toolsToUse1 = new ToolsToUse(1, SailAction.LIFT, new NbOarsUsed(1,1));
     }
 
     ///////////////////////////////////////////////// equals() ////////////////////////////////////////////
@@ -26,12 +26,12 @@ class ToolsToUseTest {
 
     @Test
     void equals_All0(){
-        assertEquals(toolsToUse0, new ToolsToUse(0,VoileAction.DO_NOTHING,new int[]{0,0}));
+        assertEquals(toolsToUse0, new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(0,0)));
     }
 
     @Test
     void equals_All1(){
-        assertEquals(toolsToUse1, new ToolsToUse(1,VoileAction.LIFT,new int[]{1,1}));
+        assertEquals(toolsToUse1, new ToolsToUse(1,SailAction.LIFT,new NbOarsUsed(1,1)));
     }
 
     @Test

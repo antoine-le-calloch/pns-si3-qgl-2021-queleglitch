@@ -1,10 +1,10 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie;
 
-public class Vigie extends Entities{
+public class Watch extends Entities{
 
-    public Vigie(){}
+    private Watch(){}
 
-    public Vigie(int x, int y){
+    public Watch(int x, int y){
         super(x,y);
     }
 }

@@ -4,7 +4,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 
 public class Geometry {
 
-    Position boatPosition;
+    private final Position boatPosition;
 
     public Geometry(Position boatPosition) {
         this.boatPosition = boatPosition;
@@ -37,6 +37,7 @@ public class Geometry {
             angle -= Math.PI/2;
         }
         angle -= shipAngle;
+
         if(angle > Math.PI) {
 
             angle = (-2*Math.PI)+angle;

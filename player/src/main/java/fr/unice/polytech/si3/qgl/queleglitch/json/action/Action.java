@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property =  "type", defaultImpl = void.class)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Oar.class, name = "OAR"),
+        @JsonSubTypes.Type(value = Row.class, name = "OAR"),
         @JsonSubTypes.Type(value = Moving.class, name = "MOVING"),
         @JsonSubTypes.Type(value = Turn.class, name = "TURN"),
         @JsonSubTypes.Type(value = LiftSail.class, name = "LIFT_SAIL"),
@@ -13,11 +13,24 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 
 public abstract class Action {
-    public int sailorId;
 
-    public String type;
+    int sailorId;
 
     Action(int sailorId){
+        this.sailorId = sailorId;
+    }
+
+    /**
+     * <p>Getter.</p>
+     */
+    public int getSailorId() {
+        return sailorId;
+    }
+
+    /**
+     * <p>Setter.</p>
+     */
+    public void setSailorId(int sailorId) {
         this.sailorId = sailorId;
     }
 }

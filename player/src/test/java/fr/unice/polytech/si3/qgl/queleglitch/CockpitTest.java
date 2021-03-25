@@ -1,7 +1,6 @@
-/*package fr.unice.polytech.si3.qgl.queleglitch;
+//package fr.unice.polytech.si3.qgl.queleglitch;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
-import static org.junit.jupiter.api.Assertions.*;
+/*import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +30,7 @@ class CockpitTest {
 
     @Test
     void Test_input2_HowToReachCheckpoint2WEEK6() {
-        ((RegattaGoal) cockpitGame2.informationGame.goal).numActualCheckpoint = 2;
+        cockpitGame2.informationGame.getRegattaGoal().setNumActualCheckpoint(2);
 
         String actualOutput = cockpitGame2.nextRound(getTxtInFile("2\\nextRoundFile"));
 
@@ -40,11 +39,20 @@ class CockpitTest {
 
     @Test
     void Test_input2_HowToReachCheckpoint2WEEK6_NextRound() {
-        ((RegattaGoal) cockpitGame2.informationGame.goal).numActualCheckpoint = 2;
+        cockpitGame2.informationGame.getRegattaGoal().setNumActualCheckpoint(2);
 
         String actualOutput = cockpitGame2.nextRound(getTxtInFile("2\\nextRoundFile_roundNext"));
 
         assertEquals(getTxtInFile("2\\outputFile_roundNext"), actualOutput);
+    }
+
+    @Test
+    void Test_input3() {
+        Cockpit cockpitGame1 = new Cockpit();
+        cockpitGame1.initGame(getTxtInFile("3\\initGameFile"));
+        String actualOutput = cockpitGame1.nextRound(getTxtInFile("3\\nextRoundFile"));
+
+        assertEquals(getTxtInFile("3\\outputFile"), actualOutput);
     }
 
     private String getTxtInFile(String fileName) {

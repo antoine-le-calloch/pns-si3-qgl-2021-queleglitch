@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
+import java.util.Objects;
+
 /**
  * Classe representant le système de position des bâteaux
  * @author Huot-Marchand Antoine
@@ -10,9 +12,11 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
  */
 
 public class Position {
-    public double x;
-    public double y;
-    public double orientation;
+    private double x;
+    private double y;
+    private double orientation;
+
+    public Position(){}
 
     public Position(double x, double y, double orientation){
         this.x = x;
@@ -20,11 +24,12 @@ public class Position {
         this.orientation = orientation;
     }
 
-    public Position(){ }
+    public Position copyOf(){
+        return new Position(x,y,orientation);
+    }
 
     public double getNorm(Position position){
         double distance;
-
         distance = Math.pow(x-position.getX(),2);
         distance += Math.pow(y-position.getY(),2);
         distance = Math.sqrt(distance);
@@ -41,49 +46,57 @@ public class Position {
 
     public Position calculateNewPosition(double angle, double speed){
         Position nextPosition = new Position(x,y,orientation);
-
         nextPosition.x += Math.cos(nextPosition.orientation)*speed;
         nextPosition.y += Math.sin(nextPosition.orientation)*speed;
         nextPosition.orientation += angle;
-
         return nextPosition;
     }
 
     /**
-     * @return <b>The orientation.</b>
-     */
-    public double getOrientation() {
-        return orientation;
-    }
-
-    /**
-     * @return <b>The position : x.</b>
+     * <p>Getter.</p>
      */
     public double getX() {
         return x;
     }
 
-    /**
-     * @return <b>The position : y.</b>
-     */
     public double getY() {
         return y;
     }
 
+    public double getOrientation() {
+        return orientation;
+    }
+
+    /**
+     * <p>Setter.</p>
+     */
+    public void setX(double x) { this.x = x; }
+
+    public void setY(double y) { this.y = y; }
+
+    public void setOrientation(double orientation) { this.orientation = orientation; }
+
+    /**
+     * <p>Override of toString method, allow to print a different string to give the Position's information</p>
+     */
     @Override
     public String toString() {
         return " | Position | x : " + x + " | y : " + y + " | orientation : " + orientation;
     }
 
+    /**
+     * <p>Override of equals method, allow to compare different Position by their x, y and their orientation</p>
+     */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof Position))
-            return false;
+        if (this == obj) return true;
+        if (!(obj instanceof Position)) return false;
         Position position = (Position) obj;
-        return this.x == position.x &&
-                this.y == position.y &&
-                this.orientation == position.orientation;
+        return this.x == position.x && this.y == position.y && this.orientation == position.orientation;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x,y,orientation);
     }
 }

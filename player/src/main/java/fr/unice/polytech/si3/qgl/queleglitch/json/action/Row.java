@@ -2,11 +2,11 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.action;
 
 import java.util.Objects;
 
-public class LiftSail extends Action {
+public class Row extends Action {
 
-    private final String type = "LIFT_SAIL";
+    private final String type = "OAR";
 
-    public LiftSail(int sailorId) {
+    public Row(int sailorId) {
         super(sailorId);
     }
 
@@ -16,14 +16,14 @@ public class LiftSail extends Action {
     public String getType() { return type; }
 
     /**
-     * <p>Override of equals method, allow to compare different LiftSail action by their id</p>
+     * <p>Override of equals method, allow to compare different Turn action by their rotation</p>
      */
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
-        if (!(obj instanceof LiftSail)) return false;
-        LiftSail liftSail = (LiftSail) obj;
-        return sailorId== liftSail.sailorId;
+        if (!(obj instanceof Row)) return false;
+        Row oar = (Row) obj;
+        return sailorId == oar.sailorId;
     }
 
     @Override
