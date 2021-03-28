@@ -1,12 +1,31 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.shape;
 
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+
 public class Rectangle extends Shape {
 
     private double width;
     private double height;
     private double orientation;
 
+    public Rectangle(){}
+
+    public Rectangle(double width, double height, double orientation){
+        this.width = width;
+        this.height = height;
+        this.orientation = orientation;
+    }
+
     public double getRadius(){ return 0; }
+
+    public Point[] getReelPoints(Position centralPosition){
+        Point[] reelPoints = new Point[4];
+        reelPoints[0] = new Point(centralPosition.getX() + Math.cos(orientation)*(height/2) + Math.sin(-orientation)*(width/2), centralPosition.getY() + Math.sin(orientation)*(height/2) + Math.cos(-orientation)*(width/2));
+        reelPoints[1] = new Point(centralPosition.getX() + Math.cos(orientation)*(-height/2) + Math.sin(-orientation)*(width/2), centralPosition.getY() + Math.sin(orientation)*(-height/2) + Math.cos(-orientation)*(width/2));
+        reelPoints[2] = new Point(centralPosition.getX() + Math.cos(orientation)*(-height/2) + Math.sin(-orientation)*(-width/2), centralPosition.getY() + Math.sin(orientation)*(-height/2) + Math.cos(-orientation)*(-width/2));
+        reelPoints[3] = new Point(centralPosition.getX() + Math.cos(orientation)*(height/2) + Math.sin(-orientation)*(-width/2), centralPosition.getY() + Math.sin(orientation)*(height/2) + Math.cos(-orientation)*(-width/2));
+        return reelPoints;
+    }
 
     /**
      * <p>Getter.</p>

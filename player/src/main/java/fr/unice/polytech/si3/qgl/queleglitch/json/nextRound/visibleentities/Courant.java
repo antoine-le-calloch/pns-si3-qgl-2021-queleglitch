@@ -2,7 +2,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities;
 
 public class Courant extends VisibleEntities{
 
-    private String type = "stream";
+    private final String type = "stream";
     private double strength;
 
     /**
@@ -19,10 +19,6 @@ public class Courant extends VisibleEntities{
     /**
      * <p>Setter.</p>
      */
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public void setStrength(double strength) {
         this.strength = strength;
     }

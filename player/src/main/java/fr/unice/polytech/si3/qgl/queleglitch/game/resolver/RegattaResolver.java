@@ -29,7 +29,6 @@ public class RegattaResolver {
 
     public ToolsToUse resolveToolsToUse(Position positionCheckpointToReach) {
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
-
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
         SailAction actionOnSails = SailStrategy.getSailsAction();
         NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect));

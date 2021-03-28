@@ -2,12 +2,16 @@ package fr.unice.polytech.si3.qgl.queleglitch.json;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Courant;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.VisibleEntities;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe permettant de gerer les éléments principaux du jeux : {@link Ship}, {@link Sailor}
@@ -40,6 +44,11 @@ public class InformationGame {
         this.wind = wind;
     }
 
+    public void processCheckpointReached() {
+        if(isCheckpointReached())
+            moveToNextCheckpoint();
+    }
+
     public boolean isCheckpointReached() { return ship.isCheckpointReached(((RegattaGoal) goal).getActualCheckpoint()); }
 
     public void moveToNextCheckpoint() {
@@ -54,6 +63,15 @@ public class InformationGame {
         if(goal instanceof RegattaGoal)
             return (RegattaGoal) goal;
         return null;
+    }
+
+    public List<Reef> getVisibleReef() {
+        List<Reef> visibleReef = new ArrayList<>();
+        for (VisibleEntities visibleEntities : visibleEntities) {
+            if(visibleEntities instanceof Reef)
+                visibleReef.add((Reef) visibleEntities);
+        }
+        return visibleReef;
     }
 
     /**

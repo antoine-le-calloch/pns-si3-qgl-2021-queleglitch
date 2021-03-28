@@ -2,7 +2,6 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Polygone;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 /**

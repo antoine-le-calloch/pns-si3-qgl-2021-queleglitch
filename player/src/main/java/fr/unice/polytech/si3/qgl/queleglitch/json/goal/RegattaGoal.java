@@ -33,7 +33,7 @@ public class RegattaGoal extends Goal {
         positionOptiCheckpoints[tabSize-1] = new Position(checkpoints[tabSize-1].getPosition().getX(),checkpoints[tabSize-1].getPosition().getY(),0);
 
         for (int i = tabSize-1; i > 0; i--) {
-            angleBetween2Points = positionOptiCheckpoints[i].getAngleToAPlace(checkpoints[i-1].getPosition());
+            angleBetween2Points = positionOptiCheckpoints[i].getAngleToAPosition(checkpoints[i-1].getPosition());
             distanceToTheNewPoints = positionOptiCheckpoints[i].getNorm(checkpoints[i-1].getPosition()) - checkpoints[i-1].getRadius() + 2;
             positionOptiCheckpoints[i-1] = findOptiCheckpoints(positionOptiCheckpoints[i],angleBetween2Points,distanceToTheNewPoints);
         }

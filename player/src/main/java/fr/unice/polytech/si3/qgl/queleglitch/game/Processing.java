@@ -4,6 +4,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbOarsUsed;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.SmartCreateActions;
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.FindPath;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.ShipMovementResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class Processing {
 
+    FindPath findPath;
     InformationGame informationGame;
     RegattaResolver regattaResolver;
     ShipMovementResolver shipMovementResolver;
@@ -22,10 +24,13 @@ public class Processing {
     }
 
     public void processDataNewRound(){
+        findPath = new FindPath(informationGame.getShip().getPosition().toPoint(), informationGame.getVisibleReef());
+        informationGame.processCheckpointReached();
+
+        findPath.createPath(informationGame.getRegattaGoal());
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
         regattaResolver = new RegattaResolver(informationGame);
 
-        if(informationGame.isCheckpointReached()){ informationGame.moveToNextCheckpoint(); }
     }
 
     public List<Action> actionForTheRound(){
