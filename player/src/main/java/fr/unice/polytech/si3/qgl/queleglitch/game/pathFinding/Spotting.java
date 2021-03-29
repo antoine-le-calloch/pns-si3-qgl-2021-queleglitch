@@ -48,19 +48,26 @@ public class Spotting {
     }
 
     public Point findLineIntersection(Point line1Start, Point line1End, Point line2Start, Point line2End){
-        double line1Angle = line1Start.getAngleToAPoint(line1End);
-        double x = line1Start.getX() + Math.cos(line1Angle)*line1Start.getNorm(line1End);
-        double y = line1Start.getY() + Math.sin(line1Angle)*line1Start.getNorm(line1End);
-        Point point1 = new Point(x,y);
-
-        double line2Angle = line2Start.getAngleToAPoint(line2End);
-        x = line1Start.getX() + Math.cos(line2Angle)*line2Start.getNorm(line2End);
-        y = line1Start.getY() + Math.sin(line2Angle)*line2Start.getNorm(line2End);
-        Point point2 = new Point(x,y);
-
-        if(point1.equals(point2)){
-            return new Point(x,y);
+        if(line1Start.getX() == line1End.getX() && line2Start.getX() != line2End.getX()) {
+            double aLine2 = (line2End.getY() - line2Start.getY()) / (line2End.getX() - line2Start.getX());
+            double bLine2 = line2Start.getY() - aLine2*line2Start.getX();
+            return new Point(line1Start.getX(), aLine2*line1Start.getX()+bLine2);
         }
-        return null;
+        else if(line1Start.getX() != line1End.getX() && line2Start.getX() == line2End.getX()) {
+            double aLine1 = (line1End.getY() - line1Start.getY()) / (line1End.getX() - line1Start.getX());
+            double bLine1 = line1Start.getY() - aLine1*line1Start.getX();
+            return new Point(line2Start.getX(), aLine1*line2Start.getX()+bLine1);
+        }
+
+        double aLine1 = (line1End.getY() - line1Start.getY()) / (line1End.getX() - line1Start.getX());
+        double bLine1 = line1Start.getY() - aLine1*line1Start.getX();
+
+        double aLine2 = (line2End.getY() - line2Start.getY()) / (line2End.getX() - line2Start.getX());
+        double bLine2 = line2Start.getY() - aLine2*line2Start.getX();
+
+        double x = (bLine2-bLine1)/(aLine1 - aLine2);
+        double y = aLine1*x + bLine1;
+
+        return new Point(x,y);
     }
 }

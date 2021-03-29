@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.*;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 import java.util.ArrayList;
@@ -38,6 +39,10 @@ public class Ship {
 
     public boolean isCheckpointReached(Checkpoint checkpoint){
         return checkpoint.getPosition().getNorm(position) < checkpoint.getRadius();
+    }
+
+    public boolean isPathPointReached(Point pathPoint){
+        return Math.cos(position.getAngleToAPosition(pathPoint.toPosition())) <= 0;
     }
 
     public Box getCentralPosition(){ return deck.getCentralPosition(); }

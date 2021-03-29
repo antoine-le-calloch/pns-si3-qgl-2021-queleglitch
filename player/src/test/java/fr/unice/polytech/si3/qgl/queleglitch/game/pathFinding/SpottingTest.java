@@ -514,4 +514,31 @@ class SpottingTest {
         spotting = new Spotting(Arrays.asList(reef.clone()));
         assertFalse(spotting.isReefsBetween2Points(point0_0, point100_100));
     }
+
+    ///////////////////////////////////////////   findLineIntersection()  ///////////////////////////////////////////
+
+    @Test
+    void LineIntersection_0_0__7_0_And_5_5__5_Minus5() {
+        assertEquals(new Point(5,0),spotting.findLineIntersection(new Point(0,0),new Point(7,0),new Point(5,5),new Point(5,-5)));
+    }
+
+    @Test
+    void LineIntersection_0_0__7_0_And_0_5__10_Minus5() {
+        assertEquals(new Point(5,0),spotting.findLineIntersection(new Point(0,0),new Point(7,0),new Point(0,5),new Point(10,-5)));
+    }
+
+    @Test
+    void LineIntersection_0_0__7_0_And_0_2__10_Minus2() {
+        assertEquals(new Point(5,0),spotting.findLineIntersection(new Point(0,0),new Point(7,0),new Point(0,2),new Point(10,-2)));
+    }
+
+    @Test
+    void LineIntersection_5_5__5_Minus5_And_0_0__7_0() {
+        assertEquals(new Point(5,0),spotting.findLineIntersection(new Point(5,5),new Point(5,-5),new Point(0,0),new Point(7,0)));
+    }
+
+    @Test
+    void LineIntersection_0_0__5_5_And_0_5__5_0() {
+        assertEquals(new Point(2.5,2.5),spotting.findLineIntersection(new Point(0,0),new Point(5,5),new Point(0,5),new Point(5,0)));
+    }
 }

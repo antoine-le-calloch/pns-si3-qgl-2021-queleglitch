@@ -47,9 +47,17 @@ public class InformationGame {
     public void processCheckpointReached() {
         if(isCheckpointReached())
             moveToNextCheckpoint();
+        if(isPathPointReached())
+            getRegattaGoal().setPathPoint(null);
     }
 
-    public boolean isCheckpointReached() { return ship.isCheckpointReached(((RegattaGoal) goal).getActualCheckpoint()); }
+    public boolean isCheckpointReached() {
+        return ship.isCheckpointReached(getRegattaGoal().getActualCheckpoint());
+    }
+
+    public boolean isPathPointReached() {
+        return getRegattaGoal().getPathPoint() != null && ship.isPathPointReached(getRegattaGoal().getPathPoint());
+    }
 
     public void moveToNextCheckpoint() {
         ((RegattaGoal) goal).checkpointReached();

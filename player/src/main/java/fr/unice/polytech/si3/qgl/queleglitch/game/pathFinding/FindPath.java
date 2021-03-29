@@ -1,9 +1,8 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
+import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +23,17 @@ public class FindPath {
     }
 
     public void createPath(RegattaGoal regattaGoal){
-        for (int i = 0; i < stepToReach.size()-1; i++) {
-            if(spotting.isReefsBetween2Points(stepToReach.get(i), regattaGoal.getPositionActualOptiCheckpoint().toPoint()))
-                addANewValidStep(stepToReach.get(i), stepToReach.get(i+1));
+        if(spotting.isReefsBetween2Points(stepToReach.get(0), regattaGoal.getPositionActualOptiCheckpoint().toPoint())) {
+            Point pathPoint = getANewValidStep(stepToReach.get(0), regattaGoal.getPositionActualOptiCheckpoint().toPoint());
+            regattaGoal.setPathPoint(pathPoint);
         }
+        /*for (int i = 0; i < stepToReach.size()-1; i++) {
+            if(spotting.isReefsBetween2Points(stepToReach.get(i), regattaGoal.getPositionActualOptiCheckpoint().toPoint()))
+                pathPoint = getANewValidStep(stepToReach.get(i), stepToReach.get(i+1));
+        }*/
     }
 
-    public void addANewValidStep(Point startPoint, Point pointToReach){
+    public Point getANewValidStep(Point startPoint, Point pointToReach){
         Point endStartPoint;
         Point endPointToReach;
         double angleToAdd = 0;
@@ -39,14 +42,12 @@ public class FindPath {
             endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, angleToAdd, 1000);
             endPointToReach = spotting.findEndPointOfALine(pointToReach,startPoint, -angleToAdd, 1000);
             if(!spotting.isReefsBetween2Points(startPoint, endStartPoint) && !spotting.isReefsBetween2Points(pointToReach, endPointToReach)){
-                stepToReach.add(spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach));
-                break;
+                return spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach);
             }
             endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, -angleToAdd, 1000);
-            endPointToReach = spotting.findEndPointOfALine(pointToReach,startPoint, angleToAdd, 1000);
+            endPointToReach = spotting.findEndPointOfALine(pointToReach, startPoint, angleToAdd, 1000);
             if(!spotting.isReefsBetween2Points(startPoint, endStartPoint) && !spotting.isReefsBetween2Points(pointToReach, endPointToReach)){
-                stepToReach.add(spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach));
-                break;
+                return spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach);
             }
         }
     }

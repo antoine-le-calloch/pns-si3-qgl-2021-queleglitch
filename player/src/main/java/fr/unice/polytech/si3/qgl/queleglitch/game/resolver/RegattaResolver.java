@@ -59,4 +59,12 @@ public class RegattaResolver {
         }
         return new ToolsToUse(rudderAngle,actionOnSails,nbOarsUsed);
     }
+
+    public ToolsToUse resolveToolsToUseForPathPoint(Position positionCheckpointToReach) {
+        Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
+        double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
+        SailAction actionOnSails = SailStrategy.getSailsAction();
+        NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect));
+        return new ToolsToUse(rudderAngle,actionOnSails,nbOarsUsed);
+    }
 }

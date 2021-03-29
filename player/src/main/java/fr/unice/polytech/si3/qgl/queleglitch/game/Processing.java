@@ -30,15 +30,19 @@ public class Processing {
         findPath.createPath(informationGame.getRegattaGoal());
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
         regattaResolver = new RegattaResolver(informationGame);
-
     }
 
     public List<Action> actionForTheRound(){
-        ToolsToUse toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getPositionActualOptiCheckpoint());
-        if(toolsToUse == null)
-            toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getActualCheckpoint().getPosition());
-        if(toolsToUse == null)
-            toolsToUse = new ToolsToUse(0, SailAction.DO_NOTHING,new NbOarsUsed(1,1));
+        ToolsToUse toolsToUse;
+        if(informationGame.getRegattaGoal().getPathPoint() == null) {
+            toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getPositionActualOptiCheckpoint());
+            if (toolsToUse == null)
+                toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getActualCheckpoint().getPosition());
+            if (toolsToUse == null)
+                toolsToUse = new ToolsToUse(0, SailAction.DO_NOTHING, new NbOarsUsed(1, 1));
+        }
+        else
+            toolsToUse = regattaResolver.resolveToolsToUseForPathPoint(informationGame.getRegattaGoal().getPathPoint().toPosition());
 
         SmartCreateActions smartCreateActions = new SmartCreateActions(informationGame.getShip(), informationGame.getSailors());
         return smartCreateActions.createActions(toolsToUse);

@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
 /**
  * Classe permettant de définir le mode Regatta
@@ -13,9 +14,10 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 
 public class RegattaGoal extends Goal {
 
+    private int numActualCheckpoint = 0;
     private Checkpoint[] checkpoints;
     private Position[] positionOptiCheckpoints;
-    private int numActualCheckpoint = 0;
+    private Point pathPoint;
 
     public RegattaGoal(){
     }
@@ -53,7 +55,13 @@ public class RegattaGoal extends Goal {
     /**
      * <p>Getter.</p>
      */
+    public int getNumActualCheckpoint(){ return numActualCheckpoint; }
+
+    public Checkpoint[] getCheckpoints() { return checkpoints; }
+
     public Position[] getPositionOptiCheckpoints() { return positionOptiCheckpoints; }
+
+    public Point getPathPoint() { return pathPoint; }
 
     public Checkpoint getActualCheckpoint(){ return checkpoints[numActualCheckpoint]; }
 
@@ -61,14 +69,16 @@ public class RegattaGoal extends Goal {
         return positionOptiCheckpoints[numActualCheckpoint];
     }
 
-    public int getNumActualCheckpoint(){ return numActualCheckpoint; }
-
     /**
      * <p>Setter.</p>
      */
     public void setCheckpoints(Checkpoint[] checkpoints) {
         this.checkpoints = checkpoints;
     }
+
+    public void setPositionOptiCheckpoints(Position[] positionOptiCheckpoints) { this.positionOptiCheckpoints = positionOptiCheckpoints; }
+
+    public void setPathPoint(Point pathPoint) { this.pathPoint = pathPoint; }
 
     public void setNumActualCheckpoint(int numActualCheckpoint){ this.numActualCheckpoint = numActualCheckpoint; }
 

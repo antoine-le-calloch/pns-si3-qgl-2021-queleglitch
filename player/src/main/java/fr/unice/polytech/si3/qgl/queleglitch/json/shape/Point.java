@@ -30,6 +30,10 @@ public class Point {
         return Math.atan(opo/adj);
     }
 
+    public Position toPosition(){
+        return new Position(x,y,0);
+    }
+
     /**
      * <p>Getter.</p>
      */
