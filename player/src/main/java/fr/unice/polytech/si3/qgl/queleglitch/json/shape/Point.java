@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.shape;
 
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+
 import java.util.Objects;
 
 public class Point {
@@ -10,6 +12,14 @@ public class Point {
     public Point(double x, double y){
         this.x = x;
         this.y = y;
+    }
+
+    public double getNorm(Point point){
+        double distance;
+        distance = Math.pow(x-point.getX(),2);
+        distance += Math.pow(y-point.getY(),2);
+        distance = Math.sqrt(distance);
+        return distance;
     }
 
     public double getAngleToAPoint(Point point){
