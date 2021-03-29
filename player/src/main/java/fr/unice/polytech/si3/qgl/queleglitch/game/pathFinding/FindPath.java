@@ -27,6 +27,7 @@ public class FindPath {
             Point pathPoint = getANewValidStep(stepToReach.get(0), regattaGoal.getPositionActualOptiCheckpoint().toPoint());
             regattaGoal.setPathPoint(pathPoint);
         }
+        regattaGoal.setPathPoint(null);
         /*for (int i = 0; i < stepToReach.size()-1; i++) {
             if(spotting.isReefsBetween2Points(stepToReach.get(i), regattaGoal.getPositionActualOptiCheckpoint().toPoint()))
                 pathPoint = getANewValidStep(stepToReach.get(i), stepToReach.get(i+1));

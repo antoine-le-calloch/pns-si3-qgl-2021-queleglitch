@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json;
 
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.FindPath;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
@@ -45,10 +46,11 @@ public class InformationGame {
     }
 
     public void processCheckpointReached() {
+        FindPath findPath = new FindPath(ship.getPosition().toPoint(), getVisibleReef());
         if(isCheckpointReached())
             moveToNextCheckpoint();
         if(isPathPointReached())
-            getRegattaGoal().setPathPoint(null);
+            findPath.createPath(getRegattaGoal());
     }
 
     public boolean isCheckpointReached() {

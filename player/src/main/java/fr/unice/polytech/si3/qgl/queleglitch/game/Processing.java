@@ -13,7 +13,6 @@ import java.util.List;
 
 public class Processing {
 
-    FindPath findPath;
     InformationGame informationGame;
     RegattaResolver regattaResolver;
     ShipMovementResolver shipMovementResolver;
@@ -24,10 +23,7 @@ public class Processing {
     }
 
     public void processDataNewRound(){
-        findPath = new FindPath(informationGame.getShip().getPosition().toPoint(), informationGame.getVisibleReef());
         informationGame.processCheckpointReached();
-
-        findPath.createPath(informationGame.getRegattaGoal());
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
         regattaResolver = new RegattaResolver(informationGame);
     }
