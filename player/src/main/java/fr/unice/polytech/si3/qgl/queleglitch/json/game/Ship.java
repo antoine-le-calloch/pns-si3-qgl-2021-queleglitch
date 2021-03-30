@@ -41,10 +41,6 @@ public class Ship {
         return checkpoint.getPosition().getNorm(position) < checkpoint.getRadius();
     }
 
-    public boolean isPathPointReached(Point pathPoint){
-        return Math.cos(position.getAngleToAPosition(pathPoint.toPosition())) <= 0;
-    }
-
     public Box getCentralPosition(){ return deck.getCentralPosition(); }
 
     public List<Oar> getOarsAtRight(){ return getOars().stream().filter(oar -> oar.getY()!=0).collect(Collectors.toList()); }

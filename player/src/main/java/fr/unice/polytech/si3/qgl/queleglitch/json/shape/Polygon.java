@@ -15,10 +15,11 @@ public class Polygon extends Shape {
     }
 
     public Point[] getRealPoints(Position centralPosition){
+        double realOrientation = orientation + centralPosition.getOrientation();
         Point[] reelPoints = new Point[vertices.length];
         int cpt = 0;
         for (Point point : vertices) {
-            reelPoints[cpt] = new Point(centralPosition.getX() + Math.cos(orientation)*point.getX() + Math.sin(-orientation)*point.getY(), centralPosition.getY() + Math.sin(orientation)*point.getX() + Math.cos(-orientation)*point.getY());
+            reelPoints[cpt] = new Point(centralPosition.getX() + Math.cos(realOrientation)*point.getX() + Math.sin(-realOrientation)*point.getY(), centralPosition.getY() + Math.sin(realOrientation)*point.getX() + Math.cos(-realOrientation)*point.getY());
             cpt++;
         }
         return reelPoints;

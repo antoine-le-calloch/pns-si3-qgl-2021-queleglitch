@@ -24,6 +24,7 @@ public class Processing {
 
     public void processDataNewRound(){
         informationGame.processCheckpointReached();
+        informationGame.addPath();
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
         regattaResolver = new RegattaResolver(informationGame);
     }

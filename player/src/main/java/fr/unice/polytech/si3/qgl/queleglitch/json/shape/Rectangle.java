@@ -19,11 +19,12 @@ public class Rectangle extends Shape {
     public double getRadius(){ return 0; }
 
     public Point[] getRealPoints(Position centralPosition){
+        double realOrientation = orientation + centralPosition.getOrientation();
         Point[] reelPoints = new Point[4];
-        reelPoints[0] = new Point(centralPosition.getX() + Math.cos(orientation)*(height/2) + Math.sin(-orientation)*(width/2), centralPosition.getY() + Math.sin(orientation)*(height/2) + Math.cos(-orientation)*(width/2));
-        reelPoints[1] = new Point(centralPosition.getX() + Math.cos(orientation)*(-height/2) + Math.sin(-orientation)*(width/2), centralPosition.getY() + Math.sin(orientation)*(-height/2) + Math.cos(-orientation)*(width/2));
-        reelPoints[2] = new Point(centralPosition.getX() + Math.cos(orientation)*(-height/2) + Math.sin(-orientation)*(-width/2), centralPosition.getY() + Math.sin(orientation)*(-height/2) + Math.cos(-orientation)*(-width/2));
-        reelPoints[3] = new Point(centralPosition.getX() + Math.cos(orientation)*(height/2) + Math.sin(-orientation)*(-width/2), centralPosition.getY() + Math.sin(orientation)*(height/2) + Math.cos(-orientation)*(-width/2));
+        reelPoints[0] = new Point(centralPosition.getX() + Math.cos(realOrientation)*(height/2) + Math.sin(-realOrientation)*(width/2), centralPosition.getY() + Math.sin(realOrientation)*(height/2) + Math.cos(-realOrientation)*(width/2));
+        reelPoints[1] = new Point(centralPosition.getX() + Math.cos(realOrientation)*(-height/2) + Math.sin(-realOrientation)*(width/2), centralPosition.getY() + Math.sin(realOrientation)*(-height/2) + Math.cos(-realOrientation)*(width/2));
+        reelPoints[2] = new Point(centralPosition.getX() + Math.cos(realOrientation)*(-height/2) + Math.sin(-realOrientation)*(-width/2), centralPosition.getY() + Math.sin(realOrientation)*(-height/2) + Math.cos(-realOrientation)*(-width/2));
+        reelPoints[3] = new Point(centralPosition.getX() + Math.cos(realOrientation)*(height/2) + Math.sin(-realOrientation)*(-width/2), centralPosition.getY() + Math.sin(realOrientation)*(height/2) + Math.cos(-realOrientation)*(-width/2));
         return reelPoints;
     }
 

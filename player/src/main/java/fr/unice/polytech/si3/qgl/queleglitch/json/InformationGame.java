@@ -46,19 +46,18 @@ public class InformationGame {
     }
 
     public void processCheckpointReached() {
-        FindPath findPath = new FindPath(ship.getPosition().toPoint(), getVisibleReef());
         if(isCheckpointReached())
             moveToNextCheckpoint();
-        if(visibleEntities != null && visibleEntities.length > 0 && isPathPointReached())
+    }
+
+    public void addPath() {
+        FindPath findPath = new FindPath(ship.getPosition().toPoint(), getVisibleReef());
+        if(visibleEntities != null && visibleEntities.length > 0)
             findPath.createPath(getRegattaGoal());
     }
 
     public boolean isCheckpointReached() {
         return ship.isCheckpointReached(getRegattaGoal().getActualCheckpoint());
-    }
-
-    public boolean isPathPointReached() {
-        return getRegattaGoal().getPathPoint() == null || ship.isPathPointReached(getRegattaGoal().getPathPoint());
     }
 
     public void moveToNextCheckpoint() {
