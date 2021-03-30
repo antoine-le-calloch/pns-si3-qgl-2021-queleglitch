@@ -41,10 +41,10 @@ public class Spotting {
         return false;
     }
 
-    public Point findEndPointOfALine(Point point1, Point point2, double angleToAdd, double lineLength){
-        double x = Math.cos(point1.getAngleToAPoint(point2)+angleToAdd) * lineLength;
-        double y = Math.sin(point1.getAngleToAPoint(point2)+angleToAdd) * lineLength;
-        return new Point(x,y);
+    public Point findEndPointOfALine(Point startPoint, Point targetPoint, double distanceToAdd){
+        double x = Math.cos(startPoint.getAngleToAPoint(targetPoint)+Math.PI/2) * distanceToAdd;
+        double y = Math.sin(startPoint.getAngleToAPoint(targetPoint)+Math.PI/2) * distanceToAdd;
+        return new Point(x + targetPoint.getX(),y + targetPoint.getY());
     }
 
     public Point findLineIntersection(Point line1Start, Point line1End, Point line2Start, Point line2End){

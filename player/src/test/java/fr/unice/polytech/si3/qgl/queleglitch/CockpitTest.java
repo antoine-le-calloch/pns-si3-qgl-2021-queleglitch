@@ -1,6 +1,6 @@
-//package fr.unice.polytech.si3.qgl.queleglitch;
+package fr.unice.polytech.si3.qgl.queleglitch;
 
-/*import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,9 +21,9 @@ class CockpitTest {
 
     @Test
     void Test_input1() {
-        Cockpit cockpitGame1 = new Cockpit();
-        cockpitGame1.initGame(getTxtInFile("1\\initGameFile"));
-        String actualOutput = cockpitGame1.nextRound(getTxtInFile("1\\nextRoundFile"));
+        Cockpit cockpitGame = new Cockpit();
+        cockpitGame.initGame(getTxtInFile("1\\initGameFile"));
+        String actualOutput = cockpitGame.nextRound(getTxtInFile("1\\nextRoundFile"));
 
         assertEquals(getTxtInFile("1\\outputFile"), actualOutput);
     }
@@ -48,13 +48,26 @@ class CockpitTest {
 
     @Test
     void Test_input3() {
-        Cockpit cockpitGame1 = new Cockpit();
-        cockpitGame1.initGame(getTxtInFile("3\\initGameFile"));
-        String actualOutput = cockpitGame1.nextRound(getTxtInFile("3\\nextRoundFile"));
+        Cockpit cockpitGame = new Cockpit();
+        cockpitGame.initGame(getTxtInFile("3\\initGameFile"));
+        String actualOutput = cockpitGame.nextRound(getTxtInFile("3\\nextRoundFile"));
 
         assertEquals(getTxtInFile("3\\outputFile"), actualOutput);
     }
 
+    @Test
+    void Test_input4() {
+        Cockpit cockpitGame = new Cockpit();
+        cockpitGame.initGame(getTxtInFile("4\\initGameFile"));
+
+        cockpitGame.informationGame.getRegattaGoal().setNumActualCheckpoint(2);
+        String actualOutput = cockpitGame.nextRound(getTxtInFile("4\\nextRoundFile"));
+
+        assertEquals(getTxtInFile("4\\outputFile"), actualOutput);
+    }
+
+
+    ///////////methode to open the text file with Json
     private String getTxtInFile(String fileName) {
         try {
             InputStream inputStream = CockpitTest.class.getResourceAsStream(path + fileName);
@@ -71,4 +84,4 @@ class CockpitTest {
             return null;
         }
     }
-}*/
+}

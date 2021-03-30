@@ -542,15 +542,94 @@ class SpottingTest {
         assertEquals(new Point(2.5,2.5),spotting.findLineIntersection(new Point(0,0),new Point(5,5),new Point(0,5),new Point(5,0)));
     }
 
+    ///////////////////////////////////////////   findEndPointOfALine()  ///////////////////////////////////////////
 
-    /////findEndPointOfALine
-
-    /*
-    @Test
+    /*@Test
     void twoSamePoints(){
         double nullAngle=0.0;
         double lengthUnitary=1.0;
         Point pointExpected=new Point(1,0);
         assertEquals(pointExpected,spotting.findEndPointOfALine(point0_0,point0_0,nullAngle,lengthUnitary));
     }*/
+
+
+    @Test
+    void endPointOf_0_0_WithTargetOn_1000_0_distanceToAdd0(){
+        double distanceToAdd = 0;
+        assertEquals(new Point(1000,0),spotting.findEndPointOfALine(new Point(0,0), new Point(1000,0), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_1000_0_WithTargetOn_0_0_distanceToAdd0(){
+        double distanceToAdd = 0;
+        assertEquals(new Point(0,0),spotting.findEndPointOfALine(new Point(1000,0), new Point(0,0), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_0_0_WithTargetOn_1000_1000_distanceToAdd_Sqrt8(){
+        double distanceToAdd = Math.sqrt(8);
+        assertEquals(new Point(998,1002),spotting.findEndPointOfALine(new Point(0,0), new Point(1000,1000), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_0_0_WithTargetOn_0_1000_distanceToAdd_100(){
+        double distanceToAdd = 100;
+        assertEquals(new Point(-100,1000),spotting.findEndPointOfALine(new Point(0,0), new Point(0,1000), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_0_0_WithTargetOn_Minus1000_1000_distanceToAdd_Sqrt8(){
+        double distanceToAdd = Math.sqrt(8);
+        assertEquals(new Point(-1002,998),spotting.findEndPointOfALine(new Point(0,0), new Point(-1000,1000), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_0_0_WithTargetOn_Minus1000_0_distanceToAdd_100(){
+        double distanceToAdd = 100;
+        assertEquals(new Point(-1000,-100),spotting.findEndPointOfALine(new Point(0,0), new Point(-1000,0), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_0_0_WithTargetOn_Minus1000_Minus1000_distanceToAdd_Sqrt8(){
+        double distanceToAdd = Math.sqrt(8);
+        assertEquals(new Point(-998,-1002),spotting.findEndPointOfALine(new Point(0,0), new Point(-1000,-1000), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_0_0_WithTargetOn_0_Minus1000_distanceToAdd_100(){
+        double distanceToAdd = 100;
+        assertEquals(new Point(100,-1000),spotting.findEndPointOfALine(new Point(0,0), new Point(0,-1000), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_0_0_WithTargetOn_1000_Minus1000_distanceToAdd_Sqrt8(){
+        double distanceToAdd = Math.sqrt(8);
+        assertEquals(new Point(1002,-998),spotting.findEndPointOfALine(new Point(0,0), new Point(1000,-1000), distanceToAdd));
+    }
+
+    ///
+
+    @Test
+    void endPointOf_0_0_WithTargetOn_1000_1000_distanceToAdd_Sqrt32(){
+        double distanceToAdd = Math.sqrt(32);
+        assertEquals(new Point(996,1004),spotting.findEndPointOfALine(new Point(0,0), new Point(1000,1000), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_0_0_WithTargetOn_1000_1000_distanceToAdd_MinusSqrt32(){
+        double distanceToAdd = -Math.sqrt(32);
+        assertEquals(new Point(1004,996),spotting.findEndPointOfALine(new Point(0,0), new Point(1000,1000), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_1000_1000_WithTargetOn_0_0_distanceToAdd_Sqrt32(){
+        double distanceToAdd = Math.sqrt(32);
+        assertEquals(new Point(4.000000000000001,-4),spotting.findEndPointOfALine(new Point(1000,1000), new Point(0,0), distanceToAdd));
+    }
+
+    @Test
+    void endPointOf_1000_1000_WithTargetOn_0_0_distanceToAdd_MinusSqrt32(){
+        double distanceToAdd = -Math.sqrt(32);
+        assertEquals(new Point(-4.000000000000001,4),spotting.findEndPointOfALine(new Point(1000,1000), new Point(0,0), distanceToAdd));
+    }
 }

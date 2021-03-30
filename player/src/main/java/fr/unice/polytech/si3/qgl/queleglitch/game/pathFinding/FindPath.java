@@ -8,14 +8,10 @@ import java.util.List;
 
 public class FindPath {
 
-    Point shipPoint;
-    Spotting spotting;
-    List<Reef> visibleReef;
-    List<Point> stepToReach;
+    private final Spotting spotting;
+    private final List<Point> stepToReach;
 
-    public FindPath(Point shipPosition, List<Reef> visibleReef){
-        this.shipPoint = shipPosition;
-        this.visibleReef = visibleReef;
+    public FindPath(Point shipPoint, List<Reef> visibleReef){
         this.stepToReach = new ArrayList<>();
         this.spotting = new Spotting(visibleReef);
 
@@ -27,7 +23,8 @@ public class FindPath {
             Point pathPoint = getANewValidStep(stepToReach.get(0), regattaGoal.getPositionActualOptiCheckpoint().toPoint());
             regattaGoal.setPathPoint(pathPoint);
         }
-        regattaGoal.setPathPoint(null);
+        else
+            regattaGoal.setPathPoint(null);
         /*for (int i = 0; i < stepToReach.size()-1; i++) {
             if(spotting.isReefsBetween2Points(stepToReach.get(i), regattaGoal.getPositionActualOptiCheckpoint().toPoint()))
                 pathPoint = getANewValidStep(stepToReach.get(i), stepToReach.get(i+1));
@@ -37,17 +34,23 @@ public class FindPath {
     public Point getANewValidStep(Point startPoint, Point pointToReach){
         Point endStartPoint;
         Point endPointToReach;
-        double angleToAdd = 0;
+        double distanceToAdd = 0;
         while (true){
-            angleToAdd += 2*Math.PI/180;
-            endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, angleToAdd, 1000);
-            endPointToReach = spotting.findEndPointOfALine(pointToReach,startPoint, -angleToAdd, 1000);
+            distanceToAdd += 5;
+            endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, distanceToAdd);
+            endPointToReach = spotting.findEndPointOfALine(pointToReach,startPoint, -distanceToAdd);
             if(!spotting.isReefsBetween2Points(startPoint, endStartPoint) && !spotting.isReefsBetween2Points(pointToReach, endPointToReach)){
+                distanceToAdd += 5;
+                endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, distanceToAdd);
+                endPointToReach = spotting.findEndPointOfALine(pointToReach,startPoint, -distanceToAdd);
                 return spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach);
             }
-            endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, -angleToAdd, 1000);
-            endPointToReach = spotting.findEndPointOfALine(pointToReach, startPoint, angleToAdd, 1000);
+            endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, -distanceToAdd);
+            endPointToReach = spotting.findEndPointOfALine(pointToReach, startPoint, distanceToAdd);
             if(!spotting.isReefsBetween2Points(startPoint, endStartPoint) && !spotting.isReefsBetween2Points(pointToReach, endPointToReach)){
+                distanceToAdd += 5;
+                endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, -distanceToAdd);
+                endPointToReach = spotting.findEndPointOfALine(pointToReach, startPoint, distanceToAdd);
                 return spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach);
             }
         }
