@@ -541,4 +541,16 @@ class SpottingTest {
     void LineIntersection_0_0__5_5_And_0_5__5_0() {
         assertEquals(new Point(2.5,2.5),spotting.findLineIntersection(new Point(0,0),new Point(5,5),new Point(0,5),new Point(5,0)));
     }
+
+
+    /////findEndPointOfALine
+
+    /*
+    @Test
+    void twoSamePoints(){
+        double nullAngle=0.0;
+        double lengthUnitary=1.0;
+        Point pointExpected=new Point(1,0);
+        assertEquals(pointExpected,spotting.findEndPointOfALine(point0_0,point0_0,nullAngle,lengthUnitary));
+    }*/
 }
