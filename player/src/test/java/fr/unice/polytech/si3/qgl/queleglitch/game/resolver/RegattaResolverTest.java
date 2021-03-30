@@ -12,6 +12,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -255,4 +256,63 @@ class RegattaResolverTest {
 
         assertNull(regattaResolverNotUseWind.resolveToolsToUse(checkpoint.getPosition()));
     }
+
+
+
+
+
+
+    @Nested
+    public class PathFinding{
+
+        RegattaResolver regattaResolver;
+        Position position;
+
+        @BeforeEach
+        void setUp(){
+            Mockito.when(mockShip.getPosition()).thenReturn(new Position(0,0,0));
+            mockShip = mock(Ship.class);
+            Mockito.when(mockShip.getNbOars()).thenReturn(10);
+            Mockito.when(mockShip.getNbSails()).thenReturn(1);
+            Mockito.when(mockShip.getPosition()).thenReturn(new Position(0,0,0));
+            mockRegattaGoal = Mockito.mock(RegattaGoal.class);
+            Sailor []sailors = new Sailor[10];
+            regattaResolver = new RegattaResolver(new InformationGame(sailors,mockShip,mockRegattaGoal,windOrtPi));
+        }
+
+        @Test
+        void checkPointInFrontOfTheCheckpoint(){
+            position=new Position(2000,0,0.0);
+            assertEquals(new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5)),regattaResolver.resolveToolsToUseForPathPoint(position));
+        }
+
+        @Test
+        void checkPointAtLeftAngleToCorrectMinusThan90(){
+            position=new Position(100,100,0.0);
+            assertEquals(new ToolsToUse(Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(4,4)),regattaResolver.resolveToolsToUseForPathPoint(position));
+        }
+        @Test
+        void checkPointAtRightAngleToCorrectMinusThan90(){
+            position=new Position(100,-100,0.0);
+            assertEquals(new ToolsToUse(-Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(4,4)),regattaResolver.resolveToolsToUseForPathPoint(position));
+        }
+
+
+        @Test
+        void checkPointAtLeftAngleToCorrectGreaterThan90(){
+            position=new Position(-100,4,0.0);
+            assertEquals(new ToolsToUse(Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(0,5)),regattaResolver.resolveToolsToUseForPathPoint(position));
+        }
+
+
+        @Test
+        void checkPointAtRightAngleToCorrectGreaterThan90(){
+            position=new Position(-100,-4,0.0);
+            assertEquals(new ToolsToUse(-Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(5,0)),regattaResolver.resolveToolsToUseForPathPoint(position));
+        }
+
+
+
+    }
+
 }

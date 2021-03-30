@@ -1,8 +1,10 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 
+import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -66,4 +68,11 @@ class RegattaGoalTest {
         assertEquals(new Position(100,-2,0) ,regattaGoal.getPositionOptiCheckpoints()[0]);
         assertEquals(new Position(100,100,0) ,regattaGoal.getPositionOptiCheckpoints()[1]);
     }
+
+
+
+
+
+
+
 }
