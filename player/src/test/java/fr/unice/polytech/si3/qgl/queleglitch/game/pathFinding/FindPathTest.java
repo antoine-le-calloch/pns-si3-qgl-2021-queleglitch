@@ -1,12 +1,9 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Polygon;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

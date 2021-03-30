@@ -49,12 +49,7 @@ class RectangleTest {
         rectangle = new Rectangle(250,1200,0);
         Point[] realPoints = new Point[]{new Point(5795.69389589501,692.4711955261215),new Point(4876.440564152237,-78.87393609772568),
                                          new Point(5037.137466573871,-270.3850468774702),new Point(5956.390798316645,500.960084746377)};
-        //assertArrayEquals(realPoints,
-        Point [] actualPoint = rectangle.getRealPoints(new Position(5416.415681234441,211.04307432432563,0.6981317007977318));
+        assertArrayEquals(realPoints,rectangle.getRealPoints(new Position(5416.415681234441,211.04307432432563,0.6981317007977318)));
 
-        System.out.println(actualPoint[0]);
-        System.out.println(actualPoint[1]);
-        System.out.println(actualPoint[2]);
-        System.out.println(actualPoint[3]);
     }
 }
