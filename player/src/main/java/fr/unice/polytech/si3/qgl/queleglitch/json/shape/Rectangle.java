@@ -18,7 +18,7 @@ public class Rectangle extends Shape {
 
     public double getRadius(){ return 0; }
 
-    public Point[] getReelPoints(Position centralPosition){
+    public Point[] getRealPoints(Position centralPosition){
         Point[] reelPoints = new Point[4];
         reelPoints[0] = new Point(centralPosition.getX() + Math.cos(orientation)*(height/2) + Math.sin(-orientation)*(width/2), centralPosition.getY() + Math.sin(orientation)*(height/2) + Math.cos(-orientation)*(width/2));
         reelPoints[1] = new Point(centralPosition.getX() + Math.cos(orientation)*(-height/2) + Math.sin(-orientation)*(width/2), centralPosition.getY() + Math.sin(orientation)*(-height/2) + Math.cos(-orientation)*(width/2));

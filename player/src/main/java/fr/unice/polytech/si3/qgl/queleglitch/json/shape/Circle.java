@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.shape;
 
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+
 /**
  * Classe permettant de définir la forme cercledu checkpoint
  * @author Huot-Marchand Antoine
@@ -16,6 +18,17 @@ public class Circle extends Shape {
 
     public Circle(double radius){
         this.radius = radius;
+    }
+
+    public Point[] getRealPoints(Position centralPosition){
+        double angle = 0;
+        final int NB_POINTS = 1000;
+        Point[] points = new Point[NB_POINTS];
+        for(int i = 0; i < NB_POINTS; i++){
+            points[i] = new Point(centralPosition.getX()+Math.cos(angle)*(radius+10),centralPosition.getY()+Math.sin(angle)*(radius+10));
+            angle += 2*Math.PI/NB_POINTS;
+        }
+        return points;
     }
 
     /**

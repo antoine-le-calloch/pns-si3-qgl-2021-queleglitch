@@ -39,6 +39,10 @@ public class Point {
         return new Position(x,y,0);
     }
 
+    public Point[] getRealPoints(Position centralPosition){
+        return new Point[]{new Point(x,y)};
+    }
+
     /**
      * <p>Getter.</p>
      */

@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.shape;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property =  "type", defaultImpl = void.class)
@@ -25,4 +26,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * @version 2021.01.26
  */
 public abstract class Shape {
+
+    public abstract Point[] getRealPoints(Position centralPosition);
 }

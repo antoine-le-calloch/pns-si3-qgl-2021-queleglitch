@@ -14,7 +14,7 @@ public class Polygon extends Shape {
         this.vertices = vertices;
     }
 
-    public Point[] getReelPoints(Position centralPosition){
+    public Point[] getRealPoints(Position centralPosition){
         Point[] reelPoints = new Point[vertices.length];
         int cpt = 0;
         for (Point point : vertices) {

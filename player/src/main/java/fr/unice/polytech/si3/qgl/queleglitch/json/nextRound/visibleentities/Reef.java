@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 public class Reef extends VisibleEntities{
@@ -12,6 +13,10 @@ public class Reef extends VisibleEntities{
 
     public Reef(Position position, Shape shape) {
         super(position,shape);
+    }
+
+    public Point[] getReelPointsForm(){
+        return shape.getRealPoints(position);
     }
 
     /**

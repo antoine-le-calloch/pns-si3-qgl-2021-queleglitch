@@ -13,26 +13,14 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.*;
 
 public class VisibleEntities {
 
-    private Position position;
-    private Shape shape;
+    Position position;
+    Shape shape;
 
     public VisibleEntities() {
     }
     public VisibleEntities(Position position, Shape shape) {
         this.position = position;
         this.shape = shape;
-    }
-
-    public boolean isCircle(){
-        return shape instanceof Circle;
-    }
-
-    public Point[] getReelPointsForm(){
-        if(shape instanceof Rectangle)
-            return ((Rectangle) shape).getReelPoints(position);
-        if(shape instanceof Polygon)
-            return ((Polygon) shape).getReelPoints(position);
-        return null;
     }
 
     /**

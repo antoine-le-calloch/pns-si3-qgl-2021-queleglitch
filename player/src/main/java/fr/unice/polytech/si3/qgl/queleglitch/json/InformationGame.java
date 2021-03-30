@@ -49,7 +49,7 @@ public class InformationGame {
         FindPath findPath = new FindPath(ship.getPosition().toPoint(), getVisibleReef());
         if(isCheckpointReached())
             moveToNextCheckpoint();
-        if(isPathPointReached())
+        if(visibleEntities != null && visibleEntities.length > 0 && isPathPointReached())
             findPath.createPath(getRegattaGoal());
     }
 
@@ -58,7 +58,7 @@ public class InformationGame {
     }
 
     public boolean isPathPointReached() {
-        return getRegattaGoal().getPathPoint() != null && ship.isPathPointReached(getRegattaGoal().getPathPoint());
+        return getRegattaGoal().getPathPoint() == null || ship.isPathPointReached(getRegattaGoal().getPathPoint());
     }
 
     public void moveToNextCheckpoint() {
