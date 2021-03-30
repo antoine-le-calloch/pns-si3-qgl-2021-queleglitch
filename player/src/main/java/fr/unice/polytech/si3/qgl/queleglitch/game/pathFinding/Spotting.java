@@ -3,7 +3,6 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Spotting {
@@ -31,18 +30,18 @@ public class Spotting {
             double angleStartToFormPoint2 = start.getAngleToAPoint(formPoints[(i+1)%formPoints.length]) - angleStartToEnd;
             double angleEndToFormPoint1 = end.getAngleToAPoint(formPoints[i]) - angleEndToStart;
             double angleEndToFormPoint2 = end.getAngleToAPoint(formPoints[(i+1)%formPoints.length]) - angleEndToStart;
-            if(isBetween(angleStartToFormPoint1,angleStartToFormPoint2,angleEndToFormPoint1,angleEndToFormPoint2)){
+            if(isLineBetween(angleStartToFormPoint1,angleStartToFormPoint2,angleEndToFormPoint1,angleEndToFormPoint2)){
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isBetween(double angleStartToFormPoint1, double angleStartToFormPoint2, double angleEndToFormPoint1, double angleEndToFormPoint2){
-        if(     (Math.cos(angleStartToFormPoint1) > 0 || Math.cos(angleStartToFormPoint2) > 0) &&
+    public boolean isLineBetween(double angleStartToFormPoint1, double angleStartToFormPoint2, double angleEndToFormPoint1, double angleEndToFormPoint2){
+        if(     (Math.cos(angleStartToFormPoint1) >= 0 || Math.cos(angleStartToFormPoint2) >= 0) &&
                 (Math.sin(angleStartToFormPoint1) <= 0 && Math.sin(angleStartToFormPoint2) >= 0 ||
                 Math.sin(angleStartToFormPoint1) >= 0 && Math.sin(angleStartToFormPoint2) <= 0))
-            return Math.cos(angleEndToFormPoint1) >= 0 && Math.cos(angleEndToFormPoint2) >= 0;
+            return Math.cos(angleEndToFormPoint1) >= 0 || Math.cos(angleEndToFormPoint2) >= 0;
 
         return false;
     }

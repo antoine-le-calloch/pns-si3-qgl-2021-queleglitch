@@ -544,15 +544,6 @@ class SpottingTest {
 
     ///////////////////////////////////////////   findEndPointOfALine()  ///////////////////////////////////////////
 
-    /*@Test
-    void twoSamePoints(){
-        double nullAngle=0.0;
-        double lengthUnitary=1.0;
-        Point pointExpected=new Point(1,0);
-        assertEquals(pointExpected,spotting.findEndPointOfALine(point0_0,point0_0,nullAngle,lengthUnitary));
-    }*/
-
-
     @Test
     void endPointOf_0_0_WithTargetOn_1000_0_distanceToAdd0(){
         double distanceToAdd = 0;
@@ -631,5 +622,74 @@ class SpottingTest {
     void endPointOf_1000_1000_WithTargetOn_0_0_distanceToAdd_MinusSqrt32(){
         double distanceToAdd = -Math.sqrt(32);
         assertEquals(new Point(-4.000000000000001,4),spotting.findEndPointOfALine(new Point(1000,1000), new Point(0,0), distanceToAdd));
+    }
+
+    ///////////////////////////////////////////   isLineBetween()  ///////////////////////////////////////////
+
+    @Test
+    void line_angle_PIOn4_MinusPIOn6(){
+        assertTrue(spotting.isLineBetween(Math.PI/4,-Math.PI/6,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void line_angle_MinusPIOn4_PIOn6(){
+        assertTrue(spotting.isLineBetween(-Math.PI/4,Math.PI/6,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void line_angle_3PIOn4_MinusPIOn6(){
+        assertTrue(spotting.isLineBetween(3*Math.PI/4,-Math.PI/6,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void line_angle_PIOn4_Minus5PIOn6(){
+        assertTrue(spotting.isLineBetween(Math.PI/4,-5*Math.PI/6,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void line_angle_PIOn4_0(){
+        assertTrue(spotting.isLineBetween(Math.PI/4,0,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void line_angle_0_Minus5PIOn6(){
+        assertTrue(spotting.isLineBetween(0,-5*Math.PI/6,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void line_angle_0_0(){
+        assertTrue(spotting.isLineBetween(0,0,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void line_angle_0_PI(){
+        assertTrue(spotting.isLineBetween(0,Math.PI,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void line_angle_MinusPI_0(){
+        assertTrue(spotting.isLineBetween(-Math.PI,0,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void noLine_Angle_3PIOn4_Minus5PIOn6(){
+        assertFalse(spotting.isLineBetween(3*Math.PI/4,-5*Math.PI/6,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void noLine_Angle_PIOn4_MinusPIOn6(){
+        assertTrue(spotting.isLineBetween(Math.PI/4,-Math.PI/6,3*Math.PI/4,Math.PI/6));
+        assertTrue(spotting.isLineBetween(Math.PI/4,-Math.PI/6,Math.PI/4,5*Math.PI/6));
+        assertFalse(spotting.isLineBetween(Math.PI/4,-Math.PI/6,3*Math.PI/4,5*Math.PI/6));
+    }
+
+    @Test
+    void noLine_Angle_PIOn4_PIOn6(){
+        assertFalse(spotting.isLineBetween(Math.PI/4,Math.PI/6,Math.PI/4,Math.PI/6));
+    }
+
+    @Test
+    void noLine_Angle_MinusPIOn4_MinusPIOn6(){
+        assertFalse(spotting.isLineBetween(-Math.PI/4,-Math.PI/6,Math.PI/4,Math.PI/6));
     }
 }

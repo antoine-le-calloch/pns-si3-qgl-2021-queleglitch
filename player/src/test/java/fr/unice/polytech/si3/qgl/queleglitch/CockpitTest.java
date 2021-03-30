@@ -88,6 +88,25 @@ class CockpitTest {
         assertEquals(getTxtInFile("6\\outputFile"), actualOutput);
     }
 
+    @Test
+    void Test_input7() {
+        Cockpit cockpitGame = new Cockpit();
+        cockpitGame.initGame(getTxtInFile("7\\initGameFile"));
+
+        String actualOutput = cockpitGame.nextRound(getTxtInFile("7\\nextRoundFile"));
+
+        assertEquals(getTxtInFile("7\\outputFile"), actualOutput);
+    }
+
+    @Test
+    void Test_input8() {
+        Cockpit cockpitGame = new Cockpit();
+        cockpitGame.initGame(getTxtInFile("8\\initGameFile"));
+
+        String actualOutput = cockpitGame.nextRound(getTxtInFile("8\\nextRoundFile"));
+
+        assertEquals(getTxtInFile("8\\outputFile"), actualOutput);
+    }
 
     ///////////methode to open the text file with Json
     private String getTxtInFile(String fileName) {
