@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Spotting {
@@ -21,23 +22,28 @@ public class Spotting {
         return false;
     }
 
-    public boolean isThisReefBetween2Points(Reef reef, Point point1, Point point2){
-        boolean pointInLeft = false;
-        boolean pointInRight = false;
-        double angleDifferenceP1ToPoint;
-        double angleDifferenceP2ToPoint;
-        double angleToPosition2FromPosition1 = point1.getAngleToAPoint(point2);
-        for (Point point : reef.getReelPointsForm()) {
-            angleDifferenceP1ToPoint = point1.getAngleToAPoint(point) - angleToPosition2FromPosition1;
-            angleDifferenceP2ToPoint = point2.getAngleToAPoint(point) - angleToPosition2FromPosition1 - Math.PI;
-
-            if(Math.cos(angleDifferenceP1ToPoint) >= 0 && Math.cos(angleDifferenceP2ToPoint) >= 0) {
-                pointInLeft = pointInLeft || Math.sin(angleDifferenceP1ToPoint) >= 0;
-                pointInRight = pointInRight || Math.sin(angleDifferenceP1ToPoint) <= 0;
-            }
-            if(pointInLeft && pointInRight)
+    public boolean isThisReefBetween2Points(Reef reef, Point start, Point end){
+        double angleStartToEnd = start.getAngleToAPoint(end);
+        double angleEndToStart = end.getAngleToAPoint(start);
+        Point[] formPoints = reef.getReelPointsForm();
+        for (int i = 0; i < formPoints.length; i++) {
+            double angleStartToFormPoint1 = start.getAngleToAPoint(formPoints[i]) - angleStartToEnd;
+            double angleStartToFormPoint2 = start.getAngleToAPoint(formPoints[(i+1)%formPoints.length]) - angleStartToEnd;
+            double angleEndToFormPoint1 = end.getAngleToAPoint(formPoints[i]) - angleEndToStart;
+            double angleEndToFormPoint2 = end.getAngleToAPoint(formPoints[(i+1)%formPoints.length]) - angleEndToStart;
+            if(isBetween(angleStartToFormPoint1,angleStartToFormPoint2,angleEndToFormPoint1,angleEndToFormPoint2)){
                 return true;
+            }
         }
+        return false;
+    }
+
+    private boolean isBetween(double angleStartToFormPoint1, double angleStartToFormPoint2, double angleEndToFormPoint1, double angleEndToFormPoint2){
+        if(     (Math.cos(angleStartToFormPoint1) > 0 || Math.cos(angleStartToFormPoint2) > 0) &&
+                (Math.sin(angleStartToFormPoint1) <= 0 && Math.sin(angleStartToFormPoint2) >= 0 ||
+                Math.sin(angleStartToFormPoint1) >= 0 && Math.sin(angleStartToFormPoint2) <= 0))
+            return Math.cos(angleEndToFormPoint1) >= 0 && Math.cos(angleEndToFormPoint2) >= 0;
+
         return false;
     }
 

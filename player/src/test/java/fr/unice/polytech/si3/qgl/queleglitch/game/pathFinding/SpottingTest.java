@@ -391,9 +391,9 @@ class SpottingTest {
     }
 
     @Test
-    void polygonReef_In0_0() {
-        Polygon polygon = new Polygon(0,new Point[]{new Point(1,0),new Point(-1,0.5),new Point(-1,-0.5)});
-        Reef reef = new Reef(new Position(0,0,0),polygon);
+    void polygonReef_InMinus2_0() {
+        Polygon polygon = new Polygon(0,new Point[]{new Point(2,3),new Point(-2,-1),new Point(-1,-2),new Point(3,2)});
+        Reef reef = new Reef(new Position(0,-1.5,0),polygon);
         assertTrue(spotting.isThisReefBetween2Points(reef, point0_0, point100_0));
     }
 

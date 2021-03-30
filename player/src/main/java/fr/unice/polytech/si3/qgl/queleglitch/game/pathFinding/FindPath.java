@@ -40,7 +40,7 @@ public class FindPath {
             endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, distanceToAdd);
             endPointToReach = spotting.findEndPointOfALine(pointToReach,startPoint, -distanceToAdd);
             if(!spotting.isReefsBetween2Points(startPoint, endStartPoint) && !spotting.isReefsBetween2Points(pointToReach, endPointToReach)){
-                distanceToAdd += 5;
+                distanceToAdd += 40;
                 endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, distanceToAdd);
                 endPointToReach = spotting.findEndPointOfALine(pointToReach,startPoint, -distanceToAdd);
                 return spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach);
@@ -48,7 +48,7 @@ public class FindPath {
             endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, -distanceToAdd);
             endPointToReach = spotting.findEndPointOfALine(pointToReach, startPoint, distanceToAdd);
             if(!spotting.isReefsBetween2Points(startPoint, endStartPoint) && !spotting.isReefsBetween2Points(pointToReach, endPointToReach)){
-                distanceToAdd += 5;
+                distanceToAdd += 40;
                 endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, -distanceToAdd);
                 endPointToReach = spotting.findEndPointOfALine(pointToReach, startPoint, distanceToAdd);
                 return spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach);

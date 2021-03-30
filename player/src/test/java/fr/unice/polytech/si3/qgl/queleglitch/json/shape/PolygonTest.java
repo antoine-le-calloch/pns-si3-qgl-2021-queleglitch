@@ -52,14 +52,14 @@ class PolygonTest {
     }
 
     @Test
-    void reel5Points_W2_H4_ort0_mid0_0(){
+    void reel5Points_ort0_mid0_0(){
         polygon = new Polygon(0, actual5Points);
 
         assertArrayEquals(actual5Points,polygon.getRealPoints(new Position(0,0,0)));
     }
 
     @Test
-    void reel5Points_W2_H4_ortPIOn2_mid0_0(){
+    void reel5Points_ortPIOn2_mid0_0(){
         polygon = new Polygon(Math.PI/2, actual5Points);
 
         Point[] reelPoints = new Point[]{new Point(1.8369701987210297E-16,3),new Point(-0.9999999999999999,2),new Point(-1.0000000000000002,-2),new Point(0.9999999999999999,-2),new Point(1.0000000000000002,2)};
@@ -67,7 +67,7 @@ class PolygonTest {
     }
 
     @Test
-    void reel5Points_W2_H4_ortMinusPIOn2_mid0_0(){
+    void reel5Points_ortMinusPIOn2_mid0_0(){
         polygon = new Polygon(-Math.PI/2, actual5Points);
 
         Point[] reelPoints = new Point[]{new Point(1.8369701987210297E-16,-3),new Point(1.0000000000000002,-2),new Point(0.9999999999999999,2),new Point(-1.0000000000000002,2),new Point(-0.9999999999999999,-2)};
@@ -75,10 +75,21 @@ class PolygonTest {
     }
 
     @Test
-    void reel5Points_W2_H4_ort0_midMinus1_Minus1(){
+    void reel5Points_ort0_midMinus1_Minus1(){
         polygon = new Polygon(0, actual5Points);
 
         Point[] reelPoints = new Point[]{new Point(2,-1),new Point(1,0),new Point(-3,0),new Point(-3,-2),new Point(1,-2)};
         assertArrayEquals(reelPoints,polygon.getRealPoints(new Position(-1,-1,0)));
     }
+
+    /*@Test
+    void reel5Points_ort0_In1172_1548(){
+        Point[] points = new Point[]{new Point(28.0,-748.0),new Point(568.0,-48.0),
+                new Point(68.0,712.0),new Point(-252.0,332.0),new Point(-412.0,-248.0)};
+        polygon = new Polygon(0, points);
+
+        Point[] points = new Point[]{new Point(28.0,-748.0),new Point(568.0,-48.0),
+                new Point(68.0,712.0),new Point(-252.0,332.0),new Point(-412.0,-248.0)};
+        assertArrayEquals(reelPoints,polygon.getRealPoints(new Position(1172.0,1548.0,0.0)));
+    }*/
 }
