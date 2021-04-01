@@ -21,15 +21,18 @@ public class Spotting {
         return false;
     }
 
-    public boolean isThisReefBetween2Points(Reef reef, Point start, Point end){
-        double angleStartToEnd = start.getAngleToAPoint(end);
-        double angleEndToStart = end.getAngleToAPoint(start);
+    public boolean isThisReefBetween2Points(Reef reef, Point pointStart, Point pointEnd){
+        double angleStartToEnd = pointStart.getAngleToAPoint(pointEnd);
+        double angleEndToStart = pointEnd.getAngleToAPoint(pointStart);
         Point[] formPoints = reef.getReelPointsForm();
-        for (int i = 0; i < formPoints.length; i++) {
-            double angleStartToFormPoint1 = start.getAngleToAPoint(formPoints[i]) - angleStartToEnd;
-            double angleStartToFormPoint2 = start.getAngleToAPoint(formPoints[(i+1)%formPoints.length]) - angleStartToEnd;
-            double angleEndToFormPoint1 = end.getAngleToAPoint(formPoints[i]) - angleEndToStart;
-            double angleEndToFormPoint2 = end.getAngleToAPoint(formPoints[(i+1)%formPoints.length]) - angleEndToStart;
+        int NB_OF_POINTS= formPoints.length;
+        int FIRST_POINT_OF_THE_REEF=0;
+        int SHIFT_NEXT_POINT=1;
+        for (int actualPoint = FIRST_POINT_OF_THE_REEF; actualPoint < NB_OF_POINTS; actualPoint++) {
+            double angleStartToFormPoint1 = pointStart.getAngleToAPoint(formPoints[actualPoint]) - angleStartToEnd;
+            double angleStartToFormPoint2 = pointStart.getAngleToAPoint(formPoints[(actualPoint+SHIFT_NEXT_POINT)%NB_OF_POINTS]) - angleStartToEnd;
+            double angleEndToFormPoint1 = pointEnd.getAngleToAPoint(formPoints[actualPoint]) - angleEndToStart;
+            double angleEndToFormPoint2 = pointEnd.getAngleToAPoint(formPoints[(actualPoint+SHIFT_NEXT_POINT)%NB_OF_POINTS]) - angleEndToStart;
             if(isLineBetween(angleStartToFormPoint1,angleStartToFormPoint2,angleEndToFormPoint1,angleEndToFormPoint2)){
                 return true;
             }
@@ -54,25 +57,19 @@ public class Spotting {
 
     public Point findLineIntersection(Point line1Start, Point line1End, Point line2Start, Point line2End){
         if(line1Start.getX() == line1End.getX() && line2Start.getX() != line2End.getX()) {
-            double aLine2 = (line2End.getY() - line2Start.getY()) / (line2End.getX() - line2Start.getX());
-            double bLine2 = line2Start.getY() - aLine2*line2Start.getX();
-            return new Point(line1Start.getX(), aLine2*line1Start.getX()+bLine2);
+            Line line2= new Line(line2Start,line2End);
+            return new Point(line1Start.getX(), line2.coefficient*line1Start.getX()+line2.orderedAtTheOrigin);
         }
         else if(line1Start.getX() != line1End.getX() && line2Start.getX() == line2End.getX()) {
-            double aLine1 = (line1End.getY() - line1Start.getY()) / (line1End.getX() - line1Start.getX());
-            double bLine1 = line1Start.getY() - aLine1*line1Start.getX();
-            return new Point(line2Start.getX(), aLine1*line2Start.getX()+bLine1);
+            Line line1= new Line(line1Start,line1End);
+            return new Point(line2Start.getX(), line1.coefficient*line2Start.getX()+line1.orderedAtTheOrigin);
         }
-
-        double aLine1 = (line1End.getY() - line1Start.getY()) / (line1End.getX() - line1Start.getX());
-        double bLine1 = line1Start.getY() - aLine1*line1Start.getX();
-
-        double aLine2 = (line2End.getY() - line2Start.getY()) / (line2End.getX() - line2Start.getX());
-        double bLine2 = line2Start.getY() - aLine2*line2Start.getX();
-
-        double x = (bLine2-bLine1)/(aLine1 - aLine2);
-        double y = aLine1*x + bLine1;
-
+        Line line1= new Line(line1Start,line1End);
+        Line line2= new Line(line2Start,line2End);
+        double x = (line2.orderedAtTheOrigin-line1.orderedAtTheOrigin)/(line1.coefficient - line2.coefficient);
+        double y = line1.coefficient*x + line1.orderedAtTheOrigin;
         return new Point(x,y);
     }
+
+
 }
