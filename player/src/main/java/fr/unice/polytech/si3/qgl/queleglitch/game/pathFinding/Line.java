@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Oar;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
 import java.util.Objects;

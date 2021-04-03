@@ -27,7 +27,7 @@ class FindPathTest {
 
     @Test
     void createPath_NoReef(){
-        findPath = new FindPath(new Point(0,0),new ArrayList<>());
+        findPath = new FindPath(4, new Point(0,0),new ArrayList<>());
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
         assertNull(regattaGoal.getPathPoint());
@@ -35,55 +35,64 @@ class FindPathTest {
 
     @Test
     void createPath_1Reef_notInFront(){
-        Reef reef = new Reef(new Position(0,1000,0), new Rectangle(2,4,0));
-        findPath = new FindPath(new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
+        Reef reef = new Reef(new Position(0,1000,0), new Rectangle(8,4,0));
+        findPath = new FindPath(4, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
         assertNull(regattaGoal.getPathPoint());
     }
 
     @Test
-    void createPath_1Reef_InMiddleFront_W2_H20(){
-        Reef reef = new Reef(new Position(500,0,0), new Rectangle(2,20,Math.PI/2));
-        findPath = new FindPath(new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
+    void createPath_1Reef_InMiddleFront_W8_H0_ShipWidth8(){
+        Reef reef = new Reef(new Position(500,0,0), new Rectangle(8,0,0));
+        findPath = new FindPath(8, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,32.5),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,12.5),regattaGoal.getPathPoint());
     }
 
     @Test
-    void createPath_1Reef_InMiddleFront_W1_H20(){
-        Reef reef = new Reef(new Position(500,0,0), new Rectangle(1,20,Math.PI/2));
-        findPath = new FindPath(new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
+    void createPath_1Reef_InMiddleFront_W8_H0(){
+        Reef reef = new Reef(new Position(500,0,0), new Rectangle(8,0,0));
+        findPath = new FindPath(4, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,32.5),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,10),regattaGoal.getPathPoint());
     }
 
     @Test
-    void createPath_1Reef_InUpFront_W1_H20(){
-        Reef reef = new Reef(new Position(500,5,0), new Rectangle(1,20,Math.PI/2));
-        findPath = new FindPath(new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
+    void createPath_1Reef_InMiddleFront_W8_H20(){
+        Reef reef = new Reef(new Position(500,0,0), new Rectangle(8,20,Math.PI/2));
+        findPath = new FindPath(4, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,-27.5),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,15),regattaGoal.getPathPoint());
     }
 
     @Test
-    void createPath_1Reef_InDownFront_W1_H20(){
-        Reef reef = new Reef(new Position(500,-5,0), new Rectangle(1,20,Math.PI/2));
-        findPath = new FindPath(new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
+    void createPath_1Reef_InUpFront_W8_H20(){
+        Reef reef = new Reef(new Position(500,5,0), new Rectangle(8,20,Math.PI/2));
+        findPath = new FindPath(4, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,27.5),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,-10),regattaGoal.getPathPoint());
+    }
+
+    @Test
+    void createPath_1Reef_InDownFront_W8_H20(){
+        Reef reef = new Reef(new Position(500,-5,0), new Rectangle(8,20,Math.PI/2));
+        findPath = new FindPath(4, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
+        assertNull(regattaGoal.getPathPoint());
+        findPath.createPath(regattaGoal);
+        assertEquals(new Point(500,10),regattaGoal.getPathPoint());
     }
 
     ///////////////////////////////////////////   getANewValidStep()  ///////////////////////////////////////////
 
     @Test
-    void newValidStep_1Reef_InMiddleFront_W1_H20(){
-        Reef reef = new Reef(new Position(500,0,0), new Rectangle(1,20,Math.PI/2));
-        findPath = new FindPath(null, Arrays.asList(new Reef[]{reef}.clone()));
-        assertEquals(new Point(500,32.5),findPath.getANewValidStep(new Point(0,0),new Point(1000,0)));
+    void newValidStep_1Reef_InMiddleFront_W8_H20(){
+        Reef reef = new Reef(new Position(500,0,0), new Rectangle(8,20,Math.PI/2));
+        findPath = new FindPath(4, null, Arrays.asList(new Reef[]{reef}.clone()));
+        assertEquals(new Point(500,15),findPath.getANewValidStep(new Point(0,0),new Point(1000,0)));
     }
 }

@@ -51,7 +51,7 @@ public class InformationGame {
     }
 
     public void addPath() {
-        FindPath findPath = new FindPath(ship.getPosition().toPoint(), getVisibleReef());
+        FindPath findPath = new FindPath(ship.getDeck().getWidth(), ship.getPosition().toPoint(), getVisibleReef());
         if(visibleEntities != null && visibleEntities.length > 0)
             findPath.createPath(getRegattaGoal());
     }
