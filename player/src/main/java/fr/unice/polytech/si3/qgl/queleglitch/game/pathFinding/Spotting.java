@@ -70,6 +70,4 @@ public class Spotting {
         double y = line1.coefficient*x + line1.orderedAtTheOrigin;
         return new Point(x,y);
     }
-
-
 }

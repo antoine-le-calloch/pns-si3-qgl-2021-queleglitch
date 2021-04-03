@@ -48,7 +48,7 @@ class FindPathTest {
         findPath = new FindPath(new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,162.5),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,32.5),regattaGoal.getPathPoint());
     }
 
     @Test
@@ -57,7 +57,7 @@ class FindPathTest {
         findPath = new FindPath(new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,162.5),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,32.5),regattaGoal.getPathPoint());
     }
 
     @Test
@@ -66,7 +66,7 @@ class FindPathTest {
         findPath = new FindPath(new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,-157.5),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,-27.5),regattaGoal.getPathPoint());
     }
 
     @Test
@@ -75,7 +75,7 @@ class FindPathTest {
         findPath = new FindPath(new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,157.5),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,27.5),regattaGoal.getPathPoint());
     }
 
     ///////////////////////////////////////////   getANewValidStep()  ///////////////////////////////////////////
@@ -84,6 +84,6 @@ class FindPathTest {
     void newValidStep_1Reef_InMiddleFront_W1_H20(){
         Reef reef = new Reef(new Position(500,0,0), new Rectangle(1,20,Math.PI/2));
         findPath = new FindPath(null, Arrays.asList(new Reef[]{reef}.clone()));
-        assertEquals(new Point(500,162.5),findPath.getANewValidStep(new Point(0,0),new Point(1000,0)));
+        assertEquals(new Point(500,32.5),findPath.getANewValidStep(new Point(0,0),new Point(1000,0)));
     }
 }
