@@ -1,5 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 
+import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.Geometry;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
@@ -16,12 +17,22 @@ public class Spotting {
     }
 
     public boolean isReefsOnTheShipWay(int shipWidth, Position shipPosition, Position positionToReach){
-        Rectangle widthTakenByShip = new Rectangle(shipWidth*2,0, shipPosition.getAngleToAPosition(positionToReach));
+        Rectangle widthTakenByShip = new Rectangle(shipWidth+60,0, shipPosition.getAngleToAPosition(positionToReach));
         Point topShipPoint = widthTakenByShip.getRealPoints(shipPosition)[0];
         Point downShipPoint = widthTakenByShip.getRealPoints(shipPosition)[2];
         Point topCheckpointPoint = widthTakenByShip.getRealPoints(positionToReach)[0];
         Point downCheckpointPoint = widthTakenByShip.getRealPoints(positionToReach)[2];
-        return !isReefsBetween2Points(topShipPoint, topCheckpointPoint) && !isReefsBetween2Points(downShipPoint, downCheckpointPoint) && !isReefsBetween2Points(shipPosition.toPoint(), positionToReach.toPoint());
+        if(isReefsInARectangle(new Point[]{topCheckpointPoint,topShipPoint,downShipPoint,downCheckpointPoint}))
+            return true;
+        return isReefsBetween2Points(topShipPoint, topCheckpointPoint) || isReefsBetween2Points(downShipPoint, downCheckpointPoint) || isReefsBetween2Points(shipPosition.toPoint(), positionToReach.toPoint());
+    }
+
+    public boolean isReefsInARectangle(Point[] rectanglePoint){
+        for (Reef reef : visibleReef) {
+            if(Geometry.isThisPointInARectangle(reef.getPosition().toPoint(),rectanglePoint))
+                return true;
+        }
+        return false;
     }
 
     public boolean isReefsBetween2Points(Point point1, Point point2){

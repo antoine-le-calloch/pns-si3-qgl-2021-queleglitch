@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
 public class Geometry {
 
@@ -47,5 +48,13 @@ public class Geometry {
             angle = (2*Math.PI)+angle;
         }
         return angle;
+    }
+
+    public static boolean isThisPointInARectangle(Point point, Point[] rectanglePoints){
+        double rectangleAngle = rectanglePoints[1].getAngleToAPoint(rectanglePoints[0]);
+        return  point.getAngleToAPoint(rectanglePoints[0])-rectangleAngle >= 0          && point.getAngleToAPoint(rectanglePoints[0])-rectangleAngle <= Math.PI/2  &&
+                point.getAngleToAPoint(rectanglePoints[1])-rectangleAngle >= Math.PI/2  && point.getAngleToAPoint(rectanglePoints[1])-rectangleAngle <= Math.PI    &&
+                point.getAngleToAPoint(rectanglePoints[2])-rectangleAngle >= -Math.PI   && point.getAngleToAPoint(rectanglePoints[2])-rectangleAngle <= -Math.PI/2 &&
+                point.getAngleToAPoint(rectanglePoints[3])-rectangleAngle >= -Math.PI/2 && point.getAngleToAPoint(rectanglePoints[3])-rectangleAngle <= 0;
     }
 }

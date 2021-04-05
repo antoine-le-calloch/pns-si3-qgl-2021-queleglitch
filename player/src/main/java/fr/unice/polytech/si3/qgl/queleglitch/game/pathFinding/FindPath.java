@@ -18,7 +18,7 @@ public class FindPath {
     }
 
     public void createPath(RegattaGoal regattaGoal){
-        if(spotting.isReefsBetween2Points(shipPoint, regattaGoal.getPositionActualOptiCheckpoint().toPoint())) {
+        if(spotting.isReefsOnTheShipWay(shipWight, shipPoint.toPosition(), regattaGoal.getPositionActualOptiCheckpoint())) {
             Point pathPoint = getANewValidStep(shipPoint, regattaGoal.getPositionActualOptiCheckpoint().toPoint());
             regattaGoal.setPathPoint(pathPoint);
         }
@@ -34,13 +34,13 @@ public class FindPath {
             distanceToAdd += 5;
             endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, distanceToAdd);
             endPointToReach = spotting.findEndPointOfALine(pointToReach,startPoint, -distanceToAdd);
-            if(spotting.isReefsOnTheShipWay(shipWight, startPoint.toPosition(), endStartPoint.toPosition()) && spotting.isReefsOnTheShipWay(shipWight, pointToReach.toPosition(), endPointToReach.toPosition())){
+            if(!spotting.isReefsOnTheShipWay(shipWight, startPoint.toPosition(), endStartPoint.toPosition()) && !spotting.isReefsOnTheShipWay(shipWight, pointToReach.toPosition(), endPointToReach.toPosition())){
                 return spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach);
             }
 
             endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, -distanceToAdd);
             endPointToReach = spotting.findEndPointOfALine(pointToReach, startPoint, distanceToAdd);
-            if(spotting.isReefsOnTheShipWay(shipWight, startPoint.toPosition(), endStartPoint.toPosition()) && spotting.isReefsOnTheShipWay(shipWight, pointToReach.toPosition(), endPointToReach.toPosition())){
+            if(!spotting.isReefsOnTheShipWay(shipWight, startPoint.toPosition(), endStartPoint.toPosition()) && !spotting.isReefsOnTheShipWay(shipWight, pointToReach.toPosition(), endPointToReach.toPosition())){
                 return spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach);
             }
         }

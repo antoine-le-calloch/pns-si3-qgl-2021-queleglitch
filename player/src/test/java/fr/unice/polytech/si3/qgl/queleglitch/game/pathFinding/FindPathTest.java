@@ -48,7 +48,7 @@ class FindPathTest {
         findPath = new FindPath(8, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,12.5),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,40.0),regattaGoal.getPathPoint());
     }
 
     @Test
@@ -57,7 +57,7 @@ class FindPathTest {
         findPath = new FindPath(4, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,10),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,37.5),regattaGoal.getPathPoint());
     }
 
     @Test
@@ -66,7 +66,7 @@ class FindPathTest {
         findPath = new FindPath(4, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,15),regattaGoal.getPathPoint());
+        assertEquals(new Point(499.99999999999994,42.5),regattaGoal.getPathPoint());
     }
 
     @Test
@@ -75,7 +75,7 @@ class FindPathTest {
         findPath = new FindPath(4, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,-10),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,-37.5),regattaGoal.getPathPoint());
     }
 
     @Test
@@ -84,7 +84,7 @@ class FindPathTest {
         findPath = new FindPath(4, new Point(0,0), Arrays.asList(new Reef[]{reef}.clone()));
         assertNull(regattaGoal.getPathPoint());
         findPath.createPath(regattaGoal);
-        assertEquals(new Point(500,10),regattaGoal.getPathPoint());
+        assertEquals(new Point(500,37.5),regattaGoal.getPathPoint());
     }
 
     ///////////////////////////////////////////   getANewValidStep()  ///////////////////////////////////////////
@@ -93,6 +93,6 @@ class FindPathTest {
     void newValidStep_1Reef_InMiddleFront_W8_H20(){
         Reef reef = new Reef(new Position(500,0,0), new Rectangle(8,20,Math.PI/2));
         findPath = new FindPath(4, null, Arrays.asList(new Reef[]{reef}.clone()));
-        assertEquals(new Point(500,15),findPath.getANewValidStep(new Point(0,0),new Point(1000,0)));
+        assertEquals(new Point(499.99999999999994,42.5),findPath.getANewValidStep(new Point(0,0),new Point(1000,0)));
     }
 }

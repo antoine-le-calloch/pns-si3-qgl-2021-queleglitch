@@ -8,6 +8,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +26,217 @@ class SpottingTest {
         point0_0 = new Point(0,0);
         point100_0 = new Point(100,0);
         point100_100 = new Point(100,100);
+    }
+
+    ///////////////////////////////////////////   isReefsOnTheShipWay()  ///////////////////////////////////////////
+
+    @Test
+    void manyReefOnShipWay_50_2_And_50_Minus2() {
+        Rectangle rectangle1 = new Rectangle(6,4,0);
+        Rectangle rectangle2 = new Rectangle(6,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,4,0),rectangle1),new Reef(new Position(50,-4,0),rectangle2)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void manyReefOnShipWay_50_1_And_50_Minus2() {
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Rectangle rectangle2 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,1,0),rectangle1),new Reef(new Position(50,-2,0),rectangle2)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void manyReefOnShipWay_50_2_And_50_Minus1() {
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,2,0),rectangle1),new Reef(new Position(50,-1,0),rectangle1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void manyReefOnShipWay_rectangle_50_1_And_50_Minus1() {
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,1,0),rectangle1),new Reef(new Position(50,-1,0),rectangle1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void NoReefOnShipWay() {
+        spotting = new Spotting(new ArrayList<>());
+        assertFalse(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_100.toPosition()));
+    }
+
+    @Test
+    void OneReefNotOnShipWay_50_6() {
+        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,36,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertFalse(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void OneReefOnShipWay_50_5() {
+        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,5,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void OneReefNotOnShipWay_50_Minus6() {
+        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,-36,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertFalse(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void OneReefOnShipWay_50_Minus5() {
+        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,5,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void OneReefOnShipWayButBetweenTheWayLine_50_2() {
+        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,32,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void OneReefOnShipWayButBetweenTheWayLine_50_Minus2() {
+        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,-2,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void OneReefOnShipWay_50_0() {
+        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,5,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
+    }
+
+    @Test
+    void OneReefNotOnShipWay_50_57() {
+        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(-1,1),new Point(-1,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,57,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertFalse(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_100.toPosition()));
+    }
+
+    @Test
+    void OneReefOnShipWay_50_50() {
+        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(-1,1),new Point(-1,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,50,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_100.toPosition()));
+    }
+
+    ///////////////////////////////////////////   isReefsBetween2Points()  ///////////////////////////////////////////
+
+    @Test
+    void manyReef_50_2_And_50_Minus2() {
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Rectangle rectangle2 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,2,0),rectangle1),new Reef(new Position(50,-2,0),rectangle2)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertFalse(spotting.isReefsBetween2Points(point0_0, point100_0));
+    }
+
+    @Test
+    void manyReef_50_1_And_50_Minus2() {
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Rectangle rectangle2 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,1,0),rectangle1),new Reef(new Position(50,-2,0),rectangle2)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_0));
+    }
+
+    @Test
+    void manyReef_50_2_And_50_Minus1() {
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,2,0),rectangle1),new Reef(new Position(50,-1,0),rectangle1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_0));
+    }
+
+    @Test
+    void manyReef_rectangle_50_1_And_50_Minus1() {
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,1,0),rectangle1),new Reef(new Position(50,-1,0),rectangle1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_0));
+    }
+
+    @Test
+    void manyReef_polygon_50_52_And_52_50() {
+        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-1,0.5),new Point(0,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,52,0),polygon1),new Reef(new Position(52,50,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertFalse(spotting.isReefsBetween2Points(point0_0, point100_100));
+    }
+
+    @Test
+    void manyReef_polygon_50_51_And_52_50() {
+        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
+        Reef[] reef = new Reef[]{new Reef(new Position(50,51,0),polygon1),new Reef(new Position(52,50,0),polygon1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_100));
+    }
+
+    @Test
+    void manyReef_polygonAndRectangle_50_52_And_52_50_And_50_50() {
+        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,52,0),polygon1),new Reef(new Position(52,50,0),polygon1),new Reef(new Position(50,50,0),rectangle1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_100));
+    }
+
+    @Test
+    void manyReef_polygonAndRectangle_50_52_And_51_50_And_52_50() {
+        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,52,0),polygon1),new Reef(new Position(51,50,0),polygon1),new Reef(new Position(52,50,0),rectangle1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_100));
+    }
+
+    @Test
+    void manyReef_polygonAndRectangle_50_51_And_52_50_And_52_50() {
+        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,51,0),polygon1),new Reef(new Position(52,50,0),polygon1),new Reef(new Position(52,50,0),rectangle1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_100));
+    }
+
+    @Test
+    void manyReef_polygonAndRectangle_50_51_And_51_50_And_51_50() {
+        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,51,0),polygon1),new Reef(new Position(51,50,0),polygon1),new Reef(new Position(51,50,0),rectangle1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_100));
+    }
+
+    @Test
+    void manyReef_polygonAndRectangle_50_52_And_52_50_And_48_50() {
+        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
+        Rectangle rectangle1 = new Rectangle(2,4,0);
+        Reef[] reef = new Reef[]{new Reef(new Position(50,52,0),polygon1),new Reef(new Position(52,50,0),polygon1),new Reef(new Position(46,50,0),rectangle1)};
+        spotting = new Spotting(Arrays.asList(reef.clone()));
+        assertFalse(spotting.isReefsBetween2Points(point0_0, point100_100));
     }
 
     ///////////////////////////////////////////   isThisReefBetween2Points()  ///////////////////////////////////////////
@@ -416,103 +628,6 @@ class SpottingTest {
         Polygon polygon = new Polygon(0,new Point[]{new Point(1,0),new Point(-1,1),new Point(-1,-1)});
         Reef reef = new Reef(new Position(2,2,0),polygon);
         assertFalse(spotting.isThisReefBetween2Points(reef, point0_0, point100_0));
-    }
-
-    ///////////////////////////////////////////   isReefsBetween2Points()  ///////////////////////////////////////////
-
-    @Test
-    void manyReef_50_2_And_50_Minus2() {
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Rectangle rectangle2 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,2,0),rectangle1),new Reef(new Position(50,-2,0),rectangle2)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertFalse(spotting.isReefsBetween2Points(point0_0, point100_0));
-    }
-
-    @Test
-    void manyReef_50_1_And_50_Minus2() {
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Rectangle rectangle2 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,1,0),rectangle1),new Reef(new Position(50,-2,0),rectangle2)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_0));
-    }
-
-    @Test
-    void manyReef_50_2_And_50_Minus1() {
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,2,0),rectangle1),new Reef(new Position(50,-1,0),rectangle1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_0));
-    }
-
-    @Test
-    void manyReef_rectangle_50_1_And_50_Minus1() {
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,1,0),rectangle1),new Reef(new Position(50,-1,0),rectangle1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_0));
-    }
-
-    @Test
-    void manyReef_polygon_50_52_And_52_50() {
-        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-1,0.5),new Point(0,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,52,0),polygon1),new Reef(new Position(52,50,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertFalse(spotting.isReefsBetween2Points(point0_0, point100_100));
-    }
-
-    @Test
-    void manyReef_polygon_50_51_And_52_50() {
-        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,51,0),polygon1),new Reef(new Position(52,50,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_100));
-    }
-
-    @Test
-    void manyReef_polygonAndRectangle_50_52_And_52_50_And_50_50() {
-        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,52,0),polygon1),new Reef(new Position(52,50,0),polygon1),new Reef(new Position(50,50,0),rectangle1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_100));
-    }
-
-    @Test
-    void manyReef_polygonAndRectangle_50_52_And_51_50_And_52_50() {
-        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,52,0),polygon1),new Reef(new Position(51,50,0),polygon1),new Reef(new Position(52,50,0),rectangle1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_100));
-    }
-
-    @Test
-    void manyReef_polygonAndRectangle_50_51_And_52_50_And_52_50() {
-        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,51,0),polygon1),new Reef(new Position(52,50,0),polygon1),new Reef(new Position(52,50,0),rectangle1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_100));
-    }
-
-    @Test
-    void manyReef_polygonAndRectangle_50_51_And_51_50_And_51_50() {
-        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,51,0),polygon1),new Reef(new Position(51,50,0),polygon1),new Reef(new Position(51,50,0),rectangle1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsBetween2Points(point0_0, point100_100));
-    }
-
-    @Test
-    void manyReef_polygonAndRectangle_50_52_And_52_50_And_48_50() {
-        Polygon polygon1 = new Polygon(Math.PI/8,new Point[]{new Point(1,0),new Point(-0,0.5),new Point(0,-1)});
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,52,0),polygon1),new Reef(new Position(52,50,0),polygon1),new Reef(new Position(46,50,0),rectangle1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertFalse(spotting.isReefsBetween2Points(point0_0, point100_100));
     }
 
     ///////////////////////////////////////////   findLineIntersection()  ///////////////////////////////////////////
