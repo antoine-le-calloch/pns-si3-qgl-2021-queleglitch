@@ -14,7 +14,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SpottingTest {
-
+    
     Spotting spotting;
     Point point0_0;
     Point point100_0;
