@@ -13,8 +13,8 @@ class ToolsToUseTest {
 
     @BeforeEach
     void setUp() {
-        toolsToUse0 = new ToolsToUse(0, SailAction.DO_NOTHING, new NbOarsUsed(0,0));
-        toolsToUse1 = new ToolsToUse(1, SailAction.LIFT, new NbOarsUsed(1,1));
+        toolsToUse0 = new ToolsToUse(0, SailAction.DO_NOTHING, new NbOarsUsed(0,0), false);
+        toolsToUse1 = new ToolsToUse(1, SailAction.LIFT, new NbOarsUsed(1,1), false);
     }
 
     ///////////////////////////////////////////////// equals() ////////////////////////////////////////////
@@ -26,12 +26,12 @@ class ToolsToUseTest {
 
     @Test
     void equals_All0(){
-        assertEquals(toolsToUse0, new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(0,0)));
+        assertEquals(toolsToUse0, new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(0,0), false));
     }
 
     @Test
     void equals_All1(){
-        assertEquals(toolsToUse1, new ToolsToUse(1,SailAction.LIFT,new NbOarsUsed(1,1)));
+        assertEquals(toolsToUse1, new ToolsToUse(1,SailAction.LIFT,new NbOarsUsed(1,1), false));
     }
 
     @Test

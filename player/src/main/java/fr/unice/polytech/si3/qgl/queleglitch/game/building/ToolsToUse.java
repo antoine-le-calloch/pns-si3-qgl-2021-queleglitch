@@ -9,11 +9,13 @@ public class ToolsToUse {
     private final double rudderAngle;
     private final SailAction actionOnSail;
     private final NbOarsUsed nbOarsUsed;
+    private final boolean isWatchNecessary;
 
-    public ToolsToUse(double rudderAngle, SailAction actionOnSail, NbOarsUsed nbOarsUsed){
+    public ToolsToUse(double rudderAngle, SailAction actionOnSail, NbOarsUsed nbOarsUsed, boolean isWatchNecessary){
         this.rudderAngle = rudderAngle;
         this.actionOnSail = actionOnSail;
         this.nbOarsUsed = nbOarsUsed;
+        this.isWatchNecessary = isWatchNecessary;
     }
 
     public double getRudderAngle() {
@@ -28,12 +30,14 @@ public class ToolsToUse {
         return nbOarsUsed;
     }
 
+    public boolean getIsWatchNecessary() { return isWatchNecessary;}
+
     /**
      * <p>Override of toString method, allow to print a different string to give the Sailor's information</p>
      */
     @Override
     public String toString(){
-        return "Angle du rudder : " + this.rudderAngle + ", nb Sails : " + this.actionOnSail + ", " + this.nbOarsUsed.toString();
+        return "Angle du rudder : " + this.rudderAngle + ", nb Sails : " + this.actionOnSail + ", " + this.nbOarsUsed.toString() + ", Vigie ? : " + this.isWatchNecessary;
     }
 
     /**
@@ -44,7 +48,7 @@ public class ToolsToUse {
         if (this == obj) return true;
         if (!(obj instanceof ToolsToUse)) return false;
         ToolsToUse toolsToUse = (ToolsToUse) obj;
-        return this.rudderAngle == toolsToUse.rudderAngle && this.actionOnSail == toolsToUse.actionOnSail && this.nbOarsUsed.equals(toolsToUse.nbOarsUsed);
+        return this.rudderAngle == toolsToUse.rudderAngle && this.actionOnSail == toolsToUse.actionOnSail && this.nbOarsUsed.equals(toolsToUse.nbOarsUsed) && this.isWatchNecessary == toolsToUse.isWatchNecessary;
     }
 
     @Override

@@ -52,7 +52,7 @@ class RegattaResolverTest {
         Mockito.when(mockShip.isSailsOpen()).thenReturn(false);
         positionCheckpointOpti = new Position(1100, 0, 0);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LIFT,new NbOarsUsed(4,4));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LIFT,new NbOarsUsed(4,4), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -61,7 +61,7 @@ class RegattaResolverTest {
         Mockito.when(mockShip.isSailsOpen()).thenReturn(true);
         positionCheckpointOpti = new Position(1100, 0, 0);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -70,7 +70,7 @@ class RegattaResolverTest {
         Mockito.when(mockShip.isSailsOpen()).thenReturn(false);
         positionCheckpointOpti = new Position(1000, 1000, 0);
 
-        ToolsToUse toolsToUse = new ToolsToUse(Math.PI/4,SailAction.LIFT,new NbOarsUsed(4,4));
+        ToolsToUse toolsToUse = new ToolsToUse(Math.PI/4,SailAction.LIFT,new NbOarsUsed(4,4), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -79,7 +79,7 @@ class RegattaResolverTest {
         Mockito.when(mockShip.isSailsOpen()).thenReturn(true);
         positionCheckpointOpti = new Position(1000, 1000, 0);
 
-        ToolsToUse toolsToUse = new ToolsToUse(Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(4,4));
+        ToolsToUse toolsToUse = new ToolsToUse(Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(4,4), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -90,7 +90,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(126, 0, 0), new Circle(40));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5), false);
         assertEquals(toolsToUse, regattaResolverNotUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -101,7 +101,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(125, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(4,4));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(4,4), false);
         assertEquals(toolsToUse, regattaResolverNotUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -112,7 +112,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(113, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(4,4));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(4,4), false);
         assertEquals(toolsToUse, regattaResolverNotUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -123,7 +123,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(111, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(3,3));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(3,3), false);
         assertEquals(toolsToUse, regattaResolverNotUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -134,7 +134,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(78, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(2,2));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(2,2), false);
         assertEquals(toolsToUse, regattaResolverNotUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -145,7 +145,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(45, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(1,1));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(1,1), false);
         assertEquals(toolsToUse, regattaResolverNotUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -156,7 +156,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(20, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(1,1));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(1,1), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -167,7 +167,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(52, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(2,2));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(2,2), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -178,7 +178,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(84, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(3,3));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(3,3), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -189,7 +189,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(115, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(4,4));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(4,4), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -200,7 +200,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(148, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(5,5));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(5,5), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -211,7 +211,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(200, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(5,5));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.LOWER,new NbOarsUsed(5,5), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -222,7 +222,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(720, 0, 0), new Circle(20));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5), false);
         assertEquals(toolsToUse, regattaResolverUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -243,7 +243,7 @@ class RegattaResolverTest {
         checkpoint = new Checkpoint(new Position(15, 0, 0), new Circle(5));
         Mockito.when(mockRegattaGoal.getActualCheckpoint()).thenReturn(checkpoint);
 
-        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5));
+        ToolsToUse toolsToUse = new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5), false);
         assertEquals(toolsToUse, regattaResolverNotUseWind.resolveToolsToUse(positionCheckpointOpti));
     }
 
@@ -283,32 +283,32 @@ class RegattaResolverTest {
         @Test
         void checkPointInFrontOfTheCheckpoint(){
             position=new Position(2000,0,0.0);
-            assertEquals(new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5)),regattaResolver.resolveToolsToUseForPathPoint(position));
+            assertEquals(new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(5,5), false),regattaResolver.resolveToolsToUseForPathPoint(position));
         }
 
         @Test
         void checkPointAtLeftAngleToCorrectMinusThan90(){
             position=new Position(100,100,0.0);
-            assertEquals(new ToolsToUse(Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(4,4)),regattaResolver.resolveToolsToUseForPathPoint(position));
+            assertEquals(new ToolsToUse(Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(4,4), false),regattaResolver.resolveToolsToUseForPathPoint(position));
         }
         @Test
         void checkPointAtRightAngleToCorrectMinusThan90(){
             position=new Position(100,-100,0.0);
-            assertEquals(new ToolsToUse(-Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(4,4)),regattaResolver.resolveToolsToUseForPathPoint(position));
+            assertEquals(new ToolsToUse(-Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(4,4), false),regattaResolver.resolveToolsToUseForPathPoint(position));
         }
 
 
         @Test
         void checkPointAtLeftAngleToCorrectGreaterThan90(){
             position=new Position(-100,4,0.0);
-            assertEquals(new ToolsToUse(Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(0,5)),regattaResolver.resolveToolsToUseForPathPoint(position));
+            assertEquals(new ToolsToUse(Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(0,5), false),regattaResolver.resolveToolsToUseForPathPoint(position));
         }
 
 
         @Test
         void checkPointAtRightAngleToCorrectGreaterThan90(){
             position=new Position(-100,-4,0.0);
-            assertEquals(new ToolsToUse(-Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(5,0)),regattaResolver.resolveToolsToUseForPathPoint(position));
+            assertEquals(new ToolsToUse(-Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(5,0), false),regattaResolver.resolveToolsToUseForPathPoint(position));
         }
 
 
