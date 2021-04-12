@@ -94,6 +94,14 @@ public class Ship {
         return rudder;
     }
 
+    public Watch getWatch(){
+        Watch watch = null;
+        for (Entities entitie : entities)
+            if(entitie instanceof Watch)
+                watch = (Watch) entitie;
+        return watch;
+    }
+
     /**
      * <p>Getter.</p>
      */

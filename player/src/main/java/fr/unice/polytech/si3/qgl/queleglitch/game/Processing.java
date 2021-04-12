@@ -36,7 +36,7 @@ public class Processing {
             if (toolsToUse == null)
                 toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getActualCheckpoint().getPosition());
             if (toolsToUse == null)
-                toolsToUse = new ToolsToUse(0, SailAction.DO_NOTHING, new NbOarsUsed(1, 1));
+                toolsToUse = new ToolsToUse(0, SailAction.DO_NOTHING, new NbOarsUsed(1, 1),false);
         }
         else
             toolsToUse = regattaResolver.resolveToolsToUseForPathPoint(informationGame.getRegattaGoal().getPathPoint().toPosition());

@@ -6,6 +6,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.OarStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.RudderStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.SailStrategy;
+import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.WatchStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 
@@ -17,6 +18,7 @@ public class RegattaResolver {
     private final SailStrategy SailStrategy;
     private final InformationGame informationGame;
     private final ShipMovementResolver shipMovementResolver;
+    private final WatchStrategy watchStrategy;
 
     public RegattaResolver(InformationGame informationGame) {
         this.informationGame = informationGame;
@@ -24,6 +26,7 @@ public class RegattaResolver {
         oarStrategy = new OarStrategy(informationGame.getNbSailors(), informationGame.getShip().getNbOars());
         SailStrategy = new SailStrategy(informationGame.getShip(), informationGame.getWind());
         rudderStrategy = new RudderStrategy();
+        watchStrategy = new WatchStrategy();
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
     }
 
@@ -32,6 +35,7 @@ public class RegattaResolver {
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
         SailAction actionOnSails = SailStrategy.getSailsAction();
         NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect));
+        boolean isWatchnNecessary = watchStrategy.getIsWatchNecessary();
 
         int maxLeftOarUse = nbOarsUsed.onLeft();
         int maxRightOarUse = nbOarsUsed.onRight();
@@ -57,7 +61,7 @@ public class RegattaResolver {
                 }
             }
         }
-        return new ToolsToUse(rudderAngle,actionOnSails,nbOarsUsed);
+        return new ToolsToUse(rudderAngle,actionOnSails,nbOarsUsed,isWatchnNecessary);
     }
 
     public ToolsToUse resolveToolsToUseForPathPoint(Position positionCheckpointToReach) {
@@ -65,6 +69,8 @@ public class RegattaResolver {
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
         SailAction actionOnSails = SailStrategy.getSailsAction();
         NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect));
-        return new ToolsToUse(rudderAngle,actionOnSails,nbOarsUsed);
+        boolean isWatchnNecessary = watchStrategy.getIsWatchNecessary();
+
+        return new ToolsToUse(rudderAngle,actionOnSails,nbOarsUsed,isWatchnNecessary);
     }
 }

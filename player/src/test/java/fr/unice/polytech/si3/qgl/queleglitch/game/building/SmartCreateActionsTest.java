@@ -41,7 +41,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4, SailAction.LIFT,new NbOarsUsed(2,2)));
+        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4, SailAction.LIFT,new NbOarsUsed(2,2), false));
 
         assertEquals(12, actionList.size());
     }
@@ -52,7 +52,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4, SailAction.LIFT,new NbOarsUsed(1,1)));
+        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4, SailAction.LIFT,new NbOarsUsed(1,1), false));
 
         assertEquals(10, actionList.size());
     }
@@ -63,7 +63,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4,SailAction.LIFT,new NbOarsUsed(0,0)));
+        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(Math.PI/4,SailAction.LIFT,new NbOarsUsed(0,0), false));
 
         assertEquals(8, actionList.size());
     }
@@ -74,7 +74,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(0,SailAction.LIFT,new NbOarsUsed(0,0)));
+        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(0,SailAction.LIFT,new NbOarsUsed(0,0), false));
 
         assertEquals(7, actionList.size()); //need to change
     }
@@ -85,7 +85,7 @@ class SmartCreateActionsTest {
                 new Sailor(3, 1, 3), new Sailor(3, 1, 4), new Sailor(1, 3, 5)};
         smartCreateActions = new SmartCreateActions(ship, sailors);
 
-        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(0, 0)));
+        List<Action> actionList = smartCreateActions.createActions(new ToolsToUse(0,SailAction.DO_NOTHING,new NbOarsUsed(0, 0), false));
 
         assertEquals(6, actionList.size()); //need to change
     }
