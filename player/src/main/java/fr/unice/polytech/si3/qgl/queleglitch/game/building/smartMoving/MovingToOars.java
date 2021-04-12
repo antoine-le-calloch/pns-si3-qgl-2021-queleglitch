@@ -39,7 +39,7 @@ public class MovingToOars {
         }
 
         for (int i = 0; i < nbOarsUsed.onRight(); i++) {
-            for (int j = leftOars.size() - i - 1; j >= nbOarsUsed.onRight() - i - 1; j--) {
+            for (int j = rightOars.size() - i - 1; j >= nbOarsUsed.onRight() - i - 1; j--) {
                 if((sailorToMove = tooling.nearestSailorBehind5(rightOars.get(j), sailorsAvailable)) != null) {
                     actionsList.add(tooling.buildMovingAction(sailorToMove, rightOars.get(j)));
                     actionsList.add(new Row(sailorToMove.getId()));
@@ -48,7 +48,7 @@ public class MovingToOars {
                 }
             }
             if(sailorToMove == null) {
-                entitiesTooFar.add(rightOars.get((i == 0) ? nbOarsUsed.onRight() : leftOars.size()-i));
+                entitiesTooFar.add(rightOars.get((i == 0) ? nbOarsUsed.onRight() : rightOars.size()-i));
                 break;
             }
         }
