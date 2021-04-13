@@ -17,7 +17,7 @@ public class Spotting {
     }
 
     public boolean isReefsOnTheShipWay(int shipWidth, Position shipPosition, Position positionToReach){
-        Rectangle widthTakenByShip = new Rectangle(shipWidth+100,0, shipPosition.getAngleToAPosition(positionToReach));
+        Rectangle widthTakenByShip = new Rectangle(shipWidth+60,0, shipPosition.getAngleToAPosition(positionToReach));
         Point topShipPoint = widthTakenByShip.getRealPoints(shipPosition)[0];
         Point downShipPoint = widthTakenByShip.getRealPoints(shipPosition)[2];
         Point topCheckpointPoint = widthTakenByShip.getRealPoints(positionToReach)[0];
