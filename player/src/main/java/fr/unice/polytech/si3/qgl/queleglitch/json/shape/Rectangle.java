@@ -30,6 +30,17 @@ public class Rectangle extends Shape {
         return reelPoints;
     }
 
+    public Point[] getRealPoints(Point centralPoint){
+        createPoints();
+        Point[] reelPoints = new Point[4];
+        int cpt = 0;
+        for (Point point : points) {
+            reelPoints[cpt] = new Point(centralPoint.getX() + Math.cos(orientation)*point.getX() + Math.sin(-orientation)*point.getY(), centralPoint.getY() + Math.sin(orientation)*point.getX() + Math.cos(-orientation)*point.getY());
+            cpt++;
+        }
+        return reelPoints;
+    }
+
     private void createPoints(){
         points = new Point[]{new Point(height/2,width/2),new Point(-height/2,width/2),
                              new Point(-height/2,-width/2),new Point(height/2,-width/2)};

@@ -13,6 +13,9 @@ import java.util.List;
 
 public class Processing {
 
+    Boolean firstTurn = true;
+    Boolean secondTurn = false;
+    Boolean checkpointReached;
     InformationGame informationGame;
     RegattaResolver regattaResolver;
     ShipMovementResolver shipMovementResolver;
@@ -23,15 +26,28 @@ public class Processing {
     }
 
     public void processDataNewRound(){
-        informationGame.processCheckpointReached();
-        informationGame.addPath();
+        if(informationGame.isCheckpointReached()) {
+            informationGame.processCheckpointReached();
+            checkpointReached = true;
+        }
+        else
+            checkpointReached = false;
+
+        if(firstTurn || secondTurn || checkpointReached) {
+            firstTurn = false;
+            secondTurn = checkpointReached;
+            informationGame.createGrid();
+        }
+
+        informationGame.createPath();
+
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
         regattaResolver = new RegattaResolver(informationGame);
     }
 
     public List<Action> actionForTheRound(){
         ToolsToUse toolsToUse;
-        if(informationGame.getRegattaGoal().getPathPoint() == null) {
+        if(informationGame.getRegattaGoal().getPathPoints().size() == 0) {
             toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getPositionActualOptiCheckpoint());
             if (toolsToUse == null)
                 toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getActualCheckpoint().getPosition());
@@ -39,7 +55,7 @@ public class Processing {
                 toolsToUse = new ToolsToUse(0, SailAction.DO_NOTHING, new NbOarsUsed(1, 1),false);
         }
         else
-            toolsToUse = regattaResolver.resolveToolsToUseForPathPoint(informationGame.getRegattaGoal().getPathPoint().toPosition());
+            toolsToUse = regattaResolver.resolveToolsToUseForPathPoint(informationGame.getRegattaGoal().getPathPoints().get(0).toPosition());
 
         SmartCreateActions smartCreateActions = new SmartCreateActions(informationGame.getShip(), informationGame.getSailors());
         return smartCreateActions.createActions(toolsToUse);

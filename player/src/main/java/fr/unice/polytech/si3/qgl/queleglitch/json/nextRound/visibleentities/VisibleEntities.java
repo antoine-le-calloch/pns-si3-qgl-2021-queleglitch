@@ -7,7 +7,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.*;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property =  "type", defaultImpl = Void.class)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Courant.class, name = "stream"),
+        @JsonSubTypes.Type(value = Stream.class, name = "stream"),
         @JsonSubTypes.Type(value = Reef.class, name = "reef")
 })
 

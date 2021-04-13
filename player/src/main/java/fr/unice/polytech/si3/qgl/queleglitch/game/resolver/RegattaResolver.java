@@ -26,7 +26,7 @@ public class RegattaResolver {
         oarStrategy = new OarStrategy(informationGame.getNbSailors(), informationGame.getShip().getNbOars());
         SailStrategy = new SailStrategy(informationGame.getShip(), informationGame.getWind());
         rudderStrategy = new RudderStrategy();
-        watchStrategy = new WatchStrategy();
+        watchStrategy = new WatchStrategy(informationGame.getRegattaGoal());
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
     }
 
@@ -34,8 +34,8 @@ public class RegattaResolver {
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
         SailAction actionOnSails = SailStrategy.getSailsAction();
-        NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect));
-        boolean isWatchnNecessary = watchStrategy.getIsWatchNecessary();
+        boolean isWatchNecessary = watchStrategy.isWatchNecessary();
+        NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(isWatchNecessary, rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect));
 
         int maxLeftOarUse = nbOarsUsed.onLeft();
         int maxRightOarUse = nbOarsUsed.onRight();
@@ -61,16 +61,16 @@ public class RegattaResolver {
                 }
             }
         }
-        return new ToolsToUse(rudderAngle,actionOnSails,nbOarsUsed,isWatchnNecessary);
+        return new ToolsToUse(rudderAngle,actionOnSails,nbOarsUsed,isWatchNecessary);
     }
 
     public ToolsToUse resolveToolsToUseForPathPoint(Position positionCheckpointToReach) {
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionCheckpointToReach);
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
         SailAction actionOnSails = SailStrategy.getSailsAction();
-        NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect));
-        boolean isWatchnNecessary = watchStrategy.getIsWatchNecessary();
+        boolean isWatchNecessary = watchStrategy.isWatchNecessary();
+        NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(isWatchNecessary, rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect));
 
-        return new ToolsToUse(rudderAngle,actionOnSails,nbOarsUsed,isWatchnNecessary);
+        return new ToolsToUse(rudderAngle,actionOnSails,nbOarsUsed,isWatchNecessary);
     }
 }

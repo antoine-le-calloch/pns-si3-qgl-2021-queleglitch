@@ -19,7 +19,6 @@ public class Geometry {
         double shipY = boatPosition.getY();
         double angle = 0;
 
-
         if(checkPointY-shipY==0 && checkPointX-shipX < 0){
             angle = Math.PI;
         }
@@ -40,11 +39,9 @@ public class Geometry {
         angle -= shipAngle;
 
         if(angle > Math.PI) {
-
             angle = (-2*Math.PI)+angle;
         }
         else if(angle < -Math.PI) {
-
             angle = (2*Math.PI)+angle;
         }
         return angle;

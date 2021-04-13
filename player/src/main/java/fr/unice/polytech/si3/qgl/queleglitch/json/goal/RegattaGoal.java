@@ -3,6 +3,9 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Classe permettant de définir le mode Regatta
  * @author Huot-Marchand Antoine
@@ -14,10 +17,12 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
 public class RegattaGoal extends Goal {
 
+    private final List<Point> pathPoints = new ArrayList<>();
     private int numActualCheckpoint = 0;
     private Checkpoint[] checkpoints;
     private Position[] positionOptiCheckpoints;
     private Point pathPoint;
+    private boolean checkpointReach = false;
 
     public RegattaGoal(){
     }
@@ -55,6 +60,8 @@ public class RegattaGoal extends Goal {
     /**
      * <p>Getter.</p>
      */
+    public boolean getCheckpointReach(){ return checkpointReach; }
+
     public int getNumActualCheckpoint(){ return numActualCheckpoint; }
 
     public Checkpoint[] getCheckpoints() { return checkpoints; }
@@ -62,6 +69,8 @@ public class RegattaGoal extends Goal {
     public Position[] getPositionOptiCheckpoints() { return positionOptiCheckpoints; }
 
     public Point getPathPoint() { return pathPoint; }
+
+    public List<Point> getPathPoints() { return pathPoints; }
 
     public Checkpoint getActualCheckpoint(){ return checkpoints[numActualCheckpoint]; }
 
@@ -72,6 +81,8 @@ public class RegattaGoal extends Goal {
     /**
      * <p>Setter.</p>
      */
+    public void setCheckpointReach(boolean checkpointReach){ this.checkpointReach = checkpointReach; }
+
     public void setCheckpoints(Checkpoint[] checkpoints) {
         this.checkpoints = checkpoints;
     }
@@ -79,6 +90,8 @@ public class RegattaGoal extends Goal {
     public void setPositionOptiCheckpoints(Position[] positionOptiCheckpoints) { this.positionOptiCheckpoints = positionOptiCheckpoints; }
 
     public void setPathPoint(Point pathPoint) { this.pathPoint = pathPoint; }
+
+    public void setPathPoints(Point pathPoint) { this.pathPoints.add(pathPoint); }
 
     public void setNumActualCheckpoint(int numActualCheckpoint){ this.numActualCheckpoint = numActualCheckpoint; }
 
