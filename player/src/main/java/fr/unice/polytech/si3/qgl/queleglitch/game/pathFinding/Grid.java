@@ -21,14 +21,14 @@ public class Grid {
         Spotting spotting = new Spotting(seaEntities.getVisibleReefs());
 
         for (int lin = 0, col = 0; col < NB_COL; lin = (lin+1)%NB_LIN, col += (lin==0)?1:0) {
-            grid[col][lin] = new Case(caseForm,findNextCaseCentralPoint(col,lin,gridOrientation,shipPosition));
+            grid[col][lin] = new Case(caseForm, findCasePoint(col,lin,gridOrientation,shipPosition));
             if(spotting.isReefsInaARectangle(caseForm, grid[col][lin].getCentralCasePoint()))
                 grid[col][lin].setIsReef(true);
         }
         processCaseWeight(shipPosition);
     }
 
-    public Point findNextCaseCentralPoint(int column, int line, double gridOrientation, Position shipPosition){
+    public Point findCasePoint(int column, int line, double gridOrientation, Position shipPosition){
         double opposite = GRID_SIDE/2.0-CASE_WIDTH/2.0-line*CASE_WIDTH;
         double adjacent = GRID_SIDE/2.0-CASE_HEIGHT/2.0-column*CASE_HEIGHT;
         double angle = gridOrientation + Math.atan(opposite/adjacent);
@@ -74,10 +74,6 @@ public class Grid {
             columnLine[0] += (columnLine[1]==0)?1:0;
         }
         return grid[columnLine[0]][columnLine[1]];
-    }
-
-    public Case[][] getGrid(){
-        return grid;
     }
 
     public Case getCase(int col, int lin){
