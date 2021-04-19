@@ -4,7 +4,6 @@ import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbOarsUsed;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.ToolsToUse;
 import fr.unice.polytech.si3.qgl.queleglitch.game.building.SmartCreateActions;
-import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.FindPath;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.ShipMovementResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
@@ -29,8 +28,7 @@ public class Processing {
         if(informationGame.isCheckpointReached()) {
             informationGame.processCheckpointReached();
             checkpointReached = true;
-        }
-        else
+        } else
             checkpointReached = false;
 
         if(firstTurn || secondTurn || checkpointReached) {
@@ -40,14 +38,13 @@ public class Processing {
         }
 
         informationGame.createPath();
-
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
         regattaResolver = new RegattaResolver(informationGame);
     }
 
     public List<Action> actionForTheRound(){
         ToolsToUse toolsToUse;
-        if(informationGame.getRegattaGoal().getPathPoints().size() == 0) {
+        if(informationGame.getRegattaGoal().getPathPoint() == null) {
             toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getPositionActualOptiCheckpoint());
             if (toolsToUse == null)
                 toolsToUse = regattaResolver.resolveToolsToUse(informationGame.getRegattaGoal().getActualCheckpoint().getPosition());
@@ -55,7 +52,7 @@ public class Processing {
                 toolsToUse = new ToolsToUse(0, SailAction.DO_NOTHING, new NbOarsUsed(1, 1),false);
         }
         else
-            toolsToUse = regattaResolver.resolveToolsToUseForPathPoint(informationGame.getRegattaGoal().getPathPoints().get(0).toPosition());
+            toolsToUse = regattaResolver.resolveToolsToUseForPathPoint(informationGame.getRegattaGoal().getPathPoint().toPosition());
 
         SmartCreateActions smartCreateActions = new SmartCreateActions(informationGame.getShip(), informationGame.getSailors());
         return smartCreateActions.createActions(toolsToUse);

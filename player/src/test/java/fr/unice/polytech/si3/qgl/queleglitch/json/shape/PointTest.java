@@ -1,7 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.shape;
 
-import fr.unice.polytech.si3.qgl.queleglitch.exception.IllegalMathCalculException;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,12 +21,6 @@ class PointTest {
         point0_1= new Point(0,1);
         point1_1= new Point(1,1);
         pointMinus1_Minus1=new Point(-1,-1);
-    }
-
-
-    @Test
-    void angleBetweenTwoPoints(){
-        assertThrows(IllegalMathCalculException.class, () -> point0_0.getAngleToAPoint(point0_0));
     }
 
     @Test
@@ -57,8 +49,4 @@ class PointTest {
     void angleBetweenTwoPointsWithNegativeAngle_origin_and_negative_point(){
         assertEquals(-3*Math.PI/4,point0_0.getAngleToAPoint(pointMinus1_Minus1));
     }
-
-
-
-
 }

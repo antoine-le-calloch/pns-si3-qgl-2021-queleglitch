@@ -1,6 +1,6 @@
-//package fr.unice.polytech.si3.qgl.queleglitch;
+package fr.unice.polytech.si3.qgl.queleglitch;
 
-/*import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +19,7 @@ class CockpitTest {
         cockpitGame2.initGame(getTxtInFile("2\\initGameFile"));
     }
 
+    /*
     @Test
     void Test_input1() {
         Cockpit cockpitGame = new Cockpit();
@@ -106,6 +107,16 @@ class CockpitTest {
         String actualOutput = cockpitGame.nextRound(getTxtInFile("8\\nextRoundFile"));
 
         assertEquals(getTxtInFile("8\\outputFile"), actualOutput);
+    }*/
+
+    @Test
+    void Test_input9() {
+        Cockpit cockpitGame = new Cockpit();
+        cockpitGame.initGame(getTxtInFile("9\\initGameFile"));
+
+        String actualOutput = cockpitGame.nextRound(getTxtInFile("9\\nextRoundFile"));
+
+        assertEquals(getTxtInFile("9\\outputFile"), actualOutput);
     }
 
     ///////////methode to open the text file with Json
@@ -125,4 +136,4 @@ class CockpitTest {
             return null;
         }
     }
-}*/
+}

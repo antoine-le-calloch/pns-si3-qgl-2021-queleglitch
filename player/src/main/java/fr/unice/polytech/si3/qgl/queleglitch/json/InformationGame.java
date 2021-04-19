@@ -4,17 +4,11 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.FindPath;
 import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Grid;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.SeaEntities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.VisibleEntities;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe permettant de gerer les éléments principaux du jeux : {@link Ship}, {@link Sailor}
@@ -54,21 +48,16 @@ public class InformationGame {
         createGrid();
     }
 
+    public void createGrid() {
+        grid = new Grid(7000,40,200);
+        grid.create(ship.getPosition().toPoint(), getRegattaGoal().getPositionActualOptiCheckpoint().toPoint(),seaEntities);
+    }
+
     public void createPath() {
-        FindPath findPath = new FindPath(ship.getPosition().toPoint(), seaEntities.getVisibleReefs(),grid);
+        grid.processCaseWeight(ship.getPosition().toPoint());
+        FindPath findPath = new FindPath(grid);
         findPath.createPath(getRegattaGoal());
     }
-
-    public void createGrid() {
-        grid = new Grid();
-        grid.create(ship.getPosition(), getRegattaGoal().getPositionActualOptiCheckpoint(),seaEntities);
-    }
-
-    /*public void createPath() {
-        FindPath findPath = new FindPath(ship.getDeck().getWidth(), ship.getPosition().toPoint(), seaEntities.getVisibleReefs());
-        if(seaEntities.getVisibleReefs() != null && seaEntities.getVisibleReefs().size() > 0)
-            findPath.createPath(getRegattaGoal());
-    }*/
 
     public boolean isCheckpointReached() {
         return ship.isCheckpointReached(getRegattaGoal().getActualCheckpoint());

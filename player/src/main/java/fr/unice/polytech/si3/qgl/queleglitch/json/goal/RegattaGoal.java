@@ -17,12 +17,11 @@ import java.util.List;
 
 public class RegattaGoal extends Goal {
 
-    private final List<Point> pathPoints = new ArrayList<>();
+    private List<Point> pathPoints = new ArrayList<>();
     private int numActualCheckpoint = 0;
     private Checkpoint[] checkpoints;
     private Position[] positionOptiCheckpoints;
-    private Point pathPoint;
-    private boolean checkpointReach = false;
+    private boolean checkpointReach;
 
     public RegattaGoal(){
     }
@@ -57,20 +56,23 @@ public class RegattaGoal extends Goal {
             numActualCheckpoint++;
     }
 
+    public void resetPathPoints() { this.pathPoints = new ArrayList<>(); }
+
+    public void addPathPoints(Point pathPoint) { this.pathPoints.add(pathPoint); }
+
     /**
      * <p>Getter.</p>
      */
     public boolean getCheckpointReach(){ return checkpointReach; }
 
-    public int getNumActualCheckpoint(){ return numActualCheckpoint; }
-
     public Checkpoint[] getCheckpoints() { return checkpoints; }
 
     public Position[] getPositionOptiCheckpoints() { return positionOptiCheckpoints; }
 
-    public Point getPathPoint() { return pathPoint; }
-
-    public List<Point> getPathPoints() { return pathPoints; }
+    public Point getPathPoint() {
+        if(pathPoints.size() == 0)
+            return null;
+        return pathPoints.get(pathPoints.size()-1); }
 
     public Checkpoint getActualCheckpoint(){ return checkpoints[numActualCheckpoint]; }
 
@@ -89,11 +91,7 @@ public class RegattaGoal extends Goal {
 
     public void setPositionOptiCheckpoints(Position[] positionOptiCheckpoints) { this.positionOptiCheckpoints = positionOptiCheckpoints; }
 
-    public void setPathPoint(Point pathPoint) { this.pathPoint = pathPoint; }
-
-    public void setPathPoints(Point pathPoint) { this.pathPoints.add(pathPoint); }
-
-    public void setNumActualCheckpoint(int numActualCheckpoint){ this.numActualCheckpoint = numActualCheckpoint; }
+    public void setNumActualCheckpoint(int numActualCheckpoint) { this.numActualCheckpoint = numActualCheckpoint; }
 
     /**
      * <p>Override of toString method, allow to print a different string to give the Checkpoints information</p>

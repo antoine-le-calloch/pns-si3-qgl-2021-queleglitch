@@ -49,6 +49,10 @@ public class Geometry {
 
     public static boolean isThisPointInARectangle(Point point, Point[] rectanglePoints){
         double rectangleAngle = rectanglePoints[1].getAngleToAPoint(rectanglePoints[0]);
+        for (Point rectanglePoint : rectanglePoints) {
+            if(rectanglePoint.equals(point))
+                return true;
+        }
         return  point.getAngleToAPoint(rectanglePoints[0])-rectangleAngle >= 0          && point.getAngleToAPoint(rectanglePoints[0])-rectangleAngle <= Math.PI/2  &&
                 point.getAngleToAPoint(rectanglePoints[1])-rectangleAngle >= Math.PI/2  && point.getAngleToAPoint(rectanglePoints[1])-rectangleAngle <= Math.PI    &&
                 point.getAngleToAPoint(rectanglePoints[2])-rectangleAngle >= -Math.PI   && point.getAngleToAPoint(rectanglePoints[2])-rectangleAngle <= -Math.PI/2 &&

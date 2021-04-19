@@ -5,19 +5,19 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 
 public class Case {
 
-    private final Point centralCasePoint;
-    private final Rectangle caseForm;
-    private int caseWeight = -1;
+    private final Point centralPoint;
+    private final Rectangle form;
+    private int weight = -1;
     private boolean isReef = false;
     private boolean isStream = false;
 
-    public Case(Rectangle caseForm, Point centralCasePoint) {
-        this.centralCasePoint = centralCasePoint;
-        this.caseForm = caseForm;
+    public Case(Rectangle form, Point centralPoint) {
+        this.centralPoint = centralPoint;
+        this.form = form;
     }
 
-    public Point[] getCasePoints(){
-        return caseForm.getRealPoints(centralCasePoint);
+    public Point[] getFormPoints(){
+        return form.getRealPoints(centralPoint);
     }
 
     /**
@@ -31,23 +31,23 @@ public class Case {
         return isStream;
     }
 
-    public Point getCentralCasePoint() {
-        return centralCasePoint;
+    public Point getCentralPoint() {
+        return centralPoint;
     }
 
-    public Rectangle getCaseForm() {
-        return caseForm;
+    public Rectangle getForm() {
+        return form;
     }
 
-    public int getCaseWeight() {
-        return caseWeight;
+    public int getWeight() {
+        return weight;
     }
 
     /**
      * <p>Setter.</p>
      */
-    public void setCaseWeight(int caseWeight) {
-        this.caseWeight = caseWeight;
+    public void setWeight(int caseWeight) {
+        this.weight = caseWeight;
     }
 
     public void setIsReef(boolean reef) {
