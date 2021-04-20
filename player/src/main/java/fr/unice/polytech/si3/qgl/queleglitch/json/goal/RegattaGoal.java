@@ -74,6 +74,9 @@ public class RegattaGoal extends Goal {
             return null;
         return pathPoints.get(pathPoints.size()-1); }
 
+    public List<Point> getPathPoints() {
+        return pathPoints; }
+
     public Checkpoint getActualCheckpoint(){ return checkpoints[numActualCheckpoint]; }
 
     public Position getPositionActualOptiCheckpoint(){

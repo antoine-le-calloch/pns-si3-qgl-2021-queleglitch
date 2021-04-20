@@ -37,7 +37,7 @@ public class ToolsToUse {
      */
     @Override
     public String toString(){
-        return "Angle du rudder : " + this.rudderAngle + ", nb Sails : " + this.actionOnSail + ", " + this.nbOarsUsed.toString() + ", Vigie ? : " + this.isWatchNecessary;
+        return "Rudder angle : " + this.rudderAngle + ", nb Sails : " + this.actionOnSail + ", " + this.nbOarsUsed.toString() + ", use watch : " + this.isWatchNecessary;
     }
 
     /**

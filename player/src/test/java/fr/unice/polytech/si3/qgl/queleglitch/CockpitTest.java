@@ -16,7 +16,6 @@ class CockpitTest {
         path = "\\txtJson\\test";
 
         cockpitGame2 = new Cockpit();
-        cockpitGame2.initGame(getTxtInFile("2\\initGameFile"));
     }
 
     /*
@@ -109,15 +108,29 @@ class CockpitTest {
         assertEquals(getTxtInFile("8\\outputFile"), actualOutput);
     }*/
 
-    @Test
+    /*@Test
     void Test_input9() {
         Cockpit cockpitGame = new Cockpit();
         cockpitGame.initGame(getTxtInFile("9\\initGameFile"));
 
-        String actualOutput = cockpitGame.nextRound(getTxtInFile("9\\nextRoundFile"));
+        String actualOutput = cockpitGame.nextRound(getTxtInFile("9\\nextRound1File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound2File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound3File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound4File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound5File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound6File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound7File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound8File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound9File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound10File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound11File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound12File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound13File"));
+        cockpitGame.nextRound(getTxtInFile("9\\nextRound14File"));
+        actualOutput = cockpitGame.nextRound(getTxtInFile("9\\nextRound15File"));
 
-        assertEquals(getTxtInFile("9\\outputFile"), actualOutput);
-    }
+        assertEquals(getTxtInFile("9\\output15File"), actualOutput);
+    }*/
 
     ///////////methode to open the text file with Json
     private String getTxtInFile(String fileName) {

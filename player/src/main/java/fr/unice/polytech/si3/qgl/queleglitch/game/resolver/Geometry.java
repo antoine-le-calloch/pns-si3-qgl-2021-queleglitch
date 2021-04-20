@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 
 public class Geometry {
 
@@ -53,9 +54,9 @@ public class Geometry {
             if(rectanglePoint.equals(point))
                 return true;
         }
-        return  point.getAngleToAPoint(rectanglePoints[0])-rectangleAngle >= 0          && point.getAngleToAPoint(rectanglePoints[0])-rectangleAngle <= Math.PI/2  &&
-                point.getAngleToAPoint(rectanglePoints[1])-rectangleAngle >= Math.PI/2  && point.getAngleToAPoint(rectanglePoints[1])-rectangleAngle <= Math.PI    &&
-                point.getAngleToAPoint(rectanglePoints[2])-rectangleAngle >= -Math.PI   && point.getAngleToAPoint(rectanglePoints[2])-rectangleAngle <= -Math.PI/2 &&
-                point.getAngleToAPoint(rectanglePoints[3])-rectangleAngle >= -Math.PI/2 && point.getAngleToAPoint(rectanglePoints[3])-rectangleAngle <= 0;
+        return  Math.cos(point.getAngleToAPoint(rectanglePoints[0])-rectangleAngle) >= 0 && Math.sin(point.getAngleToAPoint(rectanglePoints[0])-rectangleAngle) >= 0 &&
+                Math.cos(point.getAngleToAPoint(rectanglePoints[1])-rectangleAngle) <= 0 && Math.sin(point.getAngleToAPoint(rectanglePoints[1])-rectangleAngle) >= 0 &&
+                Math.cos(point.getAngleToAPoint(rectanglePoints[2])-rectangleAngle) <= 0 && Math.sin(point.getAngleToAPoint(rectanglePoints[2])-rectangleAngle) <= 0 &&
+                Math.cos(point.getAngleToAPoint(rectanglePoints[3])-rectangleAngle) >= 0 && Math.sin(point.getAngleToAPoint(rectanglePoints[3])-rectangleAngle) <= 0;
     }
 }

@@ -27,8 +27,18 @@ public class Spotting {
         return isReefsBetween2Points(topShipPoint, topCheckpointPoint) || isReefsBetween2Points(downShipPoint, downCheckpointPoint) || isReefsBetween2Points(shipPosition.toPoint(), positionToReach.toPoint());
     }
 
+    public boolean isReefsOnTheShipWay(Point[] rectanglePoints){
+        Point topShipPoint = rectanglePoints[1];
+        Point downShipPoint = rectanglePoints[2];
+        Point topCheckpointPoint = rectanglePoints[0];
+        Point downCheckpointPoint = rectanglePoints[3];
+        if(isReefPointsInRectangle(new Point[]{topCheckpointPoint,topShipPoint,downShipPoint,downCheckpointPoint}))
+            return true;
+        return isReefsBetween2Points(topShipPoint, topCheckpointPoint) || isReefsBetween2Points(downShipPoint, downCheckpointPoint);
+    }
+
     public boolean isReefsInaARectangle(Rectangle rectangle, Point rectangleCentralPoint){
-        return isReefPointsInRectangle(rectangle.getRealPoints(rectangleCentralPoint)) || isReefSideInRectangle(rectangle.getRealPoints(rectangleCentralPoint));
+        return isReefPointsInRectangle(rectangle.getRealPoints(rectangleCentralPoint)) || isReefSideInRectangle2(rectangle.getRealPoints(rectangleCentralPoint));
     }
 
     public boolean isReefPointsInRectangle(Point[] rectanglePoint){
@@ -37,6 +47,10 @@ public class Spotting {
                 return true;
         }
         return false;
+    }
+
+    public boolean isReefSideInRectangle2(Point[] rectanglePoint){
+        return isReefsOnTheShipWay(rectanglePoint);
     }
 
     public boolean isReefSideInRectangle(Point[] rectanglePoint){

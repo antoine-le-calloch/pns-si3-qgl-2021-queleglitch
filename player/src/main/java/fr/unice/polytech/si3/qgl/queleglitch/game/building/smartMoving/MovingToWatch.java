@@ -20,13 +20,13 @@ public class MovingToWatch {
     }
 
     public void movingAndUseWatch(List<Sailor> sailorsAvailable, List<Entities> entitiesTooFar, List<Action> actionsList){
-        Sailor sailorToMove = tooling.nearestSailorBehind5(watch, sailorsAvailable);
+        /*Sailor sailorToMove = tooling.nearestSailorBehind5(watch, sailorsAvailable);
         if(sailorToMove != null) {
             actionsList.add(tooling.buildMovingAction(sailorToMove, watch));
             actionsList.add(new UseWatch(sailorToMove.getId()));
             sailorsAvailable.remove(sailorToMove);
         }
         else
-            entitiesTooFar.add(watch);
+            entitiesTooFar.add(watch);*/
     }
 }

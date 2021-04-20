@@ -2,6 +2,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.json;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.FindPath;
 import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Grid;
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Spotting;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
@@ -49,11 +50,16 @@ public class InformationGame {
     }
 
     public void createGrid() {
-        grid = new Grid(7000,40,200);
+        grid = new Grid(7000,400,400);
         grid.create(ship.getPosition().toPoint(), getRegattaGoal().getPositionActualOptiCheckpoint().toPoint(),seaEntities);
     }
 
     public void createPath() {
+        Spotting spotting = new Spotting(seaEntities.getVisibleReefs());
+        grid.resetCaseWeight(spotting);
+        if (!grid.processCaseWeight(ship.getPosition().toPoint())) {
+            createGrid();
+        }
         grid.processCaseWeight(ship.getPosition().toPoint());
         FindPath findPath = new FindPath(grid);
         findPath.createPath(getRegattaGoal());
@@ -93,6 +99,8 @@ public class InformationGame {
     }
 
     public Wind getWind() { return wind; }
+
+    public Grid getGrid() { return grid; }
 
     /**
      * <p>Setter.</p>
