@@ -150,9 +150,9 @@ class GridTest {
         grid.processCaseWeightByColAndLin(2,2,0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(1,2).getWeight());
-        assertEquals(2,grid.getCase(1,1).getWeight());
-        assertEquals(3,grid.getCase(0,1).getWeight());
-        assertEquals(4,grid.getCase(0,0).getWeight());
+        assertEquals(1,grid.getCase(1,1).getWeight());
+        assertEquals(2,grid.getCase(0,1).getWeight());
+        assertEquals(2,grid.getCase(0,0).getWeight());
     }
 
     @Test
@@ -160,11 +160,11 @@ class GridTest {
         Grid grid = new Grid(11,1,1);
         grid.create(shipPoint0,checkpoint0,seaEntities);
         grid.processCaseWeightByColAndLin(5,5,0);
-        assertEquals(10,grid.getCase(0,0).getWeight());
-        assertEquals(9,grid.getCase(0,1).getWeight());
-        assertEquals(8,grid.getCase(1,1).getWeight());
-        assertEquals(7,grid.getCase(1,2).getWeight());
-        assertEquals(6,grid.getCase(2,2).getWeight());
+        assertEquals(5,grid.getCase(0,0).getWeight());
+        assertEquals(5,grid.getCase(0,1).getWeight());
+        assertEquals(4,grid.getCase(1,1).getWeight());
+        assertEquals(4,grid.getCase(1,2).getWeight());
+        assertEquals(3,grid.getCase(2,2).getWeight());
     }
 
     @Test
@@ -172,11 +172,11 @@ class GridTest {
         Grid grid = new Grid(21,1,1);
         grid.create(shipPoint0,checkpoint0,seaEntities);
         grid.processCaseWeightByColAndLin(10,10,0);
-        assertEquals(20,grid.getCase(0,0).getWeight());
-        assertEquals(19,grid.getCase(0,1).getWeight());
-        assertEquals(18,grid.getCase(1,1).getWeight());
-        assertEquals(17,grid.getCase(1,2).getWeight());
-        assertEquals(16,grid.getCase(2,2).getWeight());
+        assertEquals(10,grid.getCase(0,0).getWeight());
+        assertEquals(10,grid.getCase(0,1).getWeight());
+        assertEquals(9,grid.getCase(1,1).getWeight());
+        assertEquals(9,grid.getCase(1,2).getWeight());
+        assertEquals(8,grid.getCase(2,2).getWeight());
     }
 
     @Test
@@ -186,9 +186,9 @@ class GridTest {
         grid.processCaseWeightByColAndLin(2,2,0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(3,2).getWeight());
-        assertEquals(2,grid.getCase(3,1).getWeight());
-        assertEquals(3,grid.getCase(4,1).getWeight());
-        assertEquals(4,grid.getCase(4,0).getWeight());
+        assertEquals(1,grid.getCase(3,1).getWeight());
+        assertEquals(2,grid.getCase(4,1).getWeight());
+        assertEquals(2,grid.getCase(4,0).getWeight());
     }
 
     @Test
@@ -196,11 +196,11 @@ class GridTest {
         Grid grid = new Grid(22,2,2);
         grid.create(shipPoint0,checkpoint0,seaEntities);
         grid.processCaseWeightByColAndLin(5,5,0);
-        assertEquals(10,grid.getCase(0,0).getWeight());
-        assertEquals(9,grid.getCase(0,1).getWeight());
-        assertEquals(8,grid.getCase(1,1).getWeight());
-        assertEquals(7,grid.getCase(1,2).getWeight());
-        assertEquals(6,grid.getCase(2,2).getWeight());
+        assertEquals(5,grid.getCase(0,0).getWeight());
+        assertEquals(5,grid.getCase(0,1).getWeight());
+        assertEquals(4,grid.getCase(1,1).getWeight());
+        assertEquals(4,grid.getCase(1,2).getWeight());
+        assertEquals(3,grid.getCase(2,2).getWeight());
     }
 
     @Test
@@ -210,9 +210,9 @@ class GridTest {
         grid.processCaseWeightByColAndLin(2,2,0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(3,2).getWeight());
-        assertEquals(2,grid.getCase(3,1).getWeight());
-        assertEquals(3,grid.getCase(4,1).getWeight());
-        assertEquals(4,grid.getCase(4,0).getWeight());
+        assertEquals(1,grid.getCase(3,1).getWeight());
+        assertEquals(2,grid.getCase(4,1).getWeight());
+        assertEquals(2,grid.getCase(4,0).getWeight());
     }
 
     @Test
@@ -220,11 +220,11 @@ class GridTest {
         Grid grid = new Grid(5100,100,100);
         grid.create(shipPoint0,checkpoint0,seaEntities);
         grid.processCaseWeightByColAndLin(25,25,0);
-        assertEquals(50,grid.getCase(0,0).getWeight());
-        assertEquals(49,grid.getCase(0,1).getWeight());
-        assertEquals(48,grid.getCase(1,1).getWeight());
-        assertEquals(47,grid.getCase(1,2).getWeight());
-        assertEquals(46,grid.getCase(2,2).getWeight());
+        assertEquals(25,grid.getCase(0,0).getWeight());
+        assertEquals(25,grid.getCase(0,1).getWeight());
+        assertEquals(24,grid.getCase(1,1).getWeight());
+        assertEquals(24,grid.getCase(1,2).getWeight());
+        assertEquals(23,grid.getCase(2,2).getWeight());
     }
 
     ////////////////////////////////////////////    processCaseWeight    //////////////////////////////////////////
@@ -244,9 +244,9 @@ class GridTest {
         grid.processCaseWeight(shipPoint0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(1,2).getWeight());
-        assertEquals(2,grid.getCase(1,1).getWeight());
-        assertEquals(3,grid.getCase(0,1).getWeight());
-        assertEquals(4,grid.getCase(0,0).getWeight());
+        assertEquals(1,grid.getCase(1,1).getWeight());
+        assertEquals(2,grid.getCase(0,1).getWeight());
+        assertEquals(2,grid.getCase(0,0).getWeight());
     }
 
     @Test
@@ -254,11 +254,11 @@ class GridTest {
         Grid grid = new Grid(11,1,1);
         grid.create(shipPoint0,checkpoint0,seaEntities);
         grid.processCaseWeight(shipPoint0);
-        assertEquals(10,grid.getCase(0,0).getWeight());
-        assertEquals(9,grid.getCase(0,1).getWeight());
-        assertEquals(8,grid.getCase(1,1).getWeight());
-        assertEquals(7,grid.getCase(1,2).getWeight());
-        assertEquals(6,grid.getCase(2,2).getWeight());
+        assertEquals(5,grid.getCase(0,0).getWeight());
+        assertEquals(5,grid.getCase(0,1).getWeight());
+        assertEquals(4,grid.getCase(1,1).getWeight());
+        assertEquals(4,grid.getCase(1,2).getWeight());
+        assertEquals(3,grid.getCase(2,2).getWeight());
     }
 
     @Test
@@ -266,11 +266,11 @@ class GridTest {
         Grid grid = new Grid(21,1,1);
         grid.create(shipPoint0,checkpoint0,seaEntities);
         grid.processCaseWeight(shipPoint0);
-        assertEquals(20,grid.getCase(0,0).getWeight());
-        assertEquals(19,grid.getCase(0,1).getWeight());
-        assertEquals(18,grid.getCase(1,1).getWeight());
-        assertEquals(17,grid.getCase(1,2).getWeight());
-        assertEquals(16,grid.getCase(2,2).getWeight());
+        assertEquals(10,grid.getCase(0,0).getWeight());
+        assertEquals(10,grid.getCase(0,1).getWeight());
+        assertEquals(9,grid.getCase(1,1).getWeight());
+        assertEquals(9,grid.getCase(1,2).getWeight());
+        assertEquals(8,grid.getCase(2,2).getWeight());
     }
 
     @Test
@@ -280,9 +280,9 @@ class GridTest {
         grid.processCaseWeight(shipPoint0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(3,2).getWeight());
-        assertEquals(2,grid.getCase(3,1).getWeight());
-        assertEquals(3,grid.getCase(4,1).getWeight());
-        assertEquals(4,grid.getCase(4,0).getWeight());
+        assertEquals(1,grid.getCase(3,1).getWeight());
+        assertEquals(2,grid.getCase(4,1).getWeight());
+        assertEquals(2,grid.getCase(4,0).getWeight());
     }
 
     @Test
@@ -290,11 +290,11 @@ class GridTest {
         Grid grid = new Grid(22,2,2);
         grid.create(shipPoint0,checkpoint0,seaEntities);
         grid.processCaseWeight(shipPoint0);
-        assertEquals(10,grid.getCase(0,0).getWeight());
-        assertEquals(9,grid.getCase(0,1).getWeight());
-        assertEquals(8,grid.getCase(1,1).getWeight());
-        assertEquals(7,grid.getCase(1,2).getWeight());
-        assertEquals(6,grid.getCase(2,2).getWeight());
+        assertEquals(5,grid.getCase(0,0).getWeight());
+        assertEquals(5,grid.getCase(0,1).getWeight());
+        assertEquals(4,grid.getCase(1,1).getWeight());
+        assertEquals(4,grid.getCase(1,2).getWeight());
+        assertEquals(3,grid.getCase(2,2).getWeight());
     }
 
     @Test
@@ -304,9 +304,9 @@ class GridTest {
         grid.processCaseWeight(shipPoint0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(3,2).getWeight());
-        assertEquals(2,grid.getCase(3,1).getWeight());
-        assertEquals(3,grid.getCase(4,1).getWeight());
-        assertEquals(4,grid.getCase(4,0).getWeight());
+        assertEquals(1,grid.getCase(3,1).getWeight());
+        assertEquals(2,grid.getCase(4,1).getWeight());
+        assertEquals(2,grid.getCase(4,0).getWeight());
     }
 
     @Test
@@ -314,11 +314,11 @@ class GridTest {
         Grid grid = new Grid(5100,100,100);
         grid.create(shipPoint0,checkpoint0,seaEntities);
         grid.processCaseWeight(shipPoint0);
-        assertEquals(50,grid.getCase(0,0).getWeight());
-        assertEquals(49,grid.getCase(0,1).getWeight());
-        assertEquals(48,grid.getCase(1,1).getWeight());
-        assertEquals(47,grid.getCase(1,2).getWeight());
-        assertEquals(46,grid.getCase(2,2).getWeight());
+        assertEquals(25,grid.getCase(0,0).getWeight());
+        assertEquals(25,grid.getCase(0,1).getWeight());
+        assertEquals(24,grid.getCase(1,1).getWeight());
+        assertEquals(24,grid.getCase(1,2).getWeight());
+        assertEquals(23,grid.getCase(2,2).getWeight());
     }
 
     @Test
@@ -350,7 +350,7 @@ class GridTest {
         Grid grid = new Grid(5000,200,200);
         grid.create(shipPoint0,checkpoint0,seaEntities1Reef);
         grid.processCaseWeight(shipPoint0);
-        assertEquals(4,grid.getCase(10,12).getWeight());
+        assertEquals(2,grid.getCase(10,12).getWeight());
     }
 
     ///////////////////////////////////////////////   findCasePoint    ///////////////////////////////////////////////

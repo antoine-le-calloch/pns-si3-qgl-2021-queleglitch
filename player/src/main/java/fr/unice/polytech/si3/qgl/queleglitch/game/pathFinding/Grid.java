@@ -77,14 +77,20 @@ public class Grid {
             return;
         grid[column][line].setWeight(weight);
         processCaseWeightByColAndLin(column+1,line,weight+1);
-        processCaseWeightByColAndLin(column,line+1,weight+1);
+        processCaseWeightByColAndLin(column+1,line+1,weight+1);
+        processCaseWeightByColAndLin(column+1,line-1,weight+1);
         processCaseWeightByColAndLin(column-1,line,weight+1);
+        processCaseWeightByColAndLin(column-1,line+1,weight+1);
+        processCaseWeightByColAndLin(column-1,line-1,weight+1);
+        processCaseWeightByColAndLin(column,line+1,weight+1);
         processCaseWeightByColAndLin(column,line-1,weight+1);
     }
 
     public Case getCaseOfAPosition(Position position) {
         int[] columnLine = getColAndLineOfAPosition(position);
-        return grid[columnLine[0]][columnLine[1]];
+        if(columnLine != null)
+            return grid[columnLine[0]][columnLine[1]];
+        return null;
     }
 
     public int[] getColAndLineOfAPosition(Position position) {

@@ -1,11 +1,10 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building.smartMoving;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
-import fr.unice.polytech.si3.qgl.queleglitch.json.action.Turn;
-import fr.unice.polytech.si3.qgl.queleglitch.json.action.UseWatch;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
+import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
+import fr.unice.polytech.si3.qgl.queleglitch.json.action.UseWatch;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Watch;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
 
 import java.util.List;
 

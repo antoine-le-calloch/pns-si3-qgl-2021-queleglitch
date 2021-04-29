@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -692,5 +693,107 @@ class SpottingTest {
     @Test
     void noLine_Angle_MinusPIOn4_MinusPIOn6(){
         assertFalse(spotting.isLineBetween(-Math.PI/4,-Math.PI/6,Math.PI/4,Math.PI/6));
+    }
+
+    ///////////////////////////////////////////   isReefSideInRectangle  ///////////////////////////////////////////
+
+    @Test
+    void isReefSideIn_2_0_Ort0_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(2,0,0),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_2_0_OrtPIOn4_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(2,0,Math.PI/4),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_2_0_MinusOrtPIOn4_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(2,0,-Math.PI/4),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_Minus2_0_Ort0_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(-2,0,0),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_Minus2_0_OrtPIOn4_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(-2,0,Math.PI/4),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_Minus2_0_MinusOrtPIOn4_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(-2,0,-Math.PI/4),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_Minus2_0_OrtPIOn2_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(-2,0,Math.PI/2),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertFalse(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_Minus2_0_MinusOrtPIOn2_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(-2,0,-Math.PI/2),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertFalse(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_0_2_Ort0_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(0,2,0),new Rectangle(4,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,2,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_0_Minus2_Ort0_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(0,-2,0),new Rectangle(4,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,2,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
     }
 }

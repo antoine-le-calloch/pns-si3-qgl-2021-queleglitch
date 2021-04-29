@@ -16,29 +16,8 @@ public class Spotting {
         this.visibleReef = visibleReef;
     }
 
-    public boolean isReefsOnTheShipWay(int shipWidth, Position shipPosition, Position positionToReach){
-        Rectangle widthTakenByShip = new Rectangle(shipWidth+60,0, shipPosition.getAngleToAPosition(positionToReach));
-        Point topShipPoint = widthTakenByShip.getRealPoints(shipPosition)[0];
-        Point downShipPoint = widthTakenByShip.getRealPoints(shipPosition)[2];
-        Point topCheckpointPoint = widthTakenByShip.getRealPoints(positionToReach)[0];
-        Point downCheckpointPoint = widthTakenByShip.getRealPoints(positionToReach)[2];
-        if(isReefPointsInRectangle(new Point[]{topCheckpointPoint,topShipPoint,downShipPoint,downCheckpointPoint}))
-            return true;
-        return isReefsBetween2Points(topShipPoint, topCheckpointPoint) || isReefsBetween2Points(downShipPoint, downCheckpointPoint) || isReefsBetween2Points(shipPosition.toPoint(), positionToReach.toPoint());
-    }
-
-    public boolean isReefsOnTheShipWay(Point[] rectanglePoints){
-        Point topShipPoint = rectanglePoints[1];
-        Point downShipPoint = rectanglePoints[2];
-        Point topCheckpointPoint = rectanglePoints[0];
-        Point downCheckpointPoint = rectanglePoints[3];
-        if(isReefPointsInRectangle(new Point[]{topCheckpointPoint,topShipPoint,downShipPoint,downCheckpointPoint}))
-            return true;
-        return isReefsBetween2Points(topShipPoint, topCheckpointPoint) || isReefsBetween2Points(downShipPoint, downCheckpointPoint);
-    }
-
     public boolean isReefsInaARectangle(Rectangle rectangle, Point rectangleCentralPoint){
-        return isReefPointsInRectangle(rectangle.getRealPoints(rectangleCentralPoint)) || isReefSideInRectangle2(rectangle.getRealPoints(rectangleCentralPoint));
+        return isReefPointsInRectangle(rectangle.getRealPoints(rectangleCentralPoint)) || isReefSideInRectangle(rectangle.getRealPoints(rectangleCentralPoint));
     }
 
     public boolean isReefPointsInRectangle(Point[] rectanglePoint){
@@ -49,12 +28,9 @@ public class Spotting {
         return false;
     }
 
-    public boolean isReefSideInRectangle2(Point[] rectanglePoint){
-        return isReefsOnTheShipWay(rectanglePoint);
-    }
-
     public boolean isReefSideInRectangle(Point[] rectanglePoint){
-        return isReefsBetween2Points(rectanglePoint[1], rectanglePoint[0]) || isReefsBetween2Points(rectanglePoint[2], rectanglePoint[3]);
+        return isReefsBetween2Points(rectanglePoint[1], rectanglePoint[0]) || isReefsBetween2Points(rectanglePoint[1], rectanglePoint[2]) ||
+                isReefsBetween2Points(rectanglePoint[1], rectanglePoint[2]) || isReefsBetween2Points(rectanglePoint[2], rectanglePoint[3]);
     }
 
     public boolean isReefsBetween2Points(Point point1, Point point2){
@@ -87,7 +63,7 @@ public class Spotting {
     public boolean isLineBetween(double angleStartToFormPoint1, double angleStartToFormPoint2, double angleEndToFormPoint1, double angleEndToFormPoint2){
         if(     (Math.cos(angleStartToFormPoint1) >= 0 || Math.cos(angleStartToFormPoint2) >= 0) &&
                 (Math.sin(angleStartToFormPoint1) <= 0 && Math.sin(angleStartToFormPoint2) >= 0 ||
-                Math.sin(angleStartToFormPoint1) >= 0 && Math.sin(angleStartToFormPoint2) <= 0))
+                 Math.sin(angleStartToFormPoint1) >= 0 && Math.sin(angleStartToFormPoint2) <= 0))
             return Math.cos(angleEndToFormPoint1) >= 0 || Math.cos(angleEndToFormPoint2) >= 0;
 
         return false;

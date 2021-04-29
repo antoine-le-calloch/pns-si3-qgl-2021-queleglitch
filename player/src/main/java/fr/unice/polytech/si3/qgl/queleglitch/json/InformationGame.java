@@ -50,7 +50,7 @@ public class InformationGame {
     }
 
     public void createGrid() {
-        grid = new Grid(7000,400,400);
+        grid = new Grid(7000,200,200);
         grid.create(ship.getPosition().toPoint(), getRegattaGoal().getPositionActualOptiCheckpoint().toPoint(),seaEntities);
     }
 
@@ -81,6 +81,10 @@ public class InformationGame {
         if(goal instanceof RegattaGoal)
             return (RegattaGoal) goal;
         return null;
+    }
+
+    public boolean checkpointOutOfGrid() {
+        return grid.getCaseOfAPosition(getRegattaGoal().getPositionActualOptiCheckpoint()) == null;
     }
 
     /**
@@ -115,5 +119,21 @@ public class InformationGame {
         this.seaEntities = new SeaEntities(nextRound.getVisibleEntities());
         this.ship = nextRound.getShip();
         this.wind = nextRound.getWind();
+    }
+
+    public void setSeaEntities(SeaEntities seaEntities) {
+        this.seaEntities = seaEntities;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
+    }
+
+    public void setShip(Ship ship) {
+        this.ship = ship;
+    }
+
+    public void setWind(Wind wind) {
+        this.wind = wind;
     }
 }

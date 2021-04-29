@@ -8,7 +8,6 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.RegattaResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.ShipMovementResolver;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class Processing {
             informationGame.createGrid();
         }
 
-        if(firstTurn || checkpointReached) {
+        if(firstTurn || checkpointReached || informationGame.checkpointOutOfGrid()) {
             firstTurn = false;
             secondTurn = true;
             informationGame.createGrid();
@@ -48,14 +47,6 @@ public class Processing {
         informationGame.createPath();
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
         regattaResolver = new RegattaResolver(informationGame);
-        /*System.out.println("checkpoint : " + informationGame.getRegattaGoal().getPositionActualOptiCheckpoint());
-        System.out.print("checkpoint col : " + informationGame.getGrid().getColAndLineOfAPosition(informationGame.getRegattaGoal().getPositionActualOptiCheckpoint())[0]);
-        System.out.println(",    lin : " + informationGame.getGrid().getColAndLineOfAPosition(informationGame.getRegattaGoal().getPositionActualOptiCheckpoint())[1]);
-        System.out.println("case point : " + informationGame.getGrid().getCase(informationGame.getGrid().getColAndLineOfAPosition(informationGame.getRegattaGoal().getPositionActualOptiCheckpoint())[0],informationGame.getGrid().getColAndLineOfAPosition(informationGame.getRegattaGoal().getPositionActualOptiCheckpoint())[1]).getCentralPoint());
-        for (Point point : informationGame.getRegattaGoal().getPathPoints()) {
-            System.out.print("col : " + informationGame.getGrid().getColAndLineOfAPosition(point.toPosition())[0]);
-            System.out.println(", lin : " + informationGame.getGrid().getColAndLineOfAPosition(point.toPosition())[1]);
-        }*/
     }
 
     public List<Action> actionForTheRound(){
