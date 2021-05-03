@@ -388,5 +388,33 @@ class GeometryTest {
             boolean isInTheRectangle = Geometry.isThisPointInARectangle(new Point(82,-14), rectangle.getRealPoints(new Point(0,0)));
             assertTrue(isInTheRectangle);
         }
+
+        @Test
+        void pointIn_652_1073_And_RectangleIn_Minus852_1073(){
+            Rectangle rectangle = new Rectangle(200,200,0);
+            boolean isInTheRectangle = Geometry.isThisPointInARectangle(new Point(652.4393401841488,1073.521265453122), rectangle.getRealPoints(new Point(-852.098217695972,1073.521265453122)));
+            assertFalse(isInTheRectangle);
+        }
+
+        @Test
+        void pointIn_Minus852_Minus923_And_RectangleIn_Minus852_1073(){
+            Rectangle rectangle = new Rectangle(200,200,0);
+            boolean isInTheRectangle = Geometry.isThisPointInARectangle(new Point(-852.098217695972,-923.0675096651099), rectangle.getRealPoints(new Point(-852.098217695972,1073.521265453122)));
+            assertFalse(isInTheRectangle);
+        }
+
+        @Test
+        void pointIn_Minus652_Minus1073_And_RectangleIn_Minus852_1073(){
+            Rectangle rectangle = new Rectangle(200,200,0);
+            boolean isInTheRectangle = Geometry.isThisPointInARectangle(new Point(-652.4393401841488,-1073.521265453122), rectangle.getRealPoints(new Point(-852.098217695972,1073.521265453122)));
+            assertFalse(isInTheRectangle);
+        }
+
+        @Test
+        void pointIn_852_923_And_RectangleIn_Minus852_1073(){
+            Rectangle rectangle = new Rectangle(200,200,0);
+            boolean isInTheRectangle = Geometry.isThisPointInARectangle(new Point(852.098217695972,923.0675096651099), rectangle.getRealPoints(new Point(-852.098217695972,1073.521265453122)));
+            assertFalse(isInTheRectangle);
+        }
     }
 }

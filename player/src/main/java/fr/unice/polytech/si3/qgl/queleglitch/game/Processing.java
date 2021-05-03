@@ -32,7 +32,7 @@ public class Processing {
         } else
             checkpointReached = false;
 
-        if(secondTurn) {
+        if(firstTurn || secondTurn || checkpointReached || informationGame.checkpointOutOfGrid()) {
             secondTurn = false;
             informationGame.createGrid();
         }
@@ -40,7 +40,6 @@ public class Processing {
         if(firstTurn || checkpointReached || informationGame.checkpointOutOfGrid()) {
             firstTurn = false;
             secondTurn = true;
-            informationGame.createGrid();
             informationGame.getRegattaGoal().setCheckpointReach(true);
         }
 

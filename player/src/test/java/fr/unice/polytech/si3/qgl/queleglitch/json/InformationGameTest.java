@@ -2,13 +2,9 @@ package fr.unice.polytech.si3.qgl.queleglitch.json;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Grid;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.SeaEntities;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.VisibleEntities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -43,7 +39,7 @@ class InformationGameTest {
         Point checkpoint = new Point(5000,0);
         informationGame.setGoal(mockGoal);
         informationGame.setGrid(grid);
-        grid.create(shipPoint0,checkpoint,seaEntities);
+        grid.create(shipPoint0,checkpoint);
         assertTrue(informationGame.checkpointOutOfGrid());
     }
 
@@ -53,7 +49,7 @@ class InformationGameTest {
         Point checkpoint = new Point(0,5000);
         informationGame.setGoal(mockGoal);
         informationGame.setGrid(grid);
-        grid.create(shipPoint0,checkpoint,seaEntities);
+        grid.create(shipPoint0,checkpoint);
         assertTrue(informationGame.checkpointOutOfGrid());
     }
 
@@ -63,7 +59,7 @@ class InformationGameTest {
         Point checkpoint = new Point(1000,0);
         informationGame.setGoal(mockGoal);
         informationGame.setGrid(grid);
-        grid.create(shipPoint0,checkpoint,seaEntities);
+        grid.create(shipPoint0,checkpoint);
         assertFalse(informationGame.checkpointOutOfGrid());
     }
 
@@ -73,7 +69,7 @@ class InformationGameTest {
         Point checkpoint = new Point(0,1000);
         informationGame.setGoal(mockGoal);
         informationGame.setGrid(grid);
-        grid.create(shipPoint0,checkpoint,seaEntities);
+        grid.create(shipPoint0,checkpoint);
         assertFalse(informationGame.checkpointOutOfGrid());
     }
 

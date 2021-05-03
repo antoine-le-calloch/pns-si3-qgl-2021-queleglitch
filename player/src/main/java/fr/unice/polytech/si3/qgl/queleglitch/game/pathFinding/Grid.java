@@ -2,7 +2,6 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.Geometry;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.SeaEntities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 
@@ -24,10 +23,9 @@ public class Grid {
         grid = new Case[NB_COL][NB_LIN];
     }
 
-    public void create(Point centralGridPoint, Point checkpointPosition, SeaEntities seaEntities){
+    public void create(Point centralGridPoint, Point checkpointPosition){
         double gridOrientation = centralGridPoint.getAngleToAPoint(checkpointPosition);
         Rectangle caseForm = new Rectangle(CASE_WIDTH,CASE_HEIGHT,gridOrientation);
-        Spotting spotting = new Spotting(seaEntities.getVisibleReefs());
         int lin = 0, col = 0;
 
         while (col < NB_COL/2.0){
@@ -44,8 +42,6 @@ public class Grid {
                     default: break;
                 }
                 grid[newCol][newLin] = new Case(caseForm,points[i]);
-                if(spotting.isReefsInaARectangle(caseForm, grid[col][lin].getCentralPoint()))
-                    grid[col][lin].setIsReef(true);
             }
             lin++;
             if(lin > NB_LIN/2.0){
@@ -61,12 +57,11 @@ public class Grid {
         return rectangle.getRealPoints(centralGridPoint);
     }
 
-    public boolean processCaseWeight(Point shipPoint) {
-        int[] columnLine = getColAndLineOfAPosition(shipPoint.toPosition());
+    public void processCaseWeight(Point startPoint) {
+        int[] columnLine = getColAndLineOfAPosition(startPoint.toPosition());
         if(columnLine == null)
-            return false;
+            return;
         processCaseWeightByColAndLin(columnLine[0],columnLine[1],0);
-        return true;
     }
 
     public void processCaseWeightByColAndLin(int column, int line, int weight){
@@ -112,14 +107,16 @@ public class Grid {
         for (Case[] columnCases : grid) {
             for (Case gridCase : columnCases) {
                 gridCase.setWeight(-1);
-                if(spotting.isReefsInaARectangle(gridCase.getForm(), gridCase.getCentralPoint()))
+                if(spotting.isReefsInARectangle(gridCase.getForm().getRealPoints(gridCase.getCentralPoint())))
                     gridCase.setIsReef(true);
             }
         }
     }
 
     public Case getCase(int col, int lin){
-        return grid[col][lin];
+        if(col >= 0 && col < NB_COL && lin >= 0 && lin < NB_LIN)
+            return grid[col][lin];
+        return null;
     }
 
     public int getNB_COL() {
