@@ -11,6 +11,8 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 class GridTest {
 
     Grid grid;
@@ -22,12 +24,15 @@ class GridTest {
     Point checkpointMinusOrtPIOn2;
     SeaEntities seaEntities;
     SeaEntities seaEntities1Reef;
+    Spotting spotting;
 
     @BeforeEach
     void setUp() {
         grid = new Grid(5000,40,200);
-        seaEntities = new SeaEntities(null);
-        seaEntities1Reef = new SeaEntities(new VisibleEntities[]{new Reef(new Position(150,0,0),new Rectangle(10,10,0))});
+        spotting = new Spotting(new ArrayList<>());
+        seaEntities = new SeaEntities();
+        seaEntities1Reef = new SeaEntities();
+        seaEntities1Reef.addSeaEntities(new VisibleEntities[]{new Reef(new Position(150,0,0),new Rectangle(10,10,0))});
         shipPoint0 = new Point(0,0);
         shipPoint1 = new Point(1,1);
         checkpoint0 = new Point(100,0);
@@ -39,7 +44,7 @@ class GridTest {
 
     @Test
     void getColAndLineOf_0_0() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         int[] colLin = grid.getColAndLineOfAPosition(new Position(0,0,0));
         assertEquals(12,colLin[0]);
         assertEquals(62,colLin[1]);
@@ -47,7 +52,7 @@ class GridTest {
 
     @Test
     void getColAndLineOf_2500_2500() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         int[] colLin = grid.getColAndLineOfAPosition(new Position(2500,2500,0));
         assertEquals(0,colLin[0]);
         assertEquals(0,colLin[1]);
@@ -55,7 +60,7 @@ class GridTest {
 
     @Test
     void getColAndLineOf_Minus2499_2500() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         int[] colLin = grid.getColAndLineOfAPosition(new Position(-2500,2500,0));
         assertEquals(24,colLin[0]);
         assertEquals(0,colLin[1]);
@@ -63,7 +68,7 @@ class GridTest {
 
     @Test
     void getColAndLineOf_Minus2499_Minus2499() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         int[] colLin = grid.getColAndLineOfAPosition(new Position(-2500,-2500,0));
         assertEquals(24,colLin[0]);
         assertEquals(124,colLin[1]);
@@ -71,7 +76,7 @@ class GridTest {
 
     @Test
     void getColAndLineOf_2500_Minus2499() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         int[] colLin = grid.getColAndLineOfAPosition(new Position(2500,-2500,0));
         assertEquals(0,colLin[0]);
         assertEquals(124,colLin[1]);
@@ -79,7 +84,7 @@ class GridTest {
 
     @Test
     void getColAndLineOf_10000_2500() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         int[] colLin = grid.getColAndLineOfAPosition(new Position(10000,2500,0));
         assertNull(colLin);
     }
@@ -88,14 +93,14 @@ class GridTest {
 
     @Test
     void getCaseWeightOf_0_0() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         Case caseOfAPosition = grid.getCaseOfAPosition(new Position(0,0,0));
         assertEquals(-1,caseOfAPosition.getWeight());
     }
 
     @Test
     void getCaseOf_0_0() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         Case caseOfAPosition = grid.getCaseOfAPosition(new Position(0,0,0));
         assertEquals(0,caseOfAPosition.getCentralPoint().getX());
         assertEquals(0,caseOfAPosition.getCentralPoint().getY());
@@ -103,7 +108,7 @@ class GridTest {
 
     @Test
     void getCaseOf_2500_2500() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         Case caseOfAPosition = grid.getCaseOfAPosition(new Position(2500,2500,0));
         assertEquals(2400,caseOfAPosition.getCentralPoint().getX());
         assertEquals(2480,caseOfAPosition.getCentralPoint().getY());
@@ -111,7 +116,7 @@ class GridTest {
 
     @Test
     void getCaseOf_Minus2499_2500() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         Case caseOfAPosition = grid.getCaseOfAPosition(new Position(-2500,2500,0));
         assertEquals(-2400,caseOfAPosition.getCentralPoint().getX());
         assertEquals(2480,caseOfAPosition.getCentralPoint().getY());
@@ -119,7 +124,7 @@ class GridTest {
 
     @Test
     void getCaseOf_Minus2499_Minus2499() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         Case caseOfAPosition = grid.getCaseOfAPosition(new Position(-2500,-2500,0));
         assertEquals(-2400,caseOfAPosition.getCentralPoint().getX());
         assertEquals(-2480,caseOfAPosition.getCentralPoint().getY());
@@ -127,7 +132,7 @@ class GridTest {
 
     @Test
     void getCaseOf_2500_Minus2499() {
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         Case caseOfAPosition = grid.getCaseOfAPosition(new Position(2500,-2500,0));
         assertEquals(2400,caseOfAPosition.getCentralPoint().getX());
         assertEquals(-2480,caseOfAPosition.getCentralPoint().getY());
@@ -138,7 +143,7 @@ class GridTest {
     @Test
     void processCaseWeightByColAndLin_SideLength1_CaseW1_CaseH1() {
         Grid grid = new Grid(1,1,1);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeightByColAndLin(0,0,0);
         assertEquals(0,grid.getCase(0,0).getWeight());
     }
@@ -146,85 +151,65 @@ class GridTest {
     @Test
     void processCaseWeightByColAndLin_SideLength5_CaseW1_CaseH1() {
         Grid grid = new Grid(5,1,1);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeightByColAndLin(2,2,0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(1,2).getWeight());
-        assertEquals(1,grid.getCase(1,1).getWeight());
-        assertEquals(2,grid.getCase(0,1).getWeight());
-        assertEquals(2,grid.getCase(0,0).getWeight());
+        assertEquals(Math.sqrt(2),grid.getCase(1,1).getWeight());
+        assertEquals(1+Math.sqrt(2),grid.getCase(0,1).getWeight());
+        assertEquals(2*Math.sqrt(2),grid.getCase(0,0).getWeight());
     }
 
     @Test
     void processCaseWeightByColAndLin_SideLength11_CaseW1_CaseH1() {
         Grid grid = new Grid(11,1,1);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeightByColAndLin(5,5,0);
-        assertEquals(5,grid.getCase(0,0).getWeight());
-        assertEquals(5,grid.getCase(0,1).getWeight());
-        assertEquals(4,grid.getCase(1,1).getWeight());
-        assertEquals(4,grid.getCase(1,2).getWeight());
-        assertEquals(3,grid.getCase(2,2).getWeight());
+        assertEquals(5*Math.sqrt(2),grid.getCase(0,0).getWeight());
+        assertEquals(4*Math.sqrt(2),grid.getCase(1,1).getWeight());
+        assertEquals(3*Math.sqrt(2),grid.getCase(2,2).getWeight());
     }
 
     @Test
     void processCaseWeightByColAndLin_SideLength21_CaseW1_CaseH1() {
         Grid grid = new Grid(21,1,1);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeightByColAndLin(10,10,0);
-        assertEquals(10,grid.getCase(0,0).getWeight());
-        assertEquals(10,grid.getCase(0,1).getWeight());
-        assertEquals(9,grid.getCase(1,1).getWeight());
-        assertEquals(9,grid.getCase(1,2).getWeight());
-        assertEquals(8,grid.getCase(2,2).getWeight());
+        assertEquals(6*Math.sqrt(2),grid.getCase(4,4).getWeight());
     }
 
     @Test
     void processCaseWeightByColAndLin_SideLength10_CaseW2_CaseH2() {
         Grid grid = new Grid(10,2,2);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeightByColAndLin(2,2,0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(3,2).getWeight());
-        assertEquals(1,grid.getCase(3,1).getWeight());
-        assertEquals(2,grid.getCase(4,1).getWeight());
-        assertEquals(2,grid.getCase(4,0).getWeight());
+        assertEquals(1*Math.sqrt(2),grid.getCase(3,1).getWeight());
+        assertEquals(1*Math.sqrt(2)+1,grid.getCase(4,1).getWeight());
+        assertEquals(2*Math.sqrt(2),grid.getCase(4,0).getWeight());
     }
 
     @Test
     void processCaseWeightByColAndLin_SideLength22_CaseW2_CaseH2() {
         Grid grid = new Grid(22,2,2);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeightByColAndLin(5,5,0);
-        assertEquals(5,grid.getCase(0,0).getWeight());
-        assertEquals(5,grid.getCase(0,1).getWeight());
-        assertEquals(4,grid.getCase(1,1).getWeight());
-        assertEquals(4,grid.getCase(1,2).getWeight());
-        assertEquals(3,grid.getCase(2,2).getWeight());
+        assertEquals(5*Math.sqrt(2),grid.getCase(0,0).getWeight());
+        assertEquals(4*Math.sqrt(2),grid.getCase(1,1).getWeight());
+        assertEquals(3*Math.sqrt(2),grid.getCase(2,2).getWeight());
     }
 
     @Test
     void processCaseWeightByColAndLin_SideLength1000_CaseW200_CaseH200() {
         Grid grid = new Grid(1000,200,200);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeightByColAndLin(2,2,0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(3,2).getWeight());
-        assertEquals(1,grid.getCase(3,1).getWeight());
-        assertEquals(2,grid.getCase(4,1).getWeight());
-        assertEquals(2,grid.getCase(4,0).getWeight());
-    }
-
-    @Test
-    void processCaseWeightByColAndLin_SideLength5001_CaseW1_CaseH1() {
-        Grid grid = new Grid(5100,100,100);
-        grid.create(shipPoint0,checkpoint0);
-        grid.processCaseWeightByColAndLin(25,25,0);
-        assertEquals(25,grid.getCase(0,0).getWeight());
-        assertEquals(25,grid.getCase(0,1).getWeight());
-        assertEquals(24,grid.getCase(1,1).getWeight());
-        assertEquals(24,grid.getCase(1,2).getWeight());
-        assertEquals(23,grid.getCase(2,2).getWeight());
+        assertEquals(Math.sqrt(2),grid.getCase(3,1).getWeight());
+        assertEquals(Math.sqrt(2)+1,grid.getCase(4,1).getWeight());
+        assertEquals(2*Math.sqrt(2),grid.getCase(4,0).getWeight());
     }
 
     ////////////////////////////////////////////    processCaseWeight    //////////////////////////////////////////
@@ -232,7 +217,7 @@ class GridTest {
     @Test
     void processCaseWeight_SideLength1_CaseW1_CaseH1() {
         Grid grid = new Grid(1,1,1);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeight(shipPoint0);
         assertEquals(0,grid.getCase(0,0).getWeight());
     }
@@ -240,91 +225,53 @@ class GridTest {
     @Test
     void processCaseWeight_SideLength5_CaseW1_CaseH1() {
         Grid grid = new Grid(5,1,1);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeight(shipPoint0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(1,2).getWeight());
-        assertEquals(1,grid.getCase(1,1).getWeight());
-        assertEquals(2,grid.getCase(0,1).getWeight());
-        assertEquals(2,grid.getCase(0,0).getWeight());
-    }
-
-    @Test
-    void processCaseWeight_SideLength11_CaseW1_CaseH1() {
-        Grid grid = new Grid(11,1,1);
-        grid.create(shipPoint0,checkpoint0);
-        grid.processCaseWeight(shipPoint0);
-        assertEquals(5,grid.getCase(0,0).getWeight());
-        assertEquals(5,grid.getCase(0,1).getWeight());
-        assertEquals(4,grid.getCase(1,1).getWeight());
-        assertEquals(4,grid.getCase(1,2).getWeight());
-        assertEquals(3,grid.getCase(2,2).getWeight());
-    }
-
-    @Test
-    void processCaseWeight_SideLength21_CaseW1_CaseH1() {
-        Grid grid = new Grid(21,1,1);
-        grid.create(shipPoint0,checkpoint0);
-        grid.processCaseWeight(shipPoint0);
-        assertEquals(10,grid.getCase(0,0).getWeight());
-        assertEquals(10,grid.getCase(0,1).getWeight());
-        assertEquals(9,grid.getCase(1,1).getWeight());
-        assertEquals(9,grid.getCase(1,2).getWeight());
-        assertEquals(8,grid.getCase(2,2).getWeight());
+        assertEquals(Math.sqrt(2),grid.getCase(1,1).getWeight());
+        assertEquals(Math.sqrt(2)+1,grid.getCase(0,1).getWeight());
+        assertEquals(2*Math.sqrt(2),grid.getCase(0,0).getWeight());
     }
 
     @Test
     void processCaseWeight_SideLength10_CaseW2_CaseH2() {
         Grid grid = new Grid(10,2,2);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeight(shipPoint0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(3,2).getWeight());
-        assertEquals(1,grid.getCase(3,1).getWeight());
-        assertEquals(2,grid.getCase(4,1).getWeight());
-        assertEquals(2,grid.getCase(4,0).getWeight());
+        assertEquals(Math.sqrt(2),grid.getCase(3,1).getWeight());
+        assertEquals(Math.sqrt(2)+1,grid.getCase(4,1).getWeight());
+        assertEquals(2*Math.sqrt(2),grid.getCase(4,0).getWeight());
     }
 
     @Test
     void processCaseWeight_SideLength22_CaseW2_CaseH2() {
         Grid grid = new Grid(22,2,2);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeight(shipPoint0);
-        assertEquals(5,grid.getCase(0,0).getWeight());
-        assertEquals(5,grid.getCase(0,1).getWeight());
-        assertEquals(4,grid.getCase(1,1).getWeight());
-        assertEquals(4,grid.getCase(1,2).getWeight());
-        assertEquals(3,grid.getCase(2,2).getWeight());
+        assertEquals(5*Math.sqrt(2),grid.getCase(0,0).getWeight());
+        assertEquals(4*Math.sqrt(2),grid.getCase(1,1).getWeight());
+        assertEquals(3*Math.sqrt(2),grid.getCase(2,2).getWeight());
     }
 
     @Test
     void processCaseWeight_SideLength1000_CaseW200_CaseH200() {
         Grid grid = new Grid(1000,200,200);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeight(shipPoint0);
         assertEquals(0,grid.getCase(2,2).getWeight());
         assertEquals(1,grid.getCase(3,2).getWeight());
-        assertEquals(1,grid.getCase(3,1).getWeight());
-        assertEquals(2,grid.getCase(4,1).getWeight());
-        assertEquals(2,grid.getCase(4,0).getWeight());
-    }
-
-    @Test
-    void processCaseWeight_SideLength5100_CaseW100_CaseH100() {
-        Grid grid = new Grid(5100,100,100);
-        grid.create(shipPoint0,checkpoint0);
-        grid.processCaseWeight(shipPoint0);
-        assertEquals(25,grid.getCase(0,0).getWeight());
-        assertEquals(25,grid.getCase(0,1).getWeight());
-        assertEquals(24,grid.getCase(1,1).getWeight());
-        assertEquals(24,grid.getCase(1,2).getWeight());
-        assertEquals(23,grid.getCase(2,2).getWeight());
+        assertEquals(Math.sqrt(2),grid.getCase(3,1).getWeight());
+        assertEquals(Math.sqrt(2)+1,grid.getCase(4,1).getWeight());
+        assertEquals(2*Math.sqrt(2),grid.getCase(4,0).getWeight());
     }
 
     @Test
     void processCaseWeight_SideLength5000_CaseW200_CaseH200_0Reef_Case1() {
         Grid grid = new Grid(5000,200,200);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeight(shipPoint0);
         assertEquals(1,grid.getCase(11,12).getWeight());
     }
@@ -332,7 +279,7 @@ class GridTest {
     @Test
     void processCaseWeight_SideLength5000_CaseW200_CaseH200_0Reef_Case2() {
         Grid grid = new Grid(5000,200,200);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeight(shipPoint0);
         assertEquals(2,grid.getCase(10,12).getWeight());
     }
@@ -340,7 +287,7 @@ class GridTest {
     @Test
     void processCaseWeight_SideLength5000_CaseW200_CaseH200_1Reef_Case1() {
         Grid grid = new Grid(5000,200,200);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeight(shipPoint0);
         assertEquals(1,grid.getCase(11,12).getWeight());
     }
@@ -348,7 +295,7 @@ class GridTest {
     @Test
     void processCaseWeight_SideLength5000_CaseW200_CaseH200_1Reef_Case2() {
         Grid grid = new Grid(5000,200,200);
-        grid.create(shipPoint0,checkpoint0);
+        grid.create(shipPoint0,checkpoint0,spotting);
         grid.processCaseWeight(shipPoint0);
         assertEquals(2,grid.getCase(10,12).getWeight());
     }
@@ -486,42 +433,42 @@ class GridTest {
 
     @Test
     void create_C0_L0_ship0_ort0() {
-        grid.create(shipPoint0, checkpoint0);
+        grid.create(shipPoint0, checkpoint0,spotting);
         Point point = grid.getCase(0,0).getCentralPoint();
         assertEquals(new Point(2500-(0.5*200),2500-(0.5*40)),point);
     }
 
     @Test
     void create_C1_L0_ship0_ort0() {
-        grid.create(shipPoint0, checkpoint0);
+        grid.create(shipPoint0, checkpoint0,spotting);
         Point point = grid.getCase(1,0).getCentralPoint();
         assertEquals(new Point(2500-(1.5*200),2500-(0.5*40)),point);
     }
 
     @Test
     void create_C0_L1_ship0_ort0() {
-        grid.create(shipPoint0, checkpoint0);
+        grid.create(shipPoint0, checkpoint0,spotting);
         Point point = grid.getCase(0,1).getCentralPoint();
         assertEquals(new Point(2500-(0.5*200),2500-(1.5*40)),point);
     }
 
     @Test
     void create_C1_L1_ship0_ort0() {
-        grid.create(shipPoint0, checkpoint0);
+        grid.create(shipPoint0, checkpoint0,spotting);
         Point point = grid.getCase(1,1).getCentralPoint();
         assertEquals(new Point(2500-(1.5*200),2500-(1.5*40)),point);
     }
 
     @Test
     void create_C0_L2_ship0_ort0() {
-        grid.create(shipPoint0, checkpoint0);
+        grid.create(shipPoint0, checkpoint0,spotting);
         Point point = grid.getCase(0,2).getCentralPoint();
         assertEquals(new Point(2500-(0.5*200),2500-(2.5*40)),point);
     }
 
     @Test
     void create_C0_LMaxMinus1_ship0_ort0() {
-        grid.create(shipPoint0, checkpoint0);
+        grid.create(shipPoint0, checkpoint0,spotting);
         Point point = grid.getCase(0,124).getCentralPoint();
         assertEquals(new Point(2500-(0.5*200),2500-(124.5*40)),point);
     }
@@ -530,35 +477,35 @@ class GridTest {
 
     @Test
     void create_C1_L0_ship1_ort0() {
-        grid.create(shipPoint1, checkpoint1);
+        grid.create(shipPoint1, checkpoint1,spotting);
         Point point = grid.getCase(1,0).getCentralPoint();
         assertEquals(new Point(2501-(1.5*200),2501-(0.5*40)),point);
     }
 
     @Test
     void create_C0_L0_ship1_ort0() {
-        grid.create(shipPoint1, checkpoint1);
+        grid.create(shipPoint1, checkpoint1,spotting);
         Point point = grid.getCase(0,0).getCentralPoint();
         assertEquals(new Point(2501-(0.5*200),2501-(0.5*40)),point);
     }
 
     @Test
     void create_C0_L1_ship1_ort0() {
-        grid.create(shipPoint1, checkpoint1);
+        grid.create(shipPoint1, checkpoint1,spotting);
         Point point = grid.getCase(0,1).getCentralPoint();
         assertEquals(new Point(2501-(0.5*200),2501-(1.5*40)),point);
     }
 
     @Test
     void create_C0_L2_ship1_ort0() {
-        grid.create(shipPoint1, checkpoint1);
+        grid.create(shipPoint1, checkpoint1,spotting);
         Point point = grid.getCase(0,2).getCentralPoint();
         assertEquals(new Point(2501-(0.5*200),2501-(2.5*40)),point);
     }
 
     @Test
     void create_C0_LMaxMinus1_ship1_ort0() {
-        grid.create(shipPoint1, checkpoint1);
+        grid.create(shipPoint1, checkpoint1,spotting);
         Point point = grid.getCase(0,124).getCentralPoint();
         assertEquals(new Point(2501-(0.5*200),2501-(124.5*40)),point);
     }
@@ -566,21 +513,21 @@ class GridTest {
     /////ort PI/2
     @Test
     void create_C1_L0_ship1_ortPIOn2() {
-        grid.create(shipPoint1, checkpointOrtPIOn2);
+        grid.create(shipPoint1, checkpointOrtPIOn2,spotting);
         Point point = grid.getCase(1,0).getCentralPoint();
         assertEquals(new Point(-2499+(0.5*40),2501-(1.5*200)),point);
     }
 
     @Test
     void create_C0_L0_ship1_ortPIOn2() {
-        grid.create(shipPoint1, checkpointOrtPIOn2);
+        grid.create(shipPoint1, checkpointOrtPIOn2,spotting);
         Point point = grid.getCase(0,0).getCentralPoint();
         assertEquals(new Point(-2499+(0.5*40),2501-(0.5*200)),point);
     }
 
     @Test
     void create_C0_LMaxMinus1_ship1_ortPIOn2() {
-        grid.create(shipPoint1, checkpointOrtPIOn2);
+        grid.create(shipPoint1, checkpointOrtPIOn2,spotting);
         Point point = grid.getCase(0,124).getCentralPoint();
         assertEquals(new Point(-2499+(124.5*40),2501-(0.5*200)),point);
     }
@@ -588,21 +535,21 @@ class GridTest {
     /////ort -PI/2
     @Test
     void create_C1_L0_ship1_ortMinusPIOn2() {
-        grid.create(shipPoint1, checkpointMinusOrtPIOn2);
+        grid.create(shipPoint1, checkpointMinusOrtPIOn2,spotting);
         Point point = grid.getCase(1,0).getCentralPoint();
         assertEquals(new Point(2501-(0.5*40),-2499+(1.5*200)),point);
     }
 
     @Test
     void create_C0_L0_ship1_ortMinusPIOn2() {
-        grid.create(shipPoint1, checkpointMinusOrtPIOn2);
+        grid.create(shipPoint1, checkpointMinusOrtPIOn2,spotting);
         Point point = grid.getCase(0,0).getCentralPoint();
         assertEquals(new Point(2501-(0.5*40),-2499+(0.5*200)),point);
     }
 
     @Test
     void create_C0_LMaxMinus1_ship1_ortMinusPIOn2() {
-        grid.create(shipPoint1, checkpointMinusOrtPIOn2);
+        grid.create(shipPoint1, checkpointMinusOrtPIOn2,spotting);
         Point point = grid.getCase(0,124).getCentralPoint();
         assertEquals(new Point(2501-(124.5*40),-2499+(0.5*200)),point);
     }
@@ -611,7 +558,7 @@ class GridTest {
 
     @Test
     void create_OneReef_C0_L0_ship0_ort0() {
-        grid.create(shipPoint0, checkpoint0);
+        grid.create(shipPoint0, checkpoint0,spotting);
         Case gridCase = grid.getCase(11,62);
         assertFalse(gridCase.isReef());
     }

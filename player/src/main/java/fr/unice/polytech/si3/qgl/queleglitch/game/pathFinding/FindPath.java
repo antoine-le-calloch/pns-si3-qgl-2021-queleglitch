@@ -11,68 +11,71 @@ public class FindPath {
         this.grid = grid;
     }
 
-    public void createPath(RegattaGoal regattaGoal, int[] columnLineOfShip){
-        regattaGoal.resetPathPoints();
-        Point virtualCheckpoint = regattaGoal.getPositionActualOptiCheckpoint().toPoint();
-        int[] columnLineOfCheckpoint;
+    public void createPath(RegattaGoal regattaGoal, Case shipCase){
+        int col = shipCase.col();
+        int lin = shipCase.line();
+        Case targetCase;
 
-        if((columnLineOfCheckpoint = grid.getColAndLineOfAPosition(virtualCheckpoint.toPosition())) == null){
+        if((targetCase = grid.getCaseOfAPosition(regattaGoal.getPositionActualOptiCheckpoint())) == null || targetCase.getWeight() == -1){
             do{
-                if(columnLineOfShip[0] > 0)
-                    columnLineOfShip[0]--;
+                if(col > 0)
+                    col--;
                 else{
-                    if(columnLineOfShip[1] > 0)
-                        columnLineOfShip[1]--;
+                    if(lin > 0)
+                        lin--;
                     else{
-                        columnLineOfShip[1]++;
+                        lin++;
                     }
                 }
-            }while (grid.getCase(columnLineOfShip[0],columnLineOfShip[1]).isReef());
-            virtualCheckpoint = grid.getCase(columnLineOfShip[0],columnLineOfShip[1]).getCentralPoint();
-            columnLineOfCheckpoint = columnLineOfShip;
+            }while (grid.getCase(col,lin).isReef());
+            targetCase = grid.getCase(col,lin);
         }
 
-        int col = columnLineOfCheckpoint[0];
-        int lin = columnLineOfCheckpoint[1];
-        int caseWeight;
-        while ((caseWeight = grid.getCase(col,lin).getWeight()) != 0){
-            if(grid.getCase(col+1,lin+1) != null && grid.getCase(col+1,lin+1).getWeight() < caseWeight && !grid.getCase(col+1,lin+1).isReef()) {
-                caseWeight = grid.getCase(col+1, lin+1).getWeight();
-                virtualCheckpoint = grid.getCase(col+1,lin+1).getCentralPoint();
-            }
-            if(grid.getCase(col+1,lin-1) != null && grid.getCase(col+1,lin-1).getWeight() < caseWeight && !grid.getCase(col+1,lin-1).isReef()) {
-                caseWeight = grid.getCase(col+1, lin-1).getWeight();
-                virtualCheckpoint = grid.getCase(col+1,lin-1).getCentralPoint();
-            }
-            if(grid.getCase(col+1,lin) != null && grid.getCase(col+1,lin).getWeight() < caseWeight && !grid.getCase(col+1,lin).isReef()) {
-                caseWeight = grid.getCase(col+1, lin).getWeight();
-                virtualCheckpoint = grid.getCase(col+1,lin).getCentralPoint();
-            }
-            if(grid.getCase(col-1,lin+1) != null && grid.getCase(col-1,lin+1).getWeight() < caseWeight && !grid.getCase(col-1,lin+1).isReef()) {
-                caseWeight = grid.getCase(col-1, lin+1).getWeight();
-                virtualCheckpoint = grid.getCase(col-1,lin+1).getCentralPoint();
-            }
-            if(grid.getCase(col-1,lin-1) != null && grid.getCase(col-1,lin-1).getWeight() < caseWeight && !grid.getCase(col-1,lin-1).isReef()) {
-                caseWeight = grid.getCase(col-1, lin-1).getWeight();
-                virtualCheckpoint = grid.getCase(col-1,lin-1).getCentralPoint();
-            }
-            if(grid.getCase(col-1,lin) != null && grid.getCase(col-1,lin).getWeight() < caseWeight && !grid.getCase(col-1,lin).isReef()) {
-                caseWeight = grid.getCase(col-1, lin).getWeight();
-                virtualCheckpoint = grid.getCase(col-1,lin).getCentralPoint();
-            }
-            if(grid.getCase(col,lin+1) != null && grid.getCase(col,lin+1).getWeight() < caseWeight && !grid.getCase(col,lin+1).isReef()) {
-                caseWeight = grid.getCase(col, lin+1).getWeight();
-                virtualCheckpoint = grid.getCase(col,lin+1).getCentralPoint();
-            }
-            if(grid.getCase(col,lin-1) != null && grid.getCase(col,lin-1).getWeight() < caseWeight && !grid.getCase(col,lin-1).isReef()) {
-                virtualCheckpoint = grid.getCase(col,lin-1).getCentralPoint();
-            }
-            if(grid.getCaseOfAPosition(virtualCheckpoint.toPosition()).getWeight() > 0) {
-                regattaGoal.addPathPoints(virtualCheckpoint);
-            }
-            columnLineOfCheckpoint = grid.getColAndLineOfAPosition(virtualCheckpoint.toPosition());
-            col = columnLineOfCheckpoint[0];
-            lin = columnLineOfCheckpoint[1];
+        while (targetCase.getWeight() >= 2){
+            targetCase = nextCase(targetCase);
         }
+        if(targetCase.getWeight() > 0) {
+            regattaGoal.createPathPoint(targetCase.getCentralPoint());
+        }
+        else
+            regattaGoal.createPathPoint(null);
+    }
+
+    public Case nextCase(Case targetCase){
+        int col = targetCase.col();
+        int lin = targetCase.line();
+        double caseWeight = targetCase.getWeight();
+        if(grid.getCase(col+1,lin+1) != null && grid.getCase(col+1,lin+1).getWeight() < caseWeight && !grid.getCase(col+1,lin+1).isReef()) {
+            caseWeight = grid.getCase(col+1, lin+1).getWeight();
+            targetCase = grid.getCase(col+1,lin+1);
+        }
+        if(grid.getCase(col+1,lin-1) != null && grid.getCase(col+1,lin-1).getWeight() < caseWeight && !grid.getCase(col+1,lin-1).isReef()) {
+            caseWeight = grid.getCase(col+1, lin-1).getWeight();
+            targetCase = grid.getCase(col+1,lin-1);
+        }
+        if(grid.getCase(col+1,lin) != null && grid.getCase(col+1,lin).getWeight() < caseWeight && !grid.getCase(col+1,lin).isReef()) {
+            caseWeight = grid.getCase(col+1, lin).getWeight();
+            targetCase = grid.getCase(col+1,lin);
+        }
+        if(grid.getCase(col-1,lin+1) != null && grid.getCase(col-1,lin+1).getWeight() < caseWeight && !grid.getCase(col-1,lin+1).isReef()) {
+            caseWeight = grid.getCase(col-1, lin+1).getWeight();
+            targetCase = grid.getCase(col-1,lin+1);
+        }
+        if(grid.getCase(col-1,lin-1) != null && grid.getCase(col-1,lin-1).getWeight() < caseWeight && !grid.getCase(col-1,lin-1).isReef()) {
+            caseWeight = grid.getCase(col-1, lin-1).getWeight();
+            targetCase = grid.getCase(col-1,lin-1);
+        }
+        if(grid.getCase(col-1,lin) != null && grid.getCase(col-1,lin).getWeight() < caseWeight && !grid.getCase(col-1,lin).isReef()) {
+            caseWeight = grid.getCase(col-1, lin).getWeight();
+            targetCase = grid.getCase(col-1,lin);
+        }
+        if(grid.getCase(col,lin+1) != null && grid.getCase(col,lin+1).getWeight() < caseWeight && !grid.getCase(col,lin+1).isReef()) {
+            caseWeight = grid.getCase(col, lin+1).getWeight();
+            targetCase = grid.getCase(col,lin+1);
+        }
+        if(grid.getCase(col,lin-1) != null && grid.getCase(col,lin-1).getWeight() < caseWeight && !grid.getCase(col,lin-1).isReef()) {
+            targetCase = grid.getCase(col,lin-1);
+        }
+        return targetCase;
     }
 }

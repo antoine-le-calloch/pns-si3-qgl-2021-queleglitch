@@ -5,13 +5,23 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Stre
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.VisibleEntities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SeaEntities {
-    private VisibleEntities[] visibleEntities;
 
-    public SeaEntities(VisibleEntities[] visibleEntities) {
-        this.visibleEntities = visibleEntities;
+    private final List<VisibleEntities> visibleEntities = new ArrayList<>();
+
+    public SeaEntities() {
+    }
+
+    public void addSeaEntities(VisibleEntities[] newVisibleEntities){
+        for (VisibleEntities newVisibleEntity : newVisibleEntities) {
+            if(!visibleEntities.contains(newVisibleEntity)){
+                visibleEntities.add(newVisibleEntity);
+            }
+        }
     }
 
     public List<Reef> getVisibleReefs() {
@@ -30,23 +40,9 @@ public class SeaEntities {
         if(visibleEntities == null)
             return visibleStreams;
         for (VisibleEntities visibleEntities : visibleEntities) {
-            if(visibleEntities instanceof Reef)
+            if(visibleEntities instanceof Stream)
                 visibleStreams.add((Stream) visibleEntities);
         }
         return visibleStreams;
-    }
-
-    /**
-     * <p>Getter.</p>
-     */
-    public VisibleEntities[] getVisibleEntities() {
-        return visibleEntities;
-    }
-
-    /**
-     * <p>Setter.</p>
-     */
-    public void setVisibleEntities(VisibleEntities[] visibleEntities) {
-        this.visibleEntities = visibleEntities;
     }
 }

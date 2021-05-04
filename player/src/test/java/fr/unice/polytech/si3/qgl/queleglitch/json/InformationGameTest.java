@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Grid;
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Spotting;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.SeaEntities;
@@ -8,6 +9,8 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -18,17 +21,17 @@ class InformationGameTest {
     Point shipPoint0;
     RegattaGoal mockGoal;
     SeaEntities seaEntities;
+    Spotting spotting;
     InformationGame informationGame;
 
     @BeforeEach
     void setUp() {
         grid = new Grid(5200,200,200);
-        seaEntities = new SeaEntities(null);
+        spotting = new Spotting(new ArrayList<>());
+        seaEntities = new SeaEntities();
         shipPoint0 = new Point(0,0);
         informationGame = new InformationGame();
         mockGoal = mock(RegattaGoal.class);
-
-
     }
 
     ////////////////////////////////////////////    checkpointOutOfGrid    //////////////////////////////////////////
@@ -39,7 +42,7 @@ class InformationGameTest {
         Point checkpoint = new Point(5000,0);
         informationGame.setGoal(mockGoal);
         informationGame.setGrid(grid);
-        grid.create(shipPoint0,checkpoint);
+        grid.create(shipPoint0,checkpoint,spotting);
         assertTrue(informationGame.checkpointOutOfGrid());
     }
 
@@ -49,7 +52,7 @@ class InformationGameTest {
         Point checkpoint = new Point(0,5000);
         informationGame.setGoal(mockGoal);
         informationGame.setGrid(grid);
-        grid.create(shipPoint0,checkpoint);
+        grid.create(shipPoint0,checkpoint,spotting);
         assertTrue(informationGame.checkpointOutOfGrid());
     }
 
@@ -59,7 +62,7 @@ class InformationGameTest {
         Point checkpoint = new Point(1000,0);
         informationGame.setGoal(mockGoal);
         informationGame.setGrid(grid);
-        grid.create(shipPoint0,checkpoint);
+        grid.create(shipPoint0,checkpoint,spotting);
         assertFalse(informationGame.checkpointOutOfGrid());
     }
 
@@ -69,8 +72,7 @@ class InformationGameTest {
         Point checkpoint = new Point(0,1000);
         informationGame.setGoal(mockGoal);
         informationGame.setGrid(grid);
-        grid.create(shipPoint0,checkpoint);
+        grid.create(shipPoint0,checkpoint,spotting);
         assertFalse(informationGame.checkpointOutOfGrid());
     }
-
 }

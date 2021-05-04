@@ -21,7 +21,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
  */
 
 public class InformationGame {
-    private SeaEntities seaEntities;
+    private SeaEntities seaEntities = new SeaEntities();
     private Sailor[] sailors;
     private Grid grid;
     private Ship ship;
@@ -50,16 +50,16 @@ public class InformationGame {
     }
 
     public void createGrid() {
-        grid = new Grid(10200,200,200);
-        grid.create(ship.getPosition().toPoint(), getRegattaGoal().getPositionActualOptiCheckpoint().toPoint());
+        grid = new Grid(9400,200,200);
+        Spotting spotting = new Spotting(seaEntities.getVisibleReefs());
+        grid.create(ship.getPosition().toPoint(), getRegattaGoal().getPositionActualOptiCheckpoint().toPoint(),spotting);
     }
 
     public void createPath() {
-        Spotting spotting = new Spotting(seaEntities.getVisibleReefs());
-        grid.resetCaseWeight(spotting);
+        grid.resetCaseWeight();
         grid.processCaseWeight(ship.getPosition().toPoint());
         FindPath findPath = new FindPath(grid);
-        findPath.createPath(getRegattaGoal(),grid.getColAndLineOfAPosition(ship.getPosition()));
+        findPath.createPath(getRegattaGoal(),grid.getCaseOfAPosition(ship.getPosition()));
     }
 
     public boolean isCheckpointReached() {
@@ -113,7 +113,7 @@ public class InformationGame {
     }
 
     public void setNewRound(NextRound nextRound){
-        this.seaEntities = new SeaEntities(nextRound.getVisibleEntities());
+        this.seaEntities.addSeaEntities(nextRound.getVisibleEntities());
         this.ship = nextRound.getShip();
         this.wind = nextRound.getWind();
     }

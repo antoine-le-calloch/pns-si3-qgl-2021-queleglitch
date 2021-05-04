@@ -23,7 +23,7 @@ public class Grid {
         grid = new Case[NB_COL][NB_LIN];
     }
 
-    public void create(Point centralGridPoint, Point checkpointPosition){
+    public void create(Point centralGridPoint, Point checkpointPosition, Spotting spotting){
         double gridOrientation = centralGridPoint.getAngleToAPoint(checkpointPosition);
         Rectangle caseForm = new Rectangle(CASE_WIDTH,CASE_HEIGHT,gridOrientation);
         int lin = 0, col = 0;
@@ -41,7 +41,10 @@ public class Grid {
                         break;
                     default: break;
                 }
-                grid[newCol][newLin] = new Case(caseForm,points[i]);
+                Case newCase = new Case(caseForm,points[i],newCol,newLin);
+                if(spotting.isReefsInARectangle(newCase.getForm().getRealPoints(newCase.getCentralPoint())))
+                    newCase.setIsReef(true);
+                grid[newCol][newLin] = newCase;
             }
             lin++;
             if(lin > NB_LIN/2.0){
@@ -58,13 +61,13 @@ public class Grid {
     }
 
     public void processCaseWeight(Point startPoint) {
-        int[] columnLine = getColAndLineOfAPosition(startPoint.toPosition());
-        if(columnLine == null)
+        Case startCase = getCaseOfAPosition(startPoint.toPosition());
+        if(startCase == null)
             return;
-        processCaseWeightByColAndLin(columnLine[0],columnLine[1],0);
+        processCaseWeightByColAndLin(startCase.col(),startCase.line(),0);
     }
 
-    public void processCaseWeightByColAndLin(int column, int line, int weight){
+    public void processCaseWeightByColAndLin(int column, int line, double weight){
         if(column >= NB_COL || line >= NB_LIN || column < 0 || line < 0) {
             return;
         }
@@ -72,20 +75,29 @@ public class Grid {
             return;
         grid[column][line].setWeight(weight);
         processCaseWeightByColAndLin(column+1,line,weight+1);
-        processCaseWeightByColAndLin(column+1,line+1,weight+1);
-        processCaseWeightByColAndLin(column+1,line-1,weight+1);
+        processCaseWeightByColAndLin(column+1,line+1,weight+Math.sqrt(2));
+        processCaseWeightByColAndLin(column+1,line-1,weight+Math.sqrt(2));
         processCaseWeightByColAndLin(column-1,line,weight+1);
-        processCaseWeightByColAndLin(column-1,line+1,weight+1);
-        processCaseWeightByColAndLin(column-1,line-1,weight+1);
+        processCaseWeightByColAndLin(column-1,line+1,weight+Math.sqrt(2));
+        processCaseWeightByColAndLin(column-1,line-1,weight+Math.sqrt(2));
         processCaseWeightByColAndLin(column,line+1,weight+1);
         processCaseWeightByColAndLin(column,line-1,weight+1);
     }
 
     public Case getCaseOfAPosition(Position position) {
-        int[] columnLine = getColAndLineOfAPosition(position);
-        if(columnLine != null)
-            return grid[columnLine[0]][columnLine[1]];
-        return null;
+        int column = 0;
+        int line = 0;
+        while (!Geometry.isThisPointInARectangle(position.toPoint(),grid[column][line].getFormPoints())){
+            line++;
+            if(line == NB_LIN) {
+                column++;
+                line = 0;
+            }
+            if(column == NB_COL){
+                return null;
+            }
+        }
+        return grid[column][line];
     }
 
     public int[] getColAndLineOfAPosition(Position position) {
@@ -103,12 +115,10 @@ public class Grid {
         return columnLine;
     }
 
-    public void resetCaseWeight(Spotting spotting){
+    public void resetCaseWeight(){
         for (Case[] columnCases : grid) {
             for (Case gridCase : columnCases) {
                 gridCase.setWeight(-1);
-                if(spotting.isReefsInARectangle(gridCase.getForm().getRealPoints(gridCase.getCentralPoint())))
-                    gridCase.setIsReef(true);
             }
         }
     }
@@ -117,13 +127,5 @@ public class Grid {
         if(col >= 0 && col < NB_COL && lin >= 0 && lin < NB_LIN)
             return grid[col][lin];
         return null;
-    }
-
-    public int getNB_COL() {
-        return NB_COL;
-    }
-
-    public int getNB_LIN() {
-        return NB_LIN;
     }
 }

@@ -17,11 +17,11 @@ import java.util.List;
 
 public class RegattaGoal extends Goal {
 
-    private List<Point> pathPoints = new ArrayList<>();
+    private Position[] positionOptiCheckpoints;
     private int numActualCheckpoint = 0;
     private Checkpoint[] checkpoints;
-    private Position[] positionOptiCheckpoints;
     private boolean checkpointReach;
+    private Point pathPoint;
 
     public RegattaGoal(){
     }
@@ -55,10 +55,7 @@ public class RegattaGoal extends Goal {
         if(numActualCheckpoint + 1 < checkpoints.length)
             numActualCheckpoint++;
     }
-
-    public void resetPathPoints() { this.pathPoints = new ArrayList<>(); }
-
-    public void addPathPoints(Point pathPoint) { this.pathPoints.add(pathPoint); }
+    public void createPathPoint(Point pathPoint) { this.pathPoint = pathPoint; }
 
     /**
      * <p>Getter.</p>
@@ -69,13 +66,7 @@ public class RegattaGoal extends Goal {
 
     public Position[] getPositionOptiCheckpoints() { return positionOptiCheckpoints; }
 
-    public Point getPathPoint() {
-        if(pathPoints.size() == 0)
-            return null;
-        return pathPoints.get(pathPoints.size()-1); }
-
-    public List<Point> getPathPoints() {
-        return pathPoints; }
+    public Point getPathPoint() { return pathPoint; }
 
     public Checkpoint getActualCheckpoint(){ return checkpoints[numActualCheckpoint]; }
 

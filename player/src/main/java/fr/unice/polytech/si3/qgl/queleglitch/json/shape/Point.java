@@ -76,8 +76,8 @@ public class Point {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Point point = (Point) o;
-        return Double.compare(point.x, x) == 0 &&
-                Double.compare(point.y, y) == 0;
+        return Double.compare(point.x, this.x) == 0 &&
+                Double.compare(point.y, this.y) == 0;
     }
 
     @Override

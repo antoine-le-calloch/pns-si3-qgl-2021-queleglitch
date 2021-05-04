@@ -1,6 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.shape;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import java.util.Objects;
 
 public class Rectangle extends Shape {
 
@@ -8,6 +9,7 @@ public class Rectangle extends Shape {
     private double height;
     private double orientation;
     private Point[] points;
+
     public Rectangle(){}
 
     public Rectangle(double width, double height, double orientation){
@@ -15,8 +17,6 @@ public class Rectangle extends Shape {
         this.height = height;
         this.orientation = orientation;
     }
-
-    public double getRadius(){ return 0; }
 
     public Point[] getRealPoints(Position centralPosition){
         createPoints();
@@ -63,4 +63,30 @@ public class Rectangle extends Shape {
     public void setHeight(double height) { this.height = height; }
 
     public void setOrientation(double orientation) { this.orientation = orientation; }
+
+    /**
+     * <p>Override of toString method, allow to print a different string to give the Rectangle's information</p>
+     */
+    @Override
+    public String toString() {
+        return "Orientation : " + orientation + " | width : " + width + " | height : " + height;
+    }
+
+    /**
+     * <p>Override of equals method, allow to compare different Rectangle by their x, y value</p>
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return Double.compare(rectangle.orientation, this.orientation) == 0
+                && Double.compare(rectangle.width, this.width) == 0
+                && Double.compare(rectangle.height, this.height) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orientation,width,height);
+    }
 }
