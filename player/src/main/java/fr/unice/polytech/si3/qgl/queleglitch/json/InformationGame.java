@@ -50,7 +50,7 @@ public class InformationGame {
     }
 
     public void createGrid() {
-        grid = new Grid(9400,200,200);
+        grid = new Grid(10200,200,200);
         Spotting spotting = new Spotting(seaEntities.getVisibleReefs());
         grid.create(ship.getPosition().toPoint(), getRegattaGoal().getPositionActualOptiCheckpoint().toPoint(),spotting);
     }

@@ -24,7 +24,7 @@ public class Circle extends Shape {
 
     public Point[] getRealPoints(Position centralPosition){
         double angle = 0;
-        final int NB_POINTS = 1000;
+        final int NB_POINTS = 100;
         Point[] points = new Point[NB_POINTS];
         for(int i = 0; i < NB_POINTS; i++){
             points[i] = new Point(centralPosition.getX()+Math.cos(angle)*(radius+10),centralPosition.getY()+Math.sin(angle)*(radius+10));
