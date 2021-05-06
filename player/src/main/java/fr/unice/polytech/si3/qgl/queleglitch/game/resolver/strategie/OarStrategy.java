@@ -23,11 +23,12 @@ public class OarStrategy {
         return 0;
     }
 
-    public NbOarsUsed getNbOarsUsed(boolean useRudder, boolean useSail, int differenceOarRightLeft) {
+    public NbOarsUsed getNbOarsUsed(boolean useWatch, boolean useRudder, boolean useSail, int differenceOarRightLeft) {
         int nbLeftOarsToUse = -Math.min(0,differenceOarRightLeft);
         int nbRightOarsToUse = Math.max(0,differenceOarRightLeft);
         int nbSailorsForOar = NB_SAILORS;
 
+        nbSailorsForOar -= (useWatch) ? 1 : 0;
         nbSailorsForOar -= (useRudder) ? 1 : 0;
         nbSailorsForOar -= (useSail) ? 1 : 0;
 

@@ -1,18 +1,15 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.FindPath;
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Grid;
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Spotting;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.SeaEntities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.VisibleEntities;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe permettant de gerer les éléments principaux du jeux : {@link Ship}, {@link Sailor}
@@ -24,8 +21,9 @@ import java.util.List;
  */
 
 public class InformationGame {
-    private VisibleEntities[] visibleEntities;
+    private SeaEntities seaEntities = new SeaEntities();
     private Sailor[] sailors;
+    private Grid grid;
     private Ship ship;
     private Goal goal;
     private Wind wind;
@@ -46,14 +44,22 @@ public class InformationGame {
     }
 
     public void processCheckpointReached() {
-        if(isCheckpointReached())
-            moveToNextCheckpoint();
+        getRegattaGoal().setCheckpointReach(true);
+        moveToNextCheckpoint();
+        createGrid();
     }
 
-    public void addPath() {
-        FindPath findPath = new FindPath(ship.getDeck().getWidth(), ship.getPosition().toPoint(), getVisibleReef());
-        if(visibleEntities != null && visibleEntities.length > 0)
-            findPath.createPath(getRegattaGoal());
+    public void createGrid() {
+        grid = new Grid(10200,200,200);
+        Spotting spotting = new Spotting(seaEntities.getVisibleReefs());
+        grid.create(ship.getPosition().toPoint(), getRegattaGoal().getPositionActualOptiCheckpoint().toPoint(),spotting);
+    }
+
+    public void createPath() {
+        grid.resetCaseWeight();
+        grid.processCaseWeight(ship.getPosition().toPoint());
+        FindPath findPath = new FindPath(grid);
+        findPath.createPath(getRegattaGoal(),grid.getCaseOfAPosition(ship.getPosition()));
     }
 
     public boolean isCheckpointReached() {
@@ -61,7 +67,7 @@ public class InformationGame {
     }
 
     public void moveToNextCheckpoint() {
-        ((RegattaGoal) goal).checkpointReached();
+        getRegattaGoal().checkpointReached();
     }
 
     public int getNbSailors(){
@@ -74,19 +80,14 @@ public class InformationGame {
         return null;
     }
 
-    public List<Reef> getVisibleReef() {
-        List<Reef> visibleReef = new ArrayList<>();
-        for (VisibleEntities visibleEntities : visibleEntities) {
-            if(visibleEntities instanceof Reef)
-                visibleReef.add((Reef) visibleEntities);
-        }
-        return visibleReef;
+    public boolean checkpointOutOfGrid() {
+        return grid.getCaseOfAPosition(getRegattaGoal().getPositionActualOptiCheckpoint()) == null;
     }
 
     /**
      * <p>Getter.</p>
      */
-    public VisibleEntities[] getVisibleEntities() { return visibleEntities; }
+    public SeaEntities getSeaEntities() { return seaEntities; }
 
     public Sailor[] getSailors(){
         return sailors;
@@ -100,6 +101,8 @@ public class InformationGame {
 
     public Wind getWind() { return wind; }
 
+    public Grid getGrid() { return grid; }
+
     /**
      * <p>Setter.</p>
      */
@@ -110,8 +113,24 @@ public class InformationGame {
     }
 
     public void setNewRound(NextRound nextRound){
-        this.visibleEntities = nextRound.getVisibleEntities();
+        this.seaEntities.addSeaEntities(nextRound.getVisibleEntities());
         this.ship = nextRound.getShip();
         this.wind = nextRound.getWind();
+    }
+
+    public void setSeaEntities(SeaEntities seaEntities) {
+        this.seaEntities = seaEntities;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
+    }
+
+    public void setShip(Ship ship) {
+        this.ship = ship;
+    }
+
+    public void setWind(Wind wind) {
+        this.wind = wind;
     }
 }

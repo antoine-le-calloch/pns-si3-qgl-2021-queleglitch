@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.nextRound;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Courant;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.VisibleEntities;
 
 /* classe qui sert juste de variable pour mettre à jour le informationGame*/
@@ -9,7 +8,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Visi
 public class NextRound {
     private Ship ship;
     private Wind wind;
-    private VisibleEntities[] visibleEntities;
+    private VisibleEntities[] visibleEntities = new VisibleEntities[]{};
     
     /**
      * <p>Getter.</p>

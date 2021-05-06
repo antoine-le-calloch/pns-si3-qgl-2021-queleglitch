@@ -1,6 +1,5 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.shape;
 
-import fr.unice.polytech.si3.qgl.queleglitch.exception.IllegalMathCalculException;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 
 import java.util.Objects;
@@ -29,7 +28,7 @@ public class Point {
         double adj = point.getX() - x;
         double opo = point.getY() - y;
         if(adj==0.0 && opo==0.0)
-            throw new IllegalMathCalculException("You're trying to calculate an angle between 2 same points and that's imposible");
+            return 0;
         if(adj < 0)
             return -Math.atan(adj/opo) + (opo < 0 ? -Math.PI/2 : Math.PI/2);
         return Math.atan(opo/adj);
@@ -77,8 +76,8 @@ public class Point {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Point point = (Point) o;
-        return Double.compare(point.x, x) == 0 &&
-                Double.compare(point.y, y) == 0;
+        return Double.compare(point.x, this.x) == 0 &&
+                Double.compare(point.y, this.y) == 0;
     }
 
     @Override

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,120 +27,6 @@ class SpottingTest {
         point0_0 = new Point(0,0);
         point100_0 = new Point(100,0);
         point100_100 = new Point(100,100);
-    }
-
-    ///////////////////////////////////////////   isReefsOnTheShipWay()  ///////////////////////////////////////////
-
-    @Test
-    void manyReefOnShipWay_50_2_And_50_Minus2() {
-        Rectangle rectangle1 = new Rectangle(6,4,0);
-        Rectangle rectangle2 = new Rectangle(6,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,4,0),rectangle1),new Reef(new Position(50,-4,0),rectangle2)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void manyReefOnShipWay_50_1_And_50_Minus2() {
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Rectangle rectangle2 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,1,0),rectangle1),new Reef(new Position(50,-2,0),rectangle2)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void manyReefOnShipWay_50_2_And_50_Minus1() {
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,2,0),rectangle1),new Reef(new Position(50,-1,0),rectangle1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void manyReefOnShipWay_rectangle_50_1_And_50_Minus1() {
-        Rectangle rectangle1 = new Rectangle(2,4,0);
-        Reef[] reef = new Reef[]{new Reef(new Position(50,1,0),rectangle1),new Reef(new Position(50,-1,0),rectangle1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void NoReefOnShipWay() {
-        spotting = new Spotting(new ArrayList<>());
-        assertFalse(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_100.toPosition()));
-    }
-
-    @Test
-    void OneReefNotOnShipWay_50_6() {
-        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,36,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertFalse(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void OneReefOnShipWay_50_5() {
-        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,5,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void OneReefNotOnShipWay_50_Minus6() {
-        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,-36,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertFalse(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void OneReefOnShipWay_50_Minus5() {
-        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,5,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void OneReefOnShipWayButBetweenTheWayLine_50_2() {
-        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,32,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void OneReefOnShipWayButBetweenTheWayLine_50_Minus2() {
-        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,-2,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void OneReefOnShipWay_50_0() {
-        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(0,1),new Point(0,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,5,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_0.toPosition()));
-    }
-
-    @Test
-    void OneReefNotOnShipWay_50_57() {
-        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(-1,1),new Point(-1,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,57,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertFalse(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_100.toPosition()));
-    }
-
-    @Test
-    void OneReefOnShipWay_50_50() {
-        Polygon polygon1 = new Polygon(0,new Point[]{new Point(1,0),new Point(-1,1),new Point(-1,-1)});
-        Reef[] reef = new Reef[]{new Reef(new Position(50,50,0),polygon1)};
-        spotting = new Spotting(Arrays.asList(reef.clone()));
-        assertTrue(spotting.isReefsOnTheShipWay(4,point0_0.toPosition(), point100_100.toPosition()));
     }
 
     ///////////////////////////////////////////   isReefsBetween2Points()  ///////////////////////////////////////////
@@ -630,115 +517,6 @@ class SpottingTest {
         assertFalse(spotting.isThisReefBetween2Points(reef, point0_0, point100_0));
     }
 
-    ///////////////////////////////////////////   findLineIntersection()  ///////////////////////////////////////////
-
-    @Test
-    void LineIntersection_0_0__7_0_And_5_5__5_Minus5() {
-        assertEquals(new Point(5,0),spotting.findLineIntersection(new Point(0,0),new Point(7,0),new Point(5,5),new Point(5,-5)));
-    }
-
-    @Test
-    void LineIntersection_0_0__7_0_And_0_5__10_Minus5() {
-        assertEquals(new Point(5,0),spotting.findLineIntersection(new Point(0,0),new Point(7,0),new Point(0,5),new Point(10,-5)));
-    }
-
-    @Test
-    void LineIntersection_0_0__7_0_And_0_2__10_Minus2() {
-        assertEquals(new Point(5,0),spotting.findLineIntersection(new Point(0,0),new Point(7,0),new Point(0,2),new Point(10,-2)));
-    }
-
-    @Test
-    void LineIntersection_5_5__5_Minus5_And_0_0__7_0() {
-        assertEquals(new Point(5,0),spotting.findLineIntersection(new Point(5,5),new Point(5,-5),new Point(0,0),new Point(7,0)));
-    }
-
-    @Test
-    void LineIntersection_0_0__5_5_And_0_5__5_0() {
-        assertEquals(new Point(2.5,2.5),spotting.findLineIntersection(new Point(0,0),new Point(5,5),new Point(0,5),new Point(5,0)));
-    }
-
-    ///////////////////////////////////////////   findEndPointOfALine()  ///////////////////////////////////////////
-
-    @Test
-    void endPointOf_0_0_WithTargetOn_1000_0_distanceToAdd0(){
-        double distanceToAdd = 0;
-        assertEquals(new Point(1000,0),spotting.findEndPointOfALine(new Point(0,0), new Point(1000,0), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_1000_0_WithTargetOn_0_0_distanceToAdd0(){
-        double distanceToAdd = 0;
-        assertEquals(new Point(0,0),spotting.findEndPointOfALine(new Point(1000,0), new Point(0,0), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_0_0_WithTargetOn_1000_1000_distanceToAdd_Sqrt8(){
-        double distanceToAdd = Math.sqrt(8);
-        assertEquals(new Point(998,1002),spotting.findEndPointOfALine(new Point(0,0), new Point(1000,1000), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_0_0_WithTargetOn_0_1000_distanceToAdd_100(){
-        double distanceToAdd = 100;
-        assertEquals(new Point(-100,1000),spotting.findEndPointOfALine(new Point(0,0), new Point(0,1000), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_0_0_WithTargetOn_Minus1000_1000_distanceToAdd_Sqrt8(){
-        double distanceToAdd = Math.sqrt(8);
-        assertEquals(new Point(-1002,998),spotting.findEndPointOfALine(new Point(0,0), new Point(-1000,1000), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_0_0_WithTargetOn_Minus1000_0_distanceToAdd_100(){
-        double distanceToAdd = 100;
-        assertEquals(new Point(-1000,-100),spotting.findEndPointOfALine(new Point(0,0), new Point(-1000,0), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_0_0_WithTargetOn_Minus1000_Minus1000_distanceToAdd_Sqrt8(){
-        double distanceToAdd = Math.sqrt(8);
-        assertEquals(new Point(-998,-1002),spotting.findEndPointOfALine(new Point(0,0), new Point(-1000,-1000), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_0_0_WithTargetOn_0_Minus1000_distanceToAdd_100(){
-        double distanceToAdd = 100;
-        assertEquals(new Point(100,-1000),spotting.findEndPointOfALine(new Point(0,0), new Point(0,-1000), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_0_0_WithTargetOn_1000_Minus1000_distanceToAdd_Sqrt8(){
-        double distanceToAdd = Math.sqrt(8);
-        assertEquals(new Point(1002,-998),spotting.findEndPointOfALine(new Point(0,0), new Point(1000,-1000), distanceToAdd));
-    }
-
-    ///
-
-    @Test
-    void endPointOf_0_0_WithTargetOn_1000_1000_distanceToAdd_Sqrt32(){
-        double distanceToAdd = Math.sqrt(32);
-        assertEquals(new Point(996,1004),spotting.findEndPointOfALine(new Point(0,0), new Point(1000,1000), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_0_0_WithTargetOn_1000_1000_distanceToAdd_MinusSqrt32(){
-        double distanceToAdd = -Math.sqrt(32);
-        assertEquals(new Point(1004,996),spotting.findEndPointOfALine(new Point(0,0), new Point(1000,1000), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_1000_1000_WithTargetOn_0_0_distanceToAdd_Sqrt32(){
-        double distanceToAdd = Math.sqrt(32);
-        assertEquals(new Point(4.000000000000001,-4),spotting.findEndPointOfALine(new Point(1000,1000), new Point(0,0), distanceToAdd));
-    }
-
-    @Test
-    void endPointOf_1000_1000_WithTargetOn_0_0_distanceToAdd_MinusSqrt32(){
-        double distanceToAdd = -Math.sqrt(32);
-        assertEquals(new Point(-4.000000000000001,4),spotting.findEndPointOfALine(new Point(1000,1000), new Point(0,0), distanceToAdd));
-    }
-
     ///////////////////////////////////////////   isLineBetween()  ///////////////////////////////////////////
 
     @Test
@@ -806,5 +584,107 @@ class SpottingTest {
     @Test
     void noLine_Angle_MinusPIOn4_MinusPIOn6(){
         assertFalse(spotting.isLineBetween(-Math.PI/4,-Math.PI/6,Math.PI/4,Math.PI/6));
+    }
+
+    ///////////////////////////////////////////   isReefSideInRectangle  ///////////////////////////////////////////
+
+    @Test
+    void isReefSideIn_2_0_Ort0_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(2,0,0),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_2_0_OrtPIOn4_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(2,0,Math.PI/4),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_2_0_MinusOrtPIOn4_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(2,0,-Math.PI/4),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_Minus2_0_Ort0_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(-2,0,0),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_Minus2_0_OrtPIOn4_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(-2,0,Math.PI/4),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_Minus2_0_MinusOrtPIOn4_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(-2,0,-Math.PI/4),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_Minus2_0_OrtPIOn2_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(-2,0,Math.PI/2),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertFalse(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_Minus2_0_MinusOrtPIOn2_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(-2,0,-Math.PI/2),new Rectangle(2,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,1,0)).getRealPoints(new Position(0,0,0)));
+
+        assertFalse(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_0_2_Ort0_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(0,2,0),new Rectangle(4,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,2,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
+    }
+
+    @Test
+    void isReefSideIn_0_Minus2_Ort0_OnRectangleIn_0_0(){
+        List <Reef> visibleReef = new ArrayList<>();
+        visibleReef.add(new Reef(new Position(0,-2,0),new Rectangle(4,4,0)));
+        Spotting spotting = new Spotting(visibleReef);
+        boolean isReefSide = spotting.isReefSideInRectangle((new Rectangle(2,2,0)).getRealPoints(new Position(0,0,0)));
+
+        assertTrue(isReefSide);
     }
 }

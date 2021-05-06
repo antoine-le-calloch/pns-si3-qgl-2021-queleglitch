@@ -18,6 +18,32 @@ class PolygonTest {
         actual5Points = new Point[]{new Point(3,0),new Point(2,1),new Point(-2,1), new Point(-2,-1),new Point(2,-1)};
     }
 
+    ////////////////////equals()
+
+    @Test
+    void polygonEquals(){
+        Polygon polygon1 = new Polygon(0.268, actual5Points);
+        Polygon polygon2 = new Polygon(0.268, actual5Points);
+
+        assertEquals(polygon1,polygon2);
+    }
+
+    @Test
+    void polygonNotEqualsOnVertices(){
+        Polygon polygon1 = new Polygon(0.268, actual5Points);
+        Polygon polygon2 = new Polygon(0.268, actual4Points);
+
+        assertNotEquals(polygon1,polygon2);
+    }
+
+    @Test
+    void polygonNotEqualsOnOrientation(){
+        Polygon polygon1 = new Polygon(0.268, actual5Points);
+        Polygon polygon2 = new Polygon(0.56, actual5Points);
+
+        assertNotEquals(polygon1,polygon2);
+    }
+
     ////////////////////getReelPoints()
 
     @Test

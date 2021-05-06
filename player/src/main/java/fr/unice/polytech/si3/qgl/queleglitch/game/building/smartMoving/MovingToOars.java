@@ -54,7 +54,7 @@ public class MovingToOars {
                 }
             }
             if(sailorToMove == null) {
-                entitiesTooFar.add(sideOars.get((i == 0) ? nbOarsUsed.onLeft() : sideOars.size()-i));
+                entitiesTooFar.add(sideOars.get((i == 0) ? sideOars.size() - nbOarsUsedOnSide(sideOars,nbOarsUsed) : i));
                 break;
             }
         }

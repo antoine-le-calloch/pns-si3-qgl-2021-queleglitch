@@ -3,6 +3,9 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Classe permettant de définir le mode Regatta
  * @author Huot-Marchand Antoine
@@ -14,9 +17,10 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
 public class RegattaGoal extends Goal {
 
+    private Position[] positionOptiCheckpoints;
     private int numActualCheckpoint = 0;
     private Checkpoint[] checkpoints;
-    private Position[] positionOptiCheckpoints;
+    private boolean checkpointReach;
     private Point pathPoint;
 
     public RegattaGoal(){
@@ -51,11 +55,12 @@ public class RegattaGoal extends Goal {
         if(numActualCheckpoint + 1 < checkpoints.length)
             numActualCheckpoint++;
     }
+    public void createPathPoint(Point pathPoint) { this.pathPoint = pathPoint; }
 
     /**
      * <p>Getter.</p>
      */
-    public int getNumActualCheckpoint(){ return numActualCheckpoint; }
+    public boolean getCheckpointReach(){ return checkpointReach; }
 
     public Checkpoint[] getCheckpoints() { return checkpoints; }
 
@@ -72,15 +77,15 @@ public class RegattaGoal extends Goal {
     /**
      * <p>Setter.</p>
      */
+    public void setCheckpointReach(boolean checkpointReach){ this.checkpointReach = checkpointReach; }
+
     public void setCheckpoints(Checkpoint[] checkpoints) {
         this.checkpoints = checkpoints;
     }
 
     public void setPositionOptiCheckpoints(Position[] positionOptiCheckpoints) { this.positionOptiCheckpoints = positionOptiCheckpoints; }
 
-    public void setPathPoint(Point pathPoint) { this.pathPoint = pathPoint; }
-
-    public void setNumActualCheckpoint(int numActualCheckpoint){ this.numActualCheckpoint = numActualCheckpoint; }
+    public void setNumActualCheckpoint(int numActualCheckpoint) { this.numActualCheckpoint = numActualCheckpoint; }
 
     /**
      * <p>Override of toString method, allow to print a different string to give the Checkpoints information</p>

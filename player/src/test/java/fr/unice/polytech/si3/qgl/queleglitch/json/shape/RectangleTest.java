@@ -52,4 +52,12 @@ class RectangleTest {
         assertArrayEquals(realPoints,rectangle.getRealPoints(new Position(5416.415681234441,211.04307432432563,0.6981317007977318)));
 
     }
+
+    @Test
+    void realPoints_W250_H2500_ort0Point9_mid0_0(){
+        rectangle = new Rectangle(250,2500,0.9250245035569946);
+        Point[] realPoints = new Point[]{new Point(652.4393401841488,1073.521265453122),new Point(-852.098217695972,-923.0675096651099),
+                new Point(-652.4393401841488,-1073.521265453122),new Point(852.098217695972,923.0675096651099)};
+        assertArrayEquals(realPoints,rectangle.getRealPoints(new Position(0,0,0)));
+    }
 }

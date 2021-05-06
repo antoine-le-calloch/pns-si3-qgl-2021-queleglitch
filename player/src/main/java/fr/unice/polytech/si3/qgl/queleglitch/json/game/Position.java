@@ -94,10 +94,10 @@ public class Position {
      * <p>Override of equals method, allow to compare different Position by their x, y and their orientation</p>
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Position)) return false;
-        Position position = (Position) obj;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
         return this.x == position.x && this.y == position.y && this.orientation == position.orientation;
     }
 

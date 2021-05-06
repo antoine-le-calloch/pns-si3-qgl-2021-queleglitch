@@ -1,48 +1,81 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
-import java.util.List;
 
 public class FindPath {
 
-    private final Spotting spotting;
-    private final Point shipPoint;
-    private final int shipWight;
+    private final Grid grid;
 
-    public FindPath(int shipWight, Point shipPoint,List<Reef> visibleReef){
-        this.spotting = new Spotting(visibleReef);
-        this.shipPoint = shipPoint;
-        this.shipWight = shipWight;
+    public FindPath(Grid grid){
+        this.grid = grid;
     }
 
-    public void createPath(RegattaGoal regattaGoal){
-        if(spotting.isReefsOnTheShipWay(shipWight, shipPoint.toPosition(), regattaGoal.getPositionActualOptiCheckpoint())) {
-            Point pathPoint = getANewValidStep(shipPoint, regattaGoal.getPositionActualOptiCheckpoint().toPoint());
-            regattaGoal.setPathPoint(pathPoint);
+    public void createPath(RegattaGoal regattaGoal, Case shipCase){
+        int col = shipCase.col();
+        int lin = shipCase.line();
+        Case targetCase;
+
+        if((targetCase = grid.getCaseOfAPosition(regattaGoal.getPositionActualOptiCheckpoint())) == null || targetCase.getWeight() == -1){
+            do{
+                if(col > 0)
+                    col--;
+                else{
+                    if(lin > 0)
+                        lin--;
+                    else{
+                        lin++;
+                    }
+                }
+            }while (grid.getCase(col,lin).isReef());
+            targetCase = grid.getCase(col,lin);
+        }
+
+        while (targetCase.getWeight() >= 2){
+            targetCase = nextCase(targetCase);
+        }
+        if(targetCase.getWeight() > 0) {
+            regattaGoal.createPathPoint(targetCase.getCentralPoint());
         }
         else
-            regattaGoal.setPathPoint(null);
+            regattaGoal.createPathPoint(null);
     }
 
-    public Point getANewValidStep(Point startPoint, Point pointToReach){
-        Point endStartPoint;
-        Point endPointToReach;
-        double distanceToAdd = 0;
-        while (true){
-            distanceToAdd += 5;
-            endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, distanceToAdd);
-            endPointToReach = spotting.findEndPointOfALine(pointToReach,startPoint, -distanceToAdd);
-            if(!spotting.isReefsOnTheShipWay(shipWight, startPoint.toPosition(), endStartPoint.toPosition()) && !spotting.isReefsOnTheShipWay(shipWight, pointToReach.toPosition(), endPointToReach.toPosition())){
-                return spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach);
-            }
-
-            endStartPoint = spotting.findEndPointOfALine(startPoint, pointToReach, -distanceToAdd);
-            endPointToReach = spotting.findEndPointOfALine(pointToReach, startPoint, distanceToAdd);
-            if(!spotting.isReefsOnTheShipWay(shipWight, startPoint.toPosition(), endStartPoint.toPosition()) && !spotting.isReefsOnTheShipWay(shipWight, pointToReach.toPosition(), endPointToReach.toPosition())){
-                return spotting.findLineIntersection(startPoint,endStartPoint,pointToReach,endPointToReach);
-            }
+    public Case nextCase(Case targetCase){
+        int col = targetCase.col();
+        int lin = targetCase.line();
+        double caseWeight = targetCase.getWeight();
+        if(grid.getCase(col+1,lin+1) != null && grid.getCase(col+1,lin+1).getWeight() < caseWeight && !grid.getCase(col+1,lin+1).isReef()) {
+            caseWeight = grid.getCase(col+1, lin+1).getWeight();
+            targetCase = grid.getCase(col+1,lin+1);
         }
+        if(grid.getCase(col+1,lin-1) != null && grid.getCase(col+1,lin-1).getWeight() < caseWeight && !grid.getCase(col+1,lin-1).isReef()) {
+            caseWeight = grid.getCase(col+1, lin-1).getWeight();
+            targetCase = grid.getCase(col+1,lin-1);
+        }
+        if(grid.getCase(col+1,lin) != null && grid.getCase(col+1,lin).getWeight() < caseWeight && !grid.getCase(col+1,lin).isReef()) {
+            caseWeight = grid.getCase(col+1, lin).getWeight();
+            targetCase = grid.getCase(col+1,lin);
+        }
+        if(grid.getCase(col-1,lin+1) != null && grid.getCase(col-1,lin+1).getWeight() < caseWeight && !grid.getCase(col-1,lin+1).isReef()) {
+            caseWeight = grid.getCase(col-1, lin+1).getWeight();
+            targetCase = grid.getCase(col-1,lin+1);
+        }
+        if(grid.getCase(col-1,lin-1) != null && grid.getCase(col-1,lin-1).getWeight() < caseWeight && !grid.getCase(col-1,lin-1).isReef()) {
+            caseWeight = grid.getCase(col-1, lin-1).getWeight();
+            targetCase = grid.getCase(col-1,lin-1);
+        }
+        if(grid.getCase(col-1,lin) != null && grid.getCase(col-1,lin).getWeight() < caseWeight && !grid.getCase(col-1,lin).isReef()) {
+            caseWeight = grid.getCase(col-1, lin).getWeight();
+            targetCase = grid.getCase(col-1,lin);
+        }
+        if(grid.getCase(col,lin+1) != null && grid.getCase(col,lin+1).getWeight() < caseWeight && !grid.getCase(col,lin+1).isReef()) {
+            caseWeight = grid.getCase(col, lin+1).getWeight();
+            targetCase = grid.getCase(col,lin+1);
+        }
+        if(grid.getCase(col,lin-1) != null && grid.getCase(col,lin-1).getWeight() < caseWeight && !grid.getCase(col,lin-1).isReef()) {
+            targetCase = grid.getCase(col,lin-1);
+        }
+        return targetCase;
     }
 }
