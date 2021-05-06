@@ -1,7 +1,6 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
 public class FindPath {
 
