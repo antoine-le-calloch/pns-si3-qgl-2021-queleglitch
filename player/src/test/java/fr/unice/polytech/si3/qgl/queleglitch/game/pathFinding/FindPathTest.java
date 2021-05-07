@@ -18,13 +18,16 @@ class FindPathTest {
 
     FindPath findPath;
     RegattaGoal regattaGoal;
+    RegattaGoal regattaGoal2;
     Grid grid;
 
     @BeforeEach
     void setUp() {
         grid = new Grid(3500,500,500);
         regattaGoal = new RegattaGoal();
+        regattaGoal2 = new RegattaGoal();
         regattaGoal.setPositionOptiCheckpoints(new Position[]{new Position(0,-500,0)});
+        regattaGoal2.setPositionOptiCheckpoints(new Position[]{new Position(-2000,0,0)});
     }
     ///////////////////////////////////////////   createPath()  ///////////////////////////////////////////
     @Test
@@ -319,4 +322,100 @@ class FindPathTest {
         assertEquals(new Point(-1000,0),pointExpected);
 
     }*/
+
+    @Test
+    void createPath_2Reefs_Bottom_Of_Ship_And_Right_Of_Ship_Useless(){
+        Reef reef = new Reef(new Position(-1000,0,0), new Rectangle(430,420,0));
+        Reef reef2 = new Reef(new Position(-500,500,0), new Rectangle(430,420,0));
+        List<Reef> reefs = new ArrayList<>();
+        reefs.add(reef);
+        reefs.add(reef2);
+        grid.create(new Point(0,0),new Point(0,-500),new Spotting(reefs));
+        grid.resetCaseWeight();
+        grid.processCaseWeight(new Point(-1000,500));
+        findPath = new FindPath(grid);
+        assertNull(regattaGoal.getPathPoint());
+        findPath.createPath(regattaGoal, grid.getCase(5,2));
+        int x = (int) Math.round(regattaGoal.getPathPoint().getX());
+        int y = (int) Math.round(regattaGoal.getPathPoint().getY());
+        Point pointExpected = new Point(x,y);
+        assertEquals(new Point(-500,0),pointExpected);
+    }
+
+    @Test
+    void createPath_2Reefs_Left_Of_Checkpoint_And_Top_Of_Checkpoint_Useless(){
+        Reef reef = new Reef(new Position(-500,-500,0), new Rectangle(430,420,0));
+        Reef reef2 = new Reef(new Position(0,0,0), new Rectangle(430,420,0));
+        List<Reef> reefs = new ArrayList<>();
+        reefs.add(reef);
+        reefs.add(reef2);
+        grid.create(new Point(0,0),new Point(0,-500),new Spotting(reefs));
+        grid.resetCaseWeight();
+        grid.processCaseWeight(new Point(-1000,500));
+        findPath = new FindPath(grid);
+        assertNull(regattaGoal.getPathPoint());
+        findPath.createPath(regattaGoal, grid.getCase(5,2));
+        int x = (int) Math.round(regattaGoal.getPathPoint().getX());
+        int y = (int) Math.round(regattaGoal.getPathPoint().getY());
+        Point pointExpected = new Point(x,y);
+        assertEquals(new Point(-500,0),pointExpected);
+    }
+
+    @Test
+    void createPath_2Reefs_Top_Left_Of_Checkpoint_And_Right_Of_Ship_Useful(){
+        Reef reef = new Reef(new Position(-500,0,0), new Rectangle(430,420,0));
+        Reef reef2 = new Reef(new Position(-500,500,0), new Rectangle(430,420,0));
+        List<Reef> reefs = new ArrayList<>();
+        reefs.add(reef);
+        reefs.add(reef2);
+        grid.create(new Point(0,0),new Point(0,-500),new Spotting(reefs));
+        grid.resetCaseWeight();
+        grid.processCaseWeight(new Point(-1000,500));
+        findPath = new FindPath(grid);
+        assertNull(regattaGoal.getPathPoint());
+        findPath.createPath(regattaGoal, grid.getCase(5,2));
+        int x = (int) Math.round(regattaGoal.getPathPoint().getX());
+        int y = (int) Math.round(regattaGoal.getPathPoint().getY());
+        Point pointExpected = new Point(x,y);
+        assertEquals(new Point(-1000,0),pointExpected);
+    }
+
+    @Test
+    void createPath_3Reefs_Top_Left_Of_Checkpoint_And_Right_Of_Ship_And_Bottom_Of_Ship_Useful(){
+        Reef reef = new Reef(new Position(-500,0,0), new Rectangle(430,420,0));
+        Reef reef2 = new Reef(new Position(-500,500,0), new Rectangle(430,420,0));
+        Reef reef3 = new Reef(new Position(-1000,0,0), new Rectangle(430,420,0));
+        List<Reef> reefs = new ArrayList<>();
+        reefs.add(reef);
+        reefs.add(reef2);
+        reefs.add(reef3);
+        grid.create(new Point(0,0),new Point(0,-500),new Spotting(reefs));
+        grid.resetCaseWeight();
+        grid.processCaseWeight(new Point(-1000,500));
+        findPath = new FindPath(grid);
+        assertNull(regattaGoal.getPathPoint());
+        findPath.createPath(regattaGoal, grid.getCase(5,2));
+        int x = (int) Math.round(regattaGoal.getPathPoint().getX());
+        int y = (int) Math.round(regattaGoal.getPathPoint().getY());
+        Point pointExpected = new Point(x,y);
+        assertEquals(new Point(-500,1000),pointExpected);
+    }
+
+    /*
+    // Le bateau semble partir dans le mauvais sens lorsque le bateau est en dehors de la grille
+    @Test
+    void createPath_NoReef_With_OutGrid_Checkpoint(){
+        List<Reef> reefs = new ArrayList<>();
+        grid.create(new Point(0,0),new Point(-2000,0),new Spotting(reefs));
+        grid.resetCaseWeight();
+        grid.processCaseWeight(new Point(-1000,500));
+        findPath = new FindPath(grid);
+        assertNull(regattaGoal2.getPathPoint());
+        findPath.createPath(regattaGoal2, grid.getCase(5,2));
+        int x = (int) Math.round(regattaGoal2.getPathPoint().getX());
+        int y = (int) Math.round(regattaGoal2.getPathPoint().getY());
+        Point pointExpected = new Point(x,y);
+        assertEquals(new Point(-1500,0),pointExpected);
+    }
+    */
 }
