@@ -7,7 +7,10 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.action.Row;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,10 +23,12 @@ class MovingToOarsTest {
     List<Sailor> sailorsAvailable;
     List<Entities> entitiesTooFar;
     MovingToOars movingToOars;
+
     List<Action> actionsList;
     List<Oar> rightOars;
     List<Oar> leftOars;
     Tooling tooling;
+
 
     @BeforeEach
     void setUp() {
@@ -38,6 +43,11 @@ class MovingToOarsTest {
     // test movingAndUseOars(), Oars in (1,0) - (2,0) - (3,0) - (4,0)
     //                                    (1,2) - (2,2) - (3,2) - (4,2)
     ////////////////
+
+   
+
+
+
 
     @Test
     void useOars_MovesPossible_v1() {
