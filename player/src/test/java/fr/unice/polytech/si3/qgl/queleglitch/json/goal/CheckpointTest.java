@@ -3,6 +3,7 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -72,6 +73,15 @@ class CheckpointTest {
     void toStringTest(){
         assertEquals(" | Checkpoint | x : 0.0 | y : 0.0",checkpointSquare_1.toString());
 
+    }
+
+    @Test
+    void EqualityTest(){
+        Shape shapeCheckpoint2 = new Rectangle(1,1,0);
+        Position positionCheckpoint2 = new Position(0, 0, 0);
+        Checkpoint checkpointSquare_2 = new Checkpoint(positionCheckpoint2,shapeCheckpoint2);
+        assertEquals(checkpointSquare_1,checkpointSquare_2);
+        assertNotEquals(checkpointSquare_1,circleCheckpoint_1);
     }
 
 }

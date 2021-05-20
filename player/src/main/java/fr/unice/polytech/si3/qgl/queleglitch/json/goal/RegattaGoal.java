@@ -54,9 +54,12 @@ public class RegattaGoal extends Goal {
     }
     public void createPathPoint(Point pathPoint) { this.pathPoint = pathPoint; }
 
+
     /**
      * <p>Getter.</p>
      */
+
+
     public boolean getCheckpointReach(){ return checkpointReach; }
 
     public Checkpoint[] getCheckpoints() { return checkpoints; }
@@ -70,6 +73,8 @@ public class RegattaGoal extends Goal {
     public Position getPositionActualOptiCheckpoint(){
         return positionOptiCheckpoints[numActualCheckpoint];
     }
+
+    public int getNumActualCheckpoint() { return numActualCheckpoint;}
 
     /**
      * <p>Setter.</p>
