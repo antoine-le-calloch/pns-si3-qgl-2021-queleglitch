@@ -33,4 +33,8 @@ public class SeaEntities {
         }
         return visibleStreams;
     }
+
+    public List<VisibleEntities> getVisibleEntities() {
+        return visibleEntities;
+    }
 }
