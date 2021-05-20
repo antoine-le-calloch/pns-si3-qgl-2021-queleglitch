@@ -26,7 +26,7 @@ public class MovingToOars {
         movingAndUseOarsOnSide(rightOars, nbOarsUsed, sailorsAvailable, entitiesTooFar, actionsList);
     }
     
-    public void AddToActionList(Sailor sailorToMove,List<Oar> sideOars, List<Action> actionsList, List<Sailor> sailorsAvailable, int j) {
+    public void addToActionList(Sailor sailorToMove, List<Oar> sideOars, List<Action> actionsList, List<Sailor> sailorsAvailable, int j) {
         actionsList.add(tooling.buildMovingAction(sailorToMove, sideOars.get(j)));
         actionsList.add(new Row(sailorToMove.getId()));
         sailorsAvailable.remove(sailorToMove);
@@ -50,7 +50,7 @@ public class MovingToOars {
             int j;
             for (j = sideOars.size() - i - 1; j >= nbOarsUsedOnSide(sideOars,nbOarsUsed) - i -1; j--) {
                 if((sailorToMove = getNearestSailorBehind5OnThisSide(sideOars,sailorsAvailable,j)) != null) {
-                    AddToActionList(sailorToMove,sideOars,actionsList,sailorsAvailable,j);
+                    addToActionList(sailorToMove,sideOars,actionsList,sailorsAvailable,j);
                     break;
                 }
             }

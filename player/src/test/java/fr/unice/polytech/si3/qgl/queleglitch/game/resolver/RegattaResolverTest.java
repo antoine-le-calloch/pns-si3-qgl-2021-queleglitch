@@ -270,7 +270,7 @@ class RegattaResolverTest {
 
 
     @Nested
-    public class PathFinding{
+    class PathFinding{
 
         RegattaResolver regattaResolver;
         Position position;

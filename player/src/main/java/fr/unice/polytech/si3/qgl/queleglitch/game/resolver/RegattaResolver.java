@@ -8,7 +8,6 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.RudderStrat
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.SailStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie.WatchStrategy;
 import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
-import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 
 public class RegattaResolver {
@@ -16,7 +15,7 @@ public class RegattaResolver {
     private final Geometry geometry;
     private final OarStrategy oarStrategy;
     private final RudderStrategy rudderStrategy;
-    private final SailStrategy SailStrategy;
+    private final SailStrategy sailStrategy;
     private final InformationGame informationGame;
     private final ShipMovementResolver shipMovementResolver;
     private final WatchStrategy watchStrategy;
@@ -25,7 +24,7 @@ public class RegattaResolver {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame.getShip().getPosition());
         oarStrategy = new OarStrategy(informationGame.getNbSailors(), informationGame.getShip().getNbOars());
-        SailStrategy = new SailStrategy(informationGame.getShip(), informationGame.getWind(), informationGame.getShip().getNbSails() > 0);
+        sailStrategy = new SailStrategy(informationGame.getShip(), informationGame.getWind(), informationGame.getShip().getNbSails() > 0);
         rudderStrategy = new RudderStrategy(informationGame.getShip().getRudder() != null);
         watchStrategy = new WatchStrategy(informationGame.getRegattaGoal(), informationGame.getShip().getWatch() != null);
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
@@ -34,7 +33,7 @@ public class RegattaResolver {
     public ToolsToUse resolveToolsToUse(Position positionToReach, boolean isCheckpoint) {
         Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionToReach);
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
-        SailAction actionOnSails = SailStrategy.getSailsAction();
+        SailAction actionOnSails = sailStrategy.getSailsAction();
         boolean isWatchNecessary = watchStrategy.isWatchNecessary();
         NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(isWatchNecessary, rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect,rudderAngle));
 

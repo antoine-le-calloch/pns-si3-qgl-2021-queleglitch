@@ -5,7 +5,6 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.action.Action;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.LiftSail;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.LowerSail;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Entities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Sail;
 
