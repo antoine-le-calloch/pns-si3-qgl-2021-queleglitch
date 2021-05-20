@@ -42,7 +42,6 @@ class CheckpointTest {
 
     @Test
     void badRadiusBecauseRectangle(){
-        assertNotEquals(RADIUS_1,checkpointSquare_1);
         assertEquals(BAD_RADIUS,checkpointSquare_1.getRadius());
     }
 
@@ -60,7 +59,7 @@ class CheckpointTest {
 
     @Test
     void differentShape(){
-        assertNotEquals(rectangle_1_1,circle_1);
+        assertNotEquals(checkpointSquare_1.getShape(),circleCheckpoint_1.getShape());
     }
 
     @Test
