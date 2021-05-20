@@ -9,21 +9,21 @@ class ActionTest {
 
 
     LiftSail liftSail;
-    LowerSail lowerSail;
+    LowerSail liftSail2;
 
     @BeforeEach
     void setUp(){
         liftSail= new LiftSail(1);
-        lowerSail= new LowerSail(2);
+        liftSail2= new LowerSail(2);
     }
 
     @Test
     void sameId(){
-        assertNotEquals(liftSail,lowerSail);
+        assertEquals(liftSail,liftSail);
     }
 
     @Test
     void differentId(){
-        assertEquals(liftSail,liftSail);
+        assertNotEquals(liftSail,liftSail2);
     }
 }
