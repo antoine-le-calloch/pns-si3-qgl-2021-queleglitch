@@ -27,7 +27,7 @@ class InformationGameTest {
     @BeforeEach
     void setUp() {
         grid = new Grid(5200,200,200);
-        spotting = new Spotting(new ArrayList<>());
+        spotting = new Spotting(new ArrayList<>(),new ArrayList<>());
         seaEntities = new SeaEntities();
         shipPoint0 = new Point(0,0);
         informationGame = new InformationGame();

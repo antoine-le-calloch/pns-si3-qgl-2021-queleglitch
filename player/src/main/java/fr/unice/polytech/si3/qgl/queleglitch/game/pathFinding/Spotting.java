@@ -3,17 +3,34 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.Geometry;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Stream;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.VisibleEntities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Spotting {
 
-    List<Reef> visibleReef;
+    private final List<Stream> visibleStream;
+    private List<Reef> visibleReef;
 
-    public Spotting(List<Reef> visibleReef){
+    public Spotting(List<Reef> visibleReef,List<Stream> visibleStream){
         this.visibleReef = visibleReef;
+        this.visibleStream = visibleStream;
+        avoidBadStream();
+    }
+
+    public void avoidBadStream(){
+        if(visibleStream != null) {
+            for (Stream stream : visibleStream) {
+                if (stream.getStrength() > 165)
+                    if (visibleReef == null)
+                        this.visibleReef = new ArrayList<>();
+                this.visibleReef.add(new Reef(stream.getPosition(), stream.getShape()));
+            }
+        }
     }
 
     public boolean isReefsInARectangle(Point[] realRectanglePoints){

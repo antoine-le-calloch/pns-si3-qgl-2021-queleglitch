@@ -11,23 +11,24 @@ import java.util.List;
 
 public class SeaEntities {
 
-    private final List<VisibleEntities> visibleEntities = new ArrayList<>();
+    private final List<VisibleEntities> visibleEntities;
 
     public SeaEntities() {
+        visibleEntities = new ArrayList<>();
     }
 
     public void addSeaEntities(VisibleEntities[] newVisibleEntities){
-        for (VisibleEntities newVisibleEntity : newVisibleEntities) {
-            if(!visibleEntities.contains(newVisibleEntity)){
-                visibleEntities.add(newVisibleEntity);
+        if(newVisibleEntities != null) {
+            for (VisibleEntities newVisibleEntity : newVisibleEntities) {
+                if (!visibleEntities.contains(newVisibleEntity)) {
+                    visibleEntities.add(newVisibleEntity);
+                }
             }
         }
     }
 
     public List<Reef> getVisibleReefs() {
         List<Reef> visibleReefs = new ArrayList<>();
-        if(visibleEntities == null)
-            return visibleReefs;
         for (VisibleEntities visibleEntities : visibleEntities) {
             if(visibleEntities instanceof Reef)
                 visibleReefs.add((Reef) visibleEntities);
@@ -37,8 +38,6 @@ public class SeaEntities {
 
     public List<Stream> getVisibleStreams() {
         List<Stream> visibleStreams = new ArrayList<>();
-        if(visibleEntities == null)
-            return visibleStreams;
         for (VisibleEntities visibleEntities : visibleEntities) {
             if(visibleEntities instanceof Stream)
                 visibleStreams.add((Stream) visibleEntities);

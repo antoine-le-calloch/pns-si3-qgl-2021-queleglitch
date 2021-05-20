@@ -25,9 +25,9 @@ public class RegattaResolver {
         this.informationGame = informationGame;
         geometry = new Geometry(informationGame.getShip().getPosition());
         oarStrategy = new OarStrategy(informationGame.getNbSailors(), informationGame.getShip().getNbOars());
-        SailStrategy = new SailStrategy(informationGame.getShip(), informationGame.getWind());
-        rudderStrategy = new RudderStrategy();
-        watchStrategy = new WatchStrategy(informationGame.getRegattaGoal());
+        SailStrategy = new SailStrategy(informationGame.getShip(), informationGame.getWind(), informationGame.getShip().getNbSails() > 0);
+        rudderStrategy = new RudderStrategy(informationGame.getShip().getRudder() != null);
+        watchStrategy = new WatchStrategy(informationGame.getRegattaGoal(), informationGame.getShip().getWatch() != null);
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
     }
 
@@ -36,7 +36,7 @@ public class RegattaResolver {
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
         SailAction actionOnSails = SailStrategy.getSailsAction();
         boolean isWatchNecessary = watchStrategy.isWatchNecessary();
-        NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(isWatchNecessary, rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect));
+        NbOarsUsed nbOarsUsed = oarStrategy.getNbOarsUsed(isWatchNecessary, rudderAngle != 0,actionOnSails != SailAction.DO_NOTHING, oarStrategy.getDifferenceOarRightLeft(angleToCorrect,rudderAngle));
 
         if(isCheckpoint && Math.abs(angleToCorrect) < Math.PI/4)
             return proceedAntiAvoidance(positionToReach,nbOarsUsed,actionOnSails,rudderAngle,isWatchNecessary);

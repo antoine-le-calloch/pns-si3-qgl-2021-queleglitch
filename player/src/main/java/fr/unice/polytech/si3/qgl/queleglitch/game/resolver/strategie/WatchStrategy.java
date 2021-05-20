@@ -4,18 +4,16 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 
 public class WatchStrategy {
 
-    RegattaGoal regattaGoal;
+    private final RegattaGoal regattaGoal;
+    private final boolean isWatch;
 
-    public WatchStrategy(RegattaGoal regattaGoal){
+    public WatchStrategy(RegattaGoal regattaGoal, boolean isWatch){
         this.regattaGoal = regattaGoal;
+        this.isWatch = isWatch;
     }
 
     public boolean isWatchNecessary(){
-        if(regattaGoal.getCheckpointReach()){
-            regattaGoal.setCheckpointReach(false);
-            return true;
-        }
-        return false;
+        return regattaGoal.getCheckpointReach() && isWatch;
     }
 
 }

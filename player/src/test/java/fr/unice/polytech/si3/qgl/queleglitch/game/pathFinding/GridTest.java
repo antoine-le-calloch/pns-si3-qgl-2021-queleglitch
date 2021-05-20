@@ -29,7 +29,7 @@ class GridTest {
     @BeforeEach
     void setUp() {
         grid = new Grid(5000,40,200);
-        spotting = new Spotting(new ArrayList<>());
+        spotting = new Spotting(new ArrayList<>(),new ArrayList<>());
         seaEntities = new SeaEntities();
         seaEntities1Reef = new SeaEntities();
         seaEntities1Reef.addSeaEntities(new VisibleEntities[]{new Reef(new Position(150,0,0),new Rectangle(10,10,0))});

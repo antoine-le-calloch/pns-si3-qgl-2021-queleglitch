@@ -33,9 +33,9 @@ public class FindPath {
         while (targetCase.getWeight() >= 2){
             targetCase = nextCase(targetCase);
         }
-        if(targetCase.getWeight() > 0) {
+
+        if(targetCase.getWeight() > 0)
             regattaGoal.createPathPoint(targetCase.getCentralPoint());
-        }
         else
             regattaGoal.createPathPoint(null);
     }

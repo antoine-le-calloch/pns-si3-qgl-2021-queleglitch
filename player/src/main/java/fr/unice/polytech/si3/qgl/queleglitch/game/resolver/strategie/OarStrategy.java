@@ -12,12 +12,24 @@ public class OarStrategy {
         NB_SAILORS = nbSailors;
     }
 
-    public int getDifferenceOarRightLeft(Double angleToCorrect) {
+    public int getDifferenceOarRightLeft(double angleToCorrect, double rudderAngle) {
         int signe = 1;
+        if(angleToCorrect < 3*Math.PI / 180 && angleToCorrect > -3*Math.PI / 180)
+            return 0;
         if(angleToCorrect < 0)
             angleToCorrect *= (signe = -1);
 
-        if(angleToCorrect > Math.PI / 4)
+        double angleUnit = Math.PI / NB_OARS;
+        double possibleAngle = angleUnit/2;
+        int oarDifference = 0;
+        if(rudderAngle == 0) {
+            while (possibleAngle < angleToCorrect && possibleAngle < Math.PI/2){
+                possibleAngle += angleUnit;
+                oarDifference++;
+            }
+            return oarDifference*signe;
+        }
+        else if(angleToCorrect > Math.PI/4)
             return (int) (Math.round(Math.PI / 2 * signe/(Math.PI/ NB_OARS)));
 
         return 0;

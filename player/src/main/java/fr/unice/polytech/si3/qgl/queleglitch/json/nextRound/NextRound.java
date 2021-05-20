@@ -8,7 +8,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Visi
 public class NextRound {
     private Ship ship;
     private Wind wind;
-    private VisibleEntities[] visibleEntities = new VisibleEntities[]{};
+    private VisibleEntities[] visibleEntities;
     
     /**
      * <p>Getter.</p>

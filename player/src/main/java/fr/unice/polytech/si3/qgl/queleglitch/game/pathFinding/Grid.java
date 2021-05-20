@@ -31,14 +31,18 @@ public class Grid {
         while (col < NB_COL/2.0){
             Point[] points = findCasePoints(col,lin,gridOrientation,centralGridPoint);
             for (int i = 0; i < points.length; i++) {
-                int newCol=col,newLin=lin;
+                int newCol = col;
+                int newLin = lin;
                 switch (i) {
-                    case 1: newCol=NB_COL-col-1;newLin=lin;
-                        break;
-                    case 2: newCol=NB_COL-col-1;newLin=NB_LIN-lin-1;
-                        break;
-                    case 3: newCol=col;newLin=NB_LIN-lin-1;
-                        break;
+                    case 1: newCol = NB_COL-col-1;
+                            newLin = lin;
+                            break;
+                    case 2: newCol = NB_COL-col-1;
+                            newLin = NB_LIN-lin-1;
+                            break;
+                    case 3: newCol = col;
+                            newLin = NB_LIN-lin-1;
+                            break;
                     default: break;
                 }
                 Case newCase = new Case(caseForm,points[i],newCol,newLin);
@@ -48,7 +52,8 @@ public class Grid {
             }
             lin++;
             if(lin > NB_LIN/2.0){
-                lin = 0;col++;
+                lin = 0;
+                col++;
             }
         }
     }
@@ -61,18 +66,17 @@ public class Grid {
     }
 
     public void processCaseWeight(Point startPoint) {
-        Case startCase = getCaseOfAPosition(startPoint.toPosition());
-        if(startCase == null)
-            return;
-        processCaseWeightByColAndLin(startCase.col(),startCase.line(),0);
+        Case startCase;
+        if((startCase = getCaseOfAPosition(startPoint.toPosition())) != null)
+            processCaseWeightByColAndLin(startCase.col(),startCase.line(),0);
     }
 
     public void processCaseWeightByColAndLin(int column, int line, double weight){
-        if(column >= NB_COL || line >= NB_LIN || column < 0 || line < 0) {
+        if(column >= NB_COL || line >= NB_LIN || column < 0 || line < 0)
             return;
-        }
         if(grid[column][line].isReef() || (grid[column][line].getWeight() != -1 && grid[column][line].getWeight() <= weight))
             return;
+
         grid[column][line].setWeight(weight);
         processCaseWeightByColAndLin(column+1,line,weight+1);
         processCaseWeightByColAndLin(column+1,line+1,weight+Math.sqrt(2));

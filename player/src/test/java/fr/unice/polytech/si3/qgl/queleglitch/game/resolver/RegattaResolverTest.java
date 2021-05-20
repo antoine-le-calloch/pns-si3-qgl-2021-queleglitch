@@ -7,6 +7,8 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Rudder;
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Watch;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
@@ -15,6 +17,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -38,6 +42,9 @@ class RegattaResolverTest {
         Mockito.when(mockShip.getNbOars()).thenReturn(10);
         Mockito.when(mockShip.getNbSails()).thenReturn(1);
         Mockito.when(mockShip.getPosition()).thenReturn(new Position(0,0,0));
+        Mockito.when(mockShip.getRudder()).thenReturn(new Rudder());
+        Mockito.when(mockShip.getWatch()).thenReturn(new Watch());
+        Mockito.when(mockShip.getSails()).thenReturn(new ArrayList<>());
 
         mockRegattaGoal = Mockito.mock(RegattaGoal.class);
 
@@ -275,6 +282,9 @@ class RegattaResolverTest {
             Mockito.when(mockShip.getNbOars()).thenReturn(10);
             Mockito.when(mockShip.getNbSails()).thenReturn(1);
             Mockito.when(mockShip.getPosition()).thenReturn(new Position(0,0,0));
+            Mockito.when(mockShip.getRudder()).thenReturn(new Rudder());
+            Mockito.when(mockShip.getWatch()).thenReturn(new Watch());
+            Mockito.when(mockShip.getSails()).thenReturn(new ArrayList<>());
             mockRegattaGoal = Mockito.mock(RegattaGoal.class);
             Sailor []sailors = new Sailor[10];
             regattaResolver = new RegattaResolver(new InformationGame(sailors,mockShip,mockRegattaGoal,windOrtPi));
@@ -291,12 +301,12 @@ class RegattaResolverTest {
             position=new Position(100,100,0.0);
             assertEquals(new ToolsToUse(Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(4,4), false),regattaResolver.resolveToolsToUse(position,false));
         }
+
         @Test
         void checkPointAtRightAngleToCorrectMinusThan90(){
             position=new Position(100,-100,0.0);
             assertEquals(new ToolsToUse(-Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(4,4), false),regattaResolver.resolveToolsToUse(position,false));
         }
-
 
         @Test
         void checkPointAtLeftAngleToCorrectGreaterThan90(){
@@ -304,15 +314,10 @@ class RegattaResolverTest {
             assertEquals(new ToolsToUse(Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(0,5), false),regattaResolver.resolveToolsToUse(position,false));
         }
 
-
         @Test
         void checkPointAtRightAngleToCorrectGreaterThan90(){
             position=new Position(-100,-4,0.0);
             assertEquals(new ToolsToUse(-Math.PI/4,SailAction.DO_NOTHING,new NbOarsUsed(5,0), false),regattaResolver.resolveToolsToUse(position,false));
         }
-
-
-
     }
-
 }

@@ -29,8 +29,10 @@ public class Processing {
         if(informationGame.isCheckpointReached()) {
             informationGame.processCheckpointReached();
             checkpointReached = true;
-        } else
+        } else{
+            informationGame.processCheckpointNotReached();
             checkpointReached = false;
+        }
 
         if(firstTurn || secondTurn || checkpointReached || informationGame.checkpointOutOfGrid()) {
             secondTurn = false;
