@@ -1,8 +1,10 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.nextround.visibleentities;
 
+import java.util.Objects;
+
 public class Stream extends VisibleEntities{
 
-    private final static String type = "stream";
+    private static final String TYPE = "stream";
     private double strength;
 
     public Stream(){}
@@ -11,7 +13,7 @@ public class Stream extends VisibleEntities{
      * <p>Getter.</p>
      */
     public String getType() {
-        return type;
+        return TYPE;
     }
 
     public double getStrength() {
@@ -23,5 +25,19 @@ public class Stream extends VisibleEntities{
      */
     public void setStrength(double strength) {
         this.strength = strength;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Stream visibleEntities = (Stream) o;
+        return this.position.equals(visibleEntities.position)
+                && this.shape.equals(visibleEntities.shape);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position,shape);
     }
 }

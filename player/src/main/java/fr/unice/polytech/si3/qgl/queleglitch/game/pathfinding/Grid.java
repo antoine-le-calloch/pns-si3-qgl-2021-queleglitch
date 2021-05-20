@@ -12,7 +12,7 @@ public class Grid {
     private final int caseHeight;
     private final int nbCol;
     private final int nbLin;
-    private final Case[][] grid;
+    private final Case[][] otherGrid;
 
     public Grid(int gridSide, int caseWidth, int caseHeight){
         this.gridSide = gridSide;
@@ -20,13 +20,14 @@ public class Grid {
         this.caseHeight = caseHeight;
         nbCol = this.gridSide / this.caseHeight;
         nbLin = this.gridSide / this.caseWidth;
-        grid = new Case[nbCol][nbLin];
+        otherGrid = new Case[nbCol][nbLin];
     }
 
     public void create(Point centralGridPoint, Point checkpointPosition, Spotting spotting){
         double gridOrientation = centralGridPoint.getAngleToAPoint(checkpointPosition);
         Rectangle caseForm = new Rectangle(caseWidth, caseHeight,gridOrientation);
-        int lin = 0, col = 0;
+        int lin = 0;
+        int col = 0;
 
         while (col < nbCol /2.0){
             Point[] points = findCasePoints(col,lin,gridOrientation,centralGridPoint);
@@ -48,7 +49,7 @@ public class Grid {
                 Case newCase = new Case(caseForm,points[i],newCol,newLin);
                 if(spotting.isReefsInARectangle(newCase.getForm().getRealPoints(newCase.getCentralPoint())))
                     newCase.setIsReef(true);
-                grid[newCol][newLin] = newCase;
+                otherGrid[newCol][newLin] = newCase;
             }
             lin++;
             if(lin > nbLin /2.0){
@@ -74,10 +75,10 @@ public class Grid {
     public void processCaseWeightByColAndLin(int column, int line, double weight){
         if(column >= nbCol || line >= nbLin || column < 0 || line < 0)
             return;
-        if(grid[column][line].isReef() || (grid[column][line].getWeight() != -1 && grid[column][line].getWeight() <= weight))
+        if(otherGrid[column][line].isReef() || (otherGrid[column][line].getWeight() != -1 && otherGrid[column][line].getWeight() <= weight))
             return;
 
-        grid[column][line].setWeight(weight);
+        otherGrid[column][line].setWeight(weight);
         processCaseWeightByColAndLin(column+1,line,weight+1);
         processCaseWeightByColAndLin(column+1,line+1,weight+Math.sqrt(2));
         processCaseWeightByColAndLin(column+1,line-1,weight+Math.sqrt(2));
@@ -91,7 +92,7 @@ public class Grid {
     public Case getCaseOfAPosition(Position position) {
         int column = 0;
         int line = 0;
-        while (!Geometry.isThisPointInARectangle(position.toPoint(),grid[column][line].getFormPoints())){
+        while (!Geometry.isThisPointInARectangle(position.toPoint(), otherGrid[column][line].getFormPoints())){
             line++;
             if(line == nbLin) {
                 column++;
@@ -101,12 +102,12 @@ public class Grid {
                 return null;
             }
         }
-        return grid[column][line];
+        return otherGrid[column][line];
     }
 
     public int[] getColAndLineOfAPosition(Position position) {
         int[] columnLine = new int[]{0,0};
-        while (!Geometry.isThisPointInARectangle(position.toPoint(),grid[columnLine[0]][columnLine[1]].getFormPoints())){
+        while (!Geometry.isThisPointInARectangle(position.toPoint(), otherGrid[columnLine[0]][columnLine[1]].getFormPoints())){
             columnLine[1]++;
             if(columnLine[1] == nbLin) {
                 columnLine[0]++;
@@ -120,7 +121,7 @@ public class Grid {
     }
 
     public void reloadCaseInformation(Spotting spotting){
-        for (Case[] columnCases : grid) {
+        for (Case[] columnCases : otherGrid) {
             for (Case gridCase : columnCases) {
                 gridCase.setWeight(-1);
                 if(spotting.isReefsInARectangle(gridCase.getForm().getRealPoints(gridCase.getCentralPoint())))
@@ -131,7 +132,7 @@ public class Grid {
 
     public Case getCase(int col, int lin){
         if(col >= 0 && col < nbCol && lin >= 0 && lin < nbLin)
-            return grid[col][lin];
+            return otherGrid[col][lin];
         return null;
     }
 

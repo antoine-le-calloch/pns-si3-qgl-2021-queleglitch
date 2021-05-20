@@ -12,6 +12,10 @@ public class WatchStrategy {
         this.isWatch = isWatch;
     }
 
+    public RegattaGoal getRegattaGoal() {
+        return regattaGoal;
+    }
+
     public boolean isWatchNecessary(){
         return isWatch;
     }

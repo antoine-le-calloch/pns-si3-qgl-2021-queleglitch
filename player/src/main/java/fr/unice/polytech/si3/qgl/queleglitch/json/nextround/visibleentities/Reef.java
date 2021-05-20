@@ -4,9 +4,11 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
+import java.util.Objects;
+
 public class Reef extends VisibleEntities{
 
-    private final static String type = "reef";
+    private static final String TYPE = "reef";
 
     public Reef() {}
 
@@ -22,8 +24,21 @@ public class Reef extends VisibleEntities{
      * <p>Getter.</p>
      */
     public String getType() {
-        return type;
+        return TYPE;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reef visibleEntities = (Reef) o;
+        return this.position.equals(visibleEntities.position)
+                && this.shape.equals(visibleEntities.shape);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position,shape);
+    }
 
 }

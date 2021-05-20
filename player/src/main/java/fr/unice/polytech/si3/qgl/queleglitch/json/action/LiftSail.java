@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LiftSail extends Action {
 
-    private static final String type = "LIFT_SAIL";
+    private static final String TYPE = "LIFT_SAIL";
 
     public LiftSail(int sailorId) {
         super(sailorId);
@@ -13,7 +13,7 @@ public class LiftSail extends Action {
     /**
      * <p>Getter.</p>
      */
-    public String getType() { return type; }
+    public String getType() { return TYPE; }
 
     /**
      * <p>Override of equals method, allow to compare different LiftSail action by their id</p>

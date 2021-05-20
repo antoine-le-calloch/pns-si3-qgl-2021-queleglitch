@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Row extends Action {
 
-    private static final String type = "OAR";
+    private static final String TYPE = "OAR";
 
     public Row(int sailorId) {
         super(sailorId);
@@ -13,7 +13,7 @@ public class Row extends Action {
     /**
      * <p>Getter.</p>
      */
-    public String getType() { return type; }
+    public String getType() { return TYPE; }
 
     /**
      * <p>Override of equals method, allow to compare different Turn action by their rotation</p>
