@@ -108,14 +108,29 @@ class PolygonTest {
         assertArrayEquals(reelPoints,polygon.getRealPoints(new Position(-1,-1,0)));
     }
 
-    /*@Test
-    void reel5Points_ort0_In1172_1548(){
-        Point[] points = new Point[]{new Point(28.0,-748.0),new Point(568.0,-48.0),
-                new Point(68.0,712.0),new Point(-252.0,332.0),new Point(-412.0,-248.0)};
-        polygon = new Polygon(0, points);
+    @Test
+    void get_And_Set_Orientation_Test(){
+        polygon = new Polygon(0, actual5Points);
+        assertEquals(0,polygon.getOrientation());
+        polygon.setOrientation(3);
+        assertEquals(3,polygon.getOrientation());
+        assertNotEquals(5,polygon.getOrientation());
+    }
 
-        Point[] points = new Point[]{new Point(28.0,-748.0),new Point(568.0,-48.0),
-                new Point(68.0,712.0),new Point(-252.0,332.0),new Point(-412.0,-248.0)};
-        assertArrayEquals(reelPoints,polygon.getRealPoints(new Position(1172.0,1548.0,0.0)));
-    }*/
+    @Test
+    void get_And_Set_Vertices_Test(){
+        Point[] vertices = new Point[]{new Point(2,1),new Point(-2,1), new Point(-2,-1),new Point(2,-1)};
+        Polygon polygonTest = new Polygon(0,vertices);
+        assertEquals(vertices,polygonTest.getVertices());
+        Point[] newVertices = new Point[]{new Point(3,1),new Point(-4,1), new Point(-2,-7),new Point(6,-5)};
+        polygonTest.setVertices(newVertices);
+        assertEquals(newVertices,polygonTest.getVertices());
+    }
+
+    @Test
+    void see_Polygon_Informations(){
+        polygon = new Polygon(0, actual5Points);
+        assertEquals("Orientation : 0.0 | Vertices : [Point{x=3.0, y=0.0}, Point{x=2.0, y=1.0}, Point{x=-2.0, y=1.0}, Point{x=-2.0, y=-1.0}, Point{x=2.0, y=-1.0}]",polygon.toString());
+    }
+
 }

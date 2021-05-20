@@ -49,4 +49,21 @@ class PointTest {
     void angleBetweenTwoPointsWithNegativeAngle_origin_and_negative_point(){
         assertEquals(-3*Math.PI/4,point0_0.getAngleToAPoint(pointMinus1_Minus1));
     }
+
+    @Test
+    void get_And_Set_Coordinates(){
+        assertEquals(0,point0_0.getX());
+        point0_0.setX(2);
+        assertEquals(2,point0_0.getX());
+        assertEquals(0,point0_0.getY());
+        point0_0.setY(7);
+        assertEquals(7,point0_0.getY());
+        assertNotEquals(4,point0_0.getX());
+        assertNotEquals(6,point0_0.getY());
+    }
+
+    @Test
+    void see_Info_Of_Point(){
+        assertEquals("Point{x=0.0, y=0.0}",point0_0.toString());
+    }
 }
