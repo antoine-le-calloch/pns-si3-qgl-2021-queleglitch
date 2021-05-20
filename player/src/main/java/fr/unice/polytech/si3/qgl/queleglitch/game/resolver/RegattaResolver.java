@@ -48,7 +48,7 @@ public class RegattaResolver {
         int maxRightOarUse = nbOarsUsed.onRight();
         boolean changeSailSetting = false;
 
-        while (shipMovementResolver.isCheckpointMissed(positionToReach, rudderAngle, actionOnSails, nbOarsUsed)) {
+        while (Boolean.TRUE.equals(shipMovementResolver.isCheckpointMissed(positionToReach, rudderAngle, actionOnSails, nbOarsUsed))) {
             if (nbOarsUsed.onLeft() >= 1 && nbOarsUsed.onRight() >= 1 && (nbOarsUsed.onLeft() != nbOarsUsed.onRight() || nbOarsUsed.onLeft() != 1))
                 nbOarsUsed.decreaseLeftAndRight(1);
             else if (informationGame.getShip().isSailsOpen() && actionOnSails != SailAction.LOWER){
@@ -59,7 +59,7 @@ public class RegattaResolver {
                 return null;
         }
         if(changeSailSetting) {
-            while (!shipMovementResolver.isCheckpointMissed(positionToReach, rudderAngle, actionOnSails, new NbOarsUsed(nbOarsUsed.onLeft()+1,nbOarsUsed.onRight()+1))) {
+            while (Boolean.FALSE.equals(shipMovementResolver.isCheckpointMissed(positionToReach, rudderAngle, actionOnSails, new NbOarsUsed(nbOarsUsed.onLeft()+1,nbOarsUsed.onRight()+1)))) {
                 if (nbOarsUsed.onLeft()+1 > maxLeftOarUse || nbOarsUsed.onRight()+1 > maxRightOarUse){
                     break;
                 }

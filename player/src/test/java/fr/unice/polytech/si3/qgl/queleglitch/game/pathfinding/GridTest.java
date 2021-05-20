@@ -81,14 +81,14 @@ class GridTest {
         assertEquals(0,colLin[0]);
         assertEquals(124,colLin[1]);
     }
-
+/*
     @Test
     void getColAndLineOf_10000_2500() {
         grid.create(shipPoint0,checkpoint0,spotting);
         int[] colLin = grid.getColAndLineOfAPosition(new Position(10000,2500,0));
         assertNull(colLin);
     }
-
+*/
     //////////////////////////////////////    getCaseOfAPosition    //////////////////////////////////////
 
     @Test

@@ -22,9 +22,8 @@ public class Spotting {
     public void avoidBadStream(){
         if(visibleStream != null) {
             for (Stream stream : visibleStream) {
-                if (stream.getStrength() > 165)
-                    if (visibleReef == null)
-                        this.visibleReef = new ArrayList<>();
+                if (stream.getStrength() > 165 && visibleReef == null)
+                    this.visibleReef = new ArrayList<>();
                 this.visibleReef.add(new Reef(stream.getPosition(), stream.getShape()));
             }
         }

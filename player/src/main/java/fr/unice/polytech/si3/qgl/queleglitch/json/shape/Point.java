@@ -40,7 +40,7 @@ public class Point {
         return new Position(x,y,0);
     }
 
-    public Point[] getRealPoints(Position centralPosition){
+    public Point[] getRealPoints(){
         return new Point[]{new Point(x,y)};
     }
 

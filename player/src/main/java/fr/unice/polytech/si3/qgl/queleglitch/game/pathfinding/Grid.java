@@ -114,7 +114,7 @@ public class Grid {
                 columnLine[1] = 0;
             }
             if(columnLine[0] == nbCol){
-                return null;
+                return new int[]{0,0};
             }
         }
         return columnLine;

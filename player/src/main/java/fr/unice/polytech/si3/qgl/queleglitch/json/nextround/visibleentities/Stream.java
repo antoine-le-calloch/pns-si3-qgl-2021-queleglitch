@@ -7,7 +7,9 @@ public class Stream extends VisibleEntities{
     private static final String TYPE = "stream";
     private double strength;
 
-    public Stream(){}
+    public Stream(){
+        //vide
+    }
 
     /**
      * <p>Getter.</p>
