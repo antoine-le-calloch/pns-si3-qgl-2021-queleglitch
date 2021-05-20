@@ -61,8 +61,8 @@ public class Grid {
     }
 
     public Point[] findCasePoints(int column, int line, double gridOrientation, Point centralGridPoint){
-        double width = gridSide - caseWidth -line* caseWidth *2;
-        double height = gridSide - caseHeight -column* caseHeight *2;
+        double width = gridSide - caseWidth - (double) line* caseWidth *2;
+        double height = gridSide - caseHeight - (double) column* caseHeight *2;
         Rectangle rectangle = new Rectangle(width,height,gridOrientation);
         return rectangle.getRealPoints(centralGridPoint);
     }
