@@ -4,6 +4,8 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
+import java.util.Objects;
+
 /**
  * Classe representant les Checkpoints
  * @author Huot-Marchand Antoine
@@ -50,6 +52,20 @@ public class Checkpoint {
      */
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Checkpoint)) return false;
+        Checkpoint that = (Checkpoint) o;
+        return Objects.equals(position, that.position) &&
+                Objects.equals(shape, that.shape);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position, shape);
     }
 
     public void setShape(Shape shape) {
