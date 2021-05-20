@@ -1,5 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.nextround.visibleentities;
 
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,5 +31,14 @@ class StreamTest {
         assertEquals(0,streamTest.getStrength());
         streamTest.setStrength(145);
         assertEquals(145,streamTest.getStrength());
+    }
+
+    @Test
+    void equalityTest(){
+        Stream streamTest2 = new Stream(new Position(0,0,0),new Circle(2));
+        Stream streamTest3 = new Stream(new Position(0,0,0),new Circle(2));
+        Stream streamTest4 = new Stream(new Position(3,3,0),new Circle(1));
+        assertEquals(streamTest2,streamTest3);
+        assertNotEquals(streamTest2,streamTest4);
     }
 }

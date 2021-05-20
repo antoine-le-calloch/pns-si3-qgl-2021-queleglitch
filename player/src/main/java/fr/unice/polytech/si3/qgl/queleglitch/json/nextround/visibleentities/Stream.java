@@ -1,5 +1,8 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.nextround.visibleentities;
 
+import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
+import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
+
 import java.util.Objects;
 
 public class Stream extends VisibleEntities{
@@ -9,6 +12,10 @@ public class Stream extends VisibleEntities{
 
     public Stream(){
         //vide
+    }
+
+    public Stream(Position position, Shape shape) {
+        super(position,shape);
     }
 
     /**
