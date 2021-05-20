@@ -69,6 +69,43 @@ class RegattaGoalTest {
         assertEquals(new Position(100,100,0) ,regattaGoal.getPositionOptiCheckpoints()[1]);
     }
 
+    @Test
+    void checkpointReachedtest(){
+        regattaGoal = new RegattaGoal(new Checkpoint[]{new Checkpoint(new Position(100,-100,0), new Circle(100)), new Checkpoint(new Position(100,100,0), new Circle(5))});
+        assertEquals(0,regattaGoal.getNumActualCheckpoint());
+        regattaGoal.checkpointReached();
+        assertEquals(1,regattaGoal.getNumActualCheckpoint());
+        regattaGoal.checkpointReached();
+        // all checkpoints reached
+        assertEquals(1,regattaGoal.getNumActualCheckpoint());
+    }
+
+    @Test
+    void get_Checkpoint_Reach_Test(){
+        regattaGoal = new RegattaGoal(new Checkpoint[]{new Checkpoint(new Position(100,-100,0), new Circle(100)), new Checkpoint(new Position(100,100,0), new Circle(5))});
+        regattaGoal.setCheckpointReach(true);
+        assertTrue(regattaGoal.getCheckpointReach());
+        regattaGoal.setCheckpointReach(false);
+        assertFalse(regattaGoal.getCheckpointReach());
+    }
+
+    @Test
+    void getCheckpointsTest(){
+        Checkpoint[] checkpoints = new Checkpoint[]{new Checkpoint(new Position(100,-100,0), new Circle(100)), new Checkpoint(new Position(100,100,0), new Circle(5))};
+        regattaGoal = new RegattaGoal(checkpoints);
+        assertEquals(checkpoints,regattaGoal.getCheckpoints());
+        System.out.println(regattaGoal.toString());
+    }
+
+    @Test
+    void see_List_Of_Checkpoints(){
+        Checkpoint[] checkpoints = new Checkpoint[]{new Checkpoint(new Position(100,-100,0), new Circle(100)), new Checkpoint(new Position(100,100,0), new Circle(5))};
+        regattaGoal = new RegattaGoal(checkpoints);
+        assertEquals(" | Checkpoint | x : 100.0 | y : -100.0 | Checkpoint | x : 100.0 | y : 100.0",regattaGoal.toString());
+    }
+
+
+
 
 
 
