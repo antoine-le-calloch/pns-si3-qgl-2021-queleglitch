@@ -58,17 +58,17 @@ public class InformationGame {
     }
 
     public void createGrid() {
-        grid = new Grid(10200,200,200);
+        grid = new Grid(8200,200,200);
         Spotting spotting = new Spotting(seaEntities.getVisibleReefs(),seaEntities.getVisibleStreams());
         grid.create(ship.getPosition().toPoint(), getRegattaGoal().getPositionActualOptiCheckpoint().toPoint(),spotting);
     }
 
-    public void createPath() {
+    public boolean createPath() {
         Spotting spotting = new Spotting(seaEntities.getVisibleReefs(),seaEntities.getVisibleStreams());
         grid.reloadCaseInformation(spotting);
         grid.processCaseWeight(ship.getPosition().toPoint());
         FindPath findPath = new FindPath(grid);
-        findPath.createPath(getRegattaGoal(),grid.getCaseOfAPosition(ship.getPosition()));
+        return findPath.createPath(getRegattaGoal(),grid.getCaseOfAPosition(ship.getPosition()));
     }
 
     public boolean isCheckpointReached() {

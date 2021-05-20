@@ -10,7 +10,7 @@ public class FindPath {
         this.grid = grid;
     }
 
-    public void createPath(RegattaGoal regattaGoal, Case shipCase){
+    public boolean createPath(RegattaGoal regattaGoal, Case shipCase){
         int col = shipCase.col();
         int lin = shipCase.line();
         Case targetCase;
@@ -24,7 +24,7 @@ public class FindPath {
                         if (lin > 0)
                             lin--;
                         else {
-                            lin++;
+                            return false;
                         }
                     }
                     targetCase = grid.getCase(col, lin);
@@ -40,6 +40,8 @@ public class FindPath {
             regattaGoal.createPathPoint(targetCase.getCentralPoint());
         else
             regattaGoal.createPathPoint(null);
+
+        return true;
     }
 
     public Case nextCase(Case targetCase){

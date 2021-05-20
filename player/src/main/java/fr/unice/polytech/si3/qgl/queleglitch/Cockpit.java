@@ -81,5 +81,3 @@ public class Cockpit implements ICockpit {
 		return logs;
 	}
 }
-
-//test branch

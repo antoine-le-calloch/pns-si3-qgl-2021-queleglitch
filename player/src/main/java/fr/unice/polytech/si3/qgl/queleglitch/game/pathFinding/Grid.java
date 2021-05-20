@@ -137,7 +137,5 @@ public class Grid {
         return null;
     }
 
-    public Case[][] getGrid() {
-        return grid;
-    }
+
 }

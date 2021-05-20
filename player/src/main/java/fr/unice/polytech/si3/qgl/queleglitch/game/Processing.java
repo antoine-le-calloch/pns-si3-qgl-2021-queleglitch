@@ -45,6 +45,8 @@ public class Processing {
             informationGame.getRegattaGoal().setCheckpointReach(true);
         }
 
+        if(!informationGame.createPath())
+            informationGame.createGrid();
         informationGame.createPath();
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
         regattaResolver = new RegattaResolver(informationGame);

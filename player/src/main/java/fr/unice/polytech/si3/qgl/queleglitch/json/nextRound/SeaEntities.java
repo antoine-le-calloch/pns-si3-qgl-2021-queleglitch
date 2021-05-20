@@ -5,24 +5,15 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Stre
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.VisibleEntities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SeaEntities {
 
-    private final List<VisibleEntities> visibleEntities;
-
-    public SeaEntities() {
-        visibleEntities = new ArrayList<>();
-    }
+    private List<VisibleEntities> visibleEntities;
 
     public void addSeaEntities(VisibleEntities[] newVisibleEntities){
-        if(newVisibleEntities != null) {
-            for (VisibleEntities newVisibleEntity : newVisibleEntities) {
-                if (!visibleEntities.contains(newVisibleEntity)) {
-                    visibleEntities.add(newVisibleEntity);
-                }
-            }
-        }
+        visibleEntities = Arrays.asList(newVisibleEntities.clone());
     }
 
     public List<Reef> getVisibleReefs() {

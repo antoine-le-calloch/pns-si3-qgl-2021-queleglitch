@@ -14,8 +14,8 @@ class CockpitTest {
     void setUp() {
         path = "\\txtJson\\test";
     }
-/*
-    @Test
+
+    /*@Test
     void Test_inputRound0() {
         Cockpit cockpitGame = new Cockpit();
         cockpitGame.initGame(getTxtInFile("Round0\\initGameFile"));
@@ -59,7 +59,7 @@ class CockpitTest {
         assertEquals(getTxtInFile("Round0Week11\\output2File"), actualOutput);
     }
 
-    /*@Test
+    @Test
     void Test_inputRoundBeforeCrashWeek11() {
         Cockpit cockpitGame = new Cockpit();
         cockpitGame.initGame(getTxtInFile("RoundBeforeCrashWeek11\\initGameFile"));
