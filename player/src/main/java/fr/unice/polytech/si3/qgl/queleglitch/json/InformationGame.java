@@ -1,15 +1,15 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.FindPath;
-import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Grid;
-import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Spotting;
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathfinding.FindPath;
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathfinding.Grid;
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathfinding.Spotting;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.NextRound;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.SeaEntities;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextround.NextRound;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextround.SeaEntities;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextround.Wind;
 
 /**
  * Classe permettant de gerer les éléments principaux du jeux : {@link Ship}, {@link Sailor}

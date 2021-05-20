@@ -6,7 +6,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextround.Wind;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Circle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;

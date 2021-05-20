@@ -1,17 +1,12 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.resolver.strategie;
 
 import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
-import fr.unice.polytech.si3.qgl.queleglitch.json.InformationGame;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.Sail;
-import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Goal;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextround.Wind;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
