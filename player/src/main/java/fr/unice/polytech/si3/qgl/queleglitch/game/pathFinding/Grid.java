@@ -119,10 +119,12 @@ public class Grid {
         return columnLine;
     }
 
-    public void resetCaseWeight(){
+    public void reloadCaseInformation(Spotting spotting){
         for (Case[] columnCases : grid) {
             for (Case gridCase : columnCases) {
                 gridCase.setWeight(-1);
+                if(spotting.isReefsInARectangle(gridCase.getForm().getRealPoints(gridCase.getCentralPoint())))
+                    gridCase.setIsReef(true);
             }
         }
     }
@@ -131,5 +133,9 @@ public class Grid {
         if(col >= 0 && col < NB_COL && lin >= 0 && lin < NB_LIN)
             return grid[col][lin];
         return null;
+    }
+
+    public Case[][] getGrid() {
+        return grid;
     }
 }

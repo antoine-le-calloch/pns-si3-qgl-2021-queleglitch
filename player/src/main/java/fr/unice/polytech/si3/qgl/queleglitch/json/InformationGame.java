@@ -64,7 +64,8 @@ public class InformationGame {
     }
 
     public void createPath() {
-        grid.resetCaseWeight();
+        Spotting spotting = new Spotting(seaEntities.getVisibleReefs(),seaEntities.getVisibleStreams());
+        grid.reloadCaseInformation(spotting);
         grid.processCaseWeight(ship.getPosition().toPoint());
         FindPath findPath = new FindPath(grid);
         findPath.createPath(getRegattaGoal(),grid.getCaseOfAPosition(ship.getPosition()));

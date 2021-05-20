@@ -38,9 +38,11 @@ public class Spotting {
     }
 
     public boolean isReefPointsInRectangle(Point[] rectanglePoint){
-        for (Reef reef : visibleReef) {
-            if(Geometry.isThisPointInARectangle(reef.getPosition().toPoint(),rectanglePoint))
-                return true;
+        if(visibleReef != null) {
+            for (Reef reef : visibleReef) {
+                if (Geometry.isThisPointInARectangle(reef.getPosition().toPoint(), rectanglePoint))
+                    return true;
+            }
         }
         return false;
     }
@@ -51,9 +53,11 @@ public class Spotting {
     }
 
     public boolean isReefsBetween2Points(Point point1, Point point2){
-        for (Reef reef : visibleReef) {
-            if(isThisReefBetween2Points(reef,point1,point2))
-                return true;
+        if(visibleReef != null) {
+            for (Reef reef : visibleReef) {
+                if (isThisReefBetween2Points(reef, point1, point2))
+                    return true;
+            }
         }
         return false;
     }

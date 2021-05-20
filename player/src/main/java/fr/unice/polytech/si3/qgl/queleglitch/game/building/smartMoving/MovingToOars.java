@@ -47,15 +47,15 @@ public class MovingToOars {
     public void movingAndUseOarsOnSide(List<Oar> sideOars, NbOarsUsed nbOarsUsed, List<Sailor> sailorsAvailable, List<Entities> entitiesTooFar, List<Action> actionsList){
         Sailor sailorToMove = null;
         for (int i = 0; i < nbOarsUsedOnSide(sideOars,nbOarsUsed); i++) {
-            for (int j = sideOars.size() - i - 1; j >= nbOarsUsedOnSide(sideOars,nbOarsUsed) - i -1; j--) {
+            int j;
+            for (j = sideOars.size() - i - 1; j >= nbOarsUsedOnSide(sideOars,nbOarsUsed) - i -1; j--) {
                 if((sailorToMove = getNearestSailorBehind5OnThisSide(sideOars,sailorsAvailable,j)) != null) {
                     AddToActionList(sailorToMove,sideOars,actionsList,sailorsAvailable,j);
                     break;
                 }
             }
             if(sailorToMove == null) {
-                entitiesTooFar.add(sideOars.get((i == 0) ? sideOars.size() - nbOarsUsedOnSide(sideOars,nbOarsUsed) : i));
-                break;
+                entitiesTooFar.add(sideOars.get((i == 0) ? nbOarsUsedOnSide(sideOars,nbOarsUsed)-1 : j+1));
             }
         }
     }

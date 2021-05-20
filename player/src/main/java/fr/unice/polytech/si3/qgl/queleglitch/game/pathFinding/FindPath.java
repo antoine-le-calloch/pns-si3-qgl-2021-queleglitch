@@ -16,18 +16,20 @@ public class FindPath {
         Case targetCase;
 
         if((targetCase = grid.getCaseOfAPosition(regattaGoal.getPositionActualOptiCheckpoint())) == null || targetCase.getWeight() == -1){
-            do{
-                if(col > 0)
-                    col--;
-                else{
-                    if(lin > 0)
-                        lin--;
-                    else{
-                        lin++;
+            if((targetCase = grid.getCaseOfAPosition(regattaGoal.getActualCheckpoint().getPosition())) == null || targetCase.getWeight() == -1) {
+                do {
+                    if (col > 0)
+                        col--;
+                    else {
+                        if (lin > 0)
+                            lin--;
+                        else {
+                            lin++;
+                        }
                     }
-                }
-            }while (grid.getCase(col,lin).isReef());
-            targetCase = grid.getCase(col,lin);
+                    targetCase = grid.getCase(col, lin);
+                } while (targetCase.getWeight() == -1);
+            }
         }
 
         while (targetCase.getWeight() >= 2){
