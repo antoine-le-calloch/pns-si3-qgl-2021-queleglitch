@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Turn extends Action{
 
-    private static final String TYPE = "TURN";
+    private final String type = "TURN";
     private double rotation;
 
     public Turn(double rotation, int sailorId) {
@@ -21,7 +21,7 @@ public class Turn extends Action{
     }
 
     public String getType() {
-        return TYPE;
+        return type;
     }
 
     /**

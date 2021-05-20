@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LowerSail extends Action{
 
-    private static final String TYPE = "LOWER_SAIL";
+    private final String type = "LOWER_SAIL";
 
     public LowerSail(int sailorId) {
         super(sailorId);
@@ -13,7 +13,7 @@ public class LowerSail extends Action{
     /**
      * <p>Getter.</p>
      */
-    public String getType() { return TYPE; }
+    public String getType() { return type; }
 
     /**
      * <p>Override of equals method, allow to compare different LowerSail action by their id</p>

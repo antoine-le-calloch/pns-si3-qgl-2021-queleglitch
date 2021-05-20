@@ -15,19 +15,6 @@ class CockpitTest {
         path = "\\txtJson\\test";
     }
 
-    /*@Test
-    void Test_inputRound0() {
-        Cockpit cockpitGame = new Cockpit();
-        cockpitGame.initGame(getTxtInFile("Round0\\initGameFile"));
-        String actualOutput = cockpitGame.nextRound(getTxtInFile("Round0\\nextRound1File"));
-
-        assertEquals(getTxtInFile("Round0\\output1File"), actualOutput);
-
-        actualOutput = cockpitGame.nextRound(getTxtInFile("Round0\\nextRound2File"));
-
-        assertEquals(getTxtInFile("Round0\\output2File"), actualOutput);
-    }
-
     @Test
     void Test_inputRound0Week3P() {
         Cockpit cockpitGame = new Cockpit();
@@ -47,26 +34,26 @@ class CockpitTest {
     }
 
     @Test
-    void Test_inputRound0Week11() {
+    void Test_inputRound0Week12() {
         Cockpit cockpitGame = new Cockpit();
-        cockpitGame.initGame(getTxtInFile("Round0Week11\\initGameFile"));
-        String actualOutput = cockpitGame.nextRound(getTxtInFile("Round0Week11\\nextRound1File"));
+        cockpitGame.initGame(getTxtInFile("Round0Week12\\initGameFile"));
+        String actualOutput = cockpitGame.nextRound(getTxtInFile("Round0Week12\\nextRound1File"));
 
-        assertEquals(getTxtInFile("Round0Week11\\output1File"), actualOutput);
+        assertEquals(getTxtInFile("Round0Week12\\output1File"), actualOutput);
 
-        actualOutput = cockpitGame.nextRound(getTxtInFile("Round0Week11\\nextRound2File"));
+        actualOutput = cockpitGame.nextRound(getTxtInFile("Round0Week12\\nextRound2File"));
 
-        assertEquals(getTxtInFile("Round0Week11\\output2File"), actualOutput);
+        assertEquals(getTxtInFile("Round0Week12\\output2File"), actualOutput);
     }
 
     @Test
-    void Test_inputRoundBeforeCrashWeek11() {
+    void Test_inputRoundBeforeCrashWeek12() {
         Cockpit cockpitGame = new Cockpit();
-        cockpitGame.initGame(getTxtInFile("RoundBeforeCrashWeek11\\initGameFile"));
-        String actualOutput = cockpitGame.nextRound(getTxtInFile("RoundBeforeCrashWeek11\\nextRound1File"));
+        cockpitGame.initGame(getTxtInFile("RoundBeforeCrashWeek12\\initGameFile"));
+        String actualOutput = cockpitGame.nextRound(getTxtInFile("RoundBeforeCrashWeek12\\nextRound1File"));
 
-        assertEquals(getTxtInFile("RoundBeforeCrashWeek11\\output1File"), actualOutput);
-    }*/
+        assertEquals(getTxtInFile("RoundBeforeCrashWeek12\\output1File"), actualOutput);
+    }
 
     ///////////methode to open the text file with Json
     private String getTxtInFile(String fileName) {
