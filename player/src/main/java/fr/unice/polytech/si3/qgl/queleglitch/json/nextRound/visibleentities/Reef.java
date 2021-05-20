@@ -8,8 +8,7 @@ public class Reef extends VisibleEntities{
 
     private final static String type = "reef";
 
-    public Reef() {
-    }
+    public Reef() {}
 
     public Reef(Position position, Shape shape) {
         super(position,shape);
