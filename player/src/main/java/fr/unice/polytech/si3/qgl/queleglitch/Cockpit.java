@@ -35,7 +35,6 @@ public class Cockpit implements ICockpit {
 	 */
 	public void initGame(String game) {
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		System.out.println("Init game input: " + game);
 		try {
 			informationGame = objectMapper.readValue(game, InformationGame.class);
 			processing = new Processing(informationGame);
@@ -52,7 +51,6 @@ public class Cockpit implements ICockpit {
 	 * @return <b>A Json string which contains the actions of all the sailors in a round.</b>
 	 */
 	public String nextRound(String round) {
-		System.out.println("Next round input: " + round);
 		try {
 			nextRound = objectMapper.readValue(round, NextRound.class);
 			informationGame.setNewRound(nextRound);

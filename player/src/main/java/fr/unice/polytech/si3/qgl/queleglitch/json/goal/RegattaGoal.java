@@ -12,7 +12,7 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
  * @version 2021.01.26
  */
 
-public class RegattaGoal extends Goal {
+public class RegattaGoal implements Goal {
 
     private Position[] positionOptiCheckpoints;
     private int numActualCheckpoint = 0;

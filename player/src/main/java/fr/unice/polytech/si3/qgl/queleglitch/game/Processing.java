@@ -34,7 +34,7 @@ public class Processing {
             checkpointReached = false;
         }
 
-        if(firstTurn || secondTurn || checkpointReached || informationGame.checkpointOutOfGrid()) {
+        if(Boolean.TRUE.equals(firstTurn) || Boolean.TRUE.equals(secondTurn) || Boolean.TRUE.equals(checkpointReached) || Boolean.TRUE.equals(informationGame.checkpointOutOfGrid())) {
             secondTurn = false;
             informationGame.createGrid();
         }
