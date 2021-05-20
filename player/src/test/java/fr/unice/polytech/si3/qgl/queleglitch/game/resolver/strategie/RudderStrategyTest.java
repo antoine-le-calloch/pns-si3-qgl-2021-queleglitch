@@ -13,7 +13,7 @@ class RudderStrategyTest {
 
     @BeforeEach
     void setUp(){
-        rudderStrategy =new RudderStrategy();
+        rudderStrategy = new RudderStrategy(true);
     }
 
     @Test

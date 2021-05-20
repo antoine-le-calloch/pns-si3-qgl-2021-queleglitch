@@ -2,7 +2,6 @@ package fr.unice.polytech.si3.qgl.queleglitch.game.resolver;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 
 public class Geometry {
 

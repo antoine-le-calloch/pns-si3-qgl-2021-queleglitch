@@ -1,7 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.building;
 
 import fr.unice.polytech.si3.qgl.queleglitch.enums.SailAction;
-import fr.unice.polytech.si3.qgl.queleglitch.game.building.smartMoving.*;
+import fr.unice.polytech.si3.qgl.queleglitch.game.building.smartmoving.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.action.*;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Sailor;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;

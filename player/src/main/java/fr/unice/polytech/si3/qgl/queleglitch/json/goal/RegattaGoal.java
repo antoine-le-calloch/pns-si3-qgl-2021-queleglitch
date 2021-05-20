@@ -3,9 +3,6 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Classe permettant de définir le mode Regatta
  * @author Huot-Marchand Antoine
@@ -15,7 +12,7 @@ import java.util.List;
  * @version 2021.01.26
  */
 
-public class RegattaGoal extends Goal {
+public class RegattaGoal implements Goal {
 
     private Position[] positionOptiCheckpoints;
     private int numActualCheckpoint = 0;
@@ -57,9 +54,12 @@ public class RegattaGoal extends Goal {
     }
     public void createPathPoint(Point pathPoint) { this.pathPoint = pathPoint; }
 
+
     /**
      * <p>Getter.</p>
      */
+
+
     public boolean getCheckpointReach(){ return checkpointReach; }
 
     public Checkpoint[] getCheckpoints() { return checkpoints; }
@@ -73,6 +73,8 @@ public class RegattaGoal extends Goal {
     public Position getPositionActualOptiCheckpoint(){
         return positionOptiCheckpoints[numActualCheckpoint];
     }
+
+    public int getNumActualCheckpoint() { return numActualCheckpoint;}
 
     /**
      * <p>Setter.</p>

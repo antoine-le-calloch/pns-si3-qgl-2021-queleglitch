@@ -29,10 +29,12 @@ public class Processing {
         if(informationGame.isCheckpointReached()) {
             informationGame.processCheckpointReached();
             checkpointReached = true;
-        } else
+        } else{
+            informationGame.processCheckpointNotReached();
             checkpointReached = false;
+        }
 
-        if(firstTurn || secondTurn || checkpointReached || informationGame.checkpointOutOfGrid()) {
+        if(Boolean.TRUE.equals(firstTurn) || Boolean.TRUE.equals(secondTurn) || Boolean.TRUE.equals(checkpointReached) || Boolean.TRUE.equals(informationGame.checkpointOutOfGrid())) {
             secondTurn = false;
             informationGame.createGrid();
         }
@@ -43,6 +45,8 @@ public class Processing {
             informationGame.getRegattaGoal().setCheckpointReach(true);
         }
 
+        if(!informationGame.createPath())
+            informationGame.createGrid();
         informationGame.createPath();
         shipMovementResolver = new ShipMovementResolver(informationGame.getShip(), informationGame.getWind(), informationGame.getRegattaGoal());
         regattaResolver = new RegattaResolver(informationGame);

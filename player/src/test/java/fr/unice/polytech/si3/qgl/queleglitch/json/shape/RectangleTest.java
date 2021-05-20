@@ -60,4 +60,37 @@ class RectangleTest {
                 new Point(-652.4393401841488,-1073.521265453122),new Point(852.098217695972,923.0675096651099)};
         assertArrayEquals(realPoints,rectangle.getRealPoints(new Position(0,0,0)));
     }
+
+    @Test
+    void get_And_Set_Width_Test(){
+        rectangle = new Rectangle(2,4,0);
+        assertEquals(2,rectangle.getWidth());
+        rectangle.setWidth(6);
+        assertEquals(6,rectangle.getWidth());
+        assertNotEquals(2,rectangle.getWidth());
+    }
+
+    @Test
+    void get_And_Set_Height_Test(){
+        rectangle = new Rectangle(2,4,0);
+        assertEquals(4,rectangle.getHeight());
+        rectangle.setHeight(3);
+        assertEquals(3,rectangle.getHeight());
+        assertNotEquals(4,rectangle.getHeight());
+    }
+
+    @Test
+    void get_And_Set_Orientation_Test(){
+        rectangle = new Rectangle(2,4,0);
+        assertEquals(0,rectangle.getOrientation());
+        rectangle.setOrientation(Math.PI);
+        assertEquals(Math.PI,rectangle.getOrientation());
+        assertNotEquals(0,rectangle.getOrientation());
+    }
+
+    @Test
+    void see_Rectangle_Information(){
+        rectangle = new Rectangle(2,4,0);
+        assertEquals("Orientation : 0.0 | width : 2.0 | height : 4.0",rectangle.toString());
+    }
 }

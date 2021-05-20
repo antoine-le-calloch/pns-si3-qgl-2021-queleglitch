@@ -5,19 +5,19 @@ import fr.unice.polytech.si3.qgl.queleglitch.game.building.NbOarsUsed;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Ship;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.Wind;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextround.Wind;
 
 public class ShipMovementResolver {
 
     private final RegattaGoal regattaGoal;
-    private final int NB_OARS;
-    private final int NB_SAILS;
+    private final int nbOars;
+    private final int nbSails;
     private final Ship ship;
     private final Wind wind;
 
     public ShipMovementResolver(Ship ship, Wind wind, RegattaGoal regattaGoal){
-        NB_SAILS = ship.getNbSails();
-        NB_OARS = ship.getNbOars();
+        nbSails = ship.getNbSails();
+        nbOars = ship.getNbOars();
         this.regattaGoal = regattaGoal;
         this.ship = ship;
         this.wind = wind;
@@ -25,7 +25,7 @@ public class ShipMovementResolver {
 
     public Position resolveNextTurnPosition(double rudderAngle, SailAction actionOnSails, NbOarsUsed nbOarsUsed){
         final double NB_PART = 100;
-        int nbHighSails = (actionOnSails == SailAction.DO_NOTHING && ship.isSailsOpen()) || (actionOnSails == SailAction.LIFT) ? NB_SAILS : 0;
+        int nbHighSails = (actionOnSails == SailAction.DO_NOTHING && ship.isSailsOpen()) || (actionOnSails == SailAction.LIFT) ? nbSails : 0;
         Position newPosition = ship.getPosition().copyOf();
         double anglePart = getAngleToTurn(rudderAngle, nbOarsUsed)/NB_PART;
         double speedPart;
@@ -39,14 +39,14 @@ public class ShipMovementResolver {
 
     //angle we are going to turn using the elements given
     public double getAngleToTurn(double rudderAngle, NbOarsUsed nbOarsUsed){
-        return rudderAngle + ((nbOarsUsed.onRight() - nbOarsUsed.onLeft())*Math.PI/ NB_OARS);
+        return rudderAngle + ((nbOarsUsed.onRight() - nbOarsUsed.onLeft())*Math.PI/ nbOars);
     }
 
 
     //speed we are going to have using the elements given
     public double getSpeed(int nbHighSails, NbOarsUsed nbOarsUsed, double shipOrientation){
-        double speedWithOars = 165.0*(nbOarsUsed.onLeft() + nbOarsUsed.onRight())/ NB_OARS;
-        double speedWithWind = (1.0*nbHighSails/ NB_SAILS)*wind.getStrength()*Math.cos(shipOrientation - wind.getOrientation());
+        double speedWithOars = 165.0*(nbOarsUsed.onLeft() + nbOarsUsed.onRight())/ nbOars;
+        double speedWithWind = (1.0*nbHighSails/ nbSails)*wind.getStrength()*Math.cos(shipOrientation - wind.getOrientation());
         return speedWithOars + speedWithWind;
     }
 

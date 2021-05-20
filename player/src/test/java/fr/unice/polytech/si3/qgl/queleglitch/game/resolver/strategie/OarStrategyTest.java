@@ -17,17 +17,17 @@ class OarStrategyTest {
 
     @Test
     void noAngleToCorrectWithOars(){
-        assertEquals(0, oarStrategy.getDifferenceOarRightLeft(Math.PI/8));
+        assertEquals(0, oarStrategy.getDifferenceOarRightLeft(Math.PI/8,Math.PI/8));
     }
 
     @Test
     void anglePositiveToCorrectWithOars(){
-        assertEquals(1, oarStrategy.getDifferenceOarRightLeft(Math.PI));
+        assertEquals(1, oarStrategy.getDifferenceOarRightLeft(Math.PI,0));
     }
 
     @Test
     void angleNegativeToCorrectWithOars(){
-        assertEquals(-1, oarStrategy.getDifferenceOarRightLeft(-Math.PI));
+        assertEquals(-1, oarStrategy.getDifferenceOarRightLeft(-Math.PI,0));
     }
 
     ///////////getNbOarsUsed(false,)

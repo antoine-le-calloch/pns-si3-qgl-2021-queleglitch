@@ -10,6 +10,8 @@ public class Polygon extends Shape {
     private double orientation;
     private Point[] vertices;
 
+    public Polygon(){}
+
     public Polygon(double orientation, Point[] vertices){
         this.orientation = orientation;
         this.vertices = vertices;

@@ -41,4 +41,23 @@ class CircleTest {
     void allRealPoints_rad100_on_548_497_NormWith0_0() {
         assertFalse(Arrays.stream(circle.getRealPoints(new Position(548,497,0))).allMatch(point -> Math.round(point.getNorm(new Point(0,0))) == 110));
     }
+
+    @Test
+    void getRadiusTest(){
+        assertEquals(100,circle.getRadius());
+        assertNotEquals(120,circle.getRadius());
+    }
+
+    @Test
+    void setRadiusTest(){
+        assertEquals(100,circle.getRadius());
+        circle.setRadius(350);
+        assertNotEquals(100,circle.getRadius());
+        assertEquals(350,circle.getRadius());
+    }
+
+    @Test
+    void see_Circle_Description(){
+        assertEquals("Radius : 100.0",circle.toString());
+    }
 }

@@ -21,6 +21,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * @see RegattaGoal
  * @version 2021.01.26
  */
-public abstract class Goal {
-    public abstract void setCheckpoints(Checkpoint[] checkpoints);
+public interface Goal {
+    void setCheckpoints(Checkpoint[] checkpoints);
 }

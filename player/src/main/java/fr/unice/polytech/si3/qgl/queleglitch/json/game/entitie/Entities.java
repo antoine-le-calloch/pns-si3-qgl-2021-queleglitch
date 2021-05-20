@@ -9,16 +9,15 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = Sail.class, name = "sail"),
         @JsonSubTypes.Type(value = Rudder.class, name = "rudder"),
         @JsonSubTypes.Type(value = Watch.class, name = "watch")
-        //@JsonSubTypes.Type(value = Canon.class, name = "canon")
 })
 
 public abstract class Entities {
     int x;
     int y;
 
-    public Entities(){}
+    protected Entities(){}
 
-    public Entities(int x, int y){
+    protected Entities(int x, int y){
         this.x = x;
         this.y = y;
     }

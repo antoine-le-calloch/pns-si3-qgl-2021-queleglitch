@@ -1,10 +1,10 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json;
 
-import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Grid;
-import fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding.Spotting;
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathfinding.Grid;
+import fr.unice.polytech.si3.qgl.queleglitch.game.pathfinding.Spotting;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.RegattaGoal;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.SeaEntities;
+import fr.unice.polytech.si3.qgl.queleglitch.json.nextround.SeaEntities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ class InformationGameTest {
     @BeforeEach
     void setUp() {
         grid = new Grid(5200,200,200);
-        spotting = new Spotting(new ArrayList<>());
+        spotting = new Spotting(new ArrayList<>(),new ArrayList<>());
         seaEntities = new SeaEntities();
         shipPoint0 = new Point(0,0);
         informationGame = new InformationGame();
