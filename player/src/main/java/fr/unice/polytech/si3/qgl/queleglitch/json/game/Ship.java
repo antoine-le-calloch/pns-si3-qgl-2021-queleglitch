@@ -1,9 +1,7 @@
 package fr.unice.polytech.si3.qgl.queleglitch.json.game;
 
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.entitie.*;
-
 import fr.unice.polytech.si3.qgl.queleglitch.json.goal.Checkpoint;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
 import java.util.ArrayList;

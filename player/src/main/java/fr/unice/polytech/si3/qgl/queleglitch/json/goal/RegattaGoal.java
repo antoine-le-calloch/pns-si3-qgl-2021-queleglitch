@@ -3,9 +3,6 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.goal;
 import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Classe permettant de définir le mode Regatta
  * @author Huot-Marchand Antoine

@@ -1,12 +1,9 @@
 package fr.unice.polytech.si3.qgl.queleglitch.game.pathFinding;
 
 import fr.unice.polytech.si3.qgl.queleglitch.game.resolver.Geometry;
-import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Reef;
 import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Stream;
-import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.VisibleEntities;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
-import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;

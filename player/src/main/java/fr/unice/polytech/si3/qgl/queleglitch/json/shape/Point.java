@@ -29,6 +29,8 @@ public class Point {
         double opo = point.getY() - y;
         if(adj==0.0 && opo==0.0)
             return 0;
+        if(adj==0.0)
+            return (opo < 0 ? -Math.PI/2 : Math.PI/2);
         if(adj < 0)
             return -Math.atan(adj/opo) + (opo < 0 ? -Math.PI/2 : Math.PI/2);
         return Math.atan(opo/adj);

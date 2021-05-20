@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LowerSail extends Action{
 
-    private final String type = "LOWER_SAIL";
+    private static final String type = "LOWER_SAIL";
 
     public LowerSail(int sailorId) {
         super(sailorId);

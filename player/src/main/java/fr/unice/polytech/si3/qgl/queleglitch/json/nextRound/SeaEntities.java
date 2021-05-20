@@ -6,7 +6,6 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities.Visi
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class SeaEntities {
@@ -19,18 +18,18 @@ public class SeaEntities {
 
     public List<Reef> getVisibleReefs() {
         List<Reef> visibleReefs = new ArrayList<>();
-        for (VisibleEntities visibleEntities : visibleEntities) {
-            if(visibleEntities instanceof Reef)
-                visibleReefs.add((Reef) visibleEntities);
+        for (VisibleEntities visibleEntitie : visibleEntities) {
+            if(visibleEntitie instanceof Reef)
+                visibleReefs.add((Reef) visibleEntitie);
         }
         return visibleReefs;
     }
 
     public List<Stream> getVisibleStreams() {
         List<Stream> visibleStreams = new ArrayList<>();
-        for (VisibleEntities visibleEntities : visibleEntities) {
-            if(visibleEntities instanceof Stream)
-                visibleStreams.add((Stream) visibleEntities);
+        for (VisibleEntities visibleEntitie : visibleEntities) {
+            if(visibleEntitie instanceof Stream)
+                visibleStreams.add((Stream) visibleEntitie);
         }
         return visibleStreams;
     }

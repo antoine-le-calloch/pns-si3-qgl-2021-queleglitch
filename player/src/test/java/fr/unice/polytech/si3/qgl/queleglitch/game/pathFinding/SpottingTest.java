@@ -182,11 +182,11 @@ class SpottingTest {
 
     @Test
     void rectangleReef_CheckpointIn100_0_And_100_100_ReefIn100_50() {
-    Point point100_100 = new Point(100,100);
-    Rectangle rectangle = new Rectangle(2,4,0);
-    Reef reef = new Reef(new Position(100,50,0),rectangle);
-    assertTrue(spotting.isThisReefBetween2Points(reef, point100_0, point100_100));
-}
+        Point point100_100 = new Point(100,100);
+        Rectangle rectangle = new Rectangle(2,4,0);
+        Reef reef = new Reef(new Position(100,50,0),rectangle);
+        assertTrue(spotting.isThisReefBetween2Points(reef, point100_0, point100_100));
+    }
 
     @Test
     void rectangleReef_CheckpointIn100_0_And_100_100_ReefIn100_Minus50() {

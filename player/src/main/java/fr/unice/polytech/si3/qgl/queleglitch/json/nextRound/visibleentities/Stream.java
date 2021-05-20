@@ -2,8 +2,10 @@ package fr.unice.polytech.si3.qgl.queleglitch.json.nextRound.visibleentities;
 
 public class Stream extends VisibleEntities{
 
-    private final String type = "stream";
+    private final static String type = "stream";
     private double strength;
+
+    public Stream(){}
 
     /**
      * <p>Getter.</p>

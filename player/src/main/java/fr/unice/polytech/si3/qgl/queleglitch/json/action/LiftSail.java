@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LiftSail extends Action {
 
-    private final String type = "LIFT_SAIL";
+    private static final String type = "LIFT_SAIL";
 
     public LiftSail(int sailorId) {
         super(sailorId);
