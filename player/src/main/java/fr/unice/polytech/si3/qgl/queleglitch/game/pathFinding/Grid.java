@@ -5,43 +5,45 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Rectangle;
 
+import java.lang.reflect.Array;
+
 public class Grid {
 
-    private final int GRID_SIDE;
-    private final int CASE_WIDTH;
-    private final int CASE_HEIGHT;
-    private final int NB_COL;
-    private final int NB_LIN;
+    private final int gridSide;
+    private final int caseWidth;
+    private final int caseHeight;
+    private final int nbCol;
+    private final int nbLin;
     private final Case[][] grid;
 
     public Grid(int gridSide, int caseWidth, int caseHeight){
-        this.GRID_SIDE = gridSide;
-        this.CASE_WIDTH = caseWidth;
-        this.CASE_HEIGHT = caseHeight;
-        NB_COL = GRID_SIDE/CASE_HEIGHT;
-        NB_LIN = GRID_SIDE/CASE_WIDTH;
-        grid = new Case[NB_COL][NB_LIN];
+        this.gridSide = gridSide;
+        this.caseWidth = caseWidth;
+        this.caseHeight = caseHeight;
+        nbCol = this.gridSide / this.caseHeight;
+        nbLin = this.gridSide / this.caseWidth;
+        grid = new Case[nbCol][nbLin];
     }
 
     public void create(Point centralGridPoint, Point checkpointPosition, Spotting spotting){
         double gridOrientation = centralGridPoint.getAngleToAPoint(checkpointPosition);
-        Rectangle caseForm = new Rectangle(CASE_WIDTH,CASE_HEIGHT,gridOrientation);
+        Rectangle caseForm = new Rectangle(caseWidth, caseHeight,gridOrientation);
         int lin = 0, col = 0;
 
-        while (col < NB_COL/2.0){
+        while (col < nbCol /2.0){
             Point[] points = findCasePoints(col,lin,gridOrientation,centralGridPoint);
             for (int i = 0; i < points.length; i++) {
                 int newCol = col;
                 int newLin = lin;
                 switch (i) {
-                    case 1: newCol = NB_COL-col-1;
+                    case 1: newCol = nbCol -col-1;
                             newLin = lin;
                             break;
-                    case 2: newCol = NB_COL-col-1;
-                            newLin = NB_LIN-lin-1;
+                    case 2: newCol = nbCol -col-1;
+                            newLin = nbLin -lin-1;
                             break;
                     case 3: newCol = col;
-                            newLin = NB_LIN-lin-1;
+                            newLin = nbLin -lin-1;
                             break;
                     default: break;
                 }
@@ -51,7 +53,7 @@ public class Grid {
                 grid[newCol][newLin] = newCase;
             }
             lin++;
-            if(lin > NB_LIN/2.0){
+            if(lin > nbLin /2.0){
                 lin = 0;
                 col++;
             }
@@ -59,8 +61,8 @@ public class Grid {
     }
 
     public Point[] findCasePoints(int column, int line, double gridOrientation, Point centralGridPoint){
-        double width = GRID_SIDE-CASE_WIDTH-line*CASE_WIDTH*2;
-        double height = GRID_SIDE-CASE_HEIGHT-column*CASE_HEIGHT*2;
+        double width = gridSide - caseWidth -line* caseWidth *2;
+        double height = gridSide - caseHeight -column* caseHeight *2;
         Rectangle rectangle = new Rectangle(width,height,gridOrientation);
         return rectangle.getRealPoints(centralGridPoint);
     }
@@ -72,7 +74,7 @@ public class Grid {
     }
 
     public void processCaseWeightByColAndLin(int column, int line, double weight){
-        if(column >= NB_COL || line >= NB_LIN || column < 0 || line < 0)
+        if(column >= nbCol || line >= nbLin || column < 0 || line < 0)
             return;
         if(grid[column][line].isReef() || (grid[column][line].getWeight() != -1 && grid[column][line].getWeight() <= weight))
             return;
@@ -93,11 +95,11 @@ public class Grid {
         int line = 0;
         while (!Geometry.isThisPointInARectangle(position.toPoint(),grid[column][line].getFormPoints())){
             line++;
-            if(line == NB_LIN) {
+            if(line == nbLin) {
                 column++;
                 line = 0;
             }
-            if(column == NB_COL){
+            if(column == nbCol){
                 return null;
             }
         }
@@ -108,11 +110,11 @@ public class Grid {
         int[] columnLine = new int[]{0,0};
         while (!Geometry.isThisPointInARectangle(position.toPoint(),grid[columnLine[0]][columnLine[1]].getFormPoints())){
             columnLine[1]++;
-            if(columnLine[1] == NB_LIN) {
+            if(columnLine[1] == nbLin) {
                 columnLine[0]++;
                 columnLine[1] = 0;
             }
-            if(columnLine[0] == NB_COL){
+            if(columnLine[0] == nbCol){
                 return null;
             }
         }
@@ -130,7 +132,7 @@ public class Grid {
     }
 
     public Case getCase(int col, int lin){
-        if(col >= 0 && col < NB_COL && lin >= 0 && lin < NB_LIN)
+        if(col >= 0 && col < nbCol && lin >= 0 && lin < nbLin)
             return grid[col][lin];
         return null;
     }

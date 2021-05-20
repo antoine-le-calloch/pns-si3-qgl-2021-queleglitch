@@ -16,11 +16,12 @@ public class SailStrategy {
     }
 
     public SailAction getSailsAction() {
-        if(isSails)
+        if(isSails) {
             if (Math.cos(ship.getPosition().getOrientation() - wind.getOrientation()) > 0 && !ship.isSailsOpen())
                 return SailAction.LIFT;
             else if (Math.cos(ship.getPosition().getOrientation() - wind.getOrientation()) < 0 && ship.isSailsOpen())
                 return SailAction.LOWER;
+        }
 
         return SailAction.DO_NOTHING;
     }

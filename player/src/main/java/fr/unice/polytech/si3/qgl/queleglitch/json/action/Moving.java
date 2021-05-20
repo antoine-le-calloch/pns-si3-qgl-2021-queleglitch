@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Moving extends Action {
 
-    private final String type = "MOVING";
+    private static final String type = "MOVING";
     private int xdistance;
     private int ydistance;
 

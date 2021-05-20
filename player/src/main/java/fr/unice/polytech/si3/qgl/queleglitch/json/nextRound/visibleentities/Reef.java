@@ -4,11 +4,9 @@ import fr.unice.polytech.si3.qgl.queleglitch.json.game.Position;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Point;
 import fr.unice.polytech.si3.qgl.queleglitch.json.shape.Shape;
 
-import java.util.Arrays;
-
 public class Reef extends VisibleEntities{
 
-    private final String type = "reef";
+    private final static String type = "reef";
 
     public Reef() {
     }
@@ -27,4 +25,6 @@ public class Reef extends VisibleEntities{
     public String getType() {
         return type;
     }
+
+
 }

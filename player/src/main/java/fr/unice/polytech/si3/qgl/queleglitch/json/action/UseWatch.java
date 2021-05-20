@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class UseWatch extends Action{
 
-    private final String type = "USE_WATCH";
+    private static final String type = "USE_WATCH";
 
     public UseWatch(int sailorId) {
         super(sailorId);

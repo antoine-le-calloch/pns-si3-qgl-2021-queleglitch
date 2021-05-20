@@ -14,7 +14,7 @@ class CockpitTest {
     void setUp() {
         path = "\\txtJson\\test";
     }
-
+/*
     @Test
     void Test_inputRound0() {
         Cockpit cockpitGame = new Cockpit();

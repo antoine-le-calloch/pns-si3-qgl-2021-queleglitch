@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Row extends Action {
 
-    private final String type = "OAR";
+    private static final String type = "OAR";
 
     public Row(int sailorId) {
         super(sailorId);
