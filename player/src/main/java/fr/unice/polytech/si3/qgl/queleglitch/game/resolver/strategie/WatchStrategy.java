@@ -13,7 +13,6 @@ public class WatchStrategy {
     }
 
     public boolean isWatchNecessary(){
-        return regattaGoal.getCheckpointReach() && isWatch;
+        return isWatch;
     }
-
 }

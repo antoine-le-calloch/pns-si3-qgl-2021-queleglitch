@@ -32,7 +32,7 @@ public class RegattaResolver {
     }
 
     public ToolsToUse resolveToolsToUse(Position positionToReach, boolean isCheckpoint) {
-        Double angleToCorrect = geometry.calculateAngleToCheckPoint(positionToReach);
+        double angleToCorrect = geometry.calculateAngleToCheckPoint(positionToReach);
         double rudderAngle = rudderStrategy.getRudderAngle(angleToCorrect);
         SailAction actionOnSails = SailStrategy.getSailsAction();
         boolean isWatchNecessary = watchStrategy.isWatchNecessary();
